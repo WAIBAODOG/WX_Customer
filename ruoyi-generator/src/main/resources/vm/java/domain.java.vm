@@ -23,8 +23,7 @@ import ${import};
 #elseif($table.tree)
 #set($Entity="TreeEntity")
 #end
-public class ${ClassName} extends ${Entity}
-{
+public class ${ClassName} extends ${Entity}{
     private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
@@ -52,13 +51,11 @@ public class ${ClassName} extends ${Entity}
 #foreach ($column in $columns)
 #if(!$column.superColumn)
 #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
-    public void set${AttrName}($column.javaType $column.javaField) 
-    {
+    public void set${AttrName}($column.javaType $column.javaField) {
         this.$column.javaField = $column.javaField;
     }
 
-    public $column.javaType get${AttrName}() 
-    {
+    public $column.javaType get${AttrName}() {
         return $column.javaField;
     }
 #end
