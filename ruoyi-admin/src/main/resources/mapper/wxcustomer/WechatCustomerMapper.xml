@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.WechatCustomerMapper">
+    
+    <resultMap type="WechatCustomer" id="WechatCustomerResult">
+        <result property="customerId"    column="customer_id"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="weixinNumber"    column="weixin_number"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="khCharacter"    column="kh_character"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="province"    column="province"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="city"    column="city"    />
+        <result property="areaId"    column="area_id"    />
+        <result property="area"    column="area"    />
+        <result property="customerAddress"    column="customer_address"    />
+        <result property="shopName"    column="shop_name"    />
+        <result property="appointmentTime"    column="appointment_time"    />
+        <result property="customerType"    column="customer_type"    />
+        <result property="shopAssistantNumber"    column="shop_assistant_number"    />
+        <result property="storeScale"    column="store_scale"    />
+        <result property="creationTime"    column="creation_time"    />
+        <result property="demandProduct"    column="demand_product"    />
+        <result property="remark"    column="remark"    />
+        <result property="isDelivery"    column="is_delivery"    />
+        <result property="isSales"    column="is_sales"    />
+    </resultMap>
+
+    <sql id="selectWechatCustomerVo">
+        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales from kh_wechat_customer
+    </sql>
+
+    <select id="selectWechatCustomerList" parameterType="WechatCustomer" resultMap="WechatCustomerResult">
+        <include refid="selectWechatCustomerVo"/>
+        <where>  
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="weixinNumber != null  and weixinNumber != ''"> and weixin_number = #{weixinNumber}</if>
+            <if test="customerName != null  and customerName != ''"> and customer_name like concat('%', #{customerName}, '%')</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="shopName != null  and shopName != ''"> and shop_name like concat('%', #{shopName}, '%')</if>
+            <if test="appointmentTime != null "> and appointment_time = #{appointmentTime}</if>
+            <if test="customerType != null  and customerType != ''"> and customer_type = #{customerType}</if>
+            <if test="creationTime != null "> and creation_time = #{creationTime}</if>
+            <if test="isDelivery != null  and isDelivery != ''"> and is_delivery = #{isDelivery}</if>
+            <if test="isSales != null  and isSales != ''"> and is_sales = #{isSales}</if>
+        </where>
+    </select>
+    
+    <select id="selectWechatCustomerById" parameterType="String" resultMap="WechatCustomerResult">
+        <include refid="selectWechatCustomerVo"/>
+        where customer_id = #{customerId}
+    </select>
+        
+    <insert id="insertWechatCustomer" parameterType="WechatCustomer">
+        insert into kh_wechat_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerId != null  and customerId != ''">customer_id,</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">phone_number,</if>
+            <if test="weixinNumber != null  and weixinNumber != ''">weixin_number,</if>
+            <if test="customerName != null  and customerName != ''">customer_name,</if>
+            <if test="gender != null  and gender != ''">gender,</if>
+            <if test="khCharacter != null  and khCharacter != ''">kh_character,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+            <if test="creator != null  and creator != ''">creator,</if>
+            <if test="provinceId != null  and provinceId != ''">province_id,</if>
+            <if test="province != null  and province != ''">province,</if>
+            <if test="cityId != null  and cityId != ''">city_id,</if>
+            <if test="city != null  and city != ''">city,</if>
+            <if test="areaId != null  and areaId != ''">area_id,</if>
+            <if test="area != null  and area != ''">area,</if>
+            <if test="customerAddress != null  and customerAddress != ''">customer_address,</if>
+            <if test="shopName != null  and shopName != ''">shop_name,</if>
+            <if test="appointmentTime != null ">appointment_time,</if>
+            <if test="customerType != null  and customerType != ''">customer_type,</if>
+            <if test="shopAssistantNumber != null ">shop_assistant_number,</if>
+            <if test="storeScale != null  and storeScale != ''">store_scale,</if>
+            <if test="creationTime != null ">creation_time,</if>
+            <if test="demandProduct != null  and demandProduct != ''">demand_product,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="isDelivery != null  and isDelivery != ''">is_delivery,</if>
+            <if test="isSales != null  and isSales != ''">is_sales,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerId != null  and customerId != ''">#{customerId},</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="weixinNumber != null  and weixinNumber != ''">#{weixinNumber},</if>
+            <if test="customerName != null  and customerName != ''">#{customerName},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="khCharacter != null  and khCharacter != ''">#{khCharacter},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+            <if test="creator != null  and creator != ''">#{creator},</if>
+            <if test="provinceId != null  and provinceId != ''">#{provinceId},</if>
+            <if test="province != null  and province != ''">#{province},</if>
+            <if test="cityId != null  and cityId != ''">#{cityId},</if>
+            <if test="city != null  and city != ''">#{city},</if>
+            <if test="areaId != null  and areaId != ''">#{areaId},</if>
+            <if test="area != null  and area != ''">#{area},</if>
+            <if test="customerAddress != null  and customerAddress != ''">#{customerAddress},</if>
+            <if test="shopName != null  and shopName != ''">#{shopName},</if>
+            <if test="appointmentTime != null ">#{appointmentTime},</if>
+            <if test="customerType != null  and customerType != ''">#{customerType},</if>
+            <if test="shopAssistantNumber != null ">#{shopAssistantNumber},</if>
+            <if test="storeScale != null  and storeScale != ''">#{storeScale},</if>
+            <if test="creationTime != null ">#{creationTime},</if>
+            <if test="demandProduct != null  and demandProduct != ''">#{demandProduct},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="isDelivery != null  and isDelivery != ''">#{isDelivery},</if>
+            <if test="isSales != null  and isSales != ''">#{isSales},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWechatCustomer" parameterType="WechatCustomer">
+        update kh_wechat_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phoneNumber != null  and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="weixinNumber != null  and weixinNumber != ''">weixin_number = #{weixinNumber},</if>
+            <if test="customerName != null  and customerName != ''">customer_name = #{customerName},</if>
+            <if test="gender != null  and gender != ''">gender = #{gender},</if>
+            <if test="khCharacter != null  and khCharacter != ''">kh_character = #{khCharacter},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+            <if test="creator != null  and creator != ''">creator = #{creator},</if>
+            <if test="provinceId != null  and provinceId != ''">province_id = #{provinceId},</if>
+            <if test="province != null  and province != ''">province = #{province},</if>
+            <if test="cityId != null  and cityId != ''">city_id = #{cityId},</if>
+            <if test="city != null  and city != ''">city = #{city},</if>
+            <if test="areaId != null  and areaId != ''">area_id = #{areaId},</if>
+            <if test="area != null  and area != ''">area = #{area},</if>
+            <if test="customerAddress != null  and customerAddress != ''">customer_address = #{customerAddress},</if>
+            <if test="shopName != null  and shopName != ''">shop_name = #{shopName},</if>
+            <if test="appointmentTime != null ">appointment_time = #{appointmentTime},</if>
+            <if test="customerType != null  and customerType != ''">customer_type = #{customerType},</if>
+            <if test="shopAssistantNumber != null ">shop_assistant_number = #{shopAssistantNumber},</if>
+            <if test="storeScale != null  and storeScale != ''">store_scale = #{storeScale},</if>
+            <if test="creationTime != null ">creation_time = #{creationTime},</if>
+            <if test="demandProduct != null  and demandProduct != ''">demand_product = #{demandProduct},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="isDelivery != null  and isDelivery != ''">is_delivery = #{isDelivery},</if>
+            <if test="isSales != null  and isSales != ''">is_sales = #{isSales},</if>
+        </trim>
+        where customer_id = #{customerId}
+    </update>
+
+    <delete id="deleteWechatCustomerById" parameterType="String">
+        delete from kh_wechat_customer where customer_id = #{customerId}
+    </delete>
+
+    <delete id="deleteWechatCustomerByIds" parameterType="String">
+        delete from kh_wechat_customer where customer_id in 
+        <foreach item="customerId" collection="array" open="(" separator="," close=")">
+            #{customerId}
+        </foreach>
+    </delete>
+    
+</mapper>
