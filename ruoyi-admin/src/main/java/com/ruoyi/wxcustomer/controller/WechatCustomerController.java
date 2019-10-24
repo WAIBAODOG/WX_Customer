@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
@@ -67,7 +69,8 @@ public class WechatCustomerController extends BaseController{
      * 新增微信客户
      */
     @GetMapping("/add")
-    public String add(){
+    public String add(Model model){
+    	model.addAttribute("user", ShiroUtils.getSysUser());
         return prefix + "/add";
     }
 

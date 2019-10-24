@@ -85,10 +85,10 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="wxcustomer:WechatCustomer:add">
+                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="wxcustomer:WechatCustomer:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="wxcustomer:WechatCustomer:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="wxcustomer:WechatCustomer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="wxcustomer:WechatCustomer:remove">
