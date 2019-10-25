@@ -92,7 +92,7 @@ public class WechatCustomerController extends BaseController{
     public String edit(@PathVariable("customerId") String customerId, ModelMap mmap){
         WechatCustomer wechatCustomer = wechatCustomerService.selectWechatCustomerById(customerId);
         mmap.put("wechatCustomer", wechatCustomer);
-        return prefix + "/edit";
+        return prefix + "/add";
     }
 
     /**
