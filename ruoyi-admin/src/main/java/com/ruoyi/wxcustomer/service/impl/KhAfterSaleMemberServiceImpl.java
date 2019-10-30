@@ -1,21 +1,23 @@
 package com.ruoyi.wxcustomer.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.wxcustomer.mapper.KhAfterSaleMemberMapper;
-import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
-import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
+
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
+import com.ruoyi.wxcustomer.mapper.KhAfterSaleMemberMapper;
+import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
 
 /**
  * 售后情况Service业务层处理
  * 
  * @author WBG
- * @date 2019-10-28
+ * @date 2019-10-24
  */
 @Service
-public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
+public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService  {
     @Autowired
     private KhAfterSaleMemberMapper khAfterSaleMemberMapper;
 
@@ -26,7 +28,7 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
      * @return 售后情况
      */
     @Override
-    public KhAfterSaleMember selectKhAfterSaleMemberById(String id){
+    public KhAfterSaleMember selectKhAfterSaleMemberById(String id) {
         return khAfterSaleMemberMapper.selectKhAfterSaleMemberById(id);
     }
 
@@ -37,7 +39,7 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
      * @return 售后情况
      */
     @Override
-    public List<KhAfterSaleMember> selectKhAfterSaleMemberList(KhAfterSaleMember khAfterSaleMember){
+    public List<KhAfterSaleMember> selectKhAfterSaleMemberList(KhAfterSaleMember khAfterSaleMember) {
         return khAfterSaleMemberMapper.selectKhAfterSaleMemberList(khAfterSaleMember);
     }
 
@@ -48,7 +50,7 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
      * @return 结果
      */
     @Override
-    public int insertKhAfterSaleMember(KhAfterSaleMember khAfterSaleMember){
+    public int insertKhAfterSaleMember(KhAfterSaleMember khAfterSaleMember) {
         return khAfterSaleMemberMapper.insertKhAfterSaleMember(khAfterSaleMember);
     }
 
@@ -59,7 +61,7 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
      * @return 结果
      */
     @Override
-    public int updateKhAfterSaleMember(KhAfterSaleMember khAfterSaleMember){
+    public int updateKhAfterSaleMember(KhAfterSaleMember khAfterSaleMember) {
         return khAfterSaleMemberMapper.updateKhAfterSaleMember(khAfterSaleMember);
     }
 
@@ -70,7 +72,7 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
      * @return 结果
      */
     @Override
-    public int deleteKhAfterSaleMemberByIds(String ids){
+    public int deleteKhAfterSaleMemberByIds(String ids) {
         return khAfterSaleMemberMapper.deleteKhAfterSaleMemberByIds(Convert.toStrArray(ids));
     }
 
@@ -81,7 +83,7 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService {
      * @return 结果
      */
     @Override
-    public int deleteKhAfterSaleMemberById(String id){
+    public int deleteKhAfterSaleMemberById(String id) {
         return khAfterSaleMemberMapper.deleteKhAfterSaleMemberById(id);
     }
 }

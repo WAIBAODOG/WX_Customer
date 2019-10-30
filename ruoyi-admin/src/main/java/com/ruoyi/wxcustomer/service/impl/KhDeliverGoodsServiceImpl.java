@@ -1,18 +1,20 @@
 package com.ruoyi.wxcustomer.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.wxcustomer.mapper.KhDeliverGoodsMapper;
-import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
-import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
+
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
+import com.ruoyi.wxcustomer.mapper.KhDeliverGoodsMapper;
+import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 
 /**
  * 发样/成交情况Service业务层处理
  * 
  * @author WBG
- * @date 2019-10-28
+ * @date 2019-10-24
  */
 @Service
 public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
@@ -26,7 +28,7 @@ public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
      * @return 发样/成交情况
      */
     @Override
-    public KhDeliverGoods selectKhDeliverGoodsById(String id){
+    public KhDeliverGoods selectKhDeliverGoodsById(String id) {
         return khDeliverGoodsMapper.selectKhDeliverGoodsById(id);
     }
 
@@ -37,7 +39,7 @@ public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
      * @return 发样/成交情况
      */
     @Override
-    public List<KhDeliverGoods> selectKhDeliverGoodsList(KhDeliverGoods khDeliverGoods){
+    public List<KhDeliverGoods> selectKhDeliverGoodsList(KhDeliverGoods khDeliverGoods) {
         return khDeliverGoodsMapper.selectKhDeliverGoodsList(khDeliverGoods);
     }
 
@@ -48,7 +50,7 @@ public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
      * @return 结果
      */
     @Override
-    public int insertKhDeliverGoods(KhDeliverGoods khDeliverGoods){
+    public int insertKhDeliverGoods(KhDeliverGoods khDeliverGoods) {
         return khDeliverGoodsMapper.insertKhDeliverGoods(khDeliverGoods);
     }
 
@@ -59,7 +61,7 @@ public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
      * @return 结果
      */
     @Override
-    public int updateKhDeliverGoods(KhDeliverGoods khDeliverGoods){
+    public int updateKhDeliverGoods(KhDeliverGoods khDeliverGoods) {
         return khDeliverGoodsMapper.updateKhDeliverGoods(khDeliverGoods);
     }
 

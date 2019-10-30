@@ -129,9 +129,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="intentionPoint != null  and intentionPoint != ''">intention_point = #{intentionPoint},</if>
             <if test="followTimes != null ">follow_times = #{followTimes},</if>
             <if test="followResult != null  and followResult != ''">follow_result = #{followResult},</if>
-            <if test="durationHour != null ">duration_hour = #{duration-hour},</if>
-            <if test="durationMinute != null ">duration_minute = #{duration-minute},</if>
-            <if test="durationSecond != null ">duration_second = #{duration-second},</if>
+            <if test="durationHour != null ">duration_hour = #{durationHour},</if>
+            <if test="durationMinute != null ">duration_minute = #{durationMinute},</if>
+            <if test="durationSecond != null ">duration_second = #{durationSecond},</if>
             <if test="nextFollowTime != null ">next_follow_time = #{nextFollowTime},</if>
             <if test="nextFollowMentality != null  and nextFollowMentality != ''">next_follow_mentality = #{nextFollowMentality},</if>
             <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
@@ -159,5 +159,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-    
 </mapper>

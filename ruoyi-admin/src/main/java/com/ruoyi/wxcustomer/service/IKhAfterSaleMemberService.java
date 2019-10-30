@@ -1,13 +1,14 @@
 package com.ruoyi.wxcustomer.service;
 
-import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
 import java.util.List;
+
+import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
 
 /**
  * 售后情况Service接口
  * 
  * @author WBG
- * @date 2019-10-28
+ * @date 2019-10-24
  */
 public interface IKhAfterSaleMemberService {
     /**
