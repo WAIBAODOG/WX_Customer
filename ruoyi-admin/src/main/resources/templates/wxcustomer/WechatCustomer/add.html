@@ -35,9 +35,10 @@
            <div class="form-group">    
                <label class="col-sm-2 control-label">性别：</label>
 			<div class="col-sm-4">
-				 <select name="gender" class="form-control m-b" th:with="type=${@dict.getType('customer_type')}">
+				 <select name="gender" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
+                       <option value="">请选择</option>
                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                   </select>
+                 </select>
 			</div>
 			<label class="col-sm-2 control-label">性格：</label>
 			<div class="col-sm-4">
@@ -47,20 +48,10 @@
            
            <div class="form-group">    
                <label class="col-sm-2 control-label">客户地址：</label>
-               <div class="col-sm-2">
-                    <select name="province" class="form-control m-b" th:with="type=${@dict.getType('customer_type')}">
-                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                   </select>
-               </div>
-               <div class="col-sm-2">
-                    <select name="city" class="form-control m-b" th:with="type=${@dict.getType('customer_type')}">
-                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                   </select>
-               </div>
-               <div class="col-sm-2">
-                   <select name="area" class="form-control m-b" th:with="type=${@dict.getType('customer_type')}">
-                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                   </select>
+               <div class="col-sm-6 form-inline"  data-toggle="distpicker" style="padding-left: 30px;">
+                   <div class="form-group" style="padding-right: 30px"><select name="province" class="form-control m-b"></select></div>
+                   <div class="form-group" style="padding-right: 30px"><select name="city" class="form-control m-b"></select></div>
+                   <div class="form-group"><select name="area" class="form-control m-b"></select></div>
                </div>
                <div class="col-sm-4">
                    <input name="customerAddress" class="form-control" type="text" placeholder="请输入详细地址">
@@ -75,6 +66,7 @@
 			<label class="col-sm-2 control-label">客户类型：</label>
 			<div class="col-sm-4">
 				 <select name="customerType" class="form-control m-b" th:with="type=${@dict.getType('customer_type')}">
+                        <option value="">请选择</option>
                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                    </select>
 			</div>
@@ -116,7 +108,7 @@
 	       		<h4 class="form-header h4">销售情况</h4>
 	       </div>
 		   <div class="row" style="padding-bottom: 10px"> 	
-	             <a class="btn btn-success" onclick="addSaleInfo()">
+	             <a class="btn btn-success" onclick="addSaleInfo();">
 	                 <i class="fa fa-plus"></i> 添加
 	             </a>
 		   </div>
@@ -146,7 +138,7 @@
 	    		<h4 class="form-header h4">售后情况</h4>
 		   </div>
 		   <div class="row" style="padding-bottom: 10px"> 	
-	             <a class="btn btn-success" onclick="addSaleInfo()">
+	             <a class="btn btn-success" onclick="addPostSale()">
 	                 <i class="fa fa-plus"></i> 添加
 	             </a>
 		   </div>
@@ -181,6 +173,7 @@
     
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: distpicker-js" />
     <script type="text/javascript">
         var prefix = ctx + "wxcustomer/WechatCustomer";
         $("#form-WechatCustomer-add").validate({
@@ -206,7 +199,11 @@
         });
         
         function addSaleInfo() {
-        	//$('#saleInfoTable tbody').append($($('#saleInfoTpl').html()));
+        	$.modal.open('添加销售情况', prefix + '/addSaleInfo');
+        }
+        
+        function addPostSale() {
+        	$.modal.open('添加售后情况', prefix + '/addPostSale');
         }
         
     </script>

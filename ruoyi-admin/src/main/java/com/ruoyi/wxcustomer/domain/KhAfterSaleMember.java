@@ -1,19 +1,20 @@
 package com.ruoyi.wxcustomer.domain;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
-import java.util.Date;
 
 /**
  * 售后情况对象 kh_after_sale_member
  * 
  * @author WBG
- * @date 2019-10-24
+ * @date 2019-10-28
  */
-public class KhAfterSaleMember extends BaseEntity
-{
+public class KhAfterSaleMember extends BaseEntity{
     private static final long serialVersionUID = 1L;
 
     /** id */
@@ -106,256 +107,204 @@ public class KhAfterSaleMember extends BaseEntity
     @Excel(name = "是否成交", readConverterExp = "0=，是,1=否")
     private String isDeal;
 
-    public void setId(String id) 
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getId() 
-    {
+    public String getId() {
         return id;
     }
-    public void setCustomerId(String customerId) 
-    {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public String getCustomerId() 
-    {
+    public String getCustomerId() {
         return customerId;
     }
-    public void setFollowResultType(String followResultType) 
-    {
+    public void setFollowResultType(String followResultType) {
         this.followResultType = followResultType;
     }
 
-    public String getFollowResultType() 
-    {
+    public String getFollowResultType() {
         return followResultType;
     }
-    public void setDealAmount(Double dealAmount) 
-    {
+    public void setDealAmount(Double dealAmount) {
         this.dealAmount = dealAmount;
     }
 
-    public Double getDealAmount() 
-    {
+    public Double getDealAmount() {
         return dealAmount;
     }
-    public void setSendSampleList(String sendSampleList) 
-    {
+    public void setSendSampleList(String sendSampleList) {
         this.sendSampleList = sendSampleList;
     }
 
-    public String getSendSampleList() 
-    {
+    public String getSendSampleList() {
         return sendSampleList;
     }
-    public void setGiftsList(String giftsList) 
-    {
+    public void setGiftsList(String giftsList) {
         this.giftsList = giftsList;
     }
 
-    public String getGiftsList() 
-    {
+    public String getGiftsList() {
         return giftsList;
     }
-    public void setDealTime(Date dealTime) 
-    {
+    public void setDealTime(Date dealTime) {
         this.dealTime = dealTime;
     }
 
-    public Date getDealTime() 
-    {
+    public Date getDealTime() {
         return dealTime;
     }
-    public void setTroubleSpots(String troubleSpots) 
-    {
+    public void setTroubleSpots(String troubleSpots) {
         this.troubleSpots = troubleSpots;
     }
 
-    public String getTroubleSpots() 
-    {
+    public String getTroubleSpots() {
         return troubleSpots;
     }
-    public void setIntentionPoint(String intentionPoint) 
-    {
+    public void setIntentionPoint(String intentionPoint) {
         this.intentionPoint = intentionPoint;
     }
 
-    public String getIntentionPoint() 
-    {
+    public String getIntentionPoint() {
         return intentionPoint;
     }
-    public void setFollowTimes(Long followTimes) 
-    {
+    public void setFollowTimes(Long followTimes) {
         this.followTimes = followTimes;
     }
 
-    public Long getFollowTimes() 
-    {
+    public Long getFollowTimes() {
         return followTimes;
     }
-    public void setFollowResult(String followResult) 
-    {
+    public void setFollowResult(String followResult) {
         this.followResult = followResult;
     }
 
-    public String getFollowResult() 
-    {
+    public String getFollowResult() {
         return followResult;
     }
-    public void setDurationHour(Long durationHour) 
-    {
-        this.durationHour = durationHour;
-    }
+    
+    public Long getDurationHour() {
+		return durationHour;
+	}
 
-    public Long getDurationHour() 
-    {
-        return durationHour;
-    }
-    public void setDurationMinute(Long durationMinute) 
-    {
-        this.durationMinute = durationMinute;
-    }
+	public void setDurationHour(Long durationHour) {
+		this.durationHour = durationHour;
+	}
 
-    public Long getDurationMinute() 
-    {
-        return durationMinute;
-    }
-    public void setDurationSecond(Long durationSecond) 
-    {
-        this.durationSecond = durationSecond;
-    }
+	public Long getDurationMinute() {
+		return durationMinute;
+	}
 
-    public Long getDurationSecond() 
-    {
-        return durationSecond;
-    }
-    public void setNextFollowTime(Date nextFollowTime) 
-    {
+	public void setDurationMinute(Long durationMinute) {
+		this.durationMinute = durationMinute;
+	}
+
+	public Long getDurationSecond() {
+		return durationSecond;
+	}
+
+	public void setDurationSecond(Long durationSecond) {
+		this.durationSecond = durationSecond;
+	}
+
+	public void setNextFollowTime(Date nextFollowTime) {
         this.nextFollowTime = nextFollowTime;
     }
 
-    public Date getNextFollowTime() 
-    {
+    public Date getNextFollowTime() {
         return nextFollowTime;
     }
-    public void setNextFollowMentality(String nextFollowMentality) 
-    {
+    public void setNextFollowMentality(String nextFollowMentality) {
         this.nextFollowMentality = nextFollowMentality;
     }
 
-    public String getNextFollowMentality() 
-    {
+    public String getNextFollowMentality() {
         return nextFollowMentality;
     }
-    public void setCreatorId(String creatorId) 
-    {
+    public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
     }
 
-    public String getCreatorId() 
-    {
+    public String getCreatorId() {
         return creatorId;
     }
-    public void setCreator(String creator) 
-    {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 
-    public String getCreator() 
-    {
+    public String getCreator() {
         return creator;
     }
-    public void setSender(String sender) 
-    {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
-    public String getSender() 
-    {
+    public String getSender() {
         return sender;
     }
-    public void setSenderPhone(String senderPhone) 
-    {
+    public void setSenderPhone(String senderPhone) {
         this.senderPhone = senderPhone;
     }
 
-    public String getSenderPhone() 
-    {
+    public String getSenderPhone() {
         return senderPhone;
     }
-    public void setSenderAddress(String senderAddress) 
-    {
+    public void setSenderAddress(String senderAddress) {
         this.senderAddress = senderAddress;
     }
 
-    public String getSenderAddress() 
-    {
+    public String getSenderAddress() {
         return senderAddress;
     }
-    public void setSendTime(Date sendTime) 
-    {
+    public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
     }
 
-    public Date getSendTime() 
-    {
+    public Date getSendTime() {
         return sendTime;
     }
-    public void setCourierNumber(String courierNumber) 
-    {
+    public void setCourierNumber(String courierNumber) {
         this.courierNumber = courierNumber;
     }
 
-    public String getCourierNumber() 
-    {
+    public String getCourierNumber() {
         return courierNumber;
     }
-    public void setLogisticsCompany(String logisticsCompany) 
-    {
+    public void setLogisticsCompany(String logisticsCompany) {
         this.logisticsCompany = logisticsCompany;
     }
 
-    public String getLogisticsCompany() 
-    {
+    public String getLogisticsCompany() {
         return logisticsCompany;
     }
-    public void setCollectingAmount(Double collectingAmount) 
-    {
+    public void setCollectingAmount(Double collectingAmount) {
         this.collectingAmount = collectingAmount;
     }
 
-    public Double getCollectingAmount() 
-    {
+    public Double getCollectingAmount() {
         return collectingAmount;
     }
-    public void setInsuranceAmount(Double insuranceAmount) 
-    {
+    public void setInsuranceAmount(Double insuranceAmount) {
         this.insuranceAmount = insuranceAmount;
     }
 
-    public Double getInsuranceAmount() 
-    {
+    public Double getInsuranceAmount() {
         return insuranceAmount;
     }
-    public void setPostage(Long postage) 
-    {
+    public void setPostage(Long postage) {
         this.postage = postage;
     }
 
-    public Long getPostage() 
-    {
+    public Long getPostage() {
         return postage;
     }
-    public void setIsDeal(String isDeal) 
-    {
+    public void setIsDeal(String isDeal) {
         this.isDeal = isDeal;
     }
 
-    public String getIsDeal() 
-    {
+    public String getIsDeal() {
         return isDeal;
     }
 

@@ -1,6 +1,7 @@
 package com.ruoyi.wxcustomer.controller;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.wxcustomer.domain.WechatCustomer;
-import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.wxcustomer.domain.WechatCustomer;
+import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 
 /**
  * 微信客户Controller
@@ -72,6 +74,26 @@ public class WechatCustomerController extends BaseController{
     public String add(Model model){
     	model.addAttribute("user", ShiroUtils.getSysUser());
         return prefix + "/add";
+    }
+    
+    /**
+     * 新增销售情况
+     */
+    @RequiresPermissions("wxcustomer:WechatCustomer:add")
+    @GetMapping("/addSaleInfo")
+    public String addSaleInfo(Model model){
+    	model.addAttribute("user", ShiroUtils.getSysUser());
+    	return prefix + "/addSaleInfo";
+    }
+    
+    /**
+     * 新增售后情况
+     */
+    @RequiresPermissions("wxcustomer:WechatCustomer:add")
+    @GetMapping("/addPostSale")
+    public String addPostSale(Model model){
+    	model.addAttribute("user", ShiroUtils.getSysUser());
+    	return prefix + "/addPostSale";
     }
 
     /**

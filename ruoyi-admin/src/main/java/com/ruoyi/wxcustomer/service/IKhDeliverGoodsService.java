@@ -1,7 +1,8 @@
 package com.ruoyi.wxcustomer.service;
 
-import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import java.util.List;
+
+import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 
 /**
  * 发样/成交情况Service接口
@@ -9,8 +10,7 @@ import java.util.List;
  * @author WBG
  * @date 2019-10-24
  */
-public interface IKhDeliverGoodsService 
-{
+public interface IKhDeliverGoodsService {
     /**
      * 查询发样/成交情况
      * 
