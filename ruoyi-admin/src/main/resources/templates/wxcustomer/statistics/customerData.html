@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('跟进顾客资料表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                 <div class="btn-group-sm"  role="group">
+	                <a class="btn btn-success" onclick="$.table.search()"  >
+	                    <i class="fa fa-search"></i> 查询
+	                </a>
+	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
+	                    <i class="fa fa-refresh"></i> 清空
+	                </a>
+                     <a class="btn btn-success" onclick="$.table.export()"  >
+	                    <i class="fa fa-download"></i> 导出
+	                </a>
+            </div>  
+                	 
+                    <div class="select-list">
+                        <ul>
+                        	<li>
+                        		<p>业务员：</p>
+                        		<input type="text" name="creator"/>
+                        	</li>
+                        
+                        	<li>
+                        		<p>客户姓名：</p>
+                        		<input type="text" name="customerName"/>
+                        	</li>
+                        	<li>
+                        		<p>电话号码：</p>
+                        		<input type="text" name="phoneNumber"/>
+                        	</li>
+                        	<li>
+                        		<p>发样清单：</p>
+                        		<input type="text" name="sendSampleList"/>
+                        	</li>
+                        	<li>
+                        		<p>成交清单：</p>
+                        		<input type="text" name=" "/>
+                        	</li>
+                        		<li class='select-time'>
+                        		<p>成交日期：</p>
+                        		<input type="text" class='time-input' id='sendTimeStart' name="sendTimeStart"/>
+                        		<span>-</span>
+                        		<input type="text" class='time-input' id='sendTimeEnd' name="sendTimeEnd"/>
+                        	</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        
+        var prefix = ctx + "wxcustomer/customerDataStatistics";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                modalName: "跟进顾客资料表",
+                columns: [{
+                    checkbox: true
+                },
+                 {
+                    field : 'ID', 
+                    title : '序号',
+                    visible: false
+                } ,
+                {
+                    field : 'customerName', 
+                    title : '客户姓名'
+                }  ,
+                {
+                    field : 'phoneNumber', 
+                    title : '手机号'
+                } ,
+                {
+                    field : 'dealTime', 
+                    title : '成交日期'
+                } ,
+                {
+                    field : 'dealTime', 
+                    title : '成交清单'
+                } ,
+                {
+                    field : 'dealTime', 
+                    title : '订单总金额'
+                }  ,
+                {
+                    field : 'creator', 
+                    title : '对接业务员'
+                } ]
+            };
+            $.table.init(options);
+        });
+        
+    </script>
+</body>
+</html>

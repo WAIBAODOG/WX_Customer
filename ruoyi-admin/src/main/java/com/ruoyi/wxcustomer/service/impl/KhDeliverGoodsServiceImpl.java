@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.mapper.KhDeliverGoodsMapper;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 
@@ -86,4 +87,12 @@ public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
     public int deleteKhDeliverGoodsById(String id){
         return khDeliverGoodsMapper.deleteKhDeliverGoodsById(id);
     }
+    
+    @Override
+	public List<DeliverGoodsVO> selectList(DeliverGoodsVO vo) {
+		return khDeliverGoodsMapper.selectList( vo);
+	}
+	 public  DeliverGoodsVO  selectVOByOrderNumber(String num) {
+		 return khDeliverGoodsMapper.selectVOByOrderNumber(num);
+	 }
 }

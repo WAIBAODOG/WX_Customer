@@ -105,7 +105,9 @@ public class KhDeliverGoods extends BaseEntity{
     
     /** 订单号 */
     private String orderNumber;
-
+    /**是否删除**/
+    private String isDelete;
+    
     public void setId(String id) {
         this.id = id;
     }
@@ -306,6 +308,15 @@ public class KhDeliverGoods extends BaseEntity{
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
 	}
+	
+	
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	@Override
     public String toString() {
@@ -338,6 +349,7 @@ public class KhDeliverGoods extends BaseEntity{
             .append("insuranceAmount", getInsuranceAmount())
             .append("postage", getPostage())
             .append("orderNumber", getOrderNumber())
+            .append("isDelete", getIsDelete())
             .toString();
     }
 }

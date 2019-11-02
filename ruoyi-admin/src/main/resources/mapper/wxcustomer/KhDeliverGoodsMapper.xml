@@ -167,4 +167,134 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findKhDeliverGoodsByCustomerId" resultMap="KhDeliverGoodsResult" parameterType="String">
     	select * from kh_deliver_goods where customer_id=#{customerId} order by follow_times
     </select>
+    
+    
+    
+    
+    
+    
+    <resultMap type="DeliverGoodsVO" id="deliverGoodsVOResult">
+        <result property="id"    column="id"    />
+        <result property="orderNumber"    column="ORDER_NUMBER"    />
+        <result property="customerId"    column="customer_id"    />
+        <result property="followResultType"    column="follow_result_type"    />
+        <result property="dealAmount"    column="deal_amount"    />
+        <result property="sendSampleList"    column="send_sample_list"    />
+        <result property="giftsList"    column="gifts_list"    />
+        <result property="dealTime"    column="deal_time"    />
+        <result property="troubleSpots"    column="trouble_spots"    />
+        <result property="intentionPoint"    column="intention_point"    />
+        <result property="followTimes"    column="follow_times"    />
+        <result property="followResult"    column="follow_result"    />
+        <result property="durationHour"    column="duration_hour"    />
+        <result property="durationMinute"    column="duration_minute"    />
+        <result property="durationSecond"    column="duration_second"    />
+        <result property="nextFollowTime"    column="next_follow_time"    />
+        <result property="nextFollowMentality"    column="next_follow_mentality"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="sender"    column="sender"    />
+        <result property="senderPhone"    column="sender_phone"    />
+        <result property="senderAddress"    column="sender_address"    />
+        <result property="sendTime"    column="send_time"    />
+        <result property="courierNumber"    column="courier_number"    />
+        <result property="logisticsCompany"    column="logistics_company"    />
+        <result property="collectingAmount"    column="collecting_amount"    />
+        <result property="insuranceAmount"    column="insurance_amount"    />
+        <result property="postage"    column="postage"    />
+        <!-- 客户表 -->
+         <result property="customerId"    column="customer_id"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="weixinNumber"    column="weixin_number"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="khCharacter"    column="kh_character"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="province"    column="province"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="city"    column="city"    />
+        <result property="areaId"    column="area_id"    />
+        <result property="area"    column="area"    />
+        <result property="customerAddress"    column="customer_address"    />
+        <result property="shopName"    column="shop_name"    />
+        <result property="appointmentTime"    column="appointment_time"    />
+        <result property="customerType"    column="customer_type"    />
+        <result property="shopAssistantNumber"    column="shop_assistant_number"    />
+        <result property="storeScale"    column="store_scale"    />
+        <result property="creationTime"    column="creation_time"    />
+        <result property="demandProduct"    column="demand_product"    />
+        <result property="customerNum"    column="customer_num"    />
+        <result property="remark"    column="remark"    />
+        <result property="isDelivery"    column="is_delivery"    />
+        <result property="isSales"    column="is_sales"    />
+    </resultMap>
+    
+    
+    <sql id="selectDeliverGoodsVO">
+    <!-- 发样成交表 -->
+        select d.id, d.order_number,d.customer_id, d.follow_result_type, d.deal_amount, 
+        d.send_sample_list, d.gifts_list, d.deal_time, d.trouble_spots, d.intention_point,
+         d.follow_times, d.follow_result, d.duration_hour, d.duration_minute, d.duration_second,
+          d.next_follow_time, d.next_follow_mentality, d.creator_id, d.creator, d.sender,
+           d.sender_phone, d.sender_address, d.send_time, d.courier_number, d.logistics_company,
+            d.collecting_amount, d.insurance_amount, d.postage ,
+            <!--客户表  -->
+            w.customer_id,  w.phone_number,  w.weixin_number,  w.customer_name,  w.gender,  w.kh_character,
+            w.province_id,  w.province,  w.city_id,  w.city,  w.area_id,  w.area,  w.customer_address, 
+             w.shop_name,  w.appointment_time,  w.customer_type,  w.shop_assistant_number,  w.store_scale, 
+              w.creation_time,  w.demand_product,  w.remark,  w.is_delivery,  w.is_sales ,w.customer_num
+            from kh_deliver_goods d left join
+            kh_wechat_customer w on d.customer_id=w.customer_id 
+            
+    </sql>
+ <select id="selectList" parameterType="DeliverGoodsVO" resultMap="deliverGoodsVOResult">
+        <include refid="selectDeliverGoodsVO"/>
+        <where>  
+            <if test="id != null  and id != ''"> and d.id = #{id}</if>
+            <if test="orderNumber != null  and orderNumber != ''"> and d.order_number = #{orderNumber}</if>
+            <if test="customerId != null  and customerId != ''"> and d.customer_id = #{customerId}</if>
+            <if test="followResultType != null  and followResultType != ''"> and d.follow_result_type = #{followResultType}</if>
+            <if test="dealAmount != null  and dealAmount != ''"> and d.deal_amount = #{dealAmount}</if>
+             <if test="dealTimeStart!=null and dealTimeStart!=''">
+			　　 <![CDATA[ AND DATE_FORMAT(d.deal_time, '%Y-%m-%d %H:%i:%S') >= DATE_FORMAT(#{dealTimeStart}, '%Y-%m-%d %H:%i:%S') ]]>
+			</if> 
+			<if test="dealTimeEnd!=null and dealTimeEnd!=''">
+			  <![CDATA[ AND DATE_FORMAT(d.deal_time, '%Y-%m-%d %H:%i:%S') <= DATE_FORMAT(#{dealTimeEnd}, '%Y-%m-%d %H:%i:%S') ]]>
+			</if>
+             <if test="sendTimeStart!=null and sendTimeStart!=''">
+			　 <![CDATA[ AND DATE_FORMAT(d.send_time, '%Y-%m-%d %H:%i:%S') >= DATE_FORMAT(#{sendTimeStart}, '%Y-%m-%d %H:%i:%S') ]]>
+			
+			</if> 
+			<if test="dealTimeEnd!=null and sendTimeEnd!=''">
+			  <![CDATA[ AND DATE_FORMAT(d.send_time, '%Y-%m-%d %H:%i:%S') <= DATE_FORMAT(#{sendTimeEnd}, '%Y-%m-%d %H:%i:%S') ]]>
+			
+			</if>
+            <!--  <if test="dealTimeStart != null and dealTimeStart != '' and  dealTimeEnd != null and  dealTimeEnd != ''"> and d.deal_time between #{dealTimeStart} and #{dealTimeEnd}</if>
+             <if test="sendTimeStart != null and sendTimeStart != '' and  sendTimeEnd != null and  sendTimeEnd != ''"> and d.send_time between #{sendTimeStart} and #{sendTimeEnd}</if>
+              --><if test="followTimes != null "> and d.follow_times = #{followTimes}</if>
+            <if test="creator != null  and creator != ''"> and d.creator = #{creator}</if>
+            <if test="sender != null  and sender != ''"> and d.sender = #{sender}</if>
+            <if test='isDeliverGoods=="1"'> and d.courier_Number is not null </if>
+            <if test='isDeliverGoods=="0"'> and d.courier_Number is  null </if>
+       		
+       		
+       		 <if test="phoneNumber != null  and phoneNumber != ''"> and w.phone_number  like concat('%', #{phoneNumber}, '%')</if>
+            <if test="weixinNumber != null  and weixinNumber != ''"> and w.weixin_number like concat('%', #{weixinNumber}, '%')</if>
+            <if test="customerName != null  and customerName != ''"> and w.customer_name like concat('%', #{customerName}, '%')</if>
+            <if test="province != null  and province != ''"> and w.province = #{province}</if>
+            <if test="city != null  and city != ''"> and w.city = #{city}</if>
+            <if test="area != null  and area != ''"> and w.area = #{area}</if>
+            <if test="shopName != null  and shopName != ''"> and w.shop_name like concat('%', #{shopName}, '%')</if>
+            <if test="appointmentTime != null "> and w.appointment_time = #{appointmentTime}</if>
+            <if test="customerType != null  and customerType != ''"> and w.customer_type = #{customerType}</if>
+            <if test="creationTime != null "> and w.creation_time = #{creationTime}</if>
+            <if test="isDelivery != null  and isDelivery != ''"> and w.is_delivery = #{isDelivery}</if>
+            <if test="isSales != null  and isSales != ''"> and w.is_sales = #{isSales}</if>
+        </where>
+    </select>
+    <select id="selectVOByOrderNumber" parameterType="String" resultMap="deliverGoodsVOResult">
+        <include refid="selectDeliverGoodsVO"/>
+        where ORDER_NUMBER = #{orderNumber}
+    </select>
+    
 </mapper>

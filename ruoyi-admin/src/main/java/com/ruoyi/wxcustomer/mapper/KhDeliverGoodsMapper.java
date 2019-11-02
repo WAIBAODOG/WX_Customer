@@ -3,6 +3,7 @@ package com.ruoyi.wxcustomer.mapper;
 import java.util.List;
 
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 
 /**
  * 发样/成交情况Mapper接口
@@ -60,4 +61,11 @@ public interface KhDeliverGoodsMapper {
     public int deleteKhDeliverGoodsByIds(String[] ids);
 
 	public List<KhDeliverGoods> findKhDeliverGoodsByCustomerId(String customerId);
+	
+	
+	public List<DeliverGoodsVO> selectList(DeliverGoodsVO vo);
+	/**
+	 * 通过订单号获取
+	 */
+	  public  DeliverGoodsVO  selectVOByOrderNumber(String num);
 }

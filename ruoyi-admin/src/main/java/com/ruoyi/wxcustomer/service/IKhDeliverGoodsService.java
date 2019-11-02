@@ -3,6 +3,7 @@ package com.ruoyi.wxcustomer.service;
 import java.util.List;
 
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 
 /**
  * 发样/成交情况Service接口
@@ -58,4 +59,8 @@ public interface IKhDeliverGoodsService {
      * @return 结果
      */
     public int deleteKhDeliverGoodsById(String id);
+    
+    public List<DeliverGoodsVO> selectList(DeliverGoodsVO vo);
+    /**通过订单号获取**/
+	  public  DeliverGoodsVO  selectVOByOrderNumber(String num);
 }
