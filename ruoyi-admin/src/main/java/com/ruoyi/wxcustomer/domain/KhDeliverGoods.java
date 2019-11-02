@@ -102,6 +102,9 @@ public class KhDeliverGoods extends BaseEntity{
 
     /** 邮费 */
     private Long postage;
+    
+    /** 订单号 */
+    private String orderNumber;
 
     public void setId(String id) {
         this.id = id;
@@ -296,7 +299,15 @@ public class KhDeliverGoods extends BaseEntity{
         return postage;
     }
 
-    @Override
+    public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
@@ -326,6 +337,7 @@ public class KhDeliverGoods extends BaseEntity{
             .append("collectingAmount", getCollectingAmount())
             .append("insuranceAmount", getInsuranceAmount())
             .append("postage", getPostage())
+            .append("orderNumber", getOrderNumber())
             .toString();
     }
 }

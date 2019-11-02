@@ -58,4 +58,6 @@ public interface KhDeliverGoodsMapper {
      * @return 结果
      */
     public int deleteKhDeliverGoodsByIds(String[] ids);
+
+	public List<KhDeliverGoods> findKhDeliverGoodsByCustomerId(String customerId);
 }

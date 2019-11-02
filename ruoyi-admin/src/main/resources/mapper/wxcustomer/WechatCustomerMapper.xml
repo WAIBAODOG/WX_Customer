@@ -30,10 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="isDelivery"    column="is_delivery"    />
         <result property="isSales"    column="is_sales"    />
+        <result property="customerNum"    column="customer_num"    />
     </resultMap>
 
     <sql id="selectWechatCustomerVo">
-        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales from kh_wechat_customer
+        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales,customer_num from kh_wechat_customer
     </sql>
 
     <select id="selectWechatCustomerList" parameterType="WechatCustomer" resultMap="WechatCustomerResult">
@@ -88,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''">remark,</if>
             <if test="isDelivery != null  and isDelivery != ''">is_delivery,</if>
             <if test="isSales != null  and isSales != ''">is_sales,</if>
+            <if test="customerNum != null  and customerNum != ''">customer_num,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="customerId != null  and customerId != ''">#{customerId},</if>
@@ -115,6 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''">#{remark},</if>
             <if test="isDelivery != null  and isDelivery != ''">#{isDelivery},</if>
             <if test="isSales != null  and isSales != ''">#{isSales},</if>
+            <if test="customerNum != null  and customerNum != ''">#{customerNum},</if>
          </trim>
     </insert>
 
@@ -145,6 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
             <if test="isDelivery != null  and isDelivery != ''">is_delivery = #{isDelivery},</if>
             <if test="isSales != null  and isSales != ''">is_sales = #{isSales},</if>
+            <if test="customerNum != null  and customerNum != ''">customer_num = #{customerNum},</if>
         </trim>
         where customer_id = #{customerId}
     </update>

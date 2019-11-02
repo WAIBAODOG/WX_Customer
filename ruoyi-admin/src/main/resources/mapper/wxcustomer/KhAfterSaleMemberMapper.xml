@@ -33,10 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="insuranceAmount"    column="insurance_amount"    />
         <result property="postage"    column="postage"    />
         <result property="isDeal"    column="is_deal"    />
+        <result property="orderNumber"    column="order_number"    />
     </resultMap>
 
     <sql id="selectKhAfterSaleMemberVo">
-        select id, customer_id, follow_result_type, deal_amount, send_sample_list, gifts_list, deal_time, trouble_spots, intention_point, follow_times, follow_result, duration_hour, duration_minute, duration_second, next_follow_time, next_follow_mentality, creator_id, creator, sender, sender_phone, sender_address, send_time, courier_number, logistics_company, collecting_amount, insurance_amount, postage, is_deal from kh_after_sale_member
+        select id, customer_id, follow_result_type, deal_amount, send_sample_list, gifts_list, deal_time, trouble_spots, intention_point, follow_times, follow_result, duration_hour, duration_minute, duration_second, next_follow_time, next_follow_mentality, creator_id, creator, sender, sender_phone, sender_address, send_time, courier_number, logistics_company, collecting_amount, insurance_amount, postage, is_deal,order_number from kh_after_sale_member
     </sql>
 
     <select id="selectKhAfterSaleMemberList" parameterType="KhAfterSaleMember" resultMap="KhAfterSaleMemberResult">
@@ -86,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="insuranceAmount != null ">insurance_amount,</if>
             <if test="postage != null ">postage,</if>
             <if test="isDeal != null  and isDeal != ''">is_deal,</if>
+             <if test="orderNumber != null  and orderNumber != ''">order_number,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null  and id != ''">#{id},</if>
@@ -116,6 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="insuranceAmount != null ">#{insuranceAmount},</if>
             <if test="postage != null ">#{postage},</if>
             <if test="isDeal != null  and isDeal != ''">#{isDeal},</if>
+            <if test="orderNumber != null  and orderNumber != ''">#{orderNumber},</if>
          </trim>
     </insert>
 
@@ -149,6 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="insuranceAmount != null ">insurance_amount = #{insuranceAmount},</if>
             <if test="postage != null ">postage = #{postage},</if>
             <if test="isDeal != null  and isDeal != ''">is_deal = #{isDeal},</if>
+            <if test="orderNumber != null  and orderNumber != ''">order_number = #{orderNumber},</if>
         </trim>
         where id = #{id}
     </update>
@@ -163,4 +167,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+    
+    <select id="findKhAfterSaleMemberByCustomerId" resultMap="KhAfterSaleMemberResult" parameterType="String">
+    	select * from kh_after_sale_member where customer_id=#{customerId}  order by follow_times
+    </select>
 </mapper>

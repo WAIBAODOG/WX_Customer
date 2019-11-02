@@ -82,6 +82,11 @@ public class WechatCustomer extends BaseEntity{
     /** 店员数 */
     private Long shopAssistantNumber;
 
+    /**
+     * 店铺数
+     */
+    private Long customerNum;
+    
     /** 店铺规模 */
     private String storeScale;
 
@@ -269,7 +274,15 @@ public class WechatCustomer extends BaseEntity{
         return isSales;
     }
 
-    @Override
+    public Long getCustomerNum() {
+		return customerNum;
+	}
+
+	public void setCustomerNum(Long customerNum) {
+		this.customerNum = customerNum;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("customerId", getCustomerId())
@@ -297,6 +310,7 @@ public class WechatCustomer extends BaseEntity{
             .append("remark", getRemark())
             .append("isDelivery", getIsDelivery())
             .append("isSales", getIsSales())
+            .append("customerNum", getCustomerNum())
             .toString();
     }
 }

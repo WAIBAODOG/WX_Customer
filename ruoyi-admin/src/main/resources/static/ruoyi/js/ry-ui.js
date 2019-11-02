@@ -1360,7 +1360,69 @@
                      }
                  });
             	return json;
-            }
+            },
+            // uuid生成
+            genUUID: function() {
+            	var d = new Date().getTime();
+			    if (window.performance && typeof window.performance.now === "function") {
+			        d += performance.now(); //use high-precision timer if available
+			    }
+			    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+			        var r = (d + Math.random() * 16) % 16 | 0;
+			        d = Math.floor(d / 16);
+			        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+			    });
+			    return uuid.replace('-', '');
+            },
+            setForm : function($form,json){
+				$form.find(':input').each(function(){
+					var $this = $(this);
+					var ppt_name =  $this.attr('name');
+					$this.val(json[ppt_name]);
+				});
+			},
+			dateFormat : function(date,format) {
+				if(!date){
+					return date;
+				}
+				format = format || 'yyyy-MM-dd';
+			    date = new Date(date);
+			    var map = {
+			        "M": date.getMonth() + 1, //月份 
+			        "d": date.getDate(), //日 
+			        "h": date.getHours(), //小时 
+			        "m": date.getMinutes(), //分 
+			        "s": date.getSeconds(), //秒 
+			        "q": Math.floor((date.getMonth() + 3) / 3), //季度 
+			        "S": date.getMilliseconds() //毫秒 
+			    };
+			    format = format.replace(/([yMdhmsqS])+/g, function(all, t){
+			        var v = map[t];
+			        if(v !== undefined){
+			            if(all.length > 1){
+			                v = '0' + v;
+			                v = v.substr(v.length-2);
+			            }
+			            return v;
+			        }
+			        else if(t === 'y'){
+			            return (date.getFullYear() + '').substr(4 - all.length);
+			        }
+			        return all;
+			    });
+			    return format;
+			},
+			// 回显数据字典
+            getDictName: function(datas, value) {
+            	var res = null;
+                $.each(datas, function(index, dict) {
+                    if (dict.dictValue ==  value) {
+                    	res = dict.dictLabel;
+                    	return false;
+                    }
+                });
+                return res;
+            },
         }
     });
 })(jQuery);

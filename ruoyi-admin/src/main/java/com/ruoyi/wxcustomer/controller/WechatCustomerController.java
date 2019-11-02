@@ -1,7 +1,11 @@
 package com.ruoyi.wxcustomer.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -20,6 +25,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
+import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
 import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 
@@ -31,111 +39,131 @@ import com.ruoyi.wxcustomer.service.IWechatCustomerService;
  */
 @Controller
 @RequestMapping("/wxcustomer/WechatCustomer")
-public class WechatCustomerController extends BaseController{
-    private String prefix = "wxcustomer/WechatCustomer";
+public class WechatCustomerController extends BaseController {
+	private String prefix = "wxcustomer/WechatCustomer";
 
-    @Autowired
-    private IWechatCustomerService wechatCustomerService;
+	@Autowired
+	private IWechatCustomerService wechatCustomerService;
 
-    @RequiresPermissions("wxcustomer:WechatCustomer:view")
-    @GetMapping()
-    public String WechatCustomer(){
-        return prefix + "/WechatCustomer";
-    }
+	@RequiresPermissions("wxcustomer:WechatCustomer:view")
+	@GetMapping()
+	public String WechatCustomer() {
+		return prefix + "/WechatCustomer";
+	}
 
-    /**
-     * 查询微信客户列表
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:list")
-    @PostMapping("/list")
-    @ResponseBody
-    public TableDataInfo list(WechatCustomer wechatCustomer){
-        startPage();
-        List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
-        return getDataTable(list);
-    }
+	/**
+	 * 查询微信客户列表
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo list(WechatCustomer wechatCustomer) {
+		startPage();
+		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
+		return getDataTable(list);
+	}
 
-    /**
-     * 导出微信客户列表
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(WechatCustomer wechatCustomer){
-        List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
-        ExcelUtil<WechatCustomer> util = new ExcelUtil<WechatCustomer>(WechatCustomer.class);
-        return util.exportExcel(list, "WechatCustomer");
-    }
+	/**
+	 * 导出微信客户列表
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:export")
+	@PostMapping("/export")
+	@ResponseBody
+	public AjaxResult export(WechatCustomer wechatCustomer) {
+		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
+		ExcelUtil<WechatCustomer> util = new ExcelUtil<WechatCustomer>(WechatCustomer.class);
+		return util.exportExcel(list, "WechatCustomer");
+	}
 
-    /**
-     * 新增微信客户
-     */
-    @GetMapping("/add")
-    public String add(Model model){
-    	model.addAttribute("user", ShiroUtils.getSysUser());
-        return prefix + "/add";
-    }
-    
-    /**
-     * 新增销售情况
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:add")
-    @GetMapping("/addSaleInfo")
-    public String addSaleInfo(Model model){
-    	model.addAttribute("user", ShiroUtils.getSysUser());
-    	return prefix + "/addSaleInfo";
-    }
-    
-    /**
-     * 新增售后情况
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:add")
-    @GetMapping("/addPostSale")
-    public String addPostSale(Model model){
-    	model.addAttribute("user", ShiroUtils.getSysUser());
-    	return prefix + "/addPostSale";
-    }
+	/**
+	 * 新增微信客户
+	 */
+	@GetMapping("/add")
+	public String add(Model model) {
+		SysUser sysUser = ShiroUtils.getSysUser();
+		WechatCustomer wechatCustomer = new WechatCustomer();
+		wechatCustomer.setCustomerId(UUID.randomUUID().toString().replaceAll("-", ""));
+		wechatCustomer.setCreatorId(sysUser.getUserId().toString());
+		wechatCustomer.setCreator(sysUser.getUserName());
+		model.addAttribute("wechatCustomer", wechatCustomer);
+		model.addAttribute("isAdd", "1");
+		return prefix + "/add";
+	}
 
-    /**
-     * 新增保存微信客户
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:add")
-    @Log(title = "微信客户", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(WechatCustomer wechatCustomer){
-        return toAjax(wechatCustomerService.insertWechatCustomer(wechatCustomer));
-    }
+	/**
+	 * 新增销售情况
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:add")
+	@GetMapping("/addSaleInfo")
+	public String addSaleInfo(Model model, String id) {
+		model.addAttribute("user", ShiroUtils.getSysUser());
+		model.addAttribute("id", id);
+		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
+		return prefix + "/addSaleInfo";
+	}
 
-    /**
-     * 修改微信客户
-     */
-    @GetMapping("/edit/{customerId}")
-    public String edit(@PathVariable("customerId") String customerId, ModelMap mmap){
-        WechatCustomer wechatCustomer = wechatCustomerService.selectWechatCustomerById(customerId);
-        mmap.put("wechatCustomer", wechatCustomer);
-        return prefix + "/add";
-    }
+	/**
+	 * 新增售后情况
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:add")
+	@GetMapping("/addPostSale")
+	public String addPostSale(Model model, String id) {
+		model.addAttribute("user", ShiroUtils.getSysUser());
+		model.addAttribute("id", id);
+		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
+		return prefix + "/addPostSale";
+	}
 
-    /**
-     * 修改保存微信客户
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:edit")
-    @Log(title = "微信客户", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(WechatCustomer wechatCustomer) {
-        return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer));
-    }
+	/**
+	 * 新增保存微信客户
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:add")
+	@Log(title = "微信客户", businessType = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(WechatCustomer wechatCustomer,String saleInfoStr, String postSaleStr) {
+		List<KhDeliverGoods> saleInfoList = StringUtils.isBlank(saleInfoStr) ? null : JSON.parseArray(saleInfoStr, KhDeliverGoods.class);
+		List<KhAfterSaleMember> postSaleList = StringUtils.isBlank(postSaleStr) ? null : JSON.parseArray(postSaleStr, KhAfterSaleMember.class);
+		return toAjax(wechatCustomerService.addWechatCustomer(wechatCustomer, saleInfoList, postSaleList));
+	}
 
-    /**
-     * 删除微信客户
-     */
-    @RequiresPermissions("wxcustomer:WechatCustomer:remove")
-    @Log(title = "微信客户", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids) {
-        return toAjax(wechatCustomerService.deleteWechatCustomerByIds(ids));
-    }
+	/**
+	 * 修改微信客户
+	 */
+	@GetMapping("/edit/{customerId}")
+	public String edit(@PathVariable("customerId") String customerId, ModelMap mmap) {
+		WechatCustomer wechatCustomer = wechatCustomerService.selectWechatCustomerById(customerId);
+		List<KhDeliverGoods> khDeliverGoodsList = wechatCustomerService.findKhDeliverGoodsByCustomerId(customerId);
+		List<KhAfterSaleMember> khAfterSaleMemberList = wechatCustomerService.findKhAfterSaleMemberByCustomerId(customerId);
+		
+		mmap.put("khDeliverGoodsDataStr", JSON.toJSONString(khDeliverGoodsList == null? null : khDeliverGoodsList));
+		mmap.put("khAfterSaleMemberDataStr", JSON.toJSONString(khAfterSaleMemberList == null? null : khAfterSaleMemberList));
+		mmap.put("wechatCustomer", wechatCustomer);
+		mmap.addAttribute("isAdd", "0");
+		return prefix + "/add";
+	}
+
+	/**
+	 * 修改保存微信客户
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:edit")
+	@Log(title = "微信客户", businessType = BusinessType.UPDATE)
+	@PostMapping("/edit")
+	@ResponseBody
+	public AjaxResult editSave(WechatCustomer wechatCustomer,String saleInfoStr, String postSaleStr) {
+		List<KhDeliverGoods> saleInfoList = StringUtils.isBlank(saleInfoStr) ? null : JSON.parseArray(saleInfoStr, KhDeliverGoods.class);
+		List<KhAfterSaleMember> postSaleList = StringUtils.isBlank(postSaleStr) ? null : JSON.parseArray(postSaleStr, KhAfterSaleMember.class);
+		return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer, saleInfoList, postSaleList));
+	}
+
+	/**
+	 * 删除微信客户
+	 */
+	@RequiresPermissions("wxcustomer:WechatCustomer:remove")
+	@Log(title = "微信客户", businessType = BusinessType.DELETE)
+	@PostMapping("/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids) {
+		return toAjax(wechatCustomerService.deleteWechatCustomerByIds(ids));
+	}
 }

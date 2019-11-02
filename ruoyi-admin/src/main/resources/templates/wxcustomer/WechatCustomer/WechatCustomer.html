@@ -102,13 +102,20 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
+                code: "customerId",
+                uniqueId: "customerId",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
+                removeUrl: prefix + "/remove/{id}",
                 exportUrl: prefix + "/export",
                 modalName: "微信客户",
                 columns: [{
                     checkbox: true
+                },
+                {
+                    field : 'customerId', 
+                    title : 'customerId',
+                    visible: false
                 },
                 {
                     field : 'phoneNumber', 

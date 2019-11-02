@@ -10,95 +10,105 @@
    	   <h4 class="form-header h4">基本情况</h4>	
        <form class="form-horizontal" id="form-WechatCustomer-add" style="margin-right: 150px;">
            <div class="form-group">
-         		<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>电话号：</label>
+           	
+           	<input name="customerId" class="form-control" type="hidden" th:value="${wechatCustomer.customerId}" id="id">
+           	<input name="isAdd" class="form-control" type="hidden" th:value="${isAdd}" id="isAdd">
+           	<input name="saleInfoStr" class="form-control" type="hidden" value="" id="saleInfoStr">
+           	<input name="postSaleStr" class="form-control" type="hidden" value="" id="postSaleStr">
+           	
+           	<input name="provinceId" class="form-control" type="hidden" value="">
+           	<input name="cityId" class="form-control" type="hidden" value="">
+           	<input name="areaId" class="form-control" type="hidden" value="">
+           	
+         	<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>电话号：</label>
 			<div class="col-sm-4">
-				 <input name="phoneNumber" class="form-control" type="text" placeholder="请输入电话号" required>
+				 <input name="phoneNumber" class="form-control" type="text" placeholder="请输入电话号"  required th:value="${wechatCustomer.phoneNumber}">
 			</div>
 			<label class="col-sm-2 control-label">微信号：</label>
 			<div class="col-sm-4">
-				<input name="weixinNumber" class="form-control" type="text" placeholder="请输入微信号">
+				<input name="weixinNumber" class="form-control" type="text" placeholder="请输入微信号"  th:value="${wechatCustomer.weixinNumber}">
 			</div>
            </div>
            
            <div class="form-group">    
                <label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>客户姓名：</label>
 			<div class="col-sm-4">
-				 <input name="customerName" class="form-control" type="text" placeholder="请输入客户姓名" required>
+				 <input name="customerName" class="form-control" type="text" placeholder="请输入客户姓名"  required  th:value="${wechatCustomer.customerName}">
 			</div>
 			<label class="col-sm-2 control-label">对接业务员：</label>
 			<div class="col-sm-4">
-				<input name="creatorId" type="hidden" th:value="${user.userId}">
-				<input name="creator" class="form-control" type="text" th:value="${user.userName}" readonly="readonly" required>
+				<input name="creatorId" type="hidden"  th:value="${wechatCustomer.creatorId}">
+				<input name="creator" class="form-control" type="text" readonly="readonly" required  th:value="${wechatCustomer.creator}">
 			</div>
            </div>
            
            <div class="form-group">    
-               <label class="col-sm-2 control-label">性别：</label>
+            <label class="col-sm-2 control-label">性别：</label>
 			<div class="col-sm-4">
 				 <select name="gender" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
                        <option value="">请选择</option>
-                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{wechatCustomer.gender}"></option>
                  </select>
 			</div>
 			<label class="col-sm-2 control-label">性格：</label>
 			<div class="col-sm-4">
-				<input name="khCharacter" class="form-control" type="text" >
+				<input name="khCharacter" class="form-control" type="text"  th:value="${wechatCustomer.khCharacter}">
 			</div>
            </div>
            
            <div class="form-group">    
                <label class="col-sm-2 control-label">客户地址：</label>
-               <div class="col-sm-6 form-inline"  data-toggle="distpicker" style="padding-left: 30px;">
+               <div class="col-sm-6 form-inline"  style="padding-left: 30px;" id="customerAddressSelect">
                    <div class="form-group" style="padding-right: 30px"><select name="province" class="form-control m-b"></select></div>
                    <div class="form-group" style="padding-right: 30px"><select name="city" class="form-control m-b"></select></div>
                    <div class="form-group"><select name="area" class="form-control m-b"></select></div>
                </div>
                <div class="col-sm-4">
-                   <input name="customerAddress" class="form-control" type="text" placeholder="请输入详细地址">
+                   <input name="customerAddress" class="form-control" type="text" placeholder="请输入详细地址"  th:value="${wechatCustomer.customerAddress}">
                </div>
            </div>
            
            <div class="form-group">    
                <label class="col-sm-2 control-label">店名：</label>
 			<div class="col-sm-4">
-				 <input name="shopName" class="form-control" type="text">
+				 <input name="shopName" class="form-control" type="text"  th:value="${wechatCustomer.shopName}">
 			</div>
 			<label class="col-sm-2 control-label">客户类型：</label>
 			<div class="col-sm-4">
 				 <select name="customerType" class="form-control m-b" th:with="type=${@dict.getType('customer_type')}">
-                        <option value="">请选择</option>
-                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                       <option value="">请选择</option>
+                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{wechatCustomer.customerType}"></option>
                    </select>
 			</div>
            </div>
            
            <div class="form-group">    
-               <label class="col-sm-2 control-label">店员数：</label>
-			<div class="col-sm-4">
-				 <input name="shopAssistantNumber" class="form-control" type="text">
-			</div>
-			<label class="col-sm-2 control-label">店铺数：</label>
-			<div class="col-sm-4">
-				<input name="storeScale" class="form-control" type="text">
-			</div>
+                <label class="col-sm-2 control-label">店员数：</label>
+				<div class="col-sm-4">
+					 <input name="shopAssistantNumber" class="form-control" type="text"   th:value="${wechatCustomer.shopAssistantNumber}">
+				</div>
+				<label class="col-sm-2 control-label">店铺数：</label>
+				<div class="col-sm-4">
+					<input name="customerNum" class="form-control" type="text"  th:value="${wechatCustomer.customerNum}">
+				</div>
            </div>
            
            <div class="form-group">
            	<label class="col-sm-2 control-label">店铺规模：</label>
 			<div class="col-sm-4">
-				<input name="storeScale" class="form-control" type="text">
+				<input name="storeScale" class="form-control" type="text" th:value="${wechatCustomer.storeScale}">
 			</div>
            
                <label class="col-sm-2 control-label">需求产品：</label>
                <div class="col-sm-4">
-                   <textarea name="demandProduct" class="form-control"></textarea>
+                   <textarea name="demandProduct" class="form-control"  th:text="${wechatCustomer.demandProduct}"></textarea>
                </div>
            </div>
            
            <div class="form-group">
                <label class="col-sm-2 control-label">备注：</label>
                <div class="col-sm-10">
-                   <textarea name="demandProduct" class="form-control"></textarea>
+                   <textarea name="remark" class="form-control" th:text="${wechatCustomer.remark}"></textarea>
                </div>
            </div>
        </form>
@@ -113,7 +123,7 @@
 	             </a>
 		   </div>
 		   <div class="row">    
-	             <table class="table table-bordered table-striped" id="saleInfoTable">
+	             <table class="table table-bordered table-striped">
 		              <thead>
 					    <tr>
 					      <th>跟进次数</th>
@@ -126,7 +136,7 @@
 					      <th>操作</th>
 					    </tr>
 					  </thead>
-					  <tbody>
+					  <tbody  id="saleInfoTable">
 					  </tbody>
 	             </table>
 		    </div>
@@ -143,7 +153,7 @@
 	             </a>
 		   </div>
 		   <div class="row">    
-	             <table class="table table-bordered table-striped" id="saleInfoTable">
+	             <table class="table table-bordered table-striped">
 		              <thead>
 					    <tr>
 					      <th>跟进次数</th>
@@ -156,7 +166,7 @@
 					      <th>操作</th>
 					    </tr>
 					  </thead>
-					  <tbody>
+					  <tbody id="postSaleTable">
 					  </tbody>
 	             </table>
 		    </div>
@@ -170,54 +180,217 @@
         </div>
     </div>
     
+    <div id="khDeliverGoodsDataStr" style="display:none;" th:text="${khDeliverGoodsDataStr}"></div>
+    <div id="khAfterSaleMemberDataStr" style="display:none;" th:text="${khAfterSaleMemberDataStr}"></div>
+    <div id="provinceData" style="display:none;" th:text="${wechatCustomer.province}"></div>
+    <div id="cityData" style="display:none;" th:text="${wechatCustomer.city}"></div>
+    <div id="areaData" style="display:none;" th:text="${wechatCustomer.area}"></div>
     
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
     <th:block th:include="include :: distpicker-js" />
-    <script type="text/javascript">
+    <th:block th:include="include :: jquery-tmpl-js" />
+    <script th:inline="javascript">
+    	var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
+    	var isDeliveryDatas = [[${@dict.getType('is_delivery')}]];
         var prefix = ctx + "wxcustomer/WechatCustomer";
         $("#form-WechatCustomer-add").validate({
             focusCleanup: true
         });
+        
+        $(function() {
+        	var khDeliverGoodsDataStr = $('#khDeliverGoodsDataStr').text();
+        	if(khDeliverGoodsDataStr){
+        		var jsonArray = JSON.parse(khDeliverGoodsDataStr);
+	        	for(var i=0;i<jsonArray.length;i++) {
+	        		jsonArray[i].followResultTypeName = $.common.getDictName(followResultTypeDatas, jsonArray[i].followResultType);
+	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime);
+	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime);
+	        		jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
+	        	}
+        		$('#saleInfoTpl').tmpl(jsonArray).appendTo('#saleInfoTable');
+        	}
+        	
+        	var khAfterSaleMemberDataStr = $('#khAfterSaleMemberDataStr').text();
+        	if(khAfterSaleMemberDataStr){
+        		var jsonArray = JSON.parse(khAfterSaleMemberDataStr);
+	        	for(var i=0;i<jsonArray.length;i++) {
+	        		jsonArray[i].isDealName = $.common.getDictName(isDeliveryDatas, jsonArray[i].isDeal);
+	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime);
+	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime);
+	        		jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
+	        	}
+        		$('#postSaleTpl').tmpl(jsonArray).appendTo('#postSaleTable');
+        	}
+        	
+        	$('#customerAddressSelect').distpicker({
+			  province: $('#provinceData').text(),
+			  city: $('#provinceData').text(),
+			  district: $('#provinceData').text()
+			});
+        });
 
         function submitHandler() {
-            if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-WechatCustomer-add').serialize());
+            if (!$.validate.form()) {
+            	return;
             }
+            var isAdd = $('#isAdd').val();
+        	var url = prefix + "/add"; 
+        	if(isAdd != 1) {
+        		url = prefix + "/edit"; 
+        	}
+        	
+        	$('[name="provinceId"]').val($('[name="province"]').find('option:selected').data('code'));
+        	$('[name="cityId"]').val($('[name="city"]').find('option:selected').data('code'));
+        	$('[name="areaId"]').val($('[name="area"]').find('option:selected').data('code'));
+        	
+        	var saleInfoArr = getArrayJson('saleInfoTable');
+        	if(saleInfoArr.length > 0) {
+        		$('#saleInfoStr').val(JSON.stringify(saleInfoArr));
+        	}
+        	
+        	var postSaleArr = getArrayJson('postSaleTable');
+        	if(postSaleArr.length > 0) {
+        		$('#postSaleStr').val(JSON.stringify(postSaleArr));
+        	}
+        	
+            $.operate.save(url, $('#form-WechatCustomer-add').serialize());
+        }
+        
+        function getArrayJson(tableName) {
+        	var data = [];
+        	$('#' + tableName).find('tr').each(function() {
+    			var $tdThis = $(this);
+    			var json = {};
+    			$tdThis.find('[data-name]').each(function() {
+    				var $this = $(this);
+	    			json[$this.data('name')] = $this.text();
+    			});
+    			
+    			data.push(json);
+    		});
+    		return data;
         }
 
-        $("input[name='appointmentTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='creationTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-        
         function addSaleInfo() {
         	$.modal.open('添加销售情况', prefix + '/addSaleInfo');
+        }
+        
+        function editSaleInfo(_this) {
+        	var id = $(_this).closest('tr').find('[data-name="id"]').text();
+        	$.modal.open('修改销售情况',prefix + '/addSaleInfo?id=' + id);
+        }
+        
+        function getJson(type, id) {
+            var json = {};
+            var $id = getTdById(type, id);
+        	if($id) {
+        		$id.closest('tr').find('td[data-name]').each(function() {
+        			var $this = $(this);
+        			json[$this.data('name')] = $this.text();
+        		});
+        	}
+        	return json;
+        }
+        
+        function getTdById(type, id) {
+        	var tableName = '';
+            var $id = null;
+            if(type == 'saleInfo') {
+            	tableName = 'saleInfoTable';
+            }
+            if(type == 'postSale') {
+            	tableName = 'postSaleTable';
+            }
+            
+        	$('#' + tableName).find('[data-name="id"]').each(function() {
+        		var $this = $(this);
+        		if($this.text() == id) {
+        			$id = $this;
+        			return false;
+        		}
+        	});
+        	return $id;
+        }
+        
+        function handleSaleInfo(json, isAdd) {
+        	handleInfo('saleInfo', json, isAdd);
+        }
+        
+        function handleInfo(type, json, isAdd) {
+        	if(isAdd) {
+        		json.followTimes = handleFollowTimes(type + 'Table') + 1;
+        		$('#'+ type + 'Tpl').tmpl(json).appendTo('#' + type + 'Table');
+        		return;
+        	}
+        	var $id = getTdById(type, json.id);
+        	if($id) {
+        		$id.closest('tr').find('td[data-name]').each(function() {
+        			var $this = $(this);
+        			$this.text(json[$this.data('name')]);
+        		});
+        	}
+        }
+        
+        function handleFollowTimes(tableName) {
+        	var $followTimes = $('#' + tableName).find('[data-name="followTimes"]').last();
+        	if($followTimes.size() == 0) {
+        		return 0;
+        	}
+        	
+        	return Number($followTimes.text());
         }
         
         function addPostSale() {
         	$.modal.open('添加售后情况', prefix + '/addPostSale');
         }
         
+        function editPostSale(_this) {
+        	var id = $(_this).closest('tr').find('[data-name="id"]').text();
+        	$.modal.open('修改售后情况',prefix + '/addPostSale?id=' + id);
+        }
+        
+        function handlePostSale(json, isAdd) {
+        	handleInfo('postSale', json, isAdd);
+        }
+        
     </script>
     
-    <script  id="saleInfoTpl" type="text/template">
+    <script  id="saleInfoTpl" type="text/x-jquery-tmpl">
  		<tr>
-	      <th>跟进次数</th>
-	      <th>跟进结果类型</th>
-	      <th>跟进时间</th>
-	      <th>跟进情况</th>
-	      <th>下次跟进时间</th>
-	      <th>通话时长</th>
-	      <th>对接业务员</th>
-	      <th>操作</th>
+ 		  <td data-name="id" style="display:none;">${id}</td>
+	      <td data-name="followTimes">${followTimes}</td>
+	      <td data-name="followResultType" style="display:none;">${followResultType}</td>
+	      <td data-name="followResultTypeName">${followResultTypeName}</td>
+	      <td data-name="dealTime">${dealTime}</td>
+	      <td data-name="followResult">${followResult}</td>
+	      <td data-name="nextFollowTime">${nextFollowTime}</td>
+	      <td data-name="duration">${duration}</td>
+	      <td data-name="durationHour" style="display:none;">${durationHour}</td>
+	      <td data-name="durationMinute" style="display:none;">${durationMinute}</td>
+	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
+	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
+	      <td data-name="creator">${creator}</td>
+	      <td><a href="javascript:;" onclick="editSaleInfo(this);">修改</a></td>
+	    </tr>
+	</script>
+	
+	<script  id="postSaleTpl" type="text/x-jquery-tmpl">
+	    <tr>
+ 		  <td data-name="id" style="display:none;">${id}</td>
+	      <td data-name="followTimes">${followTimes}</td>
+	      <td data-name="isDeal" style="display:none;">${isDeal}</td>
+	      <td data-name="isDealName">${isDealName}</td>
+	      <td data-name="dealTime">${dealTime}</td>
+	      <td data-name="followResult">${followResult}</td>
+	      <td data-name="nextFollowTime">${nextFollowTime}</td>
+	      <td data-name="duration">${duration}</td>
+	      <td data-name="durationHour" style="display:none;">${durationHour}</td>
+	      <td data-name="durationMinute" style="display:none;">${durationMinute}</td>
+	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
+	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
+	      <td data-name="creator">${creator}</td>
+	      <td><a href="javascript:;" onclick="editPostSale(this);">修改</a></td>
 	    </tr>
 	</script>
 </body>

@@ -106,6 +106,9 @@ public class KhAfterSaleMember extends BaseEntity{
     /** 是否成交（0，是 1否） */
     @Excel(name = "是否成交", readConverterExp = "0=，是,1=否")
     private String isDeal;
+    
+    /** 订单号 */
+    private String orderNumber;
 
     public void setId(String id) {
         this.id = id;
@@ -308,7 +311,15 @@ public class KhAfterSaleMember extends BaseEntity{
         return isDeal;
     }
 
-    @Override
+    public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
@@ -339,6 +350,7 @@ public class KhAfterSaleMember extends BaseEntity{
             .append("insuranceAmount", getInsuranceAmount())
             .append("postage", getPostage())
             .append("isDeal", getIsDeal())
+            .append("orderNumber", getOrderNumber())
             .toString();
     }
 }
