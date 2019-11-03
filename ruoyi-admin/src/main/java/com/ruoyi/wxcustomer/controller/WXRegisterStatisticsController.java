@@ -9,7 +9,10 @@
  */
 package com.ruoyi.wxcustomer.controller;
 
+import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
+import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
+import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
+import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 
 /**
 * @ClassName: WXRegisterStatisticsController
@@ -30,7 +40,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/wxcustomer/wxRegisterStatistics")
 public class WXRegisterStatisticsController extends BaseController{
 	 private String prefix = "wxcustomer/statistics";
-
+	 @Autowired
+	    private IKhDeliverGoodsService khDeliverGoodsService;
+	 
 	    //每天微信登记
 	    @RequiresPermissions("wxRegisterStatistics:wxRegister:view")
 	    @GetMapping()
@@ -44,8 +56,20 @@ public class WXRegisterStatisticsController extends BaseController{
 	    @RequiresPermissions("wxRegisterStatistics:wxRegister:list")
 	    @PostMapping("/list")
 	    @ResponseBody
-	    public TableDataInfo list( ){
+	    public TableDataInfo list( DeliverGoodsVO vo ){
 	        startPage();
-	        return getDataTable(null);
+	        return getDataTable(khDeliverGoodsService.selectList(vo));
+	    }
+	    /**
+	     * 导出
+	     */
+	    @RequiresPermissions("wxRegisterStatistics:wxRegister:export")
+	    @PostMapping("/export")
+	    @ResponseBody
+	    public AjaxResult export( DeliverGoodsVO vo)
+	    {
+	        List<DeliverGoodsVO> list =khDeliverGoodsService.selectList(vo);
+	        ExcelUtil<DeliverGoodsVO> util = new ExcelUtil<DeliverGoodsVO>(DeliverGoodsVO.class);
+	        return util.exportExcel(list, "wxRegister");
 	    }
 }

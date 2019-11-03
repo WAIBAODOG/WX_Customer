@@ -8,18 +8,7 @@
         <div class="row">
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
-                 <div class="btn-group-sm"  role="group">
-	                <a class="btn btn-success" onclick="$.table.search()"  >
-	                    <i class="fa fa-search"></i> 查询
-	                </a>
-	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
-	                    <i class="fa fa-refresh"></i> 清空
-	                </a>
-                     <a class="btn btn-success" onclick="$.table.export()"  >
-	                    <i class="fa fa-download"></i> 导出
-	                </a>
-            </div>  
-                	 
+                 
                     <div class="select-list">
                         <ul>
                         	<li>
@@ -53,7 +42,18 @@
                     </div>
                 </form>
             </div>
-
+			<div class="btn-group-sm"  id="toolbar" role="group">
+	                <a class="btn btn-success" onclick="$.table.search()"  >
+	                    <i class="fa fa-search"></i> 查询
+	                </a>
+	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
+	                    <i class="fa fa-refresh"></i> 清空
+	                </a>
+                     <a class="btn btn-success" onclick="$.table.exportExcel()"  >
+	                    <i class="fa fa-download"></i> 导出
+	                </a>
+            </div>  
+                	 
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
             </div>
@@ -67,6 +67,7 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
+                exportUrl: prefix + "/export",
                 modalName: "跟进顾客资料表",
                 columns: [{
                     checkbox: true
