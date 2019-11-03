@@ -3,6 +3,7 @@ package com.ruoyi.wxcustomer.service;
 import java.util.List;
 
 import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
+import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
 
 /**
  * 售后情况Service接口
@@ -58,4 +59,14 @@ public interface IKhAfterSaleMemberService {
      * @return 结果
      */
     public int deleteKhAfterSaleMemberById(String id);
+    
+    public List<AfterSaleMemberVO> selectList(AfterSaleMemberVO vo);
+
+	/**
+	 * 通过订单号获取
+	 */
+	public AfterSaleMemberVO selectVOByOrderNumber(String num);
+
+	/** 改状态，不是物理删除 **/
+	public int deleteByIds(String ids);
 }

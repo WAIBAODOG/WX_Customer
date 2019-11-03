@@ -274,6 +274,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               --><if test="followTimes != null "> and d.follow_times = #{followTimes}</if>
             <if test="creator != null  and creator != ''"> and d.creator = #{creator}</if>
             <if test="sender != null  and sender != ''"> and d.sender = #{sender}</if>
+            <if test="isDelete != null  and isDelete != ''"> and d.is_delete = #{isDelete}</if>
             <if test='isDeliverGoods=="1"'> and d.courier_Number is not null </if>
             <if test='isDeliverGoods=="0"'> and d.courier_Number is  null </if>
        		
@@ -296,5 +297,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDeliverGoodsVO"/>
         where ORDER_NUMBER = #{orderNumber}
     </select>
-    
+     <delete id="deleteByIds" parameterType="String">
+        update  kh_deliver_goods set is_delete='1' where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

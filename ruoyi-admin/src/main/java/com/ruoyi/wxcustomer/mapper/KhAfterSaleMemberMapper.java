@@ -3,6 +3,8 @@ package com.ruoyi.wxcustomer.mapper;
 import java.util.List;
 
 import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
+import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 
 /**
  * 售后情况Mapper接口
@@ -60,4 +62,14 @@ public interface KhAfterSaleMemberMapper {
 	public int deleteKhAfterSaleMemberByIds(String[] ids);
 
 	public List<KhAfterSaleMember> findKhAfterSaleMemberByCustomerId(String customerId);
+	
+	public List<AfterSaleMemberVO> selectList(AfterSaleMemberVO vo);
+
+	/**
+	 * 通过订单号获取
+	 */
+	public AfterSaleMemberVO selectVOByOrderNumber(String num);
+
+	/** 改状态，不是物理删除 **/
+	public int deleteByIds(String[] ids);
 }

@@ -6,24 +6,25 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ">
-        <form class="form-horizontal m" id="form-deliver_goods-add">
+        <form class="form-horizontal m" id="form-deliver_goods">
+        	<input type="hidden" name="id" th:value="${vo.id}"  />
            <div class="col-md-12">
    		 <div class="form-group">
         <label class="col-sm-3 control-label">发件人：</label>
         <div class="col-sm-9">
-            <input type="text" name="sender" class="form-control" placeholder="请输入发件人">
+            <input type="text" name="sender" class="form-control" placeholder="请输入发件人" th:value="${vo.sender}" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">发件人电话：</label>
         <div class="col-sm-9">
-            <input type="text" name="senderPhone" class="form-control" placeholder="请输入发件人电话">
+            <input type="text" name="senderPhone" class="form-control" placeholder="请输入发件人电话" th:value="${vo.senderPhone}" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">发件人地址：</label>
         <div class="col-sm-9">
-            <input type="text" name="senderAddress" class="form-control" placeholder="请输入发件人地址">
+            <input type="text" name="senderAddress" class="form-control" placeholder="请输入发件人地址" th:value="${vo.senderAddress}" required>
         </div>
     </div>
     <div class="form-group">
@@ -31,38 +32,38 @@
         <div class="col-sm-9">
             <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 
-                <input type="text" name="sendTime" class="form-control" value="">
+                <input type="text" name="sendTime" class="form-control" th:value="${#dates.format(vo.sendTime,'yyyy-MM-dd')}" required>
             </div>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">快递单号：</label>
         <div class="col-sm-9">
-            <input type="text" name="courierNumber" class="form-control" placeholder="请输入快递单号">
+            <input type="text" name="courierNumber" class="form-control" placeholder="请输入快递单号" th:value="${vo.courierNumber}" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">物流公司：</label>
         <div class="col-sm-9">
-            <input type="text" name="logisticsCompany" class="form-control" placeholder="请输入物流公司">
+            <input type="text" name="logisticsCompany" class="form-control" placeholder="请输入物流公司" th:value="${vo.logisticsCompany}" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">邮费：</label>
         <div class="col-sm-9">
-            <input type="text" name="postage" class="form-control" placeholder="请输入收益">
+            <input type="text" name="postage" class="form-control" placeholder="请输入邮费" th:value="${vo.postage}" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">代收金额：</label>
         <div class="col-sm-9">
-            <input type="text" name="collectingAmount" class="form-control" placeholder="请输入代收金额">
+            <input type="text" name="collectingAmount" class="form-control" placeholder="请输入代收金额" th:value="${vo.collectingAmount}" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">保价金额：</label>
         <div class="col-sm-9">
-            <input type="text" name="insuranceAmount" class="form-control" placeholder="请输入保价金额">
+            <input type="text" name="insuranceAmount" class="form-control" placeholder="请输入保价金额" th:value="${vo.insuranceAmount}" required>
         </div>
     </div>
 </div>
@@ -71,24 +72,18 @@
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
     <script type="text/javascript">
-        var prefix = ctx + "wxcustomer/deliver_goods"
-        $("#form-deliver_goods-add").validate({
+        var prefix = ctx + "wxcustomer/deliverGoods"
+        $("#form-deliver_goods").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-deliver_goods-add').serialize());
+                $.operate.save(prefix + "/edit", $('#form-deliver_goods').serialize());
             }
         }
 
         $("input[name='dealTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
-
-        $("input[name='nextFollowTime']").datetimepicker({
             format: "yyyy-mm-dd",
             minView: "month",
             autoclose: true

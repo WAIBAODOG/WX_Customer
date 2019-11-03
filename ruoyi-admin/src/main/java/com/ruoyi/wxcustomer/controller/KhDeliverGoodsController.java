@@ -40,14 +40,9 @@ public class KhDeliverGoodsController extends BaseController
 
     @RequiresPermissions("deliverGoods:deliverGoods:view")
     @GetMapping()
-    public String deliverGoods(String requestType)
+    public String deliverGoods( )
     {
-    	if("1".equals(requestType)) {//发样
-    		return prefix + "/hairManage";
-    	}else if("2".equals(requestType)) {//成交
-    		return prefix + "/dealManage";
-    	}
-    	return"";
+    return prefix + "/hairManage";
         
     }
 
@@ -59,6 +54,8 @@ public class KhDeliverGoodsController extends BaseController
     @ResponseBody
     public TableDataInfo list(DeliverGoodsVO vo)
     {
+    	vo.setIsDelete("0");//未删除
+    	vo.setIsDelivery("1");//发样
         startPage();
         List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
         return getDataTable(list);
@@ -68,20 +65,47 @@ public class KhDeliverGoodsController extends BaseController
      * 明细
      */
     @GetMapping("/detail")
-    public String detail(String requestType,String orderNumber,Model model)
+    public String detail( String orderNumber,Model model)
     {
-    	if("1".equals(requestType)) {//发样
-    		DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
-    		model.addAttribute("vo",vo);
-    		return prefix + "/hairDetail";
-    	}else if("2".equals(requestType)) {//成交
-    		return prefix + "/dealDetail";
-    	}
-    	return"";
+    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+    	model.addAttribute("vo",vo);
+    	return prefix + "/hairDetail";
+     
         
     }
+    /**
+     * 删除发样/成交情况
+     */
+    @RequiresPermissions("deliverGoods:deliverGoods:remove")
+    @Log(title = " 删除发样/成交情况", businessType = BusinessType.DELETE)
+    @PostMapping( "/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids)
+    {
+        return toAjax(khDeliverGoodsService.deleteByIds(ids));
+    }
     
-    
+    /**
+     * 快递单
+     */
+    @GetMapping( "/expressBill")
+    public String expressBill(String orderNumber,Model model)
+    {
+    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+    	model.addAttribute("vo",vo);
+    	return "wxcustomer/common/expressOrder";
+    }
+    /**
+     * 修改保存发样/成交情况
+     */
+    @RequiresPermissions("deliverGoods:deliverGoods:edit")
+    @Log(title = "发样/成交情况", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(KhDeliverGoods khDeliverGoods)
+    {
+        return toAjax(khDeliverGoodsService.updateKhDeliverGoods(khDeliverGoods));
+    }
     
     
     
@@ -133,27 +157,7 @@ public class KhDeliverGoodsController extends BaseController
         return prefix + "/edit";
     }
 
-    /**
-     * 修改保存发样/成交情况
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:edit")
-    @Log(title = "发样/成交情况", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(KhDeliverGoods khDeliverGoods)
-    {
-        return toAjax(khDeliverGoodsService.updateKhDeliverGoods(khDeliverGoods));
-    }
+    
 
-    /**
-     * 删除发样/成交情况
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:remove")
-    @Log(title = "发样/成交情况", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(khDeliverGoodsService.deleteKhDeliverGoodsByIds(ids));
-    }
+    
 }

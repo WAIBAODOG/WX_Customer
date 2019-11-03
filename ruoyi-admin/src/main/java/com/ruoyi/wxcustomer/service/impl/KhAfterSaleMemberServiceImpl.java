@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
+import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
 import com.ruoyi.wxcustomer.mapper.KhAfterSaleMemberMapper;
 import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
 
@@ -86,4 +87,19 @@ public class KhAfterSaleMemberServiceImpl implements IKhAfterSaleMemberService  
     public int deleteKhAfterSaleMemberById(String id) {
         return khAfterSaleMemberMapper.deleteKhAfterSaleMemberById(id);
     }
+    public List<AfterSaleMemberVO> selectList(AfterSaleMemberVO vo){
+    	return khAfterSaleMemberMapper.selectList(vo);
+    }
+
+	/**
+	 * 通过订单号获取
+	 */
+	public AfterSaleMemberVO selectVOByOrderNumber(String num) {
+		return khAfterSaleMemberMapper.selectVOByOrderNumber(num);
+	}
+	
+	/** 改状态，不是物理删除 **/
+	public int deleteByIds(String ids) {
+		return khAfterSaleMemberMapper.deleteByIds(Convert.toStrArray(ids));
+	}
 }

@@ -104,6 +104,10 @@ public class WechatCustomer extends BaseEntity{
     /** 是否销售（0：否 1：是）默认0 */
     @Excel(name = "是否销售", readConverterExp = "0=：否,1=：是")
     private String isSales;
+    /**售后人员**/
+    private String saleId;
+    /**售后人员**/
+    private String saleName;
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
@@ -282,6 +286,22 @@ public class WechatCustomer extends BaseEntity{
 		this.customerNum = customerNum;
 	}
 
+	public String getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(String saleId) {
+		this.saleId = saleId;
+	}
+
+	public String getSaleName() {
+		return saleName;
+	}
+
+	public void setSaleName(String saleName) {
+		this.saleName = saleName;
+	}
+
 	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -313,4 +333,5 @@ public class WechatCustomer extends BaseEntity{
             .append("customerNum", getCustomerNum())
             .toString();
     }
+	
 }

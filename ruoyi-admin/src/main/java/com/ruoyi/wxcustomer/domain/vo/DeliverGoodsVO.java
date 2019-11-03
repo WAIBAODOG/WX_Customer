@@ -11,6 +11,8 @@ package com.ruoyi.wxcustomer.domain.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
 * @ClassName: Snippet
@@ -41,6 +43,7 @@ public class DeliverGoodsVO {
     private String giftsList;
 
     /** 成交日期 */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dealTime;
     /** 成交日期 */
     private Date dealTimeStart;
@@ -89,6 +92,7 @@ public class DeliverGoodsVO {
     private String senderAddress;
 
     /** 发货日期 */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date sendTime;
     private Date sendTimeStart;
     private Date sendTimeEnd;
@@ -186,7 +190,11 @@ public class DeliverGoodsVO {
     
     /**是否发货**/
     private String isDeliverGoods;
-    
+    /**售后人员**/
+    private String saleId;
+    /**售后人员**/
+    private String saleName;
+
 	public String getId() {
 		return id;
 	}
@@ -641,6 +649,22 @@ public class DeliverGoodsVO {
 
 	public void setIsDeliverGoods(String isDeliverGoods) {
 		this.isDeliverGoods = isDeliverGoods;
+	}
+
+	public String getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(String saleId) {
+		this.saleId = saleId;
+	}
+
+	public String getSaleName() {
+		return saleName;
+	}
+
+	public void setSaleName(String saleName) {
+		this.saleName = saleName;
 	}
 	
     

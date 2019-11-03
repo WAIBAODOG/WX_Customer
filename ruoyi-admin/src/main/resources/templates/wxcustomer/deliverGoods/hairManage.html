@@ -8,21 +8,6 @@
         <div class="row">
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
-                 <div class="btn-group-sm"  role="group">
-	                <a class="btn btn-success" onclick="$.table.search()"  >
-	                    <i class="fa fa-search"></i> 查询
-	                </a>
-	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
-	                    <i class="fa fa-refresh"></i> 清空
-	                </a>
-                    <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="deliverGoods:deliverGoods:remove">
-                    	<i class="fa fa-remove"></i> 删除
-               		 </a>
-               		 <a class="btn btn-success" onclick="deliverGoods()"   >
-                  	  <i class="fa fa-ravelry"></i> 发货
-                	 </a>
-            </div>  
-                	 
                     <div class="select-list">
                         <ul>
                         	<li>
@@ -62,40 +47,24 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                         	</li>
-                            <!-- <li>
-                                <p>跟进结果类型：</p>
-                                <select name="followResultType" th:with="type=${@dict.getType('follow_result_type')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <p>成交金额：</p>
-                                <input type="text" name="dealAmount"/>
-                            </li>
-                            <li class="select-time">
-                                <p>成交日期：</p>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginDealTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endDealTime]"/>
-                            </li>
-                            <li>
-                                <p>跟进次数：</p>
-                                <input type="text" name="followTimes"/>
-                            </li>
-                            <li>
-                                <p>对接业务员：</p>
-                                <input type="text" name="creator"/>
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li> -->
                         </ul>
                     </div>
                 </form>
             </div>
-
+			 <div class="btn-group-sm " id="toolbar"  role="group">
+	                <a class="btn btn-success" onclick="$.table.search()"  >
+	                    <i class="fa fa-search"></i> 查询
+	                </a>
+	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
+	                    <i class="fa fa-refresh"></i> 清空
+	                </a>
+                    <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="deliverGoods:deliverGoods:remove">
+                    	<i class="fa fa-remove"></i> 删除
+               		 </a>
+               		 <a class="btn btn-success" onclick="deliverGoods()"   >
+                  	  <i class="fa fa-ravelry"></i> 发货
+                	 </a>
+            </div>  
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
             </div>
@@ -105,7 +74,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('deliverGoods:deliverGoods:edit')}]];
         var removeFlag = [[${@permission.hasPermi('deliverGoods:deliverGoods:remove')}]];
-        var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
+        var customerTypeDatas = [[${@dict.getType('customer_type')}]];
+        var isDeliveryDatas = [[${@dict.getType('')}]];
         var prefix = ctx + "wxcustomer/deliverGoods";
 
         $(function() {
@@ -128,7 +98,7 @@
                     field : 'orderNumber', 
                     title : '发样单号',
                     formatter: function(value, row, index) {
-                    	return "<a href='/wxcustomer/deliverGoods/detail?requestType=1&orderNumber="+value+"' >"+value+"</a>"
+                    	return "<a  class='orderNumber' href='/wxcustomer/deliverGoods/detail?orderNumber="+value+"' >"+value+"</a>"
                       // return $.table.selectDictLabel(followResultTypeDatas, value);
                     }
                 },
@@ -146,7 +116,10 @@
                 },
                 {
                     field : 'customerType', 
-                    title : '客户类型'
+                    title : '客户类型',
+                    	formatter: function(value, row, index) {
+                            return $.table.selectDictLabel(customerTypeDatas, value);
+                         }
                 },
                 {
                     field : 'shopName', 
@@ -162,7 +135,13 @@
                 },
                 {
                     field : 'courierNumber', 
-                    title : '是否发货'
+                    title : '是否发货',
+                    formatter: function(value, row, index) {
+                    	if(value==""||value==null){
+                    		return "否";
+                    	}else{
+                    		return "是";
+                    	}}
                 }/* ,
                 {
                     title: '操作',
@@ -180,11 +159,13 @@
         //发货
         function deliverGoods() {
         	var ck=$("#bootstrap-table").find('tbody').find(".bs-checkbox ").find("input[type='checkbox']:checked");
-        	if(ck.length<1||ck.length>2){
+        	if(ck.length<1||ck.length>1){
         		$.modal.alertWarning('必须是勾选一项！')
         		return;
         	}
-        	$('#deliverGoodsModal').modal('show');
+        	var orderNumber=$(ck[0]).parent().parent().find(".orderNumber").html();
+        	$.modal.open('快递单', prefix + '/expressBill?orderNumber='+orderNumber);
+        	//$('#deliverGoodsModal').modal('show');
         }
     </script>
 	<div class="modal inmodal fade" id="deliverGoodsModal" tabindex="-1"
