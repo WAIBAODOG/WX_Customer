@@ -9,6 +9,7 @@
  */
 package com.ruoyi.wxcustomer.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -58,6 +59,7 @@ public class WXRegisterStatisticsController extends BaseController{
 	    @ResponseBody
 	    public TableDataInfo list( DeliverGoodsVO vo ){
 	        startPage();
+	        vo.setDealTime(new Date());
 	        return getDataTable(khDeliverGoodsService.selectList(vo));
 	    }
 	    /**

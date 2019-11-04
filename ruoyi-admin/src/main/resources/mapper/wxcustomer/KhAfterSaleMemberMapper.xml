@@ -277,7 +277,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isDelete != null  and isDelete != ''"> and d.is_delete = #{isDelete}</if>
             <if test='isDeliverGoods=="1"'> and d.courier_Number is not null </if>
             <if test='isDeliverGoods=="0"'> and d.courier_Number is  null </if>
-       		
+       		<if test="dealTime != null "> and d.deal_time = #{dealTime}</if>
        		
        		 <if test="phoneNumber != null  and phoneNumber != ''"> and w.phone_number  like concat('%', #{phoneNumber}, '%')</if>
             <if test="weixinNumber != null  and weixinNumber != ''"> and w.weixin_number like concat('%', #{weixinNumber}, '%')</if>
