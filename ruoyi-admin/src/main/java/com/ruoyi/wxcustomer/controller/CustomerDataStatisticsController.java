@@ -58,7 +58,9 @@ public class CustomerDataStatisticsController extends BaseController{
 	    @ResponseBody
 	    public TableDataInfo list(AfterSaleMemberVO vo ){
 	        startPage();
-	        vo.setDealTime(new Date());
+	        if(vo.getDealTimeStart()!=null&&null!=vo.getDealTimeEnd()) {
+	        	 vo.setDealTime(new Date());
+	        }
 	        return getDataTable(khAfterSaleMemberService.selectList(vo));
 	    }
 	    

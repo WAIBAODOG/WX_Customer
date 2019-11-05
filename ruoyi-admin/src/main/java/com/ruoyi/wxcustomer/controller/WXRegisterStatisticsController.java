@@ -59,7 +59,9 @@ public class WXRegisterStatisticsController extends BaseController{
 	    @ResponseBody
 	    public TableDataInfo list( DeliverGoodsVO vo ){
 	        startPage();
-	        vo.setDealTime(new Date());
+	        if(vo.getDealTimeStart()!=null&&null!=vo.getDealTimeEnd()) {
+	        	 vo.setDealTime(new Date());
+	        }
 	        return getDataTable(khDeliverGoodsService.selectList(vo));
 	    }
 	    /**
