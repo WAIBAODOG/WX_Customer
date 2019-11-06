@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
     <select id="findKhDeliverGoodsByCustomerId" resultMap="KhDeliverGoodsResult" parameterType="String">
-    	select * from kh_deliver_goods where customer_id=#{customerId} order by follow_times
+    	select * from kh_deliver_goods where customer_id=#{customerId}  and is_delete='0' order by follow_times
     </select>
     
     
