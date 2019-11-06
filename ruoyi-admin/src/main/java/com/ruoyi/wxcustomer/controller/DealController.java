@@ -19,30 +19,30 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
+import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
-import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
-import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
+import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 
 /**
- * 售后情况Controller
+ * 成交客户管理Controller
  * 
  * @author WBG
  * @date 2019-10-24
  */
 @Controller
-@RequestMapping("/wxcustomer/afterSale")
-public class KhAfterSaleMemberController extends BaseController
+@RequestMapping("/wxcustomer/deal")
+public class DealController extends BaseController
 {
-    private String prefix = "wxcustomer/afterSale";
+    private String prefix = "wxcustomer/deal";
 
     @Autowired
-    private IKhAfterSaleMemberService khAfterSaleMemberService;
+    private IKhDeliverGoodsService khDeliverGoodsService;
     @Autowired
     private IWechatCustomerService wechatCustomerService;
 
-    @RequiresPermissions("afterSaleMember:afterSale:view")
+    @RequiresPermissions("deal:deal:view")
     @GetMapping()
     public String afterSale()
     {
@@ -52,15 +52,16 @@ public class KhAfterSaleMemberController extends BaseController
     /**
      * 查询售后情况列表
      */
-    @RequiresPermissions("afterSaleMember:afterSale:list")
+    @RequiresPermissions("deal:deal:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(AfterSaleMemberVO vo)
+    public TableDataInfo list(DeliverGoodsVO vo)
     {
         startPage();
         vo.setIsDelete("0");//未删除
-        vo.setIsSales("1");//成交
-        List<AfterSaleMemberVO> list = khAfterSaleMemberService.selectList(vo);
+        //vo.setIsSales("1");//成交
+        vo.setFollowResultType("3");
+        List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
         return getDataTable(list);
     }
     
@@ -70,7 +71,7 @@ public class KhAfterSaleMemberController extends BaseController
     @GetMapping("/detail")
     public String detail(String orderNumber,Model model)
     {
-    	AfterSaleMemberVO vo=khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
     	model.addAttribute("vo",vo);
     	return prefix + "/dealDetail";
     }
@@ -80,13 +81,13 @@ public class KhAfterSaleMemberController extends BaseController
     /**
      * 删除售后情况
      */
-    @RequiresPermissions("afterSaleMember:afterSale:remove")
+    @RequiresPermissions("deal:deal:remove")
     @Log(title = "售后情况", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(khAfterSaleMemberService.deleteByIds(ids));
+        return toAjax(khDeliverGoodsService.deleteByIds(ids));
     }
     /**
      * 快递单
@@ -94,20 +95,20 @@ public class KhAfterSaleMemberController extends BaseController
     @GetMapping( "/expressBill")
     public String expressBill(String orderNumber,Model model)
     {
-    	AfterSaleMemberVO vo=khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
     	model.addAttribute("vo",vo);
     	return  "wxcustomer/common/expressOrder";
     }
     /**
      * 修改售后情况
      */
-    @RequiresPermissions("afterSaleMember:afterSale:edit")
+    @RequiresPermissions("deal:deal:edit")
     @Log(title = "售后情况", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(KhAfterSaleMember khAfterSaleMember)
+    public AjaxResult editSave(KhDeliverGoods KhDeliverGoods)
     {
-        return toAjax(khAfterSaleMemberService.updateKhAfterSaleMember(khAfterSaleMember));
+        return toAjax(khDeliverGoodsService.updateKhDeliverGoods(KhDeliverGoods));
     }
     /**
      * 分配售后人员
@@ -116,7 +117,7 @@ public class KhAfterSaleMemberController extends BaseController
     @ResponseBody
     public AjaxResult distributionSale(String orderNumber,String saleId,String saleName)
     {
-    	AfterSaleMemberVO vo=khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
     	if(null==vo) {
     		return  AjaxResult.error("操作失败！");
     	}
@@ -140,13 +141,13 @@ public class KhAfterSaleMemberController extends BaseController
     /**
      * 导出售后情况列表
      */
-    @RequiresPermissions("afterSaleMember:afterSale:export")
+    @RequiresPermissions("deal:deal:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(KhAfterSaleMember khAfterSaleMember)
+    public AjaxResult export(KhDeliverGoods KhDeliverGoods)
     {
-        List<KhAfterSaleMember> list = khAfterSaleMemberService.selectKhAfterSaleMemberList(khAfterSaleMember);
-        ExcelUtil<KhAfterSaleMember> util = new ExcelUtil<KhAfterSaleMember>(KhAfterSaleMember.class);
+        List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(KhDeliverGoods);
+        ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
         return util.exportExcel(list, "afterSale");
     }
 
@@ -162,13 +163,13 @@ public class KhAfterSaleMemberController extends BaseController
     /**
      * 新增保存售后情况
      */
-    @RequiresPermissions("afterSaleMember:afterSale:add")
+    @RequiresPermissions("deal:deal:add")
     @Log(title = "售后情况", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(KhAfterSaleMember khAfterSaleMember)
+    public AjaxResult addSave(KhDeliverGoods KhDeliverGoods)
     {
-        return toAjax(khAfterSaleMemberService.insertKhAfterSaleMember(khAfterSaleMember));
+        return toAjax(khDeliverGoodsService.insertKhDeliverGoods(KhDeliverGoods));
     }
 
     /**
@@ -177,8 +178,8 @@ public class KhAfterSaleMemberController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap mmap)
     {
-        KhAfterSaleMember khAfterSaleMember = khAfterSaleMemberService.selectKhAfterSaleMemberById(id);
-        mmap.put("khAfterSaleMember", khAfterSaleMember);
+        KhDeliverGoods KhDeliverGoods = khDeliverGoodsService.selectKhDeliverGoodsById(id);
+        mmap.put("KhDeliverGoods", KhDeliverGoods);
         return prefix + "/edit";
     }
 

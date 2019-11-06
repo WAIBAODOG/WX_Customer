@@ -24,7 +24,7 @@ import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 
 /**
- * 发样/成交情况Controller
+ * 发样情况Controller
  * 
  * @author WBG
  * @date 2019-10-24
@@ -47,7 +47,7 @@ public class KhDeliverGoodsController extends BaseController
     }
 
     /**
-     * 查询发样/成交情况列表
+     * 查询发样情况列表
      */
     @RequiresPermissions("deliverGoods:deliverGoods:list")
     @PostMapping("/list")
@@ -55,7 +55,7 @@ public class KhDeliverGoodsController extends BaseController
     public TableDataInfo list(DeliverGoodsVO vo)
     {
     	vo.setIsDelete("0");//未删除
-    	vo.setIsDelivery("1");//发样
+    	 vo.setFollowResultType("2");//发样
         startPage();
         List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
         return getDataTable(list);
@@ -74,10 +74,10 @@ public class KhDeliverGoodsController extends BaseController
         
     }
     /**
-     * 删除发样/成交情况
+     * 删除发样情况
      */
     @RequiresPermissions("deliverGoods:deliverGoods:remove")
-    @Log(title = " 删除发样/成交情况", businessType = BusinessType.DELETE)
+    @Log(title = " 删除发样情况", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -96,10 +96,10 @@ public class KhDeliverGoodsController extends BaseController
     	return "wxcustomer/common/expressOrder";
     }
     /**
-     * 修改保存发样/成交情况
+     * 修改保存发样情况
      */
     @RequiresPermissions("deliverGoods:deliverGoods:edit")
-    @Log(title = "发样/成交情况", businessType = BusinessType.UPDATE)
+    @Log(title = "发样情况", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(KhDeliverGoods khDeliverGoods)
@@ -113,7 +113,7 @@ public class KhDeliverGoodsController extends BaseController
     
     
     /**
-     * 导出发样/成交情况列表
+     * 导出发样情况列表
      */
     @RequiresPermissions("deliverGoods:deliverGoods:export")
     @PostMapping("/export")
@@ -126,7 +126,7 @@ public class KhDeliverGoodsController extends BaseController
     }
 
     /**
-     * 新增发样/成交情况
+     * 新增发样情况
      */
     @GetMapping("/add")
     public String add()
@@ -135,10 +135,10 @@ public class KhDeliverGoodsController extends BaseController
     }
   
     /**
-     * 新增保存发样/成交情况
+     * 新增保存发样情况
      */
     @RequiresPermissions("deliverGoods:deliverGoods:add")
-    @Log(title = "发样/成交情况", businessType = BusinessType.INSERT)
+    @Log(title = "发样情况", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(KhDeliverGoods khDeliverGoods)
@@ -147,7 +147,7 @@ public class KhDeliverGoodsController extends BaseController
     }
 
     /**
-     * 修改发样/成交情况
+     * 修改发样情况
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap mmap)

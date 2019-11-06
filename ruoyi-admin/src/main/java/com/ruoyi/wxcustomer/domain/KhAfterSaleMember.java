@@ -109,7 +109,11 @@ public class KhAfterSaleMember extends BaseEntity{
     
     /** 订单号 */
     private String orderNumber;
+    /** 删除 */
+    private String isDelete;
 
+    /**意向度**/
+    private String intentionDegree;
     public void setId(String id) {
         this.id = id;
     }
@@ -317,6 +321,22 @@ public class KhAfterSaleMember extends BaseEntity{
 
 	public void setOrderNumber(String orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+	
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public String getIntentionDegree() {
+		return intentionDegree;
+	}
+
+	public void setIntentionDegree(String intentionDegree) {
+		this.intentionDegree = intentionDegree;
 	}
 
 	@Override

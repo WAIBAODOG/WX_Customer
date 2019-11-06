@@ -150,6 +150,7 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 				khDeliverGoods.setCustomerId(wechatCustomer.getCustomerId());
 				KhDeliverGoods kdg=khDeliverGoodsMapper.selectKhDeliverGoodsById(khDeliverGoods.getId());
 				if(null==kdg) {
+					khDeliverGoods.setOrderNumber(genOrderNumber(khDeliverGoods.getFollowResultType()));
 					khDeliverGoodsMapper.insertKhDeliverGoods(khDeliverGoods);
 				}else {
 					khDeliverGoodsMapper.updateKhDeliverGoods(khDeliverGoods);
@@ -163,6 +164,7 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 				khAfterSaleMember.setCustomerId(wechatCustomer.getCustomerId());
 				KhAfterSaleMember kasm=khAfterSaleMemberMapper.selectKhAfterSaleMemberById(khAfterSaleMember.getId());
 				if(null==kasm) {
+					khAfterSaleMember.setOrderNumber(genOrderNumber("4"));
 					khAfterSaleMemberMapper.insertKhAfterSaleMember(khAfterSaleMember);
 				}else {
 					khAfterSaleMemberMapper.updateKhAfterSaleMember(khAfterSaleMember);

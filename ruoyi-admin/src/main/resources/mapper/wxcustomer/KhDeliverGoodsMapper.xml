@@ -33,10 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="insuranceAmount"    column="insurance_amount"    />
         <result property="postage"    column="postage"    />
         <result property="orderNumber"    column="order_number"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="intentionDegree"    column="intention_degree"    />
     </resultMap>
 
     <sql id="selectKhDeliverGoodsVo">
-        select id, customer_id, follow_result_type, deal_amount, send_sample_list, gifts_list, deal_time, trouble_spots, intention_point, follow_times, follow_result, duration_hour, duration_minute, duration_second, next_follow_time, next_follow_mentality, creator_id, creator, sender, sender_phone, sender_address, send_time, courier_number, logistics_company, collecting_amount, insurance_amount, postage,order_number from kh_deliver_goods
+        select id, customer_id, follow_result_type, deal_amount, send_sample_list, gifts_list, deal_time, trouble_spots, intention_point, follow_times, follow_result, duration_hour, duration_minute, duration_second, next_follow_time, next_follow_mentality, creator_id, creator, sender, sender_phone, sender_address, send_time, courier_number, logistics_company, collecting_amount, insurance_amount, postage,order_number,is_delete,intention_degree from kh_deliver_goods
     </sql>
 
     <select id="selectKhDeliverGoodsList" parameterType="KhDeliverGoods" resultMap="KhDeliverGoodsResult">
@@ -86,6 +88,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="collectingAmount != null ">collecting_amount,</if>
             <if test="insuranceAmount != null ">insurance_amount,</if>
             <if test="postage != null ">postage,</if>
+            <if test="isDelete != null  and isDelete != ''">is_delete,</if>
+            <if test="intentionDegree != null  and intentionDegree != '' ">intention_degree,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null  and id != ''">#{id},</if>
@@ -116,6 +120,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="collectingAmount != null ">#{collectingAmount},</if>
             <if test="insuranceAmount != null ">#{insuranceAmount},</if>
             <if test="postage != null ">#{postage},</if>
+            <if test="isDelete != null and isDelete != '' ">#{isDelete},</if>
+            <if test="intentionDegree != null and intentionDegree != ''">#{intentionDegree},</if>
          </trim>
     </insert>
 
@@ -149,6 +155,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="insuranceAmount != null ">insurance_amount = #{insuranceAmount},</if>
             <if test="postage != null ">postage = #{postage},</if>
             <if test="orderNumber != null  and orderNumber != ''">order_number = #{orderNumber},</if>
+            <if test="isDelete != null  and isDelete != ''">is_delete = #{isDelete},</if>
+            <if test="intentionDegree != null  and intentionDegree != ''">intention_degree = #{intentionDegree},</if>
         </trim>
         where id = #{id}
     </update>
@@ -202,6 +210,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="collectingAmount"    column="collecting_amount"    />
         <result property="insuranceAmount"    column="insurance_amount"    />
         <result property="postage"    column="postage"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="intentionDegree"    column="intention_degree"    />
         <!-- 客户表 -->
          <result property="customerId"    column="customer_id"    />
         <result property="phoneNumber"    column="phone_number"    />
@@ -237,7 +247,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          d.follow_times, d.follow_result, d.duration_hour, d.duration_minute, d.duration_second,
           d.next_follow_time, d.next_follow_mentality, d.creator_id, d.creator, d.sender,
            d.sender_phone, d.sender_address, d.send_time, d.courier_number, d.logistics_company,
-            d.collecting_amount, d.insurance_amount, d.postage ,
+            d.collecting_amount, d.insurance_amount, d.postage ,d.is_delete,d.intention_degree,
             <!--客户表  -->
             w.customer_id,  w.phone_number,  w.weixin_number,  w.customer_name,  w.gender,  w.kh_character,
             w.province_id,  w.province,  w.city_id,  w.city,  w.area_id,  w.area,  w.customer_address, 
@@ -250,6 +260,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="selectList" parameterType="DeliverGoodsVO" resultMap="deliverGoodsVOResult">
         <include refid="selectDeliverGoodsVO"/>
         <where>  
+           and w.is_delete='0'
             <if test="id != null  and id != ''"> and d.id = #{id}</if>
             <if test="orderNumber != null  and orderNumber != ''"> and d.order_number = #{orderNumber}</if>
             <if test="customerId != null  and customerId != ''"> and d.customer_id = #{customerId}</if>

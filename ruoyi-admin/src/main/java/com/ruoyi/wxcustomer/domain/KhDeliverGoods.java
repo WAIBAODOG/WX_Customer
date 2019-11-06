@@ -107,6 +107,8 @@ public class KhDeliverGoods extends BaseEntity{
     private String orderNumber;
     /**是否删除**/
     private String isDelete;
+    /**意向度**/
+    private String intentionDegree;
     
     public void setId(String id) {
         this.id = id;
@@ -316,6 +318,14 @@ public class KhDeliverGoods extends BaseEntity{
 
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
+	}
+	
+	public String getIntentionDegree() {
+		return intentionDegree;
+	}
+
+	public void setIntentionDegree(String intentionDegree) {
+		this.intentionDegree = intentionDegree;
 	}
 
 	@Override

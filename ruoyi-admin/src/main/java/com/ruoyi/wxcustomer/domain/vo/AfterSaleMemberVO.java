@@ -114,6 +114,8 @@ public class AfterSaleMemberVO extends BaseEntity{
     private String isDelete;
     private String isDeal;
    
+    /**意向度**/
+    private String intentionDegree;
 
     
     //客户表
@@ -653,6 +655,14 @@ public class AfterSaleMemberVO extends BaseEntity{
 
 	public void setSaleName(String saleName) {
 		this.saleName = saleName;
+	}
+
+	public String getIntentionDegree() {
+		return intentionDegree;
+	}
+
+	public void setIntentionDegree(String intentionDegree) {
+		this.intentionDegree = intentionDegree;
 	}
 
 	 

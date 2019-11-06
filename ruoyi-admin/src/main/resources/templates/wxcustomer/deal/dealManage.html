@@ -61,10 +61,10 @@
 	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
 	                    <i class="fa fa-refresh"></i> 清空
 	                </a>
-	                <a class="btn btn-success " onclick="distributionStaff()" shiro:hasPermission="afterSaleMember:afterSale:remove">
+	                <a class="btn btn-success " onclick="distributionStaff()" shiro:hasPermission="deal:deal:remove">
                     	<i class="fa fa-remove"></i> 分配售后人员
                		 </a>
-                    <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="afterSaleMember:afterSale:remove">
+                    <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="deal:deal:remove">
                     	<i class="fa fa-remove"></i> 删除
                		 </a>
                		 <a class="btn btn-success" onclick="afterSale()"  >
@@ -79,10 +79,10 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('afterSaleMember:afterSale:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('afterSaleMember:afterSale:remove')}]];
+        var editFlag = [[${@permission.hasPermi('deal:deal:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('deal:deal:remove')}]];
         var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
-        var prefix = ctx + "wxcustomer/afterSale";
+        var prefix = ctx + "wxcustomer/deal";
 
         $(function() {
             var options = {
@@ -104,7 +104,7 @@
                     field : 'orderNumber', 
                     title : '订单号',
                     formatter: function(value, row, index) {
-                    	return "<a class='orderNumber' href='/wxcustomer/afterSale/detail?orderNumber="+value+"'>"+value+"</a>"
+                    	return "<a class='orderNumber' href='/wxcustomer/deal/detail?orderNumber="+value+"'>"+value+"</a>"
                         // return $.table.selectDictLabel(followResultTypeDatas, value);
                     }
                 },

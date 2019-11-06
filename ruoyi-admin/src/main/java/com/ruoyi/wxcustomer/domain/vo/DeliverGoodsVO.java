@@ -122,7 +122,10 @@ public class DeliverGoodsVO {
     
     /**是否删除**/
     private String isDelete;
-    
+   
+
+    /**意向度**/
+    private String intentionDegree;
 
     //客户表
 
@@ -676,6 +679,14 @@ public class DeliverGoodsVO {
 
 	public void setSaleName(String saleName) {
 		this.saleName = saleName;
+	}
+
+	public String getIntentionDegree() {
+		return intentionDegree;
+	}
+
+	public void setIntentionDegree(String intentionDegree) {
+		this.intentionDegree = intentionDegree;
 	}
 	
     
