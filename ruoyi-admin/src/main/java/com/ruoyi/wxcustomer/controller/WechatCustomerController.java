@@ -59,6 +59,7 @@ public class WechatCustomerController extends BaseController {
 	@ResponseBody
 	public TableDataInfo list(WechatCustomer wechatCustomer) {
 		startPage();
+		wechatCustomer.setIsDelete("0");//未删除的
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		return getDataTable(list);
 	}
@@ -70,6 +71,7 @@ public class WechatCustomerController extends BaseController {
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(WechatCustomer wechatCustomer) {
+		wechatCustomer.setIsDelete("0");//未删除的
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		ExcelUtil<WechatCustomer> util = new ExcelUtil<WechatCustomer>(WechatCustomer.class);
 		return util.exportExcel(list, "WechatCustomer");
@@ -153,7 +155,8 @@ public class WechatCustomerController extends BaseController {
 	public AjaxResult editSave(WechatCustomer wechatCustomer,String saleInfoStr, String postSaleStr) {
 		List<KhDeliverGoods> saleInfoList = StringUtils.isBlank(saleInfoStr) ? null : JSON.parseArray(saleInfoStr, KhDeliverGoods.class);
 		List<KhAfterSaleMember> postSaleList = StringUtils.isBlank(postSaleStr) ? null : JSON.parseArray(postSaleStr, KhAfterSaleMember.class);
-		return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer, saleInfoList, postSaleList));
+		int i=wechatCustomerService.updateWechatCustomer(wechatCustomer, saleInfoList, postSaleList);
+		return toAjax(i);
 	}
 
 	/**

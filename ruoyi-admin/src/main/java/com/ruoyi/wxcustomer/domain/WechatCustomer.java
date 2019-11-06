@@ -104,6 +104,8 @@ public class WechatCustomer extends BaseEntity{
     /** 是否销售（0：否 1：是）默认0 */
     @Excel(name = "是否销售", readConverterExp = "0=：否,1=：是")
     private String isSales;
+    /**是否删除**/
+    private String isDelete;
     /**售后人员**/
     private String saleId;
     /**售后人员**/
@@ -300,6 +302,15 @@ public class WechatCustomer extends BaseEntity{
 
 	public void setSaleName(String saleName) {
 		this.saleName = saleName;
+	}
+	
+
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@Override

@@ -148,14 +148,26 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 		if(saleInfoList != null && saleInfoList.size() > 0) {
 			for (KhDeliverGoods khDeliverGoods : saleInfoList) {
 				khDeliverGoods.setCustomerId(wechatCustomer.getCustomerId());
-				khDeliverGoodsMapper.updateKhDeliverGoods(khDeliverGoods);
+				KhDeliverGoods kdg=khDeliverGoodsMapper.selectKhDeliverGoodsById(khDeliverGoods.getId());
+				if(null==kdg) {
+					khDeliverGoodsMapper.insertKhDeliverGoods(khDeliverGoods);
+				}else {
+					khDeliverGoodsMapper.updateKhDeliverGoods(khDeliverGoods);
+				}
+				
 			}
 		}
 		
 		if(postSaleList != null && postSaleList.size() > 0) {
 			for (KhAfterSaleMember khAfterSaleMember : postSaleList) {
 				khAfterSaleMember.setCustomerId(wechatCustomer.getCustomerId());
-				khAfterSaleMemberMapper.updateKhAfterSaleMember(khAfterSaleMember);
+				KhAfterSaleMember kasm=khAfterSaleMemberMapper.selectKhAfterSaleMemberById(khAfterSaleMember.getId());
+				if(null==kasm) {
+					khAfterSaleMemberMapper.insertKhAfterSaleMember(khAfterSaleMember);
+				}else {
+					khAfterSaleMemberMapper.updateKhAfterSaleMember(khAfterSaleMember);
+				}
+				
 			}
 		}
 		return 1;
