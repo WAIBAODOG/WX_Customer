@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
@@ -27,9 +28,11 @@ public class AfterSaleMemberVO extends BaseEntity{
     private String followResultType;
 
     /** 成交金额 */
+    @Excel(name = "成交金额")
     private Double dealAmount;
 
     /** 发样/成交清单 */
+    @Excel(name = "成交清单")
     private String sendSampleList;
 
     /** 赠品清单 */
@@ -37,6 +40,7 @@ public class AfterSaleMemberVO extends BaseEntity{
 
     /** 成交日期 */
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Excel(name = "成交日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date dealTime;
     /** 成交日期 */
     private Date dealTimeStart;
@@ -73,6 +77,7 @@ public class AfterSaleMemberVO extends BaseEntity{
     private String creatorId;
 
     /** 对接业务员 */
+    @Excel(name = "对接业务员")
     private String creator;
 
     /** 发件人 */
@@ -114,12 +119,14 @@ public class AfterSaleMemberVO extends BaseEntity{
     //客户表
 
     /** 电话号 */
+    @Excel(name = "手机号")
     private String phoneNumber;
 
     /** 微信号 */
     private String weixinNumber;
 
     /** 客户姓名 */
+    @Excel(name = "客户姓名")
     private String customerName;
 
     /** 性别 */

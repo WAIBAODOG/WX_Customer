@@ -13,6 +13,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.ruoyi.common.annotation.Excel;
+
 
 /**
 * @ClassName: Snippet
@@ -37,6 +39,7 @@ public class DeliverGoodsVO {
     private Double dealAmount;
 
     /** 发样/成交清单 */
+    @Excel(name = "发样清单")
     private String sendSampleList;
 
     /** 赠品清单 */
@@ -44,6 +47,7 @@ public class DeliverGoodsVO {
 
     /** 成交日期 */
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Excel(name = "成交日期 ", width = 30, dateFormat = "yyyy-MM-dd")
     private Date dealTime;
     /** 成交日期 */
     private Date dealTimeStart;
@@ -53,12 +57,15 @@ public class DeliverGoodsVO {
     private String troubleSpots;
 
     /** 意向点 */
+    @Excel(name = "意向点 ")
     private String intentionPoint;
 
     /** 跟进次数 */
+    @Excel(name = "跟进次数 ")
     private Long followTimes;
 
     /** 跟进情况 */
+    @Excel(name = "跟进情况 ")
     private String followResult;
 
     /** 通话时长-时 */
@@ -80,6 +87,7 @@ public class DeliverGoodsVO {
     private String creatorId;
 
     /** 对接业务员 */
+    @Excel(name = "对接业务员 ")
     private String creator;
 
     /** 发件人 */
@@ -119,12 +127,15 @@ public class DeliverGoodsVO {
     //客户表
 
     /** 电话号 */
+    @Excel(name = "手机号")
     private String phoneNumber;
 
     /** 微信号 */
+    @Excel(name = "微信号")
     private String weixinNumber;
 
     /** 客户姓名 */
+    @Excel(name = "客户姓名")
     private String customerName;
 
     /** 性别 */
