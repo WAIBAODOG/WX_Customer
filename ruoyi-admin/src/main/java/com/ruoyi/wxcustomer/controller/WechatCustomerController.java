@@ -161,9 +161,9 @@ public class WechatCustomerController extends BaseController {
 	 */
 	@RequiresPermissions("wxcustomer:WechatCustomer:remove")
 	@Log(title = "微信客户", businessType = BusinessType.DELETE)
-	@PostMapping("/remove")
+	@PostMapping("/remove/{ids}")
 	@ResponseBody
-	public AjaxResult remove(String ids) {
+	public AjaxResult remove(@PathVariable("ids") String ids) {
 		return toAjax(wechatCustomerService.deleteWechatCustomerByIds(ids));
 	}
 }
