@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
+<!-- 销售情况 -->
 	<th:block th:include="include :: header('销售信息')" />
 	<th:block th:include="include :: datetimepicker-css" />
 </head>
@@ -17,32 +18,94 @@
                  	</select>
 				</div>
 			</div>
+			<div class="form-group">    
+                <label class="col-sm-3 control-label">意向度：</label>
+                <div class="col-sm-8">
+                    <select name="intentionDegree" class="form-control m-b" th:with="type=${@dict.getType('Intention_degree')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>跟进时间：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="dealTime" readonly="readonly" required th:value="${createTime}">
 				</div>
 			</div>
+			<div class="form-group">    
+                <label class="col-sm-3 control-label">跟进时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="dealTime" class="form-control" type="text" th:value="${createTime}">
+                    </div>
+                </div>
+            </div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>跟进情况：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="followResult" required>
+					<textarea name="followResult" class="form-control" required></textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>下次跟进时间：</label>
+				<label class="col-sm-3 control-label">下次跟进时间：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="nextFollowTime" readonly="readonly" required>
+					<input class="form-control" type="text" name="nextFollowTime" readonly="readonly" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>通话时长：</label>
+				<label class="col-sm-3 control-label">通话时长：</label>
                <div class="col-sm-8 form-inline" >
-                   <input type="text" value="" name="durationHour" class="form-control" placeholder="小时"  style="width: 30%;" required>
-                   <input type="text" value="" name="durationMinute" class="form-control" placeholder="分钟"  style="width: 30%;" required>
-                   <input type="text" value="" name="durationSecond" class="form-control" placeholder="秒"  style="width: 30%;" required>
+                   <input type="text" value="" name="durationHour" class="form-control" placeholder="小时"  style="width: 30%;" >
+                   <input type="text" value="" name="durationMinute" class="form-control" placeholder="分钟"  style="width: 30%;" >
+                   <input type="text" value="" name="durationSecond" class="form-control" placeholder="秒"  style="width: 30%;" >
                </div>
 			</div>
+			<div class="form-group">    
+                <label class="col-sm-3 control-label">成交金额：</label>
+                <div class="col-sm-8">
+                    <input name="dealAmount" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">发样/成交清单：</label>
+                <div class="col-sm-8">
+                    <textarea name="sendSampleList" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">赠品清单：</label>
+                <div class="col-sm-8">
+                    <textarea name="giftsList" class="form-control"></textarea>
+                </div>
+            </div>
+			 <div class="form-group">
+                <label class="col-sm-3 control-label">问题点：</label>
+                <div class="col-sm-8">
+                    <textarea name="troubleSpots" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">意向点：</label>
+                <div class="col-sm-8">
+                    <textarea name="intentionPoint" class="form-control"></textarea>
+                </div>
+            </div>
+			<div class="form-group">    
+                <label class="col-sm-3 control-label">下次跟进时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="nextFollowTime" class="form-control"  type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">下次跟进思路：</label>
+                <div class="col-sm-8">
+                    <textarea name="nextFollowMentality" class="form-control"></textarea>
+                </div>
+            </div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">对接业务员：</label>
 				<div class="col-sm-8">
@@ -68,9 +131,14 @@
         });
         
         $("input[name='nextFollowTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
+        	format: "yyyy-mm-dd hh:ii:ss",
+   		    autoclose: true
+        });
+        
+        
+        $("input[name='dealTime']").datetimepicker({
+        	format: "yyyy-mm-dd hh:ii:ss",
+   		    autoclose: true
         });
         
 		function submitHandler() {
