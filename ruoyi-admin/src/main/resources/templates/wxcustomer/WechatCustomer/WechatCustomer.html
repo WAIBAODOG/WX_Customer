@@ -26,28 +26,7 @@
                                 <p>对接业务员：</p>
                                 <input type="text" name="creator"/>
                             </li>
-                            <li>
-                                <p>客户地址-省：</p>
-                                <input type="text" name="province"/>
-                            </li>
-                            <li>
-                                <p>客户地址-市：</p>
-                                <input type="text" name="city"/>
-                            </li>
-                            <li>
-                                <p>客户地址-区：</p>
-                                <input type="text" name="area"/>
-                            </li>
-                            <li>
-                                <p>店名：</p>
-                                <input type="text" name="shopName"/>
-                            </li>
-                            <li class="select-time">
-                                <p>创建时间：</p>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreationTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreationTime]"/>
-                            </li>
+                            
                             <li>
                                 <p>是否发样：</p>
                                 <select name="isDelivery" th:with="type=${@dict.getType('is_delivery')}">
@@ -56,13 +35,30 @@
                                 </select>
                             </li>
                             <li>
-                                <p>是否销售：</p>
+                                <p>是否发货：</p>
                                 <select name="isSales" th:with="type=${@dict.getType('is_delivery')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            <li>
+                            
+                            <li class="select-time">
+                                <p>创建时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreationTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreationTime]"/>
+                            </li>
+                        </ul>
+                        <ul>
+                        	 <li style="width: 200%;">
+		                         <p>省市区：</p>
+		                         <div data-toggle="distpicker">
+			                          <select name="province"></select>
+			                          <select name="city"></select>
+			                          <select name="area"></select>
+		                         </div>
+		                     </li>
+		                     <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             </li>
@@ -91,6 +87,7 @@
         </div>
     </div>
     <th:block th:include="include :: footer" />
+    <th:block th:include="include :: distpicker-js" />
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('wxcustomer:WechatCustomer:edit')}]];
         var removeFlag = [[${@permission.hasPermi('wxcustomer:WechatCustomer:remove')}]];
