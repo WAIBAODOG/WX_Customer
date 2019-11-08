@@ -63,7 +63,7 @@ public class CaptchaValidateFilter extends AccessControlFilter
         String code = String.valueOf(obj != null ? obj : "");
         if (StringUtils.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
         {
-            return false;
+            return true;
         }
         return true;
     }

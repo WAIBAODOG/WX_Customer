@@ -74,6 +74,6 @@ public class WXRegisterStatisticsController extends BaseController{
 	    {
 	        List<DeliverGoodsVO> list =khDeliverGoodsService.selectList(vo);
 	        ExcelUtil<DeliverGoodsVO> util = new ExcelUtil<DeliverGoodsVO>(DeliverGoodsVO.class);
-	        return util.exportExcel(list, "wxRegister");
+	        return util.exportExcel(list, "每日微信跟进登记表");
 	    }
 }

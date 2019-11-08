@@ -74,7 +74,7 @@ public class CustomerDataStatisticsController extends BaseController{
 	    {
 	        List<AfterSaleMemberVO> list =khAfterSaleMemberService.selectList(vo);
 	        ExcelUtil<AfterSaleMemberVO> util = new ExcelUtil<AfterSaleMemberVO>(AfterSaleMemberVO.class);
-	        return util.exportExcel(list, "customerData");
+	        return util.exportExcel(list, "跟进顾客资料表");
 	    }
 
 }
