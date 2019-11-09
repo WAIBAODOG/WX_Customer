@@ -25,6 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
@@ -44,6 +45,9 @@ public class WechatCustomerController extends BaseController {
 
 	@Autowired
 	private IWechatCustomerService wechatCustomerService;
+	
+	@Autowired
+	private PermissionService permissionService;
 
 	@RequiresPermissions("wxcustomer:WechatCustomer:view")
 	@GetMapping()
@@ -60,6 +64,19 @@ public class WechatCustomerController extends BaseController {
 	public TableDataInfo list(WechatCustomer wechatCustomer) {
 		startPage();
 		wechatCustomer.setIsDelete("0");//未删除的
+		
+		boolean isAdmin = permissionService.isRole("admin");
+		if(!isAdmin) {
+			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZZ,FYCJZZY");
+			if(StringUtils.isBlank(isFyUserRoleStr)) {
+				wechatCustomer.setIsFyUser("1");
+			}
+			
+			String isShUserRoleStr = permissionService.hasAnyRoles("SHZZZ,SHZZY");
+			if(StringUtils.isBlank(isShUserRoleStr)) {
+				wechatCustomer.setShUserId(ShiroUtils.getUserId() + "");
+			}
+		}
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		return getDataTable(list);
 	}
@@ -81,6 +98,7 @@ public class WechatCustomerController extends BaseController {
 	 * 新增微信客户
 	 */
 	@GetMapping("/add")
+	@RequiresPermissions("wxcustomer:WechatCustomer:add")
 	public String add(Model model) {
 		SysUser sysUser = ShiroUtils.getSysUser();
 		WechatCustomer wechatCustomer = new WechatCustomer();
@@ -95,24 +113,24 @@ public class WechatCustomerController extends BaseController {
 	/**
 	 * 新增销售情况
 	 */
-	@RequiresPermissions("wxcustomer:WechatCustomer:add")
+	@RequiresPermissions("wxcustomer:WechatCustomer:addSaleInfo")
 	@GetMapping("/addSaleInfo")
 	public String addSaleInfo(Model model, String id) {
 		model.addAttribute("user", ShiroUtils.getSysUser());
 		model.addAttribute("id", id);
-		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
+		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		return prefix + "/addSaleInfo";
 	}
 
 	/**
 	 * 新增售后情况
 	 */
-	@RequiresPermissions("wxcustomer:WechatCustomer:add")
+	@RequiresPermissions("wxcustomer:WechatCustomer:addPostSale")
 	@GetMapping("/addPostSale")
 	public String addPostSale(Model model, String id) {
 		model.addAttribute("user", ShiroUtils.getSysUser());
 		model.addAttribute("id", id);
-		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd"));
+		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		return prefix + "/addPostSale";
 	}
 
@@ -164,9 +182,13 @@ public class WechatCustomerController extends BaseController {
 	 */
 	@RequiresPermissions("wxcustomer:WechatCustomer:remove")
 	@Log(title = "微信客户", businessType = BusinessType.DELETE)
-	@PostMapping("/remove/{ids}")
+	@PostMapping("/remove")
 	@ResponseBody
-	public AjaxResult remove(@PathVariable("ids") String ids) {
-		return toAjax(wechatCustomerService.deleteWechatCustomerByIds(ids));
+	public AjaxResult remove(String ids) {
+		String msg = wechatCustomerService.deleteWechatCustomerByIds(ids);
+		if(msg == null) {
+			return success();
+		}
+		return error(msg);
 	}
 }
