@@ -34,9 +34,9 @@
                         	</li>
                         		<li class='select-time'>
                         		<p>成交日期：</p>
-                        		<input type="text" class='time-input' id='sendTimeStart' name="sendTimeStart"/>
+                        		<input type="text" class='time-input' id='dealTimeStart' name="dealTimeStart"/>
                         		<span>-</span>
-                        		<input type="text" class='time-input' id='sendTimeEnd' name="sendTimeEnd"/>
+                        		<input type="text" class='time-input' id='dealTimeEnd' name="dealTimeEnd"/>
                         	</li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
-        
+    var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
         var prefix = ctx + "wxcustomer/customerDataStatistics";
 
         $(function() {
@@ -88,6 +88,18 @@
                 {
                     field : 'dealTime', 
                     title : '成交日期'
+                } ,
+                {
+                    field : 'followResultType', 
+                    title : '是否成交' ,
+                        formatter: function(value, row, index) {
+                        	if(value=="3" ){
+                        		return "是";
+                        	}else{
+                        		return "否";
+                        	}
+                        }
+                        	  
                 } ,
                 {
                     field : 'sendSampleList', 

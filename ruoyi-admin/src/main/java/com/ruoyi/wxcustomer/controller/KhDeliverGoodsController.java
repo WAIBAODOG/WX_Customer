@@ -19,6 +19,8 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
@@ -31,133 +33,125 @@ import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
  */
 @Controller
 @RequestMapping("/wxcustomer/deliverGoods")
-public class KhDeliverGoodsController extends BaseController
-{
-    private String prefix = "wxcustomer/deliverGoods";
+public class KhDeliverGoodsController extends BaseController {
+	private String prefix = "wxcustomer/deliverGoods";
 
-    @Autowired
-    private IKhDeliverGoodsService khDeliverGoodsService;
+	@Autowired
+	private IKhDeliverGoodsService khDeliverGoodsService;
+	@Autowired
+	private PermissionService permissionService;
 
-    @RequiresPermissions("deliverGoods:deliverGoods:view")
-    @GetMapping()
-    public String deliverGoods( )
-    {
-    return prefix + "/hairManage";
-        
-    }
+	@RequiresPermissions("deliverGoods:deliverGoods:view")
+	@GetMapping()
+	public String deliverGoods() {
+		return prefix + "/hairManage";
 
-    /**
-     * 查询发样情况列表
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:list")
-    @PostMapping("/list")
-    @ResponseBody
-    public TableDataInfo list(DeliverGoodsVO vo)
-    {
-    	vo.setIsDelete("0");//未删除
-    	 vo.setFollowResultType("2");//发样
-        startPage();
-        List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
-        return getDataTable(list);
-    }
+	}
 
-    /**
-     * 明细
-     */
-    @GetMapping("/detail")
-    public String detail( String orderNumber,Model model)
-    {
-    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
-    	model.addAttribute("vo",vo);
-    	return prefix + "/hairDetail";
-     
-        
-    }
-    /**
-     * 删除发样情况
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:remove")
-    @Log(title = " 删除发样情况", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(khDeliverGoodsService.deleteByIds(ids));
-    }
-    
-    /**
-     * 快递单
-     */
-    @GetMapping( "/expressBill")
-    public String expressBill(String orderNumber,Model model)
-    {
-    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
-    	model.addAttribute("vo",vo);
-    	return "wxcustomer/common/expressOrder";
-    }
-    /**
-     * 修改保存发样情况
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:edit")
-    @Log(title = "发样情况", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(KhDeliverGoods khDeliverGoods)
-    {
-        return toAjax(khDeliverGoodsService.updateKhDeliverGoods(khDeliverGoods));
-    }
-    
-    
-    
-    
-    
-    
-    /**
-     * 导出发样情况列表
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(KhDeliverGoods khDeliverGoods)
-    {
-        List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(khDeliverGoods);
-        ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
-        return util.exportExcel(list, "deliverGoods");
-    }
+	/**
+	 * 查询发样情况列表
+	 */
+	@RequiresPermissions("deliverGoods:deliverGoods:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo list(DeliverGoodsVO vo) {
+		boolean isFYRY = permissionService.isRole("FYCJZZY");
+		if (isFYRY) {
+			vo.setIsFYRY(ShiroUtils.getUserId().toString());
+		}
+		boolean isFYSH = permissionService.isRole("SHZZY");
+		if (isFYSH) {
+			vo.setIsSHRY(ShiroUtils.getUserId().toString());
+		}
+		vo.setIsDelete("0");// 未删除
+		vo.setFollowResultType("2");// 发样
+		startPage();
+		List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
+		return getDataTable(list);
+	}
 
-    /**
-     * 新增发样情况
-     */
-    @GetMapping("/add")
-    public String add()
-    {
-        return prefix + "/add";
-    }
-  
-    /**
-     * 新增保存发样情况
-     */
-    @RequiresPermissions("deliverGoods:deliverGoods:add")
-    @Log(title = "发样情况", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(KhDeliverGoods khDeliverGoods)
-    {
-        return toAjax(khDeliverGoodsService.insertKhDeliverGoods(khDeliverGoods));
-    }
+	/**
+	 * 明细
+	 */
+	@GetMapping("/detail")
+	public String detail(String orderNumber, Model model) {
+		DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+		model.addAttribute("vo", vo);
+		return prefix + "/hairDetail";
 
-    /**
-     * 修改发样情况
-     */
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, ModelMap mmap)
-    {
-        KhDeliverGoods khDeliverGoods = khDeliverGoodsService.selectKhDeliverGoodsById(id);
-        mmap.put("khDeliverGoods", khDeliverGoods);
-        return prefix + "/edit";
-    }
+	}
 
-    
+	/**
+	 * 删除发样情况
+	 */
+	@RequiresPermissions("deliverGoods:deliverGoods:remove")
+	@Log(title = " 删除发样情况", businessType = BusinessType.DELETE)
+	@PostMapping("/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids) {
+		return toAjax(khDeliverGoodsService.deleteByIds(ids));
+	}
 
-    
+	/**
+	 * 快递单
+	 */
+	@GetMapping("/expressBill")
+	public String expressBill(String orderNumber, Model model) {
+		DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+		model.addAttribute("vo", vo);
+		return "wxcustomer/common/expressOrder";
+	}
+
+	/**
+	 * 修改保存发样情况
+	 */
+	@RequiresPermissions("deliverGoods:deliverGoods:edit")
+	@Log(title = "发样情况", businessType = BusinessType.UPDATE)
+	@PostMapping("/edit")
+	@ResponseBody
+	public AjaxResult editSave(KhDeliverGoods khDeliverGoods) {
+		return toAjax(khDeliverGoodsService.updateKhDeliverGoods(khDeliverGoods));
+	}
+
+	/**
+	 * 导出发样情况列表
+	 */
+	@RequiresPermissions("deliverGoods:deliverGoods:export")
+	@PostMapping("/export")
+	@ResponseBody
+	public AjaxResult export(KhDeliverGoods khDeliverGoods) {
+		List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(khDeliverGoods);
+		ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
+		return util.exportExcel(list, "deliverGoods");
+	}
+
+	/**
+	 * 新增发样情况
+	 */
+	@GetMapping("/add")
+	public String add() {
+		return prefix + "/add";
+	}
+
+	/**
+	 * 新增保存发样情况
+	 */
+	@RequiresPermissions("deliverGoods:deliverGoods:add")
+	@Log(title = "发样情况", businessType = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(KhDeliverGoods khDeliverGoods) {
+		return toAjax(khDeliverGoodsService.insertKhDeliverGoods(khDeliverGoods));
+	}
+
+	/**
+	 * 修改发样情况
+	 */
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") String id, ModelMap mmap) {
+		KhDeliverGoods khDeliverGoods = khDeliverGoodsService.selectKhDeliverGoodsById(id);
+		mmap.put("khDeliverGoods", khDeliverGoods);
+		return prefix + "/edit";
+	}
+
 }

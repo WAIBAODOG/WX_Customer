@@ -24,110 +24,7 @@ import com.ruoyi.common.annotation.Excel;
 *
 */
 public class DeliverGoodsVO {
-	 /** ID */
-    private String id;
-    /** orderNumber */
-    private String orderNumber;
-
-    /** 客户编号 */
-    private String customerId;
-
-    /** 跟进结果类型 */
-    private String followResultType;
-
-    /** 成交金额 */
-    private Double dealAmount;
-
-    /** 发样/成交清单 */
-    @Excel(name = "发样清单")
-    private String sendSampleList;
-
-    /** 赠品清单 */
-    private String giftsList;
-
-    /** 成交日期 */
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @Excel(name = "成交日期 ", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date dealTime;
-    /** 成交日期 */
-    private Date dealTimeStart;
-    private Date dealTimeEnd;
-
-    /** 问题点 */
-    private String troubleSpots;
-
-    /** 意向点 */
-    @Excel(name = "意向点 ")
-    private String intentionPoint;
-
-    /** 跟进次数 */
-    @Excel(name = "跟进次数 ")
-    private Long followTimes;
-
-    /** 跟进情况 */
-    @Excel(name = "跟进情况 ")
-    private String followResult;
-
-    /** 通话时长-时 */
-    private Long durationHour;
-
-    /** 通话时长-分 */
-    private Long durationMinute;
-
-    /** 通话时长-秒 */
-    private Long durationSecond;
-
-    /** 下次跟进时间 */
-    private Date nextFollowTime;
-
-    /** 下次跟进思路 */
-    private String nextFollowMentality;
-
-    /** 对接业务员id */
-    private String creatorId;
-
-    /** 对接业务员 */
-    @Excel(name = "对接业务员 ")
-    private String creator;
-
-    /** 发件人 */
-    private String sender;
-
-    /** 发件人电话 */
-    private String senderPhone;
-
-    /** 发件人地址 */
-    private String senderAddress;
-
-    /** 发货日期 */
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date sendTime;
-    private Date sendTimeStart;
-    private Date sendTimeEnd;
-
-    /** 快递单号 */
-    private String courierNumber;
-
-    /** 物流公司 */
-    private String logisticsCompany;
-
-    /** 代收金额 */
-    private Double collectingAmount;
-
-    /** 保价金额 */
-    private Double insuranceAmount;
-
-    /** 邮费 */
-    private Long postage;
-    
-    /**是否删除**/
-    private String isDelete;
-   
-
-    /**意向度**/
-    private String intentionDegree;
-
-    //客户表
+	//客户表
 
     /** 电话号 */
     @Excel(name = "手机号")
@@ -168,6 +65,7 @@ public class DeliverGoodsVO {
     private String area;
 
     /** 客户地址详细 */
+    @Excel(name = "客户地址")
     private String customerAddress;
 
     /** 店名 */
@@ -208,6 +106,128 @@ public class DeliverGoodsVO {
     private String saleId;
     /**售后人员**/
     private String saleName;
+    
+    
+    
+    
+    
+    
+    
+    /*******成交发样表*********/
+    
+	 /** ID */
+    private String id;
+    /** orderNumber */
+    private String orderNumber;
+
+    /** 客户编号 */
+    private String customerId;
+
+    /** 跟进结果类型 */
+    private String followResultType;
+
+    /** 成交金额 */
+    private Double dealAmount;
+
+    /** 发样/成交清单 */
+    @Excel(name = "发样清单")
+    private String sendSampleList;
+
+    /** 赠品清单 */
+    private String giftsList;
+
+    /** 成交日期 */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Excel(name = "成交日期 ", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date dealTime;
+    /** 成交日期 */
+    private String dealTimeStart;
+    private String dealTimeEnd;
+
+    /** 问题点 */
+    @Excel(name = "问题点 ")
+    private String troubleSpots;
+
+    /** 意向点 */
+    @Excel(name = "意向点 ")
+    private String intentionPoint;
+
+    /** 跟进次数 */
+    @Excel(name = "跟进次数 ")
+    private Long followTimes;
+
+    /** 跟进情况 */
+    @Excel(name = "跟进情况 ")
+    private String followResult;
+
+    /** 通话时长-时 */
+    private Long durationHour;
+
+    /** 通话时长-分 */
+    private Long durationMinute;
+
+    /** 通话时长-秒 */
+    private Long durationSecond;
+
+    /** 下次跟进时间 */
+    @Excel(name = "下次跟进时间 ", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    private Date nextFollowTime;
+
+    /** 下次跟进思路 */
+    @Excel(name = "下次跟进思路 ")
+    private String nextFollowMentality;
+
+    /** 对接业务员id */
+    private String creatorId;
+
+    /** 对接业务员 */
+    @Excel(name = "对接业务员 ")
+    private String creator;
+
+    /** 发件人 */
+    private String sender;
+
+    /** 发件人电话 */
+    private String senderPhone;
+
+    /** 发件人地址 */
+    private String senderAddress;
+
+    /** 发货日期 */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date sendTime;
+    private String sendTimeStart;
+    private String sendTimeEnd;
+
+    /** 快递单号 */
+    private String courierNumber;
+
+    /** 物流公司 */
+    private String logisticsCompany;
+
+    /** 代收金额 */
+    private Double collectingAmount;
+
+    /** 保价金额 */
+    private Double insuranceAmount;
+
+    /** 邮费 */
+    private Long postage;
+    
+    /**是否删除**/
+    private String isDelete;
+   
+
+    /**意向度**/
+    @Excel(name = "意向度")
+    private String intentionDegree;
+    //成交类型
+    private String dealType;
+    
+    private String selfData;    
+    private String allData;  
+    private String isFYRY;  
+    private String isSHRY;  
 
 	public String getId() {
 		return id;
@@ -625,35 +645,35 @@ public class DeliverGoodsVO {
 		this.isDelete = isDelete;
 	}
 
-	public Date getDealTimeStart() {
+	public String getDealTimeStart() {
 		return dealTimeStart;
 	}
 
-	public void setDealTimeStart(Date dealTimeStart) {
+	public void setDealTimeStart(String dealTimeStart) {
 		this.dealTimeStart = dealTimeStart;
 	}
 
-	public Date getDealTimeEnd() {
+	public String getDealTimeEnd() {
 		return dealTimeEnd;
 	}
 
-	public void setDealTimeEnd(Date dealTimeEnd) {
+	public void setDealTimeEnd(String dealTimeEnd) {
 		this.dealTimeEnd = dealTimeEnd;
 	}
 
-	public Date getSendTimeStart() {
+	public String getSendTimeStart() {
 		return sendTimeStart;
 	}
 
-	public void setSendTimeStart(Date sendTimeStart) {
+	public void setSendTimeStart(String sendTimeStart) {
 		this.sendTimeStart = sendTimeStart;
 	}
 
-	public Date getSendTimeEnd() {
+	public String getSendTimeEnd() {
 		return sendTimeEnd;
 	}
 
-	public void setSendTimeEnd(Date sendTimeEnd) {
+	public void setSendTimeEnd(String sendTimeEnd) {
 		this.sendTimeEnd = sendTimeEnd;
 	}
 
@@ -688,6 +708,48 @@ public class DeliverGoodsVO {
 	public void setIntentionDegree(String intentionDegree) {
 		this.intentionDegree = intentionDegree;
 	}
+
+	public String getDealType() {
+		return dealType;
+	}
+
+	public void setDealType(String dealType) {
+		this.dealType = dealType;
+	}
+
+	public String getSelfData() {
+		return selfData;
+	}
+
+	public void setSelfData(String selfData) {
+		this.selfData = selfData;
+	}
+
+	public String getAllData() {
+		return allData;
+	}
+
+	public void setAllData(String allData) {
+		this.allData = allData;
+	}
+
+	public String getIsFYRY() {
+		return isFYRY;
+	}
+
+	public void setIsFYRY(String isFYRY) {
+		this.isFYRY = isFYRY;
+	}
+
+	public String getIsSHRY() {
+		return isSHRY;
+	}
+
+	public void setIsSHRY(String isSHRY) {
+		this.isSHRY = isSHRY;
+	}
+	
+	 
 	
     
     

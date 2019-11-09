@@ -33,8 +33,8 @@
                         	 
                         	<li class='select-time'>
                         		<p>发样日期：</p>
-                        		<input type="text" class='time-input' id='sendTimeStart' name="sendTimeStart"/>                    		<span>-</span>
-                        		<input type="text" class='time-input' id='sendTimeEnd' name="sendTimeEnd"/>
+                        		<input type="text" class='time-input' id='dealTimeStart' name="dealTimeStart"/>                    		<span>-</span>
+                        		<input type="text" class='time-input' id='dealTimeEnd' name="dealTimeEnd"/>
                         	</li>
                         	<li>
                         		<p>对接业务员：</p>
@@ -61,7 +61,7 @@
                     <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="deliverGoods:deliverGoods:remove">
                     	<i class="fa fa-remove"></i> 删除
                		 </a>
-               		 <a class="btn btn-success" onclick="deliverGoods()"   >
+               		 <a class="btn btn-success  single disabled" onclick="deliverGoods()"  shiro:hasPermission="deal:deal:send" >
                   	  <i class="fa fa-ravelry"></i> 发货
                 	 </a>
             </div>  

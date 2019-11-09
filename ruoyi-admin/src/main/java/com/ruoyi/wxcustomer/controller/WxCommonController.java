@@ -46,18 +46,22 @@ public class WxCommonController extends BaseController {
 	    private ISysUserService userService;
 	    
 	    @GetMapping("/user")
-	    public String user(String orderNumber,String requestType,Model model)
+	    public String user(String orderNumber,String requestType,String dealType,Model model)
 	    {
 	    	model.addAttribute("requestType", requestType);
 	    	model.addAttribute("orderNumber", orderNumber);
+	    	model.addAttribute("dealType", dealType);
 	        return prefix + "/user";
 	    }
 
 	    @PostMapping("/list")
 	    @ResponseBody
-	    public TableDataInfo list(SysUser user)
+	    public TableDataInfo list(SysUser user, String requestType)
 	    {
 	        startPage();
+	        if("afterSale".equals(requestType)) {
+	        	user.setDeptId(102L);
+	    	}
 	        List<SysUser> list = userService.selectUserList(user);
 	        return getDataTable(list);
 	    }
@@ -66,9 +70,13 @@ public class WxCommonController extends BaseController {
 	     */
 	    @GetMapping("/treeData")
 	    @ResponseBody
-	    public List<Ztree> treeData()
+	    public List<Ztree> treeData(String requestType)
 	    {
-	        List<Ztree> ztrees = deptService.selectDeptTree(new SysDept());
+	    	SysDept dept=new SysDept();
+	    	if("afterSale".equals(requestType)) {
+	    		dept.setDeptName("售后");
+	    	}
+	        List<Ztree> ztrees = deptService.selectDeptTree(dept);
 	        return ztrees;
 	    }
 }

@@ -50,6 +50,13 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                         	</li>
+                        	<li>
+                        		<p>成交类型：</p>
+                        		 <select name="dealType"  id="dealType" >
+                                    <option value="1">发样成交</option>
+                                    <option value="2">售后成交</option>
+                                </select>
+                        	</li>
                         </ul>
                     </div>
                 </form>
@@ -61,13 +68,14 @@
 	                <a class="btn btn-primary  " onclick="$.form.reset()"  >
 	                    <i class="fa fa-refresh"></i> 清空
 	                </a>
-	                <a class="btn btn-success " onclick="distributionStaff()" shiro:hasPermission="deal:deal:remove">
+	                
+	                <a class="btn btn-success  single disabled" onclick="distributionStaff()"  th:if="${isSHZZ}"  shiro:hasPermission="deal:deal:giveSale">
                     	<i class="fa fa-remove"></i> 分配售后人员
                		 </a>
                     <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="deal:deal:remove">
                     	<i class="fa fa-remove"></i> 删除
                		 </a>
-               		 <a class="btn btn-success" onclick="afterSale()"  >
+               		 <a class="btn btn-success  single disabled" onclick="afterSale()" shiro:hasPermission="deal:deal:send" >
                   	  <i class="fa fa-ravelry"></i> 发货
                 	 </a>
             </div>  
@@ -83,13 +91,13 @@
         var removeFlag = [[${@permission.hasPermi('deal:deal:remove')}]];
         var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
         var prefix = ctx + "wxcustomer/deal";
-
+        
         $(function() {
             var options = {
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
+                removeUrl: prefix + "/remove?dealType="+dealType,
                 exportUrl: prefix + "/export",
                 modalName: "成交情况",
                 columns: [{
@@ -104,7 +112,8 @@
                     field : 'orderNumber', 
                     title : '订单号',
                     formatter: function(value, row, index) {
-                    	return "<a class='orderNumber' href='/wxcustomer/deal/detail?orderNumber="+value+"'>"+value+"</a>"
+                    	var dealType=$("#dealType").val();
+                    	return "<a class='orderNumber' href='/wxcustomer/deal/detail?orderNumber="+value+"&dealType="+dealType+"'>"+value+"</a>"
                         // return $.table.selectDictLabel(followResultTypeDatas, value);
                     }
                 },
@@ -149,24 +158,26 @@
         });
         //发货
         function afterSale() {
+        	var dealType=$("#dealType").val();
         	var ck=$("#bootstrap-table").find('tbody').find(".bs-checkbox ").find("input[type='checkbox']:checked");
         	if(ck.length<1||ck.length>1){
         		$.modal.alertWarning('必须是勾选一项！')
         		return;
         	}
         	var orderNumber=$(ck[0]).parent().parent().find(".orderNumber").html();
-        	$.modal.open('快递单', prefix + '/expressBill?orderNumber='+orderNumber);
+        	$.modal.open('快递单', prefix + '/expressBill?orderNumber='+orderNumber+"&dealType="+dealType);
         	//$('#afterSaleModal').modal('show');
         }
         //分配售后人员
         function distributionStaff(){
+        	var dealType=$("#dealType").val();
         	var ck=$("#bootstrap-table").find('tbody').find(".bs-checkbox ").find("input[type='checkbox']:checked");
         	if(ck.length<1||ck.length>1){
         		$.modal.alertWarning('必须是勾选一项！')
         		return;
         	}
         	var orderNumber=$(ck[0]).parent().parent().find(".orderNumber").html();
-        	$.modal.open('分配售后人员', "/wxcustomer/common/user?requestType=afterSale&orderNumber="+orderNumber);
+        	$.modal.open('分配售后人员', "/wxcustomer/common/user?requestType=afterSale&orderNumber="+orderNumber+"&dealType="+dealType);
         }
        
     </script>

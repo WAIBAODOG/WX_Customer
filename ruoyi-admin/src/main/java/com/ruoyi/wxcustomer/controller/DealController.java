@@ -1,7 +1,8 @@
-package  com.ruoyi.wxcustomer.controller;
+package com.ruoyi.wxcustomer.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,15 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
+import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
 import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
+import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 
@@ -33,155 +39,181 @@ import com.ruoyi.wxcustomer.service.IWechatCustomerService;
  */
 @Controller
 @RequestMapping("/wxcustomer/deal")
-public class DealController extends BaseController
-{
-    private String prefix = "wxcustomer/deal";
+public class DealController extends BaseController {
+	private String prefix = "wxcustomer/deal";
 
-    @Autowired
-    private IKhDeliverGoodsService khDeliverGoodsService;
-    @Autowired
-    private IWechatCustomerService wechatCustomerService;
+	@Autowired
+	private IKhDeliverGoodsService khDeliverGoodsService;
+	@Autowired
+	private IWechatCustomerService wechatCustomerService;
+	@Autowired
+	private IKhAfterSaleMemberService khAfterSaleMemberService;
+	@Autowired
+	private PermissionService permissionService;
+	@RequiresPermissions("deal:deal:view")
+	@GetMapping()
+	public String deal(Model model) {
+		boolean isSHZZ= permissionService.isRole("SHZZZ")|| permissionService.isRole("admin");
+		model.addAttribute("isSHZZ", isSHZZ);
+		return prefix + "/dealManage";
+	}
 
-    @RequiresPermissions("deal:deal:view")
-    @GetMapping()
-    public String afterSale()
-    {
-    	return prefix + "/dealManage";
-    }
+	/**
+	 * 查询售后情况列表
+	 */
+	@RequiresPermissions("deal:deal:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo list(DeliverGoodsVO vo) {
+		startPage();
+		boolean isFYRY = permissionService.isRole("FYCJZZY");
+		if (isFYRY) {
+			vo.setIsFYRY(ShiroUtils.getUserId().toString());
+		}
+		boolean isFYSH = permissionService.isRole("SHZZY");
+		if ( isFYSH) {
+			vo.setIsSHRY(ShiroUtils.getUserId().toString());
+		}
+		vo.setIsDelete("0");// 未删除
+		if ("2".equals(vo.getDealType())) {// 售后成交
+			AfterSaleMemberVO saleVo = new AfterSaleMemberVO();
+			BeanUtils.copyProperties(vo, saleVo);
+			List<AfterSaleMemberVO> list = khAfterSaleMemberService.selectList(saleVo);
+			return getDataTable(list);
+		} else {
+			vo.setFollowResultType("3");
+			List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
+			return getDataTable(list);
+		}
 
-    /**
-     * 查询售后情况列表
-     */
-    @RequiresPermissions("deal:deal:list")
-    @PostMapping("/list")
-    @ResponseBody
-    public TableDataInfo list(DeliverGoodsVO vo)
-    {
-        startPage();
-        vo.setIsDelete("0");//未删除
-        //vo.setIsSales("1");//成交
-        vo.setFollowResultType("3");
-        List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
-        return getDataTable(list);
-    }
-    
-    /**
-     * 明细
-     */
-    @GetMapping("/detail")
-    public String detail(String orderNumber,Model model)
-    {
-    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
-    	model.addAttribute("vo",vo);
-    	return prefix + "/dealDetail";
-    }
-    
-    
+	}
 
-    /**
-     * 删除售后情况
-     */
-    @RequiresPermissions("deal:deal:remove")
-    @Log(title = "售后情况", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(khDeliverGoodsService.deleteByIds(ids));
-    }
-    /**
-     * 快递单
-     */
-    @GetMapping( "/expressBill")
-    public String expressBill(String orderNumber,Model model)
-    {
-    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
-    	model.addAttribute("vo",vo);
-    	return  "wxcustomer/common/expressOrder";
-    }
-    /**
-     * 修改售后情况
-     */
-    @RequiresPermissions("deal:deal:edit")
-    @Log(title = "售后情况", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(KhDeliverGoods KhDeliverGoods)
-    {
-        return toAjax(khDeliverGoodsService.updateKhDeliverGoods(KhDeliverGoods));
-    }
-    /**
-     * 分配售后人员
-    */
-    @PostMapping("/distributionSale")
-    @ResponseBody
-    public AjaxResult distributionSale(String orderNumber,String saleId,String saleName)
-    {
-    	DeliverGoodsVO vo=khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
-    	if(null==vo) {
-    		return  AjaxResult.error("操作失败！");
-    	}
-    	WechatCustomer wechatCustomer=new WechatCustomer();
-    	wechatCustomer.setCustomerId(vo.getCustomerId());
-    	wechatCustomer.setSaleId(saleId);
-    	wechatCustomer.setSaleName(saleName);
-    	return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer));
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * 导出售后情况列表
-     */
-    @RequiresPermissions("deal:deal:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(KhDeliverGoods KhDeliverGoods)
-    {
-        List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(KhDeliverGoods);
-        ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
-        return util.exportExcel(list, "afterSale");
-    }
+	/**
+	 * 明细
+	 */
+	@GetMapping("/detail")
+	public String detail(String orderNumber, Model model,String dealType) {
+		if("1".equals(dealType)) {
+			DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+			model.addAttribute("vo", vo);
+		}else {
+			AfterSaleMemberVO vo = khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+			model.addAttribute("vo", vo);
+		}
+		
+		return prefix + "/dealDetail";
+	}
 
-    /**
-     * 新增售后情况
-     */
-    @GetMapping("/add")
-    public String add()
-    {
-        return prefix + "/add";
-    }
+	/**
+	 * 删除 
+	 */
+	@RequiresPermissions("deal:deal:remove")
+	@Log(title = " ", businessType = BusinessType.DELETE)
+	@PostMapping("/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids,String dealType) {
+		if("1".equals(dealType)) {
+			return toAjax(khDeliverGoodsService.deleteByIds(ids));
+		}else {
+			return toAjax(khAfterSaleMemberService.deleteByIds(ids));
+		}
+		
+	}
 
-    /**
-     * 新增保存售后情况
-     */
-    @RequiresPermissions("deal:deal:add")
-    @Log(title = "售后情况", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(KhDeliverGoods KhDeliverGoods)
-    {
-        return toAjax(khDeliverGoodsService.insertKhDeliverGoods(KhDeliverGoods));
-    }
+	/**
+	 * 快递单
+	 */
+	@GetMapping("/expressBill")
+	public String expressBill(String orderNumber, Model model,String dealType) {
+		if("1".equals(dealType)) {
+			DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+			model.addAttribute("vo", vo);
+		}else {
+			AfterSaleMemberVO vo = khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+			model.addAttribute("vo", vo);
+		}
+		 
+		return "wxcustomer/common/expressOrder";
+	}
 
-    /**
-     * 修改售后情况
-     */
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, ModelMap mmap)
-    {
-        KhDeliverGoods KhDeliverGoods = khDeliverGoodsService.selectKhDeliverGoodsById(id);
-        mmap.put("KhDeliverGoods", KhDeliverGoods);
-        return prefix + "/edit";
-    }
+	/**
+	 * 修改售后情况
+	 */
+	@RequiresPermissions("deal:deal:edit")
+	@Log(title = "售后情况", businessType = BusinessType.UPDATE)
+	@PostMapping("/edit")
+	@ResponseBody
+	public AjaxResult editSave(KhDeliverGoods KhDeliverGoods) {
+		return toAjax(khDeliverGoodsService.updateKhDeliverGoods(KhDeliverGoods));
+	}
 
-    
+	/**
+	 * 分配售后人员
+	 */
+	@PostMapping("/distributionSale")
+	@ResponseBody
+	public AjaxResult distributionSale(String orderNumber, String saleId, String saleName,String dealType) {
+		String customerId="";
+		if("1".equals(dealType)) {
+			DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+			if (null == vo) {
+				return AjaxResult.error("操作失败！");
+			}
+			customerId=vo.getCustomerId();
+		}else {
+			AfterSaleMemberVO vo = khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+			if (null == vo) {
+				return AjaxResult.error("操作失败！");
+			}
+			customerId=vo.getCustomerId();
+			
+		}
+		WechatCustomer wechatCustomer = new WechatCustomer();
+		wechatCustomer.setCustomerId(customerId);
+		wechatCustomer.setSaleId(saleId);
+		wechatCustomer.setSaleName(saleName);
+		return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer));
+	}
+
+	/**
+	 * 导出售后情况列表
+	 */
+	@RequiresPermissions("deal:deal:export")
+	@PostMapping("/export")
+	@ResponseBody
+	public AjaxResult export(KhDeliverGoods KhDeliverGoods) {
+		List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(KhDeliverGoods);
+		ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
+		return util.exportExcel(list, "afterSale");
+	}
+
+	/**
+	 * 新增售后情况
+	 */
+	@GetMapping("/add")
+	public String add() {
+		return prefix + "/add";
+	}
+
+	/**
+	 * 新增保存售后情况
+	 */
+	@RequiresPermissions("deal:deal:add")
+	@Log(title = "售后情况", businessType = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(KhDeliverGoods KhDeliverGoods) {
+		return toAjax(khDeliverGoodsService.insertKhDeliverGoods(KhDeliverGoods));
+	}
+
+	/**
+	 * 修改售后情况
+	 */
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") String id, ModelMap mmap) {
+		KhDeliverGoods KhDeliverGoods = khDeliverGoodsService.selectKhDeliverGoodsById(id);
+		mmap.put("KhDeliverGoods", KhDeliverGoods);
+		return prefix + "/edit";
+	}
+
 }

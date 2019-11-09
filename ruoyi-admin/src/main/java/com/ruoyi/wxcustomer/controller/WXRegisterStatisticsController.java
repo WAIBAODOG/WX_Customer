@@ -12,6 +12,7 @@ package com.ruoyi.wxcustomer.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
 import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
@@ -31,49 +34,80 @@ import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 
 /**
-* @ClassName: WXRegisterStatisticsController
-* @Description: 业绩统计--每日微信跟进登记表
-* @author HuaSheng
-* @date 2019年11月2日 下午8:29:56
-*
-*/
+ * @ClassName: WXRegisterStatisticsController
+ * @Description: 业绩统计--每日微信跟进登记表
+ * @author HuaSheng
+ * @date 2019年11月2日 下午8:29:56
+ *
+ */
 @Controller
 @RequestMapping("/wxcustomer/wxRegisterStatistics")
-public class WXRegisterStatisticsController extends BaseController{
-	 private String prefix = "wxcustomer/statistics";
-	 @Autowired
-	    private IKhDeliverGoodsService khDeliverGoodsService;
-	 
-	    //每天微信登记
-	    @RequiresPermissions("wxRegisterStatistics:wxRegister:view")
-	    @GetMapping()
-	    public String wxRegister()
-	    {
-	        return prefix + "/wxRegister";
-	    }
-	    /**
-	     * 业绩统计列表
-	     */
-	    @RequiresPermissions("wxRegisterStatistics:wxRegister:list")
-	    @PostMapping("/list")
-	    @ResponseBody
-	    public TableDataInfo list( DeliverGoodsVO vo ){
-	        startPage();
-	        if(vo.getDealTimeStart()!=null&&null!=vo.getDealTimeEnd()) {
-	        	 vo.setDealTime(new Date());
-	        }
-	        return getDataTable(khDeliverGoodsService.selectList(vo));
-	    }
-	    /**
-	     * 导出
-	     */
-	    @RequiresPermissions("wxRegisterStatistics:wxRegister:export")
-	    @PostMapping("/export")
-	    @ResponseBody
-	    public AjaxResult export( DeliverGoodsVO vo)
-	    {
-	        List<DeliverGoodsVO> list =khDeliverGoodsService.selectList(vo);
-	        ExcelUtil<DeliverGoodsVO> util = new ExcelUtil<DeliverGoodsVO>(DeliverGoodsVO.class);
-	        return util.exportExcel(list, "每日微信跟进登记表");
-	    }
+public class WXRegisterStatisticsController extends BaseController {
+	private String prefix = "wxcustomer/statistics";
+	@Autowired
+	private IKhDeliverGoodsService khDeliverGoodsService;
+	@Autowired
+	private PermissionService permissionService;
+
+	// 每天微信登记
+	@RequiresPermissions("wxRegisterStatistics:wxRegister:view")
+	@GetMapping()
+	public String wxRegister() {
+		return prefix + "/wxRegister";
+	}
+
+	/**
+	 * 业绩统计列表
+	 */
+	@RequiresPermissions("wxRegisterStatistics:wxRegister:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo list(DeliverGoodsVO vo) {
+		startPage();
+		boolean isAdmin = permissionService.isRole("admin");
+		if (!isAdmin) {
+			String selfData = permissionService.hasAnyRoles("FYCJZZY");
+			if (StringUtils.isBlank(selfData)) {
+				vo.setSelfData(ShiroUtils.getUserId().toString());
+			}
+
+			String allData = permissionService.hasAnyRoles("FYCJZZZ,GSLD");
+			if (StringUtils.isBlank(allData)) {
+				vo.setAllData("1");
+			}
+		}
+		vo.setIsDelete("0");
+		if (StringUtils.isNoneEmpty(vo.getDealTimeStart()) && StringUtils.isNoneEmpty(vo.getDealTimeEnd())) {
+			vo.setDealTime(new Date());
+		}
+		return getDataTable(khDeliverGoodsService.selectList(vo));
+	}
+
+	/**
+	 * 导出
+	 */
+	@RequiresPermissions("wxRegisterStatistics:wxRegister:export")
+	@PostMapping("/export")
+	@ResponseBody
+	public AjaxResult export(DeliverGoodsVO vo) {
+		vo.setIsDelete("0");
+		boolean isAdmin = permissionService.isRole("admin");
+		if (!isAdmin) {
+			String selfData = permissionService.hasAnyRoles("FYCJZZY");
+			if (StringUtils.isBlank(selfData)) {
+				vo.setSelfData(ShiroUtils.getUserId().toString());
+			}
+
+			String allData = permissionService.hasAnyRoles("FYCJZZZ,GSLD");
+			if (StringUtils.isBlank(allData)) {
+				vo.setAllData("1");
+			}
+		}
+		if (StringUtils.isNoneEmpty(vo.getDealTimeStart()) && StringUtils.isNoneEmpty(vo.getDealTimeEnd())) {
+			vo.setDealTime(new Date());
+		}
+		List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
+		ExcelUtil<DeliverGoodsVO> util = new ExcelUtil<DeliverGoodsVO>(DeliverGoodsVO.class);
+		return util.exportExcel(list, "每日微信跟进登记表");
+	}
 }

@@ -31,6 +31,7 @@
 					<form id="user-form">
 						<input type="hidden" id="deptId" name="deptId">
 						<input type="hidden" id="requestType" name="requestType" th:value="${requestType}">
+						<input type="hidden" id="dealType" name="dealType" th:value="${dealType}">
 						<input type="hidden" id="orderNumber" name="orderNumber" th:value="${orderNumber}">
 		                <input type="hidden" id="parentId" name="parentId">
 						<div class="select-list">
@@ -75,7 +76,7 @@
 		    queryUserList();
 		    queryDeptTree();
 		});
-
+		var requestType=$("#requestType").val()
 		function queryUserList() {
 		    var options = {
 		        url: prefix + "/list",
@@ -108,7 +109,7 @@
 		
 		function queryDeptTree()
 		{
-			var url = prefix + "/treeData";
+			var url = prefix + "/treeData?requestType="+requestType;
 			var options = {
 		        url: url,
 		        expandLevel: 2,
@@ -157,7 +158,8 @@
 		        var saleId=$(user[1]).html();
 		        var saleName=$(user[2]).html();
 		        var orderNumber=$("#orderNumber").val();
-		        $.operate.save("/wxcustomer/afterSale/distributionSale", {orderNumber:+orderNumber,saleId:saleId,saleName:saleName});
+		        var dealType=$("#dealType").val();
+		        $.operate.save("/wxcustomer/deal/distributionSale", {orderNumber:orderNumber,saleId:saleId,saleName:saleName,dealType:dealType});
 		}
 		 
 	</script>

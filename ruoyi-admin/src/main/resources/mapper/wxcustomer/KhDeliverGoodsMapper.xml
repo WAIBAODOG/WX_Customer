@@ -266,19 +266,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerId != null  and customerId != ''"> and d.customer_id = #{customerId}</if>
             <if test="followResultType != null  and followResultType != ''"> and d.follow_result_type = #{followResultType}</if>
             <if test="dealAmount != null  and dealAmount != ''"> and d.deal_amount = #{dealAmount}</if>
+			
              <if test="dealTimeStart!=null and dealTimeStart!=''">
-			　　 <![CDATA[ AND DATE_FORMAT(d.deal_time, '%Y-%m-%d %H:%i:%S') >= DATE_FORMAT(#{dealTimeStart}, '%Y-%m-%d %H:%i:%S') ]]>
+             	AND date_format(d.deal_time,'%y%m%d') &gt;= date_format(#{dealTimeStart},'%y%m%d')
 			</if> 
 			<if test="dealTimeEnd!=null and dealTimeEnd!=''">
-			  <![CDATA[ AND DATE_FORMAT(d.deal_time, '%Y-%m-%d %H:%i:%S') <= DATE_FORMAT(#{dealTimeEnd}, '%Y-%m-%d %H:%i:%S') ]]>
+			  AND date_format(d.deal_time,'%y%m%d') &lt;= date_format(#{dealTimeEnd},'%y%m%d')
 			</if>
              <if test="sendTimeStart!=null and sendTimeStart!=''">
-			　 <![CDATA[ AND DATE_FORMAT(d.send_time, '%Y-%m-%d %H:%i:%S') >= DATE_FORMAT(#{sendTimeStart}, '%Y-%m-%d %H:%i:%S') ]]>
+			　  AND date_format(d.send_time, '%y%m%d') &gt;= date_format(#{sendTimeStart},'%y%m%d')  
 			
 			</if> 
-			<if test="dealTimeEnd!=null and sendTimeEnd!=''">
-			  <![CDATA[ AND DATE_FORMAT(d.send_time, '%Y-%m-%d %H:%i:%S') <= DATE_FORMAT(#{sendTimeEnd}, '%Y-%m-%d %H:%i:%S') ]]>
-			
+			<if test="sendTimeEnd!=null and sendTimeEnd!=''">
+			    AND date_format(d.send_time, '%y%m%d') &lt;=  date_format(#{sendTimeEnd}, '%y%m%d') 
 			</if>
             <!--  <if test="dealTimeStart != null and dealTimeStart != '' and  dealTimeEnd != null and  dealTimeEnd != ''"> and d.deal_time between #{dealTimeStart} and #{dealTimeEnd}</if>
              <if test="sendTimeStart != null and sendTimeStart != '' and  sendTimeEnd != null and  sendTimeEnd != ''"> and d.send_time between #{sendTimeStart} and #{sendTimeEnd}</if>
@@ -288,7 +288,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isDelete != null  and isDelete != ''"> and d.is_delete = #{isDelete}</if>
             <if test='isDeliverGoods=="1"'> and d.courier_Number is not null </if>
             <if test='isDeliverGoods=="0"'> and d.courier_Number is  null </if>
-       		<if test="dealTime != null "> and d.deal_time = #{dealTime}</if>
+       		<if test="dealTime != null "> and d.deal_time = date_format(#{dealTime},'yyyy-MM-dd')</if>
+       		
        		
        		 <if test="phoneNumber != null  and phoneNumber != ''"> and w.phone_number  like concat('%', #{phoneNumber}, '%')</if>
             <if test="weixinNumber != null  and weixinNumber != ''"> and w.weixin_number like concat('%', #{weixinNumber}, '%')</if>
@@ -302,6 +303,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="creationTime != null "> and w.creation_time = #{creationTime}</if>
             <if test="isDelivery != null  and isDelivery != ''"> and w.is_delivery = #{isDelivery}</if>
             <if test="isSales != null  and isSales != ''"> and w.is_sales = #{isSales}</if>
+            <if test="selfData != null  and selfData != ''"> and d.creator_id = #{selfData}</if>
+            <if test="allData != null  and allData != ''"> </if>
+              <if test="isFYRY != null  and isFYRY != ''">and d.creator_id = #{isFYRY} </if>
+            <if test="isSHRY != null  and isSHRY != ''">and w.sale_id = #{isSHRY} </if>
+            order by d.deal_time desc
         </where>
     </select>
     <select id="selectVOByOrderNumber" parameterType="String" resultMap="deliverGoodsVOResult">
