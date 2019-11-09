@@ -58,6 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isDelivery != null  and isDelivery != ''"> and is_delivery = #{isDelivery}</if>
             <if test="isSales != null  and isSales != ''"> and is_sales = #{isSales}</if>
             <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="isFyUser != null"> and is_sales!='1'</if>
+            <if test="shUserId != null"> and sale_id=#{shUserId}</if>
         </where>
     </select>
     

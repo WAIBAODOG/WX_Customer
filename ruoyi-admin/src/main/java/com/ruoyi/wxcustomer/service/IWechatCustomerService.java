@@ -50,7 +50,7 @@ public interface IWechatCustomerService {
 	 * @param ids 需要删除的数据ID
 	 * @return 结果
 	 */
-	public int deleteWechatCustomerByIds(String ids);
+	public String deleteWechatCustomerByIds(String ids);
 
 	/**
 	 * 删除微信客户信息

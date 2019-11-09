@@ -41,13 +41,6 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            
-                            <li class="select-time">
-                                <p>创建时间：</p>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreationTime]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreationTime]"/>
-                            </li>
                         </ul>
                         <ul>
                         	 <li style="width: 200%;">
@@ -58,7 +51,15 @@
 			                          <select name="area"></select>
 		                         </div>
 		                     </li>
-		                     <li>
+                        </ul>
+                        <ul>
+                        	<li class="select-time">
+                                <p>创建时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreationTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreationTime]"/>
+                            </li>
+                        	<li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             </li>
@@ -71,7 +72,7 @@
                 <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="wxcustomer:WechatCustomer:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="wxcustomer:WechatCustomer:edit">
+                <a class="btn btn-primary single disabled" onclick="openDetail()" shiro:hasPermission="wxcustomer:WechatCustomer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="wxcustomer:WechatCustomer:remove">
@@ -103,7 +104,7 @@
                 uniqueId: "customerId",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove/{id}",
+                removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
                 modalName: "微信客户",
                 columns: [{
@@ -116,7 +117,12 @@
                 },
                 {
                     field : 'phoneNumber', 
-                    title : '电话号'
+                    title : '电话号',
+                    formatter: function(value, row, index) {
+                      var actions = [];
+                      actions.push('<a class="' + editFlag + '" href="javascript:void(0)" onclick="openDetail(\'' + row.customerId + '\')">'+ value +'</a> ');
+                      return actions.join('');	
+                    }
                 },
                 {
                     field : 'weixinNumber', 
@@ -163,20 +169,14 @@
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel(isSalesDatas, value);
                     }
-                },
-                {
-                    title: '操作',
-                    align: 'center',
-                    formatter: function(value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.customerId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.customerId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        return actions.join('');
-                    }
                 }]
             };
             $.table.init(options);
         });
+        
+        function openDetail(id) {
+        	$.modal.openTab($.table._option.modalName + "详情", $.operate.editUrl(id));
+        }
     </script>
 </body>
 </html>

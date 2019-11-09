@@ -97,8 +97,31 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 	 * @return 结果
 	 */
 	@Override
-	public int deleteWechatCustomerByIds(String ids) {
-		return wechatCustomerMapper.deleteWechatCustomerByIds(Convert.toStrArray(ids));
+	public String deleteWechatCustomerByIds(String ids) {
+		String[] idArray = Convert.toStrArray(ids);
+		StringBuilder sb = new StringBuilder();
+		boolean hasError = false;
+		for (String id : idArray) {
+			boolean flag = false;
+			WechatCustomer customer = wechatCustomerMapper.selectWechatCustomerById(id);
+			if("1".equals(customer.getIsDelivery())) {
+				flag = true;
+			}
+			if("1".equals(customer.getIsSales())) {
+				flag = true;
+			}
+			
+			if(flag) {
+				sb.append("<br>" + customer.getCustomerName() + ("1".equals(customer.getIsDelivery())? "已经发样, " : "") + ("1".equals(customer.getIsSales())? "已经成交," : "") + "不允许删除");
+				hasError = true;
+			}
+		}
+		
+		if(hasError) {
+			return sb.toString().replaceFirst("<br>", "");
+		}
+		wechatCustomerMapper.deleteWechatCustomerByIds(Convert.toStrArray(ids));
+		return null;
 	}
 
 	/**
@@ -111,6 +134,8 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 	public int deleteWechatCustomerById(String customerId) {
 		return wechatCustomerMapper.deleteWechatCustomerById(customerId);
 	}
+	
+	
 
 	@Transactional(rollbackFor=Exception.class)
 	@Override

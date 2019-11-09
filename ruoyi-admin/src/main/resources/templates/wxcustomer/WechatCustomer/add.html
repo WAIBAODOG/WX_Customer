@@ -118,7 +118,7 @@
 	       		<h4 class="form-header h4">销售情况</h4>
 	       </div>
 		   <div class="row" style="padding-bottom: 10px"> 	
-	             <a class="btn btn-success" onclick="addSaleInfo();">
+	             <a class="btn btn-success" onclick="addSaleInfo();"  shiro:hasPermission="wxcustomer:WechatCustomer:addSaleInfo">
 	                 <i class="fa fa-plus"></i> 添加
 	             </a>
 		   </div>
@@ -148,7 +148,7 @@
 	    		<h4 class="form-header h4">售后情况</h4>
 		   </div>
 		   <div class="row" style="padding-bottom: 10px"> 	
-	             <a class="btn btn-success" onclick="addPostSale()">
+	             <a class="btn btn-success" onclick="addPostSale()" shiro:hasPermission="wxcustomer:WechatCustomer:addPostSale">
 	                 <i class="fa fa-plus"></i> 添加
 	             </a>
 		   </div>
@@ -193,6 +193,10 @@
     <script th:inline="javascript">
     	var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
     	var isDeliveryDatas = [[${@dict.getType('is_delivery')}]];
+    	var intentionDegreeDatas = [[${@dict.getType('Intention_degree')}]];
+    	var saleRoleFlag = [[${@permission.hasPermi('wxcustomer:WechatCustomer:addSaleInfo')}]];
+    	var shRoleFlag = [[${@permission.hasPermi('wxcustomer:WechatCustomer:addPostSale')}]];
+    	
         var prefix = ctx + "wxcustomer/WechatCustomer";
         $("#form-WechatCustomer-add").validate({
             focusCleanup: true
@@ -204,11 +208,15 @@
         		var jsonArray = JSON.parse(khDeliverGoodsDataStr);
 	        	for(var i=0;i<jsonArray.length;i++) {
 	        		jsonArray[i].followResultTypeName = $.common.getDictName(followResultTypeDatas, jsonArray[i].followResultType);
-	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime);
-	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime);
+	        		jsonArray[i].intentionDegreeName = $.common.getDictName(intentionDegreeDatas, jsonArray[i].intentionDegreeName);
+	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
+	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
 	        		jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
 	        	}
         		$('#saleInfoTpl').tmpl(jsonArray).appendTo('#saleInfoTable');
+        		if(saleRoleFlag == 'hidden') {
+        			$('#saleInfoTable').find('a.op').remove();
+        		}
         	}
         	
         	var khAfterSaleMemberDataStr = $('#khAfterSaleMemberDataStr').text();
@@ -216,11 +224,15 @@
         		var jsonArray = JSON.parse(khAfterSaleMemberDataStr);
 	        	for(var i=0;i<jsonArray.length;i++) {
 	        		jsonArray[i].isDealName = $.common.getDictName(isDeliveryDatas, jsonArray[i].isDeal);
-	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime);
-	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime);
+	        		jsonArray[i].intentionDegreeName = $.common.getDictName(intentionDegreeDatas, jsonArray[i].intentionDegreeName);
+	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
+	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
 	        		jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
 	        	}
         		$('#postSaleTpl').tmpl(jsonArray).appendTo('#postSaleTable');
+        		if(shRoleFlag == 'hidden') {
+        			$('#postSaleTable').find('a.op').remove();
+        		}
         	}
         	
         	$('#customerAddressSelect').distpicker({
@@ -254,7 +266,7 @@
         		$('#postSaleStr').val(JSON.stringify(postSaleArr));
         	}
         	
-            $.operate.save(url, $('#form-WechatCustomer-add').serialize());
+            $.operate.saveTab(url, $('#form-WechatCustomer-add').serialize());
         }
         
         function getArrayJson(tableName) {
@@ -359,6 +371,14 @@
     <script  id="saleInfoTpl" type="text/x-jquery-tmpl">
  		<tr>
  		  <td data-name="id" style="display:none;">${id}</td>
+ 		  <td data-name="intentionDegree" style="display:none;">${intentionDegree}</td>
+	      <td data-name="intentionDegreeName" style="display:none;">${intentionDegreeName}</td>
+	      <td data-name="dealAmount" style="display:none;">${dealAmount}</td>
+	      <td data-name="sendSampleList" style="display:none;">${sendSampleList}</td>
+	      <td data-name="giftsList" style="display:none;">${giftsList}</td>
+	      <td data-name="troubleSpots" style="display:none;">${troubleSpots}</td>
+	      <td data-name="intentionPoint" style="display:none;">${intentionPoint}</td>
+	      <td data-name="nextFollowMentality" style="display:none;">${nextFollowMentality}</td>
 	      <td data-name="followTimes">${followTimes}</td>
 	      <td data-name="followResultType" style="display:none;">${followResultType}</td>
 	      <td data-name="followResultTypeName">${followResultTypeName}</td>
@@ -371,13 +391,22 @@
 	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
 	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
 	      <td data-name="creator">${creator}</td>
-	      <td><a href="javascript:;" onclick="editSaleInfo(this);">修改</a></td>
+	      <td><a href="javascript:;" onclick="editSaleInfo(this);" class="op">修改</a></td>
 	    </tr>
 	</script>
 	
 	<script  id="postSaleTpl" type="text/x-jquery-tmpl">
 	    <tr>
  		  <td data-name="id" style="display:none;">${id}</td>
+ 		  <td data-name="intentionDegree" style="display:none;">${intentionDegree}</td>
+	      <td data-name="intentionDegreeName" style="display:none;">${intentionDegreeName}</td>
+	      <td data-name="dealAmount" style="display:none;">${dealAmount}</td>
+	      <td data-name="sendSampleList" style="display:none;">${sendSampleList}</td>
+	      <td data-name="giftsList" style="display:none;">${giftsList}</td>
+	      <td data-name="troubleSpots" style="display:none;">${troubleSpots}</td>
+	      <td data-name="intentionPoint" style="display:none;">${intentionPoint}</td>
+	      <td data-name="nextFollowMentality" style="display:none;">${nextFollowMentality}</td>
+ 		  
 	      <td data-name="followTimes">${followTimes}</td>
 	      <td data-name="isDeal" style="display:none;">${isDeal}</td>
 	      <td data-name="isDealName">${isDealName}</td>
@@ -390,7 +419,7 @@
 	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
 	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
 	      <td data-name="creator">${creator}</td>
-	      <td><a href="javascript:;" onclick="editPostSale(this);">修改</a></td>
+	      <td><a href="javascript:;" onclick="editPostSale(this);" class="op">修改</a></td>
 	    </tr>
 	</script>
 </body>

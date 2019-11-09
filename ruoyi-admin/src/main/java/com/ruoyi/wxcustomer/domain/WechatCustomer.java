@@ -76,7 +76,7 @@ public class WechatCustomer extends BaseEntity{
     private Date appointmentTime;
 
     /** 客户类型（0：日化店  1：母婴店  2：美容院） */
-    @Excel(name = "客户类型", readConverterExp = "0=：日化店,1=：母婴店,2=：美容院")
+    @Excel(name = "客户类型", readConverterExp = "0=日化店,1=母婴店,2=美容院")
     private String customerType;
 
     /** 店员数 */
@@ -98,11 +98,11 @@ public class WechatCustomer extends BaseEntity{
     private String demandProduct;
 
     /** 是否发样（0：否 1：是） 默认0 */
-    @Excel(name = "是否发样", readConverterExp = "0=：否,1=：是")
+    @Excel(name = "是否发样", readConverterExp = "0=否,1=是")
     private String isDelivery;
 
     /** 是否销售（0：否 1：是）默认0 */
-    @Excel(name = "是否销售", readConverterExp = "0=：否,1=：是")
+    @Excel(name = "是否销售", readConverterExp = "0=否,1=是")
     private String isSales;
     /**是否删除**/
     private String isDelete;
@@ -110,6 +110,9 @@ public class WechatCustomer extends BaseEntity{
     private String saleId;
     /**售后人员**/
     private String saleName;
+    
+    private String isFyUser;   //是否发样成交人员, 不持久化
+    private String shUserId;   //售后人员Id, 不持久化
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
@@ -311,6 +314,22 @@ public class WechatCustomer extends BaseEntity{
 
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
+	}
+
+	public String getIsFyUser() {
+		return isFyUser;
+	}
+
+	public void setIsFyUser(String isFyUser) {
+		this.isFyUser = isFyUser;
+	}
+
+	public String getShUserId() {
+		return shUserId;
+	}
+
+	public void setShUserId(String shUserId) {
+		this.shUserId = shUserId;
 	}
 
 	@Override
