@@ -93,11 +93,12 @@
         var prefix = ctx + "wxcustomer/deal";
         
         $(function() {
+        	var removeUrl=prefix + "/remove?dealType="+dealType;
             var options = {
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove?dealType="+dealType,
+                removeUrl: removeUrl,
                 exportUrl: prefix + "/export",
                 modalName: "成交情况",
                 columns: [{
@@ -155,6 +156,13 @@
                 } ]
             };
             $.table.init(options);
+        	$("#dealType").change(function(){
+        		var dealType=$("#dealType").val();
+        		 removeUrl=prefix + "/remove?dealType="+dealType;
+        		 options.removeUrl=removeUrl;
+        		 $.table.init(options);
+        		 $.table.search();
+        	});
         });
         //发货
         function afterSale() {
