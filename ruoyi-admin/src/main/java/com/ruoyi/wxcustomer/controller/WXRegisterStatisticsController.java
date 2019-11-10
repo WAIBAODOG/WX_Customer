@@ -77,7 +77,7 @@ public class WXRegisterStatisticsController extends BaseController {
 			}
 		}
 		vo.setIsDelete("0");
-		if (StringUtils.isNoneEmpty(vo.getDealTimeStart()) && StringUtils.isNoneEmpty(vo.getDealTimeEnd())) {
+		if (StringUtils.isEmpty(vo.getDealTimeStart()) && StringUtils.isEmpty(vo.getDealTimeEnd())) {
 			vo.setDealTime(new Date());
 		}
 		return getDataTable(khDeliverGoodsService.selectList(vo));
@@ -103,7 +103,7 @@ public class WXRegisterStatisticsController extends BaseController {
 				vo.setAllData("1");
 			}
 		}
-		if (StringUtils.isNoneEmpty(vo.getDealTimeStart()) && StringUtils.isNoneEmpty(vo.getDealTimeEnd())) {
+		if (StringUtils.isEmpty(vo.getDealTimeStart()) && StringUtils.isEmpty(vo.getDealTimeEnd())) {
 			vo.setDealTime(new Date());
 		}
 		List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);

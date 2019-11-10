@@ -102,7 +102,7 @@ public class CustomerDataStatisticsController extends BaseController {
 			}
 		}
 		vo.setIsDelete("0");
-		if (StringUtils.isNoneEmpty(vo.getDealTimeStart()) && StringUtils.isNoneEmpty(vo.getDealTimeEnd())) {
+		if (StringUtils.isEmpty(vo.getDealTimeStart()) && StringUtils.isEmpty(vo.getDealTimeEnd())) {
 			vo.setDealTime(new Date());
 		}
 		List<AfterSaleMemberVO> list = khAfterSaleMemberService.selectList(vo);
