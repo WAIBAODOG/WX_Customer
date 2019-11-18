@@ -46,11 +46,12 @@ public class WxCommonController extends BaseController {
 	    private ISysUserService userService;
 	    
 	    @GetMapping("/user")
-	    public String user(String orderNumber,String requestType,String dealType,Model model)
+	    public String user(String orderNumber,String requestType,String dealType,String customerId,Model model)
 	    {
 	    	model.addAttribute("requestType", requestType);
 	    	model.addAttribute("orderNumber", orderNumber);
 	    	model.addAttribute("dealType", dealType);
+	    	model.addAttribute("customerId", customerId);
 	        return prefix + "/user";
 	    }
 

@@ -33,6 +33,7 @@
 						<input type="hidden" id="requestType" name="requestType" th:value="${requestType}">
 						<input type="hidden" id="dealType" name="dealType" th:value="${dealType}">
 						<input type="hidden" id="orderNumber" name="orderNumber" th:value="${orderNumber}">
+						<input type="hidden" id="customerId" name="customerId" th:value="${customerId}">
 		                <input type="hidden" id="parentId" name="parentId">
 						<div class="select-list">
 							<ul>
@@ -159,7 +160,8 @@
 		        var saleName=$(user[2]).html();
 		        var orderNumber=$("#orderNumber").val();
 		        var dealType=$("#dealType").val();
-		        $.operate.save("/wxcustomer/deal/distributionSale", {orderNumber:orderNumber,saleId:saleId,saleName:saleName,dealType:dealType});
+		        var customerId=$("#customerId").val();
+		        $.operate.save("/wxcustomer/deal/distributionSale", {orderNumber:orderNumber,saleId:saleId,saleName:saleName,dealType:dealType,customerid:customerId});
 		}
 		 
 	</script>

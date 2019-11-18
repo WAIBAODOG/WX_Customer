@@ -152,7 +152,14 @@ public class DealController extends BaseController {
 	 */
 	@PostMapping("/distributionSale")
 	@ResponseBody
-	public AjaxResult distributionSale(String orderNumber, String saleId, String saleName,String dealType) {
+	public AjaxResult distributionSale(String orderNumber, String saleId, String saleName,String dealType,String customerid) {
+		WechatCustomer wechatCustomer = new WechatCustomer();
+		wechatCustomer.setSaleId(saleId);
+		wechatCustomer.setSaleName(saleName);
+		if(StringUtils.isNotEmpty(customerid)) {
+			wechatCustomer.setCustomerId(customerid);
+			return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer));
+		}
 		String customerId="";
 		if("1".equals(dealType)) {
 			DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
@@ -168,10 +175,7 @@ public class DealController extends BaseController {
 			customerId=vo.getCustomerId();
 			
 		}
-		WechatCustomer wechatCustomer = new WechatCustomer();
 		wechatCustomer.setCustomerId(customerId);
-		wechatCustomer.setSaleId(saleId);
-		wechatCustomer.setSaleName(saleName);
 		return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer));
 	}
 

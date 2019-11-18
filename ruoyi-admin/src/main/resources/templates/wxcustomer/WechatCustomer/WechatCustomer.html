@@ -75,6 +75,9 @@
                 <a class="btn btn-primary single disabled" onclick="openDetail()" shiro:hasPermission="wxcustomer:WechatCustomer:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
+                <a class="btn btn-success  single disabled" onclick="distributionStaff()"    shiro:hasPermission="deal:deal:giveSale">
+                    	<i class="fa fa-ravelry"></i> 分配售后人员
+               		 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="wxcustomer:WechatCustomer:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
@@ -176,6 +179,16 @@
         
         function openDetail(id) {
         	$.modal.openTab($.table._option.modalName + "详情", $.operate.editUrl(id));
+        }
+        //分配售后人员
+        function distributionStaff(){
+        	var ck=$("#bootstrap-table").find('tbody').find(".bs-checkbox ").find("input[type='checkbox']:checked");
+        	if(ck.length<1||ck.length>1){
+        		$.modal.alertWarning('必须是勾选一项！')
+        		return;
+        	}
+        	var customerId=$(ck[0]).parent().parent().attr("data-uniqueid");
+        	$.modal.open('分配售后人员', "/wxcustomer/common/user?requestType=afterSale&customerId="+customerId);
         }
     </script>
 </body>
