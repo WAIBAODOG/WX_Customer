@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhDailySummaryMapper">
+    
+    <resultMap type="KhDailySummary" id="KhDailySummaryResult">
+        <result property="id"    column="id"    />
+        <result property="todayData"    column="today_data"    />
+        <result property="todayProblems"    column="today_problems"    />
+        <result property="improvedMethod"    column="improved_method"    />
+        <result property="tomorrowPlan"    column="tomorrow_plan"    />
+        <result property="summaryType"    column="summary_type"    />
+        <result property="conclusionTime"    column="conclusion_time"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="creationTime"    column="creation_time"    />
+        <result property="alternateField1"    column="alternate_field_1"    />
+        <result property="alternateField2"    column="alternate_field_2"    />
+        <result property="alternateField3"    column="alternate_field_3"    />
+        <result property="alternateField4"    column="alternate_field_4"    />
+        <result property="alternateField5"    column="alternate_field_5"    />
+    </resultMap>
+
+    <sql id="selectKhDailySummaryVo">
+        select id, today_data, today_problems, improved_method, tomorrow_plan, summary_type, conclusion_time, creator_id, creator, creation_time, alternate_field_1, alternate_field_2, alternate_field_3, alternate_field_4, alternate_field_5 from kh_daily_summary
+    </sql>
+
+    <select id="selectKhDailySummaryList" parameterType="KhDailySummary" resultMap="KhDailySummaryResult">
+        <include refid="selectKhDailySummaryVo"/>
+        <where>  
+            <if test="summaryType != null  and summaryType != ''"> and summary_type = #{summaryType}</if>
+            <if test="conclusionTime != null "> and conclusion_time = #{conclusionTime}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="creationTime != null "> and creation_time = #{creationTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectKhDailySummaryById" parameterType="String" resultMap="KhDailySummaryResult">
+        <include refid="selectKhDailySummaryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKhDailySummary" parameterType="KhDailySummary">
+        insert into kh_daily_summary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="todayData != null  and todayData != ''">today_data,</if>
+            <if test="todayProblems != null  and todayProblems != ''">today_problems,</if>
+            <if test="improvedMethod != null  and improvedMethod != ''">improved_method,</if>
+            <if test="tomorrowPlan != null  and tomorrowPlan != ''">tomorrow_plan,</if>
+            <if test="summaryType != null  and summaryType != ''">summary_type,</if>
+            <if test="conclusionTime != null ">conclusion_time,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+            <if test="creator != null  and creator != ''">creator,</if>
+            <if test="creationTime != null ">creation_time,</if>
+            <if test="alternateField1 != null  and alternateField1 != ''">alternate_field_1,</if>
+            <if test="alternateField2 != null  and alternateField2 != ''">alternate_field_2,</if>
+            <if test="alternateField3 != null  and alternateField3 != ''">alternate_field_3,</if>
+            <if test="alternateField4 != null  and alternateField4 != ''">alternate_field_4,</if>
+            <if test="alternateField5 != null  and alternateField5 != ''">alternate_field_5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="todayData != null  and todayData != ''">#{todayData},</if>
+            <if test="todayProblems != null  and todayProblems != ''">#{todayProblems},</if>
+            <if test="improvedMethod != null  and improvedMethod != ''">#{improvedMethod},</if>
+            <if test="tomorrowPlan != null  and tomorrowPlan != ''">#{tomorrowPlan},</if>
+            <if test="summaryType != null  and summaryType != ''">#{summaryType},</if>
+            <if test="conclusionTime != null ">#{conclusionTime},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+            <if test="creator != null  and creator != ''">#{creator},</if>
+            <if test="creationTime != null ">#{creationTime},</if>
+            <if test="alternateField1 != null  and alternateField1 != ''">#{alternateField1},</if>
+            <if test="alternateField2 != null  and alternateField2 != ''">#{alternateField2},</if>
+            <if test="alternateField3 != null  and alternateField3 != ''">#{alternateField3},</if>
+            <if test="alternateField4 != null  and alternateField4 != ''">#{alternateField4},</if>
+            <if test="alternateField5 != null  and alternateField5 != ''">#{alternateField5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKhDailySummary" parameterType="KhDailySummary">
+        update kh_daily_summary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="todayData != null  and todayData != ''">today_data = #{todayData},</if>
+            <if test="todayProblems != null  and todayProblems != ''">today_problems = #{todayProblems},</if>
+            <if test="improvedMethod != null  and improvedMethod != ''">improved_method = #{improvedMethod},</if>
+            <if test="tomorrowPlan != null  and tomorrowPlan != ''">tomorrow_plan = #{tomorrowPlan},</if>
+            <if test="summaryType != null  and summaryType != ''">summary_type = #{summaryType},</if>
+            <if test="conclusionTime != null ">conclusion_time = #{conclusionTime},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+            <if test="creator != null  and creator != ''">creator = #{creator},</if>
+            <if test="creationTime != null ">creation_time = #{creationTime},</if>
+            <if test="alternateField1 != null  and alternateField1 != ''">alternate_field_1 = #{alternateField1},</if>
+            <if test="alternateField2 != null  and alternateField2 != ''">alternate_field_2 = #{alternateField2},</if>
+            <if test="alternateField3 != null  and alternateField3 != ''">alternate_field_3 = #{alternateField3},</if>
+            <if test="alternateField4 != null  and alternateField4 != ''">alternate_field_4 = #{alternateField4},</if>
+            <if test="alternateField5 != null  and alternateField5 != ''">alternate_field_5 = #{alternateField5},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKhDailySummaryById" parameterType="String">
+        delete from kh_daily_summary where id = #{id}
+    </delete>
+
+    <delete id="deleteKhDailySummaryByIds" parameterType="String">
+        delete from kh_daily_summary where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhQaLibraryMapper">
+    
+    <resultMap type="KhQaLibrary" id="KhQaLibraryResult">
+        <result property="id"    column="id"    />
+        <result property="problem"    column="problem"    />
+        <result property="answer"    column="answer"    />
+        <result property="remark"    column="remark"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="creationTime"    column="creation_time"    />
+        <result property="alternateField1"    column="alternate_field_1"    />
+        <result property="alternateField2"    column="alternate_field_2"    />
+    </resultMap>
+
+    <sql id="selectKhQaLibraryVo">
+        select id, problem, answer, remark, creator_id, creator, creation_time, alternate_field_1, alternate_field_2 from kh_qa_library
+    </sql>
+
+    <select id="selectKhQaLibraryList" parameterType="KhQaLibrary" resultMap="KhQaLibraryResult">
+        <include refid="selectKhQaLibraryVo"/>
+        <where>  
+            <if test="problem != null  and problem != ''"> and problem like concat('%', #{problem}, '%')</if>
+            <if test="answer != null  and answer != ''"> and answer like concat('%', #{answer}, '%')</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="creationTime != null "> and creation_time = #{creationTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectKhQaLibraryById" parameterType="String" resultMap="KhQaLibraryResult">
+        <include refid="selectKhQaLibraryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKhQaLibrary" parameterType="KhQaLibrary">
+        insert into kh_qa_library
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="problem != null  and problem != ''">problem,</if>
+            <if test="answer != null  and answer != ''">answer,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+            <if test="creator != null  and creator != ''">creator,</if>
+            <if test="creationTime != null ">creation_time,</if>
+            <if test="alternateField1 != null  and alternateField1 != ''">alternate_field_1,</if>
+            <if test="alternateField2 != null  and alternateField2 != ''">alternate_field_2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="problem != null  and problem != ''">#{problem},</if>
+            <if test="answer != null  and answer != ''">#{answer},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+            <if test="creator != null  and creator != ''">#{creator},</if>
+            <if test="creationTime != null ">#{creationTime},</if>
+            <if test="alternateField1 != null  and alternateField1 != ''">#{alternateField1},</if>
+            <if test="alternateField2 != null  and alternateField2 != ''">#{alternateField2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKhQaLibrary" parameterType="KhQaLibrary">
+        update kh_qa_library
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="problem != null  and problem != ''">problem = #{problem},</if>
+            <if test="answer != null  and answer != ''">answer = #{answer},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+            <if test="creator != null  and creator != ''">creator = #{creator},</if>
+            <if test="creationTime != null ">creation_time = #{creationTime},</if>
+            <if test="alternateField1 != null  and alternateField1 != ''">alternate_field_1 = #{alternateField1},</if>
+            <if test="alternateField2 != null  and alternateField2 != ''">alternate_field_2 = #{alternateField2},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKhQaLibraryById" parameterType="String">
+        delete from kh_qa_library where id = #{id}
+    </delete>
+
+    <delete id="deleteKhQaLibraryByIds" parameterType="String">
+        delete from kh_qa_library where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

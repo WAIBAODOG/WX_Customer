@@ -67,12 +67,12 @@ public class WechatCustomerController extends BaseController {
 		
 		boolean isAdmin = permissionService.isRole("admin");
 		if(!isAdmin) {
-			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZZ,FYCJZZY");
+			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZY");
 			if(StringUtils.isBlank(isFyUserRoleStr)) {
 				wechatCustomer.setIsFyUser("1");
 			}
 			
-			String isShUserRoleStr = permissionService.hasAnyRoles("SHZZZ,SHZZY");
+			String isShUserRoleStr = permissionService.hasAnyRoles("SHZZY");
 			if(StringUtils.isBlank(isShUserRoleStr)) {
 				wechatCustomer.setShUserId(ShiroUtils.getUserId() + "");
 			}
