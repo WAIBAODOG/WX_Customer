@@ -81,4 +81,11 @@ public interface IWechatCustomerService {
 	public List<KhDeliverGoods> findKhDeliverGoodsByCustomerId(String customerId);
 
 	public List<KhAfterSaleMember> findKhAfterSaleMemberByCustomerId(String customerId);
+
+	/**
+	 * 根据手机号获取客户
+	 * @param phone
+	 * @return
+	 */
+	public List<WechatCustomer> findByPhone(String phone);
 }

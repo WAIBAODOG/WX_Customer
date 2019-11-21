@@ -209,4 +209,11 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 	public List<KhAfterSaleMember> findKhAfterSaleMemberByCustomerId(String customerId) {
 		return khAfterSaleMemberMapper.findKhAfterSaleMemberByCustomerId(customerId);
 	}
+
+	@Override
+	public List<WechatCustomer> findByPhone(String phone) {
+		WechatCustomer wechatCustomer = new WechatCustomer();
+		wechatCustomer.setPhoneNumber(phone);
+		return wechatCustomerMapper.selectWechatCustomerList(wechatCustomer);
+	}
 }

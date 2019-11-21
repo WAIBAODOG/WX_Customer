@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('销售情况查询')" />
+    <style type="text/css">
+    	.container-div .row {
+    		height: auto;
+    	}
+    </style>
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <p>电话号：</p>
+                                <input type="text" name="phoneNumber" id="phoneNumber" />
+                            </li>
+                        </ul>
+                        <ul>
+                        	<li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="searchFn();"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="row">
+	         <div class="col-sm-12 search-collapse">
+	         	<div class="col-sm-12">
+	            	<h4 class="form-header h4">销售情况</h4>
+	            </div>
+	            <div class="col-sm-12">
+	            	<table class="table table-bordered table-striped">
+			              <thead>
+						    <tr>
+						      <th>跟进次数</th>
+						      <th>跟进结果类型</th>
+						      <th>跟进时间</th>
+						      <th>跟进情况</th>
+						      <th>下次跟进时间</th>
+						      <th>通话时长</th>
+						      <th>对接业务员</th>
+						    </tr>
+						  </thead>
+						  <tbody  id="saleInfoTable">
+						  </tbody>
+		             </table>
+	            </div>
+	         </div>
+        </div>
+        
+        <div class="row">
+        	<div class="col-sm-12 search-collapse">
+	        	<div class="col-sm-12">
+	            	<h4 class="form-header h4">售后情况</h4>
+	            </div>
+	            <div class="col-sm-12">
+	            	<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>跟进次数</th>
+								<th>是否成交</th>
+								<th>跟进时间</th>
+								<th>跟进情况</th>
+								<th>下次跟进时间</th>
+								<th>通话时长</th>
+								<th>对接业务员</th>
+							</tr>
+						</thead>
+						<tbody id="postSaleTable">
+						</tbody>
+					</table>
+	            </div>
+        	</div>
+        </div>
+        
+    </div>
+	
+	<div class="modal inmodal fade" id="selectCustomerModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg" style="width: 50%;">
+			<div class="modal-content" >
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">请选择</h4>
+				</div>
+				<small class="font-bold">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">客户名称：</label>
+			                <div class="col-sm-8">
+			                    <select id="selectCustomer" name="selectCustomer" class="form-control m-b">
+			                    </select>
+			                </div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="selectCustomerFn();">确定</button>
+					</div>
+				</small>
+			</div>
+			<small class="font-bold"> </small>
+		</div>
+		<small class="font-bold"> </small>
+	</div>
+
+
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: jquery-tmpl-js" />
+    <script th:inline="javascript">
+    	var followResultTypeDatas = [[${@dict.getType('follow_result_type')}]];
+    	var isDeliveryDatas = [[${@dict.getType('is_delivery')}]];
+    	var intentionDegreeDatas = [[${@dict.getType('Intention_degree')}]];
+    	
+    	function searchFn() {
+    		var phoneNumber =  $('#phoneNumber').val();
+    		if(!phoneNumber) {
+    			return;
+    		}
+    		
+    		$.get('/wxcustomer/saleInfo/findByPhone?phone=' + phoneNumber, function(res) {
+    			clearData();
+    			if(!res || res.length == 0) {
+    				$.modal.msg('该手机号下没有客户!');
+    				return;
+    			}
+    			
+    			if(res.length != 1) {
+    				renderCustomerToSelect(res);
+    				$('#selectCustomerModal').modal('show');
+    				return;
+    			}
+    			
+    			$.get('/wxcustomer/saleInfo/getSaleInfoById?customerId=' + res[0].customerId, function(res) {
+    				renderData(res.fy, res.sh);
+				}, 'json');
+    		}, 'json');
+    	}
+    	
+    	function clearData() {
+    		$('#saleInfoTable').empty();
+    		$('#postSaleTable').empty();
+    	}
+    	
+    	function renderCustomerToSelect(res) {
+    		$('#selectCustomer').empty();
+    		var str = '';
+    		for(var i=0;i<res.length;i++) {
+    			str += '<option value="' + res[i].customerId + '">'+ res[i].customerName +'</option>';
+    		}
+    		
+    		$(str).appendTo($('#selectCustomer'));
+    	}
+    	
+    	function selectCustomerFn() {
+    		$('#selectCustomerModal').modal('hide');
+    		
+    		var customerId = $('#selectCustomer').val();
+    		$.get('/wxcustomer/saleInfo/getSaleInfoById?customerId=' + customerId, function(res) {
+				renderData(res.fy, res.sh);
+			}, 'json');
+    	}
+    	
+    	function renderData(fyJsonArray, shJsonArray) {
+    		clearData();
+    		
+        	for(var i=0;i<fyJsonArray.length;i++) {
+        		fyJsonArray[i].followResultTypeName = $.common.getDictName(followResultTypeDatas, fyJsonArray[i].followResultType);
+        		fyJsonArray[i].intentionDegreeName = $.common.getDictName(intentionDegreeDatas, fyJsonArray[i].intentionDegreeName);
+        		fyJsonArray[i].dealTime = $.common.dateFormat(fyJsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
+        		fyJsonArray[i].nextFollowTime = $.common.dateFormat(fyJsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
+        		fyJsonArray[i].duration = fyJsonArray[i].durationHour + ":" + fyJsonArray[i].durationMinute + ":" + fyJsonArray[i].durationSecond;
+        	}
+       		$('#saleInfoTpl').tmpl(fyJsonArray).appendTo('#saleInfoTable');
+        	
+        	for(var i=0;i<shJsonArray.length;i++) {
+        		shJsonArray[i].isDealName = $.common.getDictName(isDeliveryDatas, shJsonArray[i].isDeal);
+        		shJsonArray[i].intentionDegreeName = $.common.getDictName(intentionDegreeDatas, shJsonArray[i].intentionDegreeName);
+        		shJsonArray[i].dealTime = $.common.dateFormat(shJsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
+        		shJsonArray[i].nextFollowTime = $.common.dateFormat(shJsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
+        		shJsonArray[i].duration = shJsonArray[i].durationHour + ":" + shJsonArray[i].durationMinute + ":" + shJsonArray[i].durationSecond;
+        	}
+       		$('#postSaleTpl').tmpl(shJsonArray).appendTo('#postSaleTable');
+    	}
+    	
+    </script>
+    
+    
+    
+    <script  id="saleInfoTpl" type="text/x-jquery-tmpl">
+ 		<tr>
+ 		  <td data-name="id" style="display:none;">${id}</td>
+ 		  <td data-name="intentionDegree" style="display:none;">${intentionDegree}</td>
+	      <td data-name="intentionDegreeName" style="display:none;">${intentionDegreeName}</td>
+	      <td data-name="dealAmount" style="display:none;">${dealAmount}</td>
+	      <td data-name="sendSampleList" style="display:none;">${sendSampleList}</td>
+	      <td data-name="giftsList" style="display:none;">${giftsList}</td>
+	      <td data-name="troubleSpots" style="display:none;">${troubleSpots}</td>
+	      <td data-name="intentionPoint" style="display:none;">${intentionPoint}</td>
+	      <td data-name="nextFollowMentality" style="display:none;">${nextFollowMentality}</td>
+	      <td data-name="followTimes">${followTimes}</td>
+	      <td data-name="followResultType" style="display:none;">${followResultType}</td>
+	      <td data-name="followResultTypeName">${followResultTypeName}</td>
+	      <td data-name="dealTime">${dealTime}</td>
+	      <td data-name="followResult">${followResult}</td>
+	      <td data-name="nextFollowTime">${nextFollowTime}</td>
+	      <td data-name="duration">${duration}</td>
+	      <td data-name="durationHour" style="display:none;">${durationHour}</td>
+	      <td data-name="durationMinute" style="display:none;">${durationMinute}</td>
+	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
+	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
+	      <td data-name="creator">${creator}</td>
+	    </tr>
+	</script>
+	
+	<script  id="postSaleTpl" type="text/x-jquery-tmpl">
+	    <tr>
+ 		  <td data-name="id" style="display:none;">${id}</td>
+ 		  <td data-name="intentionDegree" style="display:none;">${intentionDegree}</td>
+	      <td data-name="intentionDegreeName" style="display:none;">${intentionDegreeName}</td>
+	      <td data-name="dealAmount" style="display:none;">${dealAmount}</td>
+	      <td data-name="sendSampleList" style="display:none;">${sendSampleList}</td>
+	      <td data-name="giftsList" style="display:none;">${giftsList}</td>
+	      <td data-name="troubleSpots" style="display:none;">${troubleSpots}</td>
+	      <td data-name="intentionPoint" style="display:none;">${intentionPoint}</td>
+	      <td data-name="nextFollowMentality" style="display:none;">${nextFollowMentality}</td>
+ 		  
+	      <td data-name="followTimes">${followTimes}</td>
+	      <td data-name="isDeal" style="display:none;">${isDeal}</td>
+	      <td data-name="isDealName">${isDealName}</td>
+	      <td data-name="dealTime">${dealTime}</td>
+	      <td data-name="followResult">${followResult}</td>
+	      <td data-name="nextFollowTime">${nextFollowTime}</td>
+	      <td data-name="duration">${duration}</td>
+	      <td data-name="durationHour" style="display:none;">${durationHour}</td>
+	      <td data-name="durationMinute" style="display:none;">${durationMinute}</td>
+	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
+	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
+	      <td data-name="creator">${creator}</td>
+	    </tr>
+	</script>
+</body>
+</html>
