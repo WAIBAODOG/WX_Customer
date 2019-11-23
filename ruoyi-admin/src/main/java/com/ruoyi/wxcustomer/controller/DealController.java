@@ -1,5 +1,6 @@
 package com.ruoyi.wxcustomer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
+import com.ruoyi.wxcustomer.domain.exportvo.SendVO;
 import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
 import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
@@ -79,6 +81,11 @@ public class DealController extends BaseController {
 			AfterSaleMemberVO saleVo = new AfterSaleMemberVO();
 			BeanUtils.copyProperties(vo, saleVo);
 			List<AfterSaleMemberVO> list = khAfterSaleMemberService.selectList(saleVo);
+			for(int i=0;i<list.size();i++) {
+				if(StringUtils.isEmpty(list.get(i).getSaleName())) {
+					list.get(i).setSaleName(list.get(i).getCreator());
+				}
+			}
 			return getDataTable(list);
 		} else {
 			vo.setFollowResultType("3");
@@ -185,10 +192,48 @@ public class DealController extends BaseController {
 	@RequiresPermissions("deal:deal:export")
 	@PostMapping("/export")
 	@ResponseBody
-	public AjaxResult export(KhDeliverGoods KhDeliverGoods) {
-		List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(KhDeliverGoods);
-		ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
-		return util.exportExcel(list, "afterSale");
+	public AjaxResult export(DeliverGoodsVO vo) {
+		String title="发样";
+		List<SendVO> listData = new ArrayList<SendVO>();
+		boolean isFYRY = permissionService.isRole("FYCJZZY");
+		if (isFYRY) {
+			vo.setIsFYRY(ShiroUtils.getUserId().toString());
+		}
+		boolean isFYSH = permissionService.isRole("SHZZY");
+		if ( isFYSH) {
+			vo.setIsSHRY(ShiroUtils.getUserId().toString());
+		}
+		vo.setIsDelete("0");// 未删除
+		if ("2".equals(vo.getDealType())) {// 售后成交
+			 title="售后";
+			AfterSaleMemberVO saleVo = new AfterSaleMemberVO();
+			BeanUtils.copyProperties(vo, saleVo);
+			List<AfterSaleMemberVO> list = khAfterSaleMemberService.selectList(saleVo);
+			for(int i=0;i<list.size();i++) {
+				if(StringUtils.isEmpty(list.get(i).getSaleName())) {
+					list.get(i).setSaleName(list.get(i).getCreator());
+				}
+				SendVO s=new SendVO();
+				BeanUtils.copyProperties(list.get(i), s);
+				if(StringUtils.isNotEmpty(list.get(i).getCourierNumber())) {
+					s.setIsSend("是");
+				}else {
+					s.setIsSend("否");
+				}
+				listData.add(s);
+			}
+		} else {
+			vo.setFollowResultType("3");
+			List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
+			for(int i=0;i<list.size();i++) {
+				SendVO s=new SendVO();
+				BeanUtils.copyProperties(list.get(i), s);
+				listData.add(s);
+			}
+		}
+		
+		ExcelUtil<SendVO> util = new ExcelUtil<SendVO>(SendVO.class);
+		return util.exportExcel(listData, title+"成交客户信息");
 	}
 
 	/**

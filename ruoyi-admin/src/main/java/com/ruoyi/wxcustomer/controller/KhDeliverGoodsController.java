@@ -1,7 +1,9 @@
 package com.ruoyi.wxcustomer.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,12 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
+import com.ruoyi.wxcustomer.domain.exportvo.SendVO;
 import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 
@@ -119,10 +123,31 @@ public class KhDeliverGoodsController extends BaseController {
 	@RequiresPermissions("deliverGoods:deliverGoods:export")
 	@PostMapping("/export")
 	@ResponseBody
-	public AjaxResult export(KhDeliverGoods khDeliverGoods) {
-		List<KhDeliverGoods> list = khDeliverGoodsService.selectKhDeliverGoodsList(khDeliverGoods);
-		ExcelUtil<KhDeliverGoods> util = new ExcelUtil<KhDeliverGoods>(KhDeliverGoods.class);
-		return util.exportExcel(list, "deliverGoods");
+	public AjaxResult export(DeliverGoodsVO vo) {
+		List<SendVO> listData = new ArrayList<SendVO>();
+		boolean isFYRY = permissionService.isRole("FYCJZZY");
+		if (isFYRY) {
+			vo.setIsFYRY(ShiroUtils.getUserId().toString());
+		}
+		boolean isFYSH = permissionService.isRole("SHZZY");
+		if (isFYSH) {
+			vo.setIsSHRY(ShiroUtils.getUserId().toString());
+		}
+		vo.setIsDelete("0");// 未删除
+		vo.setFollowResultType("2");// 发样
+		List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
+		for(int i=0;i<list.size();i++) {
+			SendVO s=new SendVO();
+			BeanUtils.copyProperties(list.get(i), s);
+			if(StringUtils.isNotEmpty(list.get(i).getCourierNumber())) {
+				s.setIsSend("是");
+			}else {
+				s.setIsSend("否");
+			}
+			listData.add(s);
+		}
+		ExcelUtil<SendVO> util = new ExcelUtil<SendVO>(SendVO.class);
+		return util.exportExcel(listData, "发样客户信息");
 	}
 
 	/**
