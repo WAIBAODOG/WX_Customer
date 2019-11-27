@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhFileMapper">
+    
+    <resultMap type="KhFile" id="KhFileResult">
+        <result property="id"    column="id"    />
+        <result property="businessId"    column="business_id"    />
+        <result property="businessYype"    column="business_type"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="fileSize"    column="file_size"    />
+        <result property="fileType"    column="file_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="sort"    column="sort"    />
+        <result property="creatorId"    column="creator_id"    />
+    </resultMap>
+
+    <sql id="selectKhFileVo">
+        select id, business_id, business_type, file_name, file_path, file_size, file_type, create_time, sort, creator_id from kh_file
+    </sql>
+
+    <select id="selectKhFileList" parameterType="KhFile" resultMap="KhFileResult">
+        <include refid="selectKhFileVo"/>
+        <where>    1=1 
+        	<if test="id != null  and id != ''"> and id = #{id}</if>
+        	<if test="businessId != null  and businessId != ''"> and business_id = #{businessId}</if>
+        	<if test="businessYype != null  and businessYype != ''"> and business_type = #{businessYype}</if>
+        	 order by  create_time asc
+        </where>
+    </select>
+    
+    <select id="selectKhFileById" parameterType="String" resultMap="KhFileResult">
+        <include refid="selectKhFileVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKhFile" parameterType="KhFile">
+        insert into kh_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="businessId != null  and businessId != ''">business_id,</if>
+            <if test="businessYype != null  and businessYype != ''">business_type,</if>
+            <if test="fileName != null  and fileName != ''">file_name,</if>
+            <if test="filePath != null  and filePath != ''">file_path,</if>
+            <if test="fileSize != null  and fileSize != ''">file_size,</if>
+            <if test="fileType != null  and fileType != ''">file_type,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="sort != null  and sort != ''">sort,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="businessId != null  and businessId != ''">#{businessId},</if>
+            <if test="businessYype != null  and businessYype != ''">#{businessYype},</if>
+            <if test="fileName != null  and fileName != ''">#{fileName},</if>
+            <if test="filePath != null  and filePath != ''">#{filePath},</if>
+            <if test="fileSize != null  and fileSize != ''">#{fileSize},</if>
+            <if test="fileType != null  and fileType != ''">#{fileType},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="sort != null  and sort != ''">#{sort},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKhFile" parameterType="KhFile">
+        update kh_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="businessId != null  and businessId != ''">business_id = #{businessId},</if>
+            <if test="businessYype != null  and businessYype != ''">business_type = #{businessYype},</if>
+            <if test="fileName != null  and fileName != ''">file_name = #{fileName},</if>
+            <if test="filePath != null  and filePath != ''">file_path = #{filePath},</if>
+            <if test="fileSize != null  and fileSize != ''">file_size = #{fileSize},</if>
+            <if test="fileType != null  and fileType != ''">file_type = #{fileType},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="sort != null  and sort != ''">sort = #{sort},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKhFileById" parameterType="String">
+        delete from kh_file where id = #{id}
+    </delete>
+
+    <delete id="deleteKhFileByIds" parameterType="String">
+        delete from kh_file where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

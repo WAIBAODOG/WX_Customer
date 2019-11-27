@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改微信朋友圈内容')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-weixincontext-edit" th:object="${weixinContext}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">
+				<label class="col-sm-2 control-label">内容：</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" readonly="readonly"  th:value="${weixinContext.context}" >
+				</div>
+		 
+				<label class="col-sm-2 control-label">创建人：</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" readonly="readonly"   th:value="${weixinContext.creatorName}"  >
+				</div>
+			</div>
+			 <div class="form-group">
+				<label class="col-sm-2 control-label">创建时间：</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" readonly="readonly"  th:value="${#dates.format(weixinContext.createTime,'yyyy-MM-dd')}" >
+				</div>
+		 
+				<label class="col-sm-2 control-label">备注：</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" readonly="readonly"   th:value="${weixinContext.remark}"  >
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">发布时间_起：</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" readonly="readonly"  th:value="${#dates.format(weixinContext.sendStartTime,'yyyy-MM-dd')}" >
+				</div>
+		 
+				<label class="col-sm-2 control-label">发布时间_止：</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" readonly="readonly"   th:value="${#dates.format(weixinContext.sendEndTime,'yyyy-MM-dd')}"  >
+				</div>
+			 <div class="form-group">
+				<label class="col-sm-2 control-label">图片列表</label>
+				<div class="col-sm-9">
+					<br><br>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th >文件名</th>
+								<th >创建人</th>
+								<th >创建时间</th>
+								<th >操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="item : ${fileList}">
+								<td th:text="${item.fileName}"></td>
+								<td th:text="${item.creatorId}"></td>
+								<td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
+								<td  >
+									<a  href="#" onclick="javaScript:openFile(this);" th:data="${item.filePath}">查看</a>
+									<a  href="#" onclick="javaScript:delFile(this);"  th:data="${item.id}">删除</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+		 
+			</div>
+			
+			</div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "wxcustomer/weixincontext";
+        $("#form-weixincontext-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-weixincontext-edit').serialize());
+            }
+        }
+        
+        function openFile(obj){
+        	var url=$(obj).attr("data");
+        	if(!url){
+        		$.modal.alertWarning('找不到路径')
+        		return;
+        	}
+        	window.open(url);
+        }
+        function delFile(obj){
+        	var fileId=$(obj).attr("data");
+        	if(!fileId){
+        		$.modal.alertWarning('附件ID为空')
+        		return;
+        	}
+        	 $.operate.remove("/wxcustomer/common/delFile", {fileId:fileId});
+        }
+    </script>
+</body>
+</html>

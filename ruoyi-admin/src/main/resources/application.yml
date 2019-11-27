@@ -13,6 +13,8 @@ ruoyi:
   # 获取ip地址开关
   addressEnabled: true
 
+fileHost: http://120.24.166.205:8888/
+
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为80

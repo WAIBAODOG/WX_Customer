@@ -239,6 +239,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="isSales"    column="is_sales"    />
         <result property="countAfterOrder"    column="countAfterOrder"    />
         <result property="countDealOrder"    column="countDealOrder"    />
+        <result property="saleId"    column="sale_Id"    />
+        <result property="saleName"    column="sale_name"    />
     </resultMap>
     
     
@@ -256,7 +258,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             w.customer_id,  w.phone_number,  w.weixin_number,  w.customer_name,  w.gender,  w.kh_character,
             w.province_id,  w.province,  w.city_id,  w.city,  w.area_id,  w.area,  w.customer_address, 
              w.shop_name,  w.appointment_time,  w.customer_type,  w.shop_assistant_number,  w.store_scale, 
-              w.creation_time,  w.demand_product,  w.remark,  w.is_delivery,  w.is_sales ,w.customer_num
+              w.creation_time,  w.demand_product,  w.remark,  w.is_delivery,  w.is_sales ,w.customer_num,w.sale_Id,w.sale_name
             from kh_after_sale_member d left join
             kh_wechat_customer w on d.customer_id=w.customer_id 
             

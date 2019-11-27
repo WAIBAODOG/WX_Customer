@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.WeixinContextMapper">
+    
+    <resultMap type="WeixinContext" id="WeixinContextResult">
+        <result property="id"    column="id"    />
+        <result property="context"    column="context"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creatorName"    column="creator_name"    />
+        <result property="remark"    column="remark"    />
+        <result property="sendStartTime"    column="send_start_time"    />
+        <result property="sendEndTime"    column="send_end_time"    />
+    </resultMap>
+
+    <sql id="selectWeixinContextVo">
+        select id, context, create_time, creator_id, creator_name, remark, send_start_time, send_end_time from kh_weixin_context
+    </sql>
+
+    <select id="selectWeixinContextList" parameterType="WeixinContext" resultMap="WeixinContextResult">
+        <include refid="selectWeixinContextVo"/>
+        <where>  1=1 
+            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="context != null  and context != ''"> and context like concat('%', #{context}, '%')</if>
+            <if test="creatorName != null  and creatorName != ''"> and creator_Name like concat('%', #{creatorName}, '%')</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+            
+            <if test="sendStartTime != null  "> and date_format(send_start_time, '%y%m%d') = date_format(#{sendStartTime},'%y%m%d')</if>
+            <if test="sendEndTime != null  "> and date_format(send_end_time, '%y%m%d') = date_format(#{sendEndTime},'%y%m%d')</if>
+            <if test="createTime != null  "> and date_format(create_time, '%y%m%d') = date_format(#{createTime},'%y%m%d')</if>
+            order by  create_time desc
+        </where>
+    </select>
+    
+    <select id="selectWeixinContextById" parameterType="String" resultMap="WeixinContextResult">
+        <include refid="selectWeixinContextVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertWeixinContext" parameterType="WeixinContext">
+        insert into kh_weixin_context
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="context != null  and context != ''">context,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+            <if test="creatorName != null  and creatorName != ''">creator_name,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="sendStartTime != null ">send_start_time,</if>
+            <if test="sendEndTime != null ">send_end_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="context != null  and context != ''">#{context},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+            <if test="creatorName != null  and creatorName != ''">#{creatorName},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="sendStartTime != null ">#{sendStartTime},</if>
+            <if test="sendEndTime != null ">#{sendEndTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWeixinContext" parameterType="WeixinContext">
+        update kh_weixin_context
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="context != null  and context != ''">context = #{context},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+            <if test="creatorName != null  and creatorName != ''">creator_name = #{creatorName},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="sendStartTime != null ">send_start_time = #{sendStartTime},</if>
+            <if test="sendEndTime != null ">send_end_time = #{sendEndTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWeixinContextById" parameterType="String">
+        delete from kh_weixin_context where id = #{id}
+    </delete>
+
+    <delete id="deleteWeixinContextByIds" parameterType="String">
+        delete from kh_weixin_context where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
