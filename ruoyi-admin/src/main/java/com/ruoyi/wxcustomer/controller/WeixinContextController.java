@@ -26,6 +26,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.wxcustomer.domain.KhFile;
@@ -45,133 +46,181 @@ import sun.misc.BASE64Decoder;
  */
 @Controller
 @RequestMapping("/wxcustomer/weixincontext")
-public class WeixinContextController extends BaseController{
-    private String prefix = "wxcustomer/weixincontext";
-    @Value("${fileHost}")
-    private String fileHost;
-    
-    @Autowired
-    private IWeixinContextService weixinContextService;
-    @Autowired
-    private IKhFileService fileService;
-    @Autowired
-    private ISysUserService userService;
-    @RequiresPermissions("wxcustomer:weixincontext:view")
-    @GetMapping()
-    public String weixincontext(){
-        return prefix + "/weixincontext";
-    }
+public class WeixinContextController extends BaseController {
+	private String prefix = "wxcustomer/weixincontext";
+	@Value("${fileHost}")
+	private String fileHost;
 
-    /**
-     * 查询微信朋友圈内容列表
-     */
-    @RequiresPermissions("wxcustomer:weixincontext:list")
-    @PostMapping("/list")
-    @ResponseBody
-    public TableDataInfo list(WeixinContext weixinContext){
-        startPage();
-        List<WeixinContext> list = weixinContextService.selectWeixinContextList(weixinContext);
-        return getDataTable(list);
-    }
+	@Autowired
+	private IWeixinContextService weixinContextService;
+	@Autowired
+	private IKhFileService fileService;
+	@Autowired
+	private ISysUserService userService;
+	@Autowired
+	private PermissionService permissionService;
 
-    /**
-     * 导出微信朋友圈内容列表
-     */
-    @RequiresPermissions("wxcustomer:weixincontext:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(WeixinContext weixinContext){
-        List<WeixinContext> list = weixinContextService.selectWeixinContextList(weixinContext);
-        ExcelUtil<WeixinContext> util = new ExcelUtil<WeixinContext>(WeixinContext.class);
-        return util.exportExcel(list, "weixincontext");
-    }
-
-    /**
-     * 新增微信朋友圈内容
-     */
-    @GetMapping("/add")
-    public String add(Model model){
-    	SysUser sysUser = ShiroUtils.getSysUser();
-    	model.addAttribute("user", sysUser);
-        return prefix + "/add";
-    }
-
-    /**
-     * 新增保存微信朋友圈内容
-     */
-    @RequiresPermissions("wxcustomer:weixincontext:add")
-    @Log(title = "微信朋友圈内容", businessType = BusinessType.INSERT)
-    @PostMapping("/add")
-    @ResponseBody
-    public AjaxResult addSave(HttpServletRequest request){
-    	String picData=request.getParameter("picData");
-    	String weixinContext=request.getParameter("weixinContext");
-    	List<PicData> dataList = JSON.parseArray(picData, PicData.class);
-    	WeixinContext wic = JSON.parseObject(weixinContext, WeixinContext.class);
-    	List<FileInfo> fileList=new ArrayList<FileInfo>();
-    	try {
-    		for(int i=0;i<dataList.size();i++) {
-        		FileInfo e=new FileInfo();
-        		String fileName=dataList.get(i).getName();
-        		String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
-        		e.setExtName(prefix);
-        		e.setFileName(fileName);
-        		BASE64Decoder decoder = new BASE64Decoder();
-        	    byte[] bytes = decoder.decodeBuffer(dataList.get(i).getData());
-        		e.setBytes(bytes);
-        		fileList.add(e);
-        	}
-		} catch (Exception e) {
-			
+	@RequiresPermissions("wxcustomer:weixincontext:view")
+	@GetMapping()
+	public String weixincontext(Model model) {
+		// 权限：发样成交组组长 售后组组长 公司领导 可 新增修改
+		// 两个组员：查看权限
+		String role = permissionService.hasAnyRoles("GSLD,FYCJZZZ,SHZZZ");
+		if (!StringUtils.isEmpty(role)) {
+			model.addAttribute("AE", true);
 		}
-        return toAjax(weixinContextService.addContext(fileList, wic));
-    }
+		return prefix + "/weixincontext";
+	}
 
-    /**
-     * 修改微信朋友圈内容
-     */
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, ModelMap mmap){
-        WeixinContext weixinContext = weixinContextService.selectWeixinContextById(id);
-        KhFile khFile=new KhFile();
-        khFile.setBusinessId(id);
-        khFile.setBusinessYype("WXC");
-       List<KhFile> fileList= fileService.selectKhFileList(khFile);
-       for(int i=0;i<fileList.size();i++) {
-    	   String filePath= fileList.get(i).getFilePath().replace(",", "/");
-    	   fileList.get(i).setFilePath(fileHost+filePath);
-    	   if(StringUtils.isNotEmpty(fileList.get(i).getCreatorId())) {
-    		   SysUser user= userService.selectUserById(Long.valueOf(fileList.get(i).getCreatorId()));
-    		   if(null!=user)
-    		   fileList.get(i).setCreatorId(user.getUserName());
-    	   }
-    	  
-       }
-        mmap.put("weixinContext", weixinContext);
-        mmap.put("fileList", fileList);
-        return prefix + "/edit";
-    }
+	/**
+	 * 查询微信朋友圈内容列表
+	 */
+	@RequiresPermissions("wxcustomer:weixincontext:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo list(WeixinContext weixinContext) {
+		startPage();
+		List<WeixinContext> list = weixinContextService.selectWeixinContextList(weixinContext);
+		return getDataTable(list);
+	}
 
-    /**
-     * 修改保存微信朋友圈内容
-     */
-    @RequiresPermissions("wxcustomer:weixincontext:edit")
-    @Log(title = "微信朋友圈内容", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(WeixinContext weixinContext) {
-        return toAjax(weixinContextService.updateWeixinContext(weixinContext));
-    }
+	/**
+	 * 导出微信朋友圈内容列表
+	 */
+	@RequiresPermissions("wxcustomer:weixincontext:export")
+	@PostMapping("/export")
+	@ResponseBody
+	public AjaxResult export(WeixinContext weixinContext) {
+		List<WeixinContext> list = weixinContextService.selectWeixinContextList(weixinContext);
+		ExcelUtil<WeixinContext> util = new ExcelUtil<WeixinContext>(WeixinContext.class);
+		return util.exportExcel(list, "weixincontext");
+	}
 
-    /**
-     * 删除微信朋友圈内容
-     */
-    @RequiresPermissions("wxcustomer:weixincontext:remove")
-    @Log(title = "微信朋友圈内容", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids) {
-        return toAjax(weixinContextService.deleteWeixinContextByIds(ids));
-    }
-    
+	/**
+	 * 新增微信朋友圈内容
+	 */
+	@GetMapping("/add")
+	public String add(Model model) {
+		String role = permissionService.hasAnyRoles("GSLD,FYCJZZZ,SHZZZ");
+		if (!StringUtils.isEmpty(role)) {
+			model.addAttribute("AE", true);
+		}
+		SysUser sysUser = ShiroUtils.getSysUser();
+		WeixinContext weixinContext = new WeixinContext();
+		weixinContext.setCreatorId(sysUser.getUserId() + "");
+		weixinContext.setCreatorName(sysUser.getUserName());
+		model.addAttribute("weixinContext", weixinContext);
+		model.addAttribute("fileList", null);
+		return prefix + "/add";
+
+	}
+
+	/**
+	 * 新增保存微信朋友圈内容
+	 */
+	@RequiresPermissions("wxcustomer:weixincontext:add")
+	@Log(title = "微信朋友圈内容", businessType = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(HttpServletRequest request) {
+		String picData = request.getParameter("picData");
+		String weixinContext = request.getParameter("weixinContext");
+		List<PicData> dataList = JSON.parseArray(picData, PicData.class);
+		WeixinContext wic = JSON.parseObject(weixinContext, WeixinContext.class);
+		List<FileInfo> fileList = new ArrayList<FileInfo>();
+		try {
+			for (int i = 0; i < dataList.size(); i++) {
+				FileInfo e = new FileInfo();
+				String fileName = dataList.get(i).getName();
+				String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
+				e.setExtName(prefix);
+				e.setFileName(fileName);
+				BASE64Decoder decoder = new BASE64Decoder();
+				byte[] bytes = decoder.decodeBuffer(dataList.get(i).getData());
+				e.setBytes(bytes);
+				fileList.add(e);
+			}
+		} catch (Exception e) {
+
+		}
+		return toAjax(weixinContextService.addContext(fileList, wic));
+	}
+
+	/**
+	 * 修改微信朋友圈内容
+	 */
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") String id, ModelMap mmap) {
+		String role = permissionService.hasAnyRoles("GSLD,FYCJZZZ,SHZZZ");
+		if (!StringUtils.isEmpty(role)) {
+			mmap.put("AE", true);
+		}
+		WeixinContext weixinContext = weixinContextService.selectWeixinContextById(id);
+		KhFile khFile = new KhFile();
+		khFile.setBusinessId(id);
+		khFile.setBusinessYype("WXC");
+		List<KhFile> fileList = fileService.selectKhFileList(khFile);
+		for (int i = 0; i < fileList.size(); i++) {
+			String filePath = fileList.get(i).getFilePath().replace(",", "/");
+			fileList.get(i).setFilePath(fileHost + filePath);
+			if (StringUtils.isNotEmpty(fileList.get(i).getCreatorId())) {
+				SysUser user = userService.selectUserById(Long.valueOf(fileList.get(i).getCreatorId()));
+				if (null != user)
+					fileList.get(i).setCreatorId(user.getUserName());
+			}
+
+		}
+		mmap.put("weixinContext", weixinContext);
+		mmap.put("fileList", fileList);
+		return prefix + "/add";
+	}
+
+	/**
+	 * 修改保存微信朋友圈内容
+	 */
+	@RequiresPermissions("wxcustomer:weixincontext:edit")
+	@Log(title = "微信朋友圈内容", businessType = BusinessType.UPDATE)
+	@PostMapping("/edit")
+	@ResponseBody
+	public AjaxResult editSave(WeixinContext weixinContext) {
+		return toAjax(weixinContextService.updateWeixinContext(weixinContext));
+	}
+
+	
+	/**
+	 * 修改微信朋友圈内容
+	 */
+	@GetMapping("/detail")
+	public String detail( String id, ModelMap mmap) {
+		 
+		WeixinContext weixinContext = weixinContextService.selectWeixinContextById(id);
+		KhFile khFile = new KhFile();
+		khFile.setBusinessId(id);
+		khFile.setBusinessYype("WXC");
+		List<KhFile> fileList = fileService.selectKhFileList(khFile);
+		for (int i = 0; i < fileList.size(); i++) {
+			String filePath = fileList.get(i).getFilePath().replace(",", "/");
+			fileList.get(i).setFilePath(fileHost + filePath);
+			if (StringUtils.isNotEmpty(fileList.get(i).getCreatorId())) {
+				SysUser user = userService.selectUserById(Long.valueOf(fileList.get(i).getCreatorId()));
+				if (null != user)
+					fileList.get(i).setCreatorId(user.getUserName());
+			}
+
+		}
+		mmap.put("weixinContext", weixinContext);
+		mmap.put("fileList", fileList);
+		return prefix + "/detail";
+	}
+	/**
+	 * 删除微信朋友圈内容
+	 */
+	@RequiresPermissions("wxcustomer:weixincontext:remove")
+	@Log(title = "微信朋友圈内容", businessType = BusinessType.DELETE)
+	@PostMapping("/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids) {
+		return toAjax(weixinContextService.deleteWeixinContextByIds(ids));
+	}
+
 }

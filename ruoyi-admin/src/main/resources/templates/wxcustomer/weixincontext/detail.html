@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('新增微信朋友圈内容')" />
+    <th:block th:include="include :: header('查看微信朋友圈内容')" />
     <th:block th:include="include :: datetimepicker-css" />
     <style type="text/css">
 .float {
@@ -53,12 +53,17 @@ img {
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <div class="btn-group-sm"  role="group">
+	       <a class="btn btn-success" onclick="window.history.go(-1);"  >
+	        <i class="fa fa-mail-reply" aria-hidden="true"></i> 返回
+	      </a>
+	 </div>
         <form class="form-horizontal m" id="form-weixincontext-add"  method="post" enctype="multipart/form-data" >
             <input name="id" class="form-control" type="hidden" readonly="readonly" th:value="${weixinContext.id}">
             <div class="form-group">
                 <label class="col-sm-3 control-label">内容：</label>
                 <div class="col-sm-8">
-                    <textarea name="context" id="context" class="form-control" required="required" th:text="${weixinContext.context}" ></textarea>
+                    <textarea name="context" id="context" class="form-control"  disabled="disabled" required="required" th:text="${weixinContext.context}" readonly="readonly"></textarea>
                 </div>
             </div>
             <div class="form-group">    
@@ -73,7 +78,7 @@ img {
                 <div class="col-sm-8">
                     <div class="input-group date">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input name="sendStartTime" class="form-control time-input" th:value="${#dates.format(weixinContext.sendStartTime,'yyyy-MM-dd')}"   readonly="readonly"  placeholder="yyyy-MM-dd" type="text" required="required">
+                        <input name="sendStartTime" class="form-control " th:value="${#dates.format(weixinContext.sendStartTime,'yyyy-MM-dd')}"   readonly="readonly"  placeholder="yyyy-MM-dd" type="text" required="required">
                     </div>
                 </div>
             </div>
@@ -82,32 +87,23 @@ img {
                 <div class="col-sm-8">
                     <div class="input-group date">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input name="sendEndTime" class="form-control time-input" th:value="${#dates.format(weixinContext.sendEndTime,'yyyy-MM-dd')}"   readonly="readonly" placeholder="yyyy-MM-dd" type="text" required="required">
+                        <input name="sendEndTime" class="form-control " th:value="${#dates.format(weixinContext.sendEndTime,'yyyy-MM-dd')}"   readonly="readonly" placeholder="yyyy-MM-dd" type="text" required="required">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">备注：</label>
                 <div class="col-sm-8">
-                    <textarea name="remark" id="remark" class="form-control" th:text="${weixinContext.remark}" ></textarea>
+                    <textarea name="remark" id="remark" class="form-control" th:text="${weixinContext.remark}" readonly="readonly" disabled="disabled"></textarea>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-4 control-label">
-               		 <a class="btn btn-success" onclick="appendFile()">
-                   		  <i class="fa fa-plus"></i> 添加图片
-               		 </a>
-               		 <!--  <a class="btn btn-success" onclick="appendFile()">
-                   		  <i class="fa fa-plus"></i> 追加图片
-               		 </a> -->
-                </label>
                  <div class="col-sm-8">
                  	<input type="file" id="file_input" accept=".jpg,.png,.jpeg,.gif" multiple style="display: none;" /> 
                     <div class="input-group " id="pritrueDiv">
                     	 <br><br>
                     	 <div th:each="item : ${fileList}" class="float">
 								<div class="delete">
-									<span style="color: red;"  onclick="javaScript:delFile(this);"  th:data="${item.id}">删除</span>
 									<span style="color: blue;"  onclick="javaScript:openFile(this);" th:data="${item.filePath}">查看</span>
 								</div>
 								<div class="result">
