@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改发样每周工作')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-weeklySummary-edit" th:object="${khWeeklySummary}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加：</label>
+                <div class="col-sm-8">
+                    <input name="blindAdd" th:field="*{blindAdd}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V：</label>
+                <div class="col-sm-8">
+                    <input name="addWechat" th:field="*{addWechat}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoods" th:field="*{deliverGoods}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDeal" th:field="*{clinchDeal}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">周六经理分析：</label>
+                <div class="col-sm-8">
+                    <textarea name="saturdayManagerAnalysis" class="form-control">[[*{saturdayManagerAnalysis}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">未达标解决方案：</label>
+                <div class="col-sm-8">
+                    <textarea name="substandardSolutions" class="form-control">[[*{substandardSolutions}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">现已有数据：</label>
+                <div class="col-sm-8">
+                    <textarea name="havingData" class="form-control">[[*{havingData}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan1" th:field="*{callDurationPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan1" th:field="*{blindAddPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan1" th:field="*{addWechatPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan1" th:field="*{deliverGoodsPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan1" th:field="*{intentionFollowPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan1" th:field="*{clinchDealPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan1" th:field="*{totalWechatNumberPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes1" th:field="*{hairBandsRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes1" th:field="*{bossMassTextingRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes1" th:field="*{giveLikeRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes1" th:field="*{callDurationRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes1" th:field="*{blindAddRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes1" th:field="*{addWechatRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes1" th:field="*{deliverGoodsRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes1" th:field="*{intentionFollowRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes1" th:field="*{clinchDealRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes1" th:field="*{totalWechatNumberRes1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_1：</label>
+                <div class="col-sm-8">
+                    <input name="problem1" th:field="*{problem1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_1：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod1" th:field="*{improvedMethod1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_1：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan1" th:field="*{tomorrowPlan1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_1：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion1" th:field="*{managerWorkSuggestion1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan2" th:field="*{callDurationPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan2" th:field="*{blindAddPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan2" th:field="*{addWechatPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan2" th:field="*{deliverGoodsPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan2" th:field="*{intentionFollowPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan2" th:field="*{clinchDealPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan2" th:field="*{totalWechatNumberPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes2" th:field="*{hairBandsRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes2" th:field="*{bossMassTextingRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes2" th:field="*{giveLikeRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes2" th:field="*{callDurationRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes2" th:field="*{blindAddRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes2" th:field="*{addWechatRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes2" th:field="*{deliverGoodsRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes2" th:field="*{intentionFollowRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes2" th:field="*{clinchDealRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes2" th:field="*{totalWechatNumberRes2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_2：</label>
+                <div class="col-sm-8">
+                    <input name="problem2" th:field="*{problem2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_2：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod2" th:field="*{improvedMethod2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_2：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan2" th:field="*{tomorrowPlan2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_2：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion2" th:field="*{managerWorkSuggestion2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan3" th:field="*{callDurationPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan3" th:field="*{blindAddPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan3" th:field="*{addWechatPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan3" th:field="*{deliverGoodsPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan3" th:field="*{intentionFollowPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan3" th:field="*{clinchDealPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan3" th:field="*{totalWechatNumberPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes3" th:field="*{hairBandsRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes3" th:field="*{bossMassTextingRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes3" th:field="*{giveLikeRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes3" th:field="*{callDurationRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes3" th:field="*{blindAddRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes3" th:field="*{addWechatRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes3" th:field="*{deliverGoodsRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes3" th:field="*{intentionFollowRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes3" th:field="*{clinchDealRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes3" th:field="*{totalWechatNumberRes3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_3：</label>
+                <div class="col-sm-8">
+                    <input name="problem3" th:field="*{problem3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_3：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod3" th:field="*{improvedMethod3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_3：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan3" th:field="*{tomorrowPlan3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_3：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion3" th:field="*{managerWorkSuggestion3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan4" th:field="*{callDurationPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan4" th:field="*{blindAddPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan4" th:field="*{addWechatPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan4" th:field="*{deliverGoodsPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan4" th:field="*{intentionFollowPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan4" th:field="*{clinchDealPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan4" th:field="*{totalWechatNumberPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes4" th:field="*{hairBandsRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes4" th:field="*{bossMassTextingRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes4" th:field="*{giveLikeRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes4" th:field="*{callDurationRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes4" th:field="*{blindAddRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes4" th:field="*{addWechatRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes4" th:field="*{deliverGoodsRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes4" th:field="*{intentionFollowRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes4" th:field="*{clinchDealRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes4" th:field="*{totalWechatNumberRes4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_4：</label>
+                <div class="col-sm-8">
+                    <input name="problem4" th:field="*{problem4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_4：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod4" th:field="*{improvedMethod4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_4：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan4" th:field="*{tomorrowPlan4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_4：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion4" th:field="*{managerWorkSuggestion4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan5" th:field="*{callDurationPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan5" th:field="*{blindAddPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan5" th:field="*{addWechatPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan5" th:field="*{deliverGoodsPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan5" th:field="*{intentionFollowPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan5" th:field="*{clinchDealPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan5" th:field="*{totalWechatNumberPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes5" th:field="*{hairBandsRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes5" th:field="*{bossMassTextingRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes5" th:field="*{giveLikeRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes5" th:field="*{callDurationRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes5" th:field="*{blindAddRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes5" th:field="*{addWechatRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes5" th:field="*{deliverGoodsRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes5" th:field="*{intentionFollowRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes5" th:field="*{clinchDealRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes5" th:field="*{totalWechatNumberRes5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_5：</label>
+                <div class="col-sm-8">
+                    <input name="problem5" th:field="*{problem5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_5：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod5" th:field="*{improvedMethod5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_5：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan5" th:field="*{tomorrowPlan5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_5：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion5" th:field="*{managerWorkSuggestion5}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan6" th:field="*{callDurationPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan6" th:field="*{blindAddPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan6" th:field="*{addWechatPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan6" th:field="*{deliverGoodsPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan6" th:field="*{intentionFollowPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan6" th:field="*{clinchDealPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan6" th:field="*{totalWechatNumberPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes6" th:field="*{hairBandsRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes6" th:field="*{bossMassTextingRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes6" th:field="*{giveLikeRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes6" th:field="*{callDurationRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes6" th:field="*{blindAddRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes6" th:field="*{addWechatRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes6" th:field="*{deliverGoodsRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes6" th:field="*{intentionFollowRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes6" th:field="*{clinchDealRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes6" th:field="*{totalWechatNumberRes6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_6：</label>
+                <div class="col-sm-8">
+                    <input name="problem6" th:field="*{problem6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_6：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod6" th:field="*{improvedMethod6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_6：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan6" th:field="*{tomorrowPlan6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_6：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion6" th:field="*{managerWorkSuggestion6}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="creationTime" th:value="${#dates.format(khWeeklySummary.creationTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人id：</label>
+                <div class="col-sm-8">
+                    <input name="creatorId" th:field="*{creatorId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人：</label>
+                <div class="col-sm-8">
+                    <input name="creator" th:field="*{creator}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="startTime" th:value="${#dates.format(khWeeklySummary.startTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="endTime" th:value="${#dates.format(khWeeklySummary.endTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">周次：</label>
+                <div class="col-sm-8">
+                    <input name="weekly" th:field="*{weekly}" class="form-control" type="text" required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "wxcustomer/weeklySummary";
+        $("#form-weeklySummary-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-weeklySummary-edit').serialize());
+            }
+        }
+
+        $("input[name='creationTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='startTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='endTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

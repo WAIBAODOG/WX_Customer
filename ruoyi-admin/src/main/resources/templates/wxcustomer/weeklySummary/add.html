@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增发样每周工作')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-weeklySummary-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加：</label>
+                <div class="col-sm-8">
+                    <input name="blindAdd" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V：</label>
+                <div class="col-sm-8">
+                    <input name="addWechat" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoods" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDeal" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">周六经理分析：</label>
+                <div class="col-sm-8">
+                    <textarea name="saturdayManagerAnalysis" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">未达标解决方案：</label>
+                <div class="col-sm-8">
+                    <textarea name="substandardSolutions" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">现已有数据：</label>
+                <div class="col-sm-8">
+                    <textarea name="havingData" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_1：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_1：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_1：</label>
+                <div class="col-sm-8">
+                    <input name="problem1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_1：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_1：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_1：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion1" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_2：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_2：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_2：</label>
+                <div class="col-sm-8">
+                    <input name="problem2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_2：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_2：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_2：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion2" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_3：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_3：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_3：</label>
+                <div class="col-sm-8">
+                    <input name="problem3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_3：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_3：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_3：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion3" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_4：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_4：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_4：</label>
+                <div class="col-sm-8">
+                    <input name="problem4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_4：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_4：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_4：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion4" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_5：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_5：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_5：</label>
+                <div class="col-sm-8">
+                    <input name="problem5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_5：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_5：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_5：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion5" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_计划_6：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发圈6条_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="hairBandsRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">老板群群发_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="bossMassTextingRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">点赞_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="giveLikeRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">通话时长_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="callDurationRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">盲加_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="blindAddRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">加V_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="addWechatRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发样_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="deliverGoodsRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">意向跟进_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="intentionFollowRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成交_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="clinchDealRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">总微信数量_结果_6：</label>
+                <div class="col-sm-8">
+                    <input name="totalWechatNumberRes6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">问题_6：</label>
+                <div class="col-sm-8">
+                    <input name="problem6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">改进方法_6：</label>
+                <div class="col-sm-8">
+                    <input name="improvedMethod6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">明日计划/建议_6：</label>
+                <div class="col-sm-8">
+                    <input name="tomorrowPlan6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经理工作建议_6：</label>
+                <div class="col-sm-8">
+                    <input name="managerWorkSuggestion6" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="creationTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人id：</label>
+                <div class="col-sm-8">
+                    <input name="creatorId" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人：</label>
+                <div class="col-sm-8">
+                    <input name="creator" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">开始时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="startTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">结束时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="endTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">周次：</label>
+                <div class="col-sm-8">
+                    <input name="weekly" class="form-control" type="text" required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "wxcustomer/weeklySummary"
+        $("#form-weeklySummary-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-weeklySummary-add').serialize());
+            }
+        }
+
+        $("input[name='creationTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='startTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='endTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>
