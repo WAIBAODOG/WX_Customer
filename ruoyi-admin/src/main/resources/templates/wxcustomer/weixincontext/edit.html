@@ -1,89 +1,274 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改微信朋友圈内容')" />
+    <th:block th:include="include :: header('新增微信朋友圈内容')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <style type="text/css">
+.float {
+	float: left;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	border: 1px solid #CCCCCC;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px;
+}
+
+img {
+	position: relative;
+}
+
+.result {
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+#file_input {
+	display: none;
+}
+
+.delete {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	text-align: center;
+	line-height: 200px;
+	z-index: 10;
+	font-size: 30px;
+	background-color: rgba(255, 255, 255, 0.8);
+	color: #777;
+	opacity: 0;
+	transition-duration: 0.7s;
+	-webkit-transition-duration: 0.7s;
+}
+
+.delete:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+</style>
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-weixincontext-edit" th:object="${weixinContext}">
-            <input name="id" th:field="*{id}" type="hidden">
+        <form class="form-horizontal m" id="form-weixincontext-add"  method="post" enctype="multipart/form-data" >
+            <input name="id" class="form-control" type="hidden" readonly="readonly" th:value="${weixinContext.id}">
             <div class="form-group">
-				<label class="col-sm-2 control-label">内容：</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" readonly="readonly"  th:value="${weixinContext.context}" >
-				</div>
-		 
-				<label class="col-sm-2 control-label">创建人：</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" readonly="readonly"   th:value="${weixinContext.creatorName}"  >
-				</div>
-			</div>
-			 <div class="form-group">
-				<label class="col-sm-2 control-label">创建时间：</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" readonly="readonly"  th:value="${#dates.format(weixinContext.createTime,'yyyy-MM-dd')}" >
-				</div>
-		 
-				<label class="col-sm-2 control-label">备注：</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" readonly="readonly"   th:value="${weixinContext.remark}"  >
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">发布时间_起：</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" readonly="readonly"  th:value="${#dates.format(weixinContext.sendStartTime,'yyyy-MM-dd')}" >
-				</div>
-		 
-				<label class="col-sm-2 control-label">发布时间_止：</label>
-				<div class="col-sm-4">
-					<input class="form-control" type="text" readonly="readonly"   th:value="${#dates.format(weixinContext.sendEndTime,'yyyy-MM-dd')}"  >
-				</div>
-			 <div class="form-group">
-				<label class="col-sm-2 control-label">图片列表</label>
-				<div class="col-sm-9">
-					<br><br>
-					<table class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th >文件名</th>
-								<th >创建人</th>
-								<th >创建时间</th>
-								<th >操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="item : ${fileList}">
-								<td th:text="${item.fileName}"></td>
-								<td th:text="${item.creatorId}"></td>
-								<td th:text="${#dates.format(item.createTime,'yyyy-MM-dd')}"></td>
-								<td  >
-									<a  href="#" onclick="javaScript:openFile(this);" th:data="${item.filePath}">查看</a>
-									<a  href="#" onclick="javaScript:delFile(this);"  th:data="${item.id}">删除</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-		 
-			</div>
-			
-			</div>
+                <label class="col-sm-3 control-label">内容：</label>
+                <div class="col-sm-8">
+                    <textarea name="context" id="context" class="form-control" required="required" th:text="${weixinContext.context}" ></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">创建人：</label>
+                <div class="col-sm-8">
+                	 <input name="creatorId" class="form-control" type="hidden" readonly="readonly" th:value="${weixinContext.creatorId}">
+                    <input name="creatorName" class="form-control" type="text" readonly="readonly" required="required" th:value="${weixinContext.creatorName}">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发布时间_起：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="sendStartTime" class="form-control time-input" th:value="${#dates.format(weixinContext.sendStartTime,'yyyy-MM-dd')}"   readonly="readonly"  placeholder="yyyy-MM-dd" type="text" required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">发布时间_止：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="sendEndTime" class="form-control time-input" th:value="${#dates.format(weixinContext.sendEndTime,'yyyy-MM-dd')}"   readonly="readonly" placeholder="yyyy-MM-dd" type="text" required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" id="remark" class="form-control" th:text="${weixinContext.remark}" ></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-4 control-label">
+               		 <a class="btn btn-success" onclick="appendFile()">
+                   		  <i class="fa fa-plus"></i> 添加图片
+               		 </a>
+               		 <!--  <a class="btn btn-success" onclick="appendFile()">
+                   		  <i class="fa fa-plus"></i> 追加图片
+               		 </a> -->
+                </label>
+                 <div class="col-sm-8">
+                 	<input type="file" id="file_input" accept=".jpg,.png,.jpeg,.gif" multiple style="display: none;" /> 
+                    <div class="input-group " id="pritrueDiv">
+                    	 <br><br>
+                    	 <div th:each="item : ${fileList}" class="float">
+								<div class="delete">
+									<span style="color: red;"  onclick="javaScript:delFile(this);"  th:data="${item.id}">删除</span>
+									<span style="color: blue;"  onclick="javaScript:openFile(this);" th:data="${item.filePath}">查看</span>
+								</div>
+								<div class="result">
+									<img class="subPic" status="success" th:src="${item.filePath}" th:alt="${item.fileName}"   />
+								</div>
+							</div>
+                    </div>
+                </div>
+            </div>
+             
         </form>
     </div>
     <th:block th:include="include :: footer" />
-    <script type="text/javascript">
-        var prefix = ctx + "wxcustomer/weixincontext";
-        $("#form-weixincontext-edit").validate({
+    <th:block th:include="include :: datetimepicker-js" />
+	<script type="text/javascript">
+		if("${AE}"=="true"){
+			
+		}
+        var prefix = ctx + "wxcustomer/weixincontext"
+        $("#form-weixincontext-add").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
+        	 if($(".float").length<1){
+             	$.modal.alertWarning('至少上传1张图片！')
+             	return;
+             }
+        	var picList=[];
+        	 $('.subPic').each(function () {
+        		 if($(this).attr("status")=="wait"){
+        			 var data=$(this).attr('src').replace("data:image/jpeg;base64,","");
+	           		  data=data.replace("data:image/png;base64,","");
+	           		  data=data.replace("data:image/jpg;base64,","");
+	           		  data=data.replace("data:image/gif;base64,","");
+	           		  data=data.replace("data:image/gif;base64,","");
+	           		  picList.push({
+	                        name: $(this).attr('alt'),
+	                        data: data
+	                    });  
+	        		 }
+             }
+         );
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-weixincontext-edit').serialize());
+            	var formData={
+            			id: $("[name='id']").val(),
+            			context: $("[name='context']").val(),
+            			creatorId: $("[name='creatorId']").val(),
+            			creatorName:$("[name='creatorName']").val(),
+            			sendStartTime:$("[name='sendStartTime']").val(),
+            			sendEndTime: $("[name='sendEndTime']").val(),
+            			remark: $("[name='remark']").val()
+            	};
+             
+            	var data={
+            		weixinContext:JSON.stringify(formData),
+            		picData :JSON.stringify(picList)
+            	}
+                $.operate.save(prefix + "/add", data);
             }
         }
-        
+
+//         $("input[name='sendStartTime']").datetimepicker({
+//             format: "yyyy-mm-dd",
+//             minView: "month",
+//             autoclose: true
+//         });
+
+//         $("input[name='sendEndTime']").datetimepicker({
+//             format: "yyyy-mm-dd",
+//             minView: "month",
+//             autoclose: true
+//         });
+        function addFile(){
+		$("#file_input").val('');
+		$('.float').remove();        
+		$("#file_input").click()
+			
+       }
+        function appendFile(){
+        	$("#file_input").val('');
+			$("#file_input").click();
+        }
+        function ReSizePic(ThisPic) {    
+            var RePicWidth = 200; //这里修改为您想显示的宽度值    
+            
+            var TrueWidth = ThisPic.width; //图片实际宽度    
+            var TrueHeight = ThisPic.height; //图片实际高度    
+                
+            if(TrueWidth>TrueHeight){    
+                //宽大于高    
+                var reWidth = RePicWidth;    
+                ThisPic.width = reWidth;    
+                //垂直居中    
+                var nowHeight = TrueHeight * (reWidth/TrueWidth);    
+                return nowHeight;  //将图片修改后的高度返回，供垂直居中用    
+            }else{    
+                //宽小于高    
+                var reHeight = RePicWidth;    
+                ThisPic.height = reHeight;    
+            }    
+        }  
+        window.onload = function(){    
+            var input = document.getElementById("file_input");    
+            var result;    
+            var dataArr = []; // 储存所选图片的结果(文件名和base64数据)  
+            var fd;  //FormData方式发送请求    
+            if(typeof FileReader==='undefined'){    
+                alert("抱歉，你的浏览器不支持 FileReader");    
+                input.setAttribute('disabled','disabled');    
+            }else{    
+                input.addEventListener('change',readFile,false);    
+            }　　　　　//handler    
+            
+                
+            function readFile(){   
+                fd = new FormData();    
+                var iLen = this.files.length;  
+                for(var i=0;i<iLen;i++){  
+                    if (!input['value'].match(/.jpg|.gif|.png|.jpeg|.bmp/i)){　　//判断上传文件格式    
+                        return alert("上传的图片格式不正确，请重新选择");    
+                    }  
+                    var reader = new FileReader();  
+                    fd.append(i,this.files[i]);  
+                    reader.readAsDataURL(this.files[i]);  //转成base64    
+                    reader.fileName = this.files[i].name;  
+          
+                    reader.onload = function(e){   
+                        var imgMsg = {    
+                            name : this.fileName,//获取文件名    
+                            base64 : this.result   //reader.readAsDataURL方法执行完后，base64数据储存在reader.result里    
+        				}   
+                        dataArr.push(imgMsg);    
+                        result = '<div class="delete"><span style="color:red; " onclick="javaScript:delFile(this);">删除</span></div><div class="result"><img class="subPic" src="'+this.result+'" alt="'+this.fileName+'"/></div>';    
+                        var div = document.createElement('div');  
+                        div.innerHTML = result;    
+                        div['className'] = 'float';  
+                        if($(".float").length>=9){
+                        	$.modal.alertWarning('最大上传9张图片！')
+                        	return;
+                        }
+                        $('#pritrueDiv').append(div);  　　//插入dom树    
+                        var img = div.getElementsByTagName('img')[0];  
+                        $(img).attr("status","wait");
+                        img.onload = function(){    
+                            var nowHeight = ReSizePic(this); //设置图片大小    
+                            this.parentNode.style.display = 'block';    
+                            var oParent = this.parentNode;    
+                            if(nowHeight){    
+                                oParent.style.paddingTop = (oParent.offsetHeight - nowHeight)/2 + 'px';    
+                            }    
+                        }   
+//                         div.onclick = function(){  
+//                             $(this).remove();                  // 在页面中删除该图片元素  
+//                         }  
+                    }    
+                }    
+            }    
+                
+            
+        }    
         function openFile(obj){
         	var url=$(obj).attr("data");
         	if(!url){
@@ -93,13 +278,25 @@
         	window.open(url);
         }
         function delFile(obj){
-        	var fileId=$(obj).attr("data");
-        	if(!fileId){
-        		$.modal.alertWarning('附件ID为空')
-        		return;
-        	}
-        	 $.operate.remove("/wxcustomer/common/delFile", {fileId:fileId});
+        	$.modal.confirm("确认要删除吗?", function() {
+        		var fileId=$(obj).attr("data");
+            	if(fileId){
+            		$.post("/wxcustomer/common/delFile", {fileIds:fileId},function(res){
+            			if(res.status=="true"){
+            				$(obj).parent().parent().remove();
+            				$.modal.alert(res.msg);
+            			}else{
+            				$.modal.alertError(res.msg);
+            			}
+            		});
+            		//$.modal.alertWarning('附件ID为空')
+            		//return;
+            	}else{
+            		$(obj).parent().parent().remove();
+            	}
+	    	});
+        	
         }
-    </script>
+ </script>
 </body>
 </html>

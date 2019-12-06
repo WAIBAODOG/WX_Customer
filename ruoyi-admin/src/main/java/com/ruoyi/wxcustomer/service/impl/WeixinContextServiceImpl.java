@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -90,28 +91,27 @@ public class WeixinContextServiceImpl implements IWeixinContextService {
 	 */
 	@Override
 	public int deleteWeixinContextByIds(String ids) {
-		String[] id=Convert.toStrArray(ids);
-		Set<String> paths=new HashSet<String>();
-		Set<String> fileIds=new HashSet<String>();
-		for(int i=0;i<id.length;i++) {
-			KhFile file=new KhFile();
+		String[] id = Convert.toStrArray(ids);
+		Set<String> paths = new HashSet<String>();
+		Set<String> fileIds = new HashSet<String>();
+		for (int i = 0; i < id.length; i++) {
+			KhFile file = new KhFile();
 			file.setBusinessId(id[i]);
 			file.setBusinessYype("WXC");
-			List<KhFile> fileList=khFileMapper.selectKhFileList(file);
-			for(int j=0;j<fileList.size();j++) {
+			List<KhFile> fileList = khFileMapper.selectKhFileList(file);
+			for (int j = 0; j < fileList.size(); j++) {
 				paths.add(fileList.get(j).getFilePath());
 				fileIds.add(fileList.get(j).getId());
 			}
-			
-			
+
 		}
 		weixinContextMapper.deleteWeixinContextByIds(Convert.toStrArray(ids));
 		try {
 			khFileMapper.deleteKhFileByIds(Convert.toStrArray(fileIds.toString()));
-			if(paths.size()>0)
-			for(String path:paths) {
-				fileService.delete(path);
-			}
+			if (paths.size() > 0)
+				for (String path : paths) {
+					fileService.delete(path);
+				}
 		} catch (Exception e) {
 			return 0;
 		}
@@ -130,25 +130,30 @@ public class WeixinContextServiceImpl implements IWeixinContextService {
 	}
 
 	public int addContext(List<FileInfo> fileList, WeixinContext weixinContext) {
-		Map<String, String> map = new HashMap<>();
-		String id = UUID.randomUUID().toString().replaceAll("-", "");
 		try {
-			weixinContext.setId(id);
-			weixinContext.setCreateTime(DateUtils.getNowDate());
-			weixinContextMapper.insertWeixinContext(weixinContext);
+			if (StringUtils.isEmpty(weixinContext.getId())) {
+				String id = UUID.randomUUID().toString().replaceAll("-", "");
+				weixinContext.setId(id);
+				weixinContext.setCreateTime(DateUtils.getNowDate());
+				weixinContextMapper.insertWeixinContext(weixinContext);
+			} else {
+				weixinContextMapper.updateWeixinContext(weixinContext);
+			}
+
 			fileUpload(fileList, weixinContext, "WXC");
 		} catch (Exception e) {
-			weixinContextMapper.deleteWeixinContextById(id);
+			weixinContextMapper.deleteWeixinContextById(weixinContext.getId());
 			return 0;
 		}
 
 		return 1;
 	}
 
-	public synchronized void fileUpload(List<FileInfo> fileList, WeixinContext weixinContext, String businessType) throws Exception {
-		Set<String> set=new HashSet< >();
+	public synchronized void fileUpload(List<FileInfo> fileList, WeixinContext weixinContext, String businessType)
+			throws Exception {
+		Set<String> set = new HashSet<>();
 		try {
-			
+
 			for (FileInfo file : fileList) {
 				KhFile khFile = new KhFile();
 				String filePath = fileService.upload(file);
@@ -165,14 +170,13 @@ public class WeixinContextServiceImpl implements IWeixinContextService {
 				khFileMapper.insertKhFile(khFile);
 			}
 		} catch (Exception e) {
-			if(set.size()>0) 
-			for(String path:set ) {
-				fileService.delete(path);
-			}
-			
+			if (set.size() > 0)
+				for (String path : set) {
+					fileService.delete(path);
+				}
+
 			throw new RuntimeException();
 		}
-		
 
 	}
 }

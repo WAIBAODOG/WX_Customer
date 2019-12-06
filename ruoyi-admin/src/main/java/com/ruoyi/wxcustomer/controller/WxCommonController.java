@@ -10,8 +10,10 @@
 package com.ruoyi.wxcustomer.controller;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -121,6 +123,34 @@ public class WxCommonController extends BaseController {
 		}
 		return map;
 	}
+	@RequestMapping(value = "delFile", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> delFile(String fileIds,
+			HttpServletRequest request, HttpServletResponse response) {
+		Map<String,Object> map=new HashMap<>();
+		try {
+			if(StringUtils.isEmpty(fileIds)) {
+				map.put("status", false);
+				map.put("msg", "文FileId为空！！");
+				return map;
+			}
+			int i=khFileService.deleteKhFileByIds(fileIds);
+			if(i<1) {
+				map.put("status", false);
+				map.put("msg", "删除失败！");
+				return map;
+			}
+			map.put("status", true);
+			map.put("msg", "操作成功！");
+			return map;
+		} catch (Exception e) {
+			map.put("status", false);
+			map.put("msg", "删除失败！");
+			return map;
+		}
+
+		
+	}
 	/**
 	 * 文件上传
 	 */
@@ -142,26 +172,5 @@ public class WxCommonController extends BaseController {
 		String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
 		return prefix;
 	}
-	/**
-	 * 加载部门列表树
-	 */
-	@PostMapping("/delFile")
-	@ResponseBody
-	public AjaxResult delFile(String fileId) {
-		if(StringUtils.isEmpty(fileId)) {
-			return AjaxResult.error("附件ID为空！");
-		}
-		KhFile file=khFileService.selectKhFileById(fileId);
-		if(null==file) {
-			return AjaxResult.error("找不到附件");
-		}
-		try {
-			khFileService.deleteKhFileById(fileId);
-			fileService.delete(file.getFilePath());
-		} catch (Exception e) {
-			return AjaxResult.error(e.getMessage());
-		}
-		return AjaxResult.success();
-	}
-
+	 
 }
