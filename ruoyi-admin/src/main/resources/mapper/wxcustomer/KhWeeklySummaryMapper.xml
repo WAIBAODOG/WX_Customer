@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="substandardSolutions"    column="substandard_solutions"    />
         <result property="havingData"    column="having_data"    />
         <result property="callDurationPlan1"    column="call_duration_plan_1"    />
+        <result property="customer1"    column="customer_1"    />
         <result property="blindAddPlan1"    column="blind_add_plan_1"    />
         <result property="addWechatPlan1"    column="add_WeChat_plan_1"    />
         <result property="deliverGoodsPlan1"    column="deliver_goods_plan_1"    />
@@ -34,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="improvedMethod1"    column="Improved_method_1"    />
         <result property="tomorrowPlan1"    column="tomorrow_plan_1"    />
         <result property="managerWorkSuggestion1"    column="manager_work_suggestion_1"    />
+        <result property="customer2"    column="customer_2"    />
         <result property="callDurationPlan2"    column="call_duration_plan_2"    />
         <result property="blindAddPlan2"    column="blind_add_plan_2"    />
         <result property="addWechatPlan2"    column="add_WeChat_plan_2"    />
@@ -55,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="improvedMethod2"    column="Improved_method_2"    />
         <result property="tomorrowPlan2"    column="tomorrow_plan_2"    />
         <result property="managerWorkSuggestion2"    column="manager_work_suggestion_2"    />
+        <result property="customer3"    column="customer_3"    />
         <result property="callDurationPlan3"    column="call_duration_plan_3"    />
         <result property="blindAddPlan3"    column="blind_add_plan_3"    />
         <result property="addWechatPlan3"    column="add_WeChat_plan_3"    />
@@ -76,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="improvedMethod3"    column="Improved_method_3"    />
         <result property="tomorrowPlan3"    column="tomorrow_plan_3"    />
         <result property="managerWorkSuggestion3"    column="manager_work_suggestion_3"    />
+        <result property="customer4"    column="customer_4"    />
         <result property="callDurationPlan4"    column="call_duration_plan_4"    />
         <result property="blindAddPlan4"    column="blind_add_plan_4"    />
         <result property="addWechatPlan4"    column="add_WeChat_plan_4"    />
@@ -97,6 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="improvedMethod4"    column="Improved_method_4"    />
         <result property="tomorrowPlan4"    column="tomorrow_plan_4"    />
         <result property="managerWorkSuggestion4"    column="manager_work_suggestion_4"    />
+        <result property="customer5"    column="customer_5"    />
         <result property="callDurationPlan5"    column="call_duration_plan_5"    />
         <result property="blindAddPlan5"    column="blind_add_plan_5"    />
         <result property="addWechatPlan5"    column="add_WeChat_plan_5"    />
@@ -118,6 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="improvedMethod5"    column="Improved_method_5"    />
         <result property="tomorrowPlan5"    column="tomorrow_plan_5"    />
         <result property="managerWorkSuggestion5"    column="manager_work_suggestion_5"    />
+        <result property="customer6"    column="customer_6"    />
         <result property="callDurationPlan6"    column="call_duration_plan_6"    />
         <result property="blindAddPlan6"    column="blind_add_plan_6"    />
         <result property="addWechatPlan6"    column="add_WeChat_plan_6"    />
@@ -148,7 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectKhWeeklySummaryVo">
-        select id, blind_add, add_WeChat, deliver_goods, clinch_deal, saturday_manager_analysis, substandard_solutions, having_data, call_duration_plan_1, blind_add_plan_1, add_WeChat_plan_1, deliver_goods_plan_1, Intention_follow_plan_1, clinch_deal_plan_1, total_WeChat_number_plan_1, hair_bands_res_1, boss_mass_texting_res_1, give_like_res_1, call_duration_res_1, blind_add_res_1, add_WeChat_res_1, deliver_goods_res_1, Intention_follow_res_1, clinch_deal_res_1, total_WeChat_number_res_1, problem_1, Improved_method_1, tomorrow_plan_1, manager_work_suggestion_1, call_duration_plan_2, blind_add_plan_2, add_WeChat_plan_2, deliver_goods_plan_2, Intention_follow_plan_2, clinch_deal_plan_2, total_WeChat_number_plan_2, hair_bands_res_2, boss_mass_texting_res_2, give_like_res_2, call_duration_res_2, blind_add_res_2, add_WeChat_res_2, deliver_goods_res_2, Intention_follow_res_2, clinch_deal_res_2, total_WeChat_number_res_2, problem_2, Improved_method_2, tomorrow_plan_2, manager_work_suggestion_2, call_duration_plan_3, blind_add_plan_3, add_WeChat_plan_3, deliver_goods_plan_3, Intention_follow_plan_3, clinch_deal_plan_3, total_WeChat_number_plan_3, hair_bands_res_3, boss_mass_texting_res_3, give_like_res_3, call_duration_res_3, blind_add_res_3, add_WeChat_res_3, deliver_goods_res_3, Intention_follow_res_3, clinch_deal_res_3, total_WeChat_number_res_3, problem_3, Improved_method_3, tomorrow_plan_3, manager_work_suggestion_3, call_duration_plan_4, blind_add_plan_4, add_WeChat_plan_4, deliver_goods_plan_4, Intention_follow_plan_4, clinch_deal_plan_4, total_WeChat_number_plan_4, hair_bands_res_4, boss_mass_texting_res_4, give_like_res_4, call_duration_res_4, blind_add_res_4, add_WeChat_res_4, deliver_goods_res_4, Intention_follow_res_4, clinch_deal_res_4, total_WeChat_number_res_4, problem_4, Improved_method_4, tomorrow_plan_4, manager_work_suggestion_4, call_duration_plan_5, blind_add_plan_5, add_WeChat_plan_5, deliver_goods_plan_5, Intention_follow_plan_5, clinch_deal_plan_5, total_WeChat_number_plan_5, hair_bands_res_5, boss_mass_texting_res_5, give_like_res_5, call_duration_res_5, blind_add_res_5, add_WeChat_res_5, deliver_goods_res_5, Intention_follow_res_5, clinch_deal_res_5, total_WeChat_number_res_5, problem_5, Improved_method_5, tomorrow_plan_5, manager_work_suggestion_5, call_duration_plan_6, blind_add_plan_6, add_WeChat_plan_6, deliver_goods_plan_6, Intention_follow_plan_6, clinch_deal_plan_6, total_WeChat_number_plan_6, hair_bands_res_6, boss_mass_texting_res_6, give_like_res_6, call_duration_res_6, blind_add_res_6, add_WeChat_res_6, deliver_goods_res_6, Intention_follow_res_6, clinch_deal_res_6, total_WeChat_number_res_6, problem_6, Improved_method_6, tomorrow_plan_6, manager_work_suggestion_6, creation_time, creator_id, creator, start_time, end_time, weekly from kh_weekly_summary
+        select id, blind_add, add_WeChat, deliver_goods, clinch_deal, saturday_manager_analysis, substandard_solutions, having_data, call_duration_plan_1, customer_1, blind_add_plan_1, add_WeChat_plan_1, deliver_goods_plan_1, Intention_follow_plan_1, clinch_deal_plan_1, total_WeChat_number_plan_1, hair_bands_res_1, boss_mass_texting_res_1, give_like_res_1, call_duration_res_1, blind_add_res_1, add_WeChat_res_1, deliver_goods_res_1, Intention_follow_res_1, clinch_deal_res_1, total_WeChat_number_res_1, problem_1, Improved_method_1, tomorrow_plan_1, manager_work_suggestion_1, customer_2, call_duration_plan_2, blind_add_plan_2, add_WeChat_plan_2, deliver_goods_plan_2, Intention_follow_plan_2, clinch_deal_plan_2, total_WeChat_number_plan_2, hair_bands_res_2, boss_mass_texting_res_2, give_like_res_2, call_duration_res_2, blind_add_res_2, add_WeChat_res_2, deliver_goods_res_2, Intention_follow_res_2, clinch_deal_res_2, total_WeChat_number_res_2, problem_2, Improved_method_2, tomorrow_plan_2, manager_work_suggestion_2, customer_3, call_duration_plan_3, blind_add_plan_3, add_WeChat_plan_3, deliver_goods_plan_3, Intention_follow_plan_3, clinch_deal_plan_3, total_WeChat_number_plan_3, hair_bands_res_3, boss_mass_texting_res_3, give_like_res_3, call_duration_res_3, blind_add_res_3, add_WeChat_res_3, deliver_goods_res_3, Intention_follow_res_3, clinch_deal_res_3, total_WeChat_number_res_3, problem_3, Improved_method_3, tomorrow_plan_3, manager_work_suggestion_3, customer_4, call_duration_plan_4, blind_add_plan_4, add_WeChat_plan_4, deliver_goods_plan_4, Intention_follow_plan_4, clinch_deal_plan_4, total_WeChat_number_plan_4, hair_bands_res_4, boss_mass_texting_res_4, give_like_res_4, call_duration_res_4, blind_add_res_4, add_WeChat_res_4, deliver_goods_res_4, Intention_follow_res_4, clinch_deal_res_4, total_WeChat_number_res_4, problem_4, Improved_method_4, tomorrow_plan_4, manager_work_suggestion_4, customer_5, call_duration_plan_5, blind_add_plan_5, add_WeChat_plan_5, deliver_goods_plan_5, Intention_follow_plan_5, clinch_deal_plan_5, total_WeChat_number_plan_5, hair_bands_res_5, boss_mass_texting_res_5, give_like_res_5, call_duration_res_5, blind_add_res_5, add_WeChat_res_5, deliver_goods_res_5, Intention_follow_res_5, clinch_deal_res_5, total_WeChat_number_res_5, problem_5, Improved_method_5, tomorrow_plan_5, manager_work_suggestion_5, customer_6, call_duration_plan_6, blind_add_plan_6, add_WeChat_plan_6, deliver_goods_plan_6, Intention_follow_plan_6, clinch_deal_plan_6, total_WeChat_number_plan_6, hair_bands_res_6, boss_mass_texting_res_6, give_like_res_6, call_duration_res_6, blind_add_res_6, add_WeChat_res_6, deliver_goods_res_6, Intention_follow_res_6, clinch_deal_res_6, total_WeChat_number_res_6, problem_6, Improved_method_6, tomorrow_plan_6, manager_work_suggestion_6, creation_time, creator_id, creator, start_time, end_time, weekly from kh_weekly_summary
     </sql>
 
     <select id="selectKhWeeklySummaryList" parameterType="KhWeeklySummary" resultMap="KhWeeklySummaryResult">
@@ -162,6 +168,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="substandardSolutions != null  and substandardSolutions != ''"> and substandard_solutions = #{substandardSolutions}</if>
             <if test="havingData != null  and havingData != ''"> and having_data = #{havingData}</if>
             <if test="callDurationPlan1 != null  and callDurationPlan1 != ''"> and call_duration_plan_1 = #{callDurationPlan1}</if>
+            <if test="customer1 != null  and customer1 != ''"> and customer_1 = #{customer1}</if>
             <if test="blindAddPlan1 != null  and blindAddPlan1 != ''"> and blind_add_plan_1 = #{blindAddPlan1}</if>
             <if test="addWechatPlan1 != null  and addWechatPlan1 != ''"> and add_WeChat_plan_1 = #{addWechatPlan1}</if>
             <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''"> and deliver_goods_plan_1 = #{deliverGoodsPlan1}</if>
@@ -182,6 +189,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod1 != null  and improvedMethod1 != ''"> and Improved_method_1 = #{improvedMethod1}</if>
             <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''"> and tomorrow_plan_1 = #{tomorrowPlan1}</if>
             <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''"> and manager_work_suggestion_1 = #{managerWorkSuggestion1}</if>
+            <if test="customer2 != null  and customer2 != ''"> and customer_2 = #{customer2}</if>
             <if test="callDurationPlan2 != null  and callDurationPlan2 != ''"> and call_duration_plan_2 = #{callDurationPlan2}</if>
             <if test="blindAddPlan2 != null  and blindAddPlan2 != ''"> and blind_add_plan_2 = #{blindAddPlan2}</if>
             <if test="addWechatPlan2 != null  and addWechatPlan2 != ''"> and add_WeChat_plan_2 = #{addWechatPlan2}</if>
@@ -203,6 +211,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod2 != null  and improvedMethod2 != ''"> and Improved_method_2 = #{improvedMethod2}</if>
             <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''"> and tomorrow_plan_2 = #{tomorrowPlan2}</if>
             <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''"> and manager_work_suggestion_2 = #{managerWorkSuggestion2}</if>
+            <if test="customer3 != null  and customer3 != ''"> and customer_3 = #{customer3}</if>
             <if test="callDurationPlan3 != null  and callDurationPlan3 != ''"> and call_duration_plan_3 = #{callDurationPlan3}</if>
             <if test="blindAddPlan3 != null  and blindAddPlan3 != ''"> and blind_add_plan_3 = #{blindAddPlan3}</if>
             <if test="addWechatPlan3 != null  and addWechatPlan3 != ''"> and add_WeChat_plan_3 = #{addWechatPlan3}</if>
@@ -224,6 +233,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod3 != null  and improvedMethod3 != ''"> and Improved_method_3 = #{improvedMethod3}</if>
             <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''"> and tomorrow_plan_3 = #{tomorrowPlan3}</if>
             <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''"> and manager_work_suggestion_3 = #{managerWorkSuggestion3}</if>
+            <if test="customer4 != null  and customer4 != ''"> and customer_4 = #{customer4}</if>
             <if test="callDurationPlan4 != null  and callDurationPlan4 != ''"> and call_duration_plan_4 = #{callDurationPlan4}</if>
             <if test="blindAddPlan4 != null  and blindAddPlan4 != ''"> and blind_add_plan_4 = #{blindAddPlan4}</if>
             <if test="addWechatPlan4 != null  and addWechatPlan4 != ''"> and add_WeChat_plan_4 = #{addWechatPlan4}</if>
@@ -245,6 +255,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod4 != null  and improvedMethod4 != ''"> and Improved_method_4 = #{improvedMethod4}</if>
             <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''"> and tomorrow_plan_4 = #{tomorrowPlan4}</if>
             <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''"> and manager_work_suggestion_4 = #{managerWorkSuggestion4}</if>
+            <if test="customer5 != null  and customer5 != ''"> and customer_5 = #{customer5}</if>
             <if test="callDurationPlan5 != null  and callDurationPlan5 != ''"> and call_duration_plan_5 = #{callDurationPlan5}</if>
             <if test="blindAddPlan5 != null  and blindAddPlan5 != ''"> and blind_add_plan_5 = #{blindAddPlan5}</if>
             <if test="addWechatPlan5 != null  and addWechatPlan5 != ''"> and add_WeChat_plan_5 = #{addWechatPlan5}</if>
@@ -266,6 +277,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod5 != null  and improvedMethod5 != ''"> and Improved_method_5 = #{improvedMethod5}</if>
             <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''"> and tomorrow_plan_5 = #{tomorrowPlan5}</if>
             <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''"> and manager_work_suggestion_5 = #{managerWorkSuggestion5}</if>
+            <if test="customer6 != null  and customer6 != ''"> and customer_6 = #{customer6}</if>
             <if test="callDurationPlan6 != null  and callDurationPlan6 != ''"> and call_duration_plan_6 = #{callDurationPlan6}</if>
             <if test="blindAddPlan6 != null  and blindAddPlan6 != ''"> and blind_add_plan_6 = #{blindAddPlan6}</if>
             <if test="addWechatPlan6 != null  and addWechatPlan6 != ''"> and add_WeChat_plan_6 = #{addWechatPlan6}</if>
@@ -313,6 +325,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="substandardSolutions != null  and substandardSolutions != ''">substandard_solutions,</if>
             <if test="havingData != null  and havingData != ''">having_data,</if>
             <if test="callDurationPlan1 != null  and callDurationPlan1 != ''">call_duration_plan_1,</if>
+            <if test="customer1 != null  and customer1 != ''">customer_1,</if>
             <if test="blindAddPlan1 != null  and blindAddPlan1 != ''">blind_add_plan_1,</if>
             <if test="addWechatPlan1 != null  and addWechatPlan1 != ''">add_WeChat_plan_1,</if>
             <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''">deliver_goods_plan_1,</if>
@@ -333,6 +346,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod1 != null  and improvedMethod1 != ''">Improved_method_1,</if>
             <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">tomorrow_plan_1,</if>
             <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">manager_work_suggestion_1,</if>
+            <if test="customer2 != null  and customer2 != ''">customer_2,</if>
             <if test="callDurationPlan2 != null  and callDurationPlan2 != ''">call_duration_plan_2,</if>
             <if test="blindAddPlan2 != null  and blindAddPlan2 != ''">blind_add_plan_2,</if>
             <if test="addWechatPlan2 != null  and addWechatPlan2 != ''">add_WeChat_plan_2,</if>
@@ -354,6 +368,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod2 != null  and improvedMethod2 != ''">Improved_method_2,</if>
             <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">tomorrow_plan_2,</if>
             <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">manager_work_suggestion_2,</if>
+            <if test="customer3 != null  and customer3 != ''">customer_3,</if>
             <if test="callDurationPlan3 != null  and callDurationPlan3 != ''">call_duration_plan_3,</if>
             <if test="blindAddPlan3 != null  and blindAddPlan3 != ''">blind_add_plan_3,</if>
             <if test="addWechatPlan3 != null  and addWechatPlan3 != ''">add_WeChat_plan_3,</if>
@@ -375,6 +390,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod3 != null  and improvedMethod3 != ''">Improved_method_3,</if>
             <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">tomorrow_plan_3,</if>
             <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">manager_work_suggestion_3,</if>
+            <if test="customer4 != null  and customer4 != ''">customer_4,</if>
             <if test="callDurationPlan4 != null  and callDurationPlan4 != ''">call_duration_plan_4,</if>
             <if test="blindAddPlan4 != null  and blindAddPlan4 != ''">blind_add_plan_4,</if>
             <if test="addWechatPlan4 != null  and addWechatPlan4 != ''">add_WeChat_plan_4,</if>
@@ -396,6 +412,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod4 != null  and improvedMethod4 != ''">Improved_method_4,</if>
             <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">tomorrow_plan_4,</if>
             <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">manager_work_suggestion_4,</if>
+            <if test="customer5 != null  and customer5 != ''">customer_5,</if>
             <if test="callDurationPlan5 != null  and callDurationPlan5 != ''">call_duration_plan_5,</if>
             <if test="blindAddPlan5 != null  and blindAddPlan5 != ''">blind_add_plan_5,</if>
             <if test="addWechatPlan5 != null  and addWechatPlan5 != ''">add_WeChat_plan_5,</if>
@@ -417,6 +434,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod5 != null  and improvedMethod5 != ''">Improved_method_5,</if>
             <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">tomorrow_plan_5,</if>
             <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">manager_work_suggestion_5,</if>
+            <if test="customer6 != null  and customer6 != ''">customer_6,</if>
             <if test="callDurationPlan6 != null  and callDurationPlan6 != ''">call_duration_plan_6,</if>
             <if test="blindAddPlan6 != null  and blindAddPlan6 != ''">blind_add_plan_6,</if>
             <if test="addWechatPlan6 != null  and addWechatPlan6 != ''">add_WeChat_plan_6,</if>
@@ -455,6 +473,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="substandardSolutions != null  and substandardSolutions != ''">#{substandardSolutions},</if>
             <if test="havingData != null  and havingData != ''">#{havingData},</if>
             <if test="callDurationPlan1 != null  and callDurationPlan1 != ''">#{callDurationPlan1},</if>
+            <if test="customer1 != null  and customer1 != ''">#{customer1},</if>
             <if test="blindAddPlan1 != null  and blindAddPlan1 != ''">#{blindAddPlan1},</if>
             <if test="addWechatPlan1 != null  and addWechatPlan1 != ''">#{addWechatPlan1},</if>
             <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''">#{deliverGoodsPlan1},</if>
@@ -475,6 +494,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod1 != null  and improvedMethod1 != ''">#{improvedMethod1},</if>
             <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">#{tomorrowPlan1},</if>
             <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">#{managerWorkSuggestion1},</if>
+            <if test="customer2 != null  and customer2 != ''">#{customer2},</if>
             <if test="callDurationPlan2 != null  and callDurationPlan2 != ''">#{callDurationPlan2},</if>
             <if test="blindAddPlan2 != null  and blindAddPlan2 != ''">#{blindAddPlan2},</if>
             <if test="addWechatPlan2 != null  and addWechatPlan2 != ''">#{addWechatPlan2},</if>
@@ -496,6 +516,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod2 != null  and improvedMethod2 != ''">#{improvedMethod2},</if>
             <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">#{tomorrowPlan2},</if>
             <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">#{managerWorkSuggestion2},</if>
+            <if test="customer3 != null  and customer3 != ''">#{customer3},</if>
             <if test="callDurationPlan3 != null  and callDurationPlan3 != ''">#{callDurationPlan3},</if>
             <if test="blindAddPlan3 != null  and blindAddPlan3 != ''">#{blindAddPlan3},</if>
             <if test="addWechatPlan3 != null  and addWechatPlan3 != ''">#{addWechatPlan3},</if>
@@ -517,6 +538,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod3 != null  and improvedMethod3 != ''">#{improvedMethod3},</if>
             <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">#{tomorrowPlan3},</if>
             <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">#{managerWorkSuggestion3},</if>
+            <if test="customer4 != null  and customer4 != ''">#{customer4},</if>
             <if test="callDurationPlan4 != null  and callDurationPlan4 != ''">#{callDurationPlan4},</if>
             <if test="blindAddPlan4 != null  and blindAddPlan4 != ''">#{blindAddPlan4},</if>
             <if test="addWechatPlan4 != null  and addWechatPlan4 != ''">#{addWechatPlan4},</if>
@@ -538,6 +560,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod4 != null  and improvedMethod4 != ''">#{improvedMethod4},</if>
             <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">#{tomorrowPlan4},</if>
             <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">#{managerWorkSuggestion4},</if>
+            <if test="customer5 != null  and customer5 != ''">#{customer5},</if>
             <if test="callDurationPlan5 != null  and callDurationPlan5 != ''">#{callDurationPlan5},</if>
             <if test="blindAddPlan5 != null  and blindAddPlan5 != ''">#{blindAddPlan5},</if>
             <if test="addWechatPlan5 != null  and addWechatPlan5 != ''">#{addWechatPlan5},</if>
@@ -559,6 +582,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod5 != null  and improvedMethod5 != ''">#{improvedMethod5},</if>
             <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">#{tomorrowPlan5},</if>
             <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">#{managerWorkSuggestion5},</if>
+            <if test="customer6 != null  and customer6 != ''">#{customer6},</if>
             <if test="callDurationPlan6 != null  and callDurationPlan6 != ''">#{callDurationPlan6},</if>
             <if test="blindAddPlan6 != null  and blindAddPlan6 != ''">#{blindAddPlan6},</if>
             <if test="addWechatPlan6 != null  and addWechatPlan6 != ''">#{addWechatPlan6},</if>
@@ -600,6 +624,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="substandardSolutions != null  and substandardSolutions != ''">substandard_solutions = #{substandardSolutions},</if>
             <if test="havingData != null  and havingData != ''">having_data = #{havingData},</if>
             <if test="callDurationPlan1 != null  and callDurationPlan1 != ''">call_duration_plan_1 = #{callDurationPlan1},</if>
+            <if test="customer1 != null  and customer1 != ''">customer_1 = #{customer1},</if>
             <if test="blindAddPlan1 != null  and blindAddPlan1 != ''">blind_add_plan_1 = #{blindAddPlan1},</if>
             <if test="addWechatPlan1 != null  and addWechatPlan1 != ''">add_WeChat_plan_1 = #{addWechatPlan1},</if>
             <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''">deliver_goods_plan_1 = #{deliverGoodsPlan1},</if>
@@ -620,6 +645,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod1 != null  and improvedMethod1 != ''">Improved_method_1 = #{improvedMethod1},</if>
             <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">tomorrow_plan_1 = #{tomorrowPlan1},</if>
             <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">manager_work_suggestion_1 = #{managerWorkSuggestion1},</if>
+            <if test="customer2 != null  and customer2 != ''">customer_2 = #{customer2},</if>
             <if test="callDurationPlan2 != null  and callDurationPlan2 != ''">call_duration_plan_2 = #{callDurationPlan2},</if>
             <if test="blindAddPlan2 != null  and blindAddPlan2 != ''">blind_add_plan_2 = #{blindAddPlan2},</if>
             <if test="addWechatPlan2 != null  and addWechatPlan2 != ''">add_WeChat_plan_2 = #{addWechatPlan2},</if>
@@ -641,6 +667,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod2 != null  and improvedMethod2 != ''">Improved_method_2 = #{improvedMethod2},</if>
             <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">tomorrow_plan_2 = #{tomorrowPlan2},</if>
             <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">manager_work_suggestion_2 = #{managerWorkSuggestion2},</if>
+            <if test="customer3 != null  and customer3 != ''">customer_3 = #{customer3},</if>
             <if test="callDurationPlan3 != null  and callDurationPlan3 != ''">call_duration_plan_3 = #{callDurationPlan3},</if>
             <if test="blindAddPlan3 != null  and blindAddPlan3 != ''">blind_add_plan_3 = #{blindAddPlan3},</if>
             <if test="addWechatPlan3 != null  and addWechatPlan3 != ''">add_WeChat_plan_3 = #{addWechatPlan3},</if>
@@ -662,6 +689,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod3 != null  and improvedMethod3 != ''">Improved_method_3 = #{improvedMethod3},</if>
             <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">tomorrow_plan_3 = #{tomorrowPlan3},</if>
             <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">manager_work_suggestion_3 = #{managerWorkSuggestion3},</if>
+            <if test="customer4 != null  and customer4 != ''">customer_4 = #{customer4},</if>
             <if test="callDurationPlan4 != null  and callDurationPlan4 != ''">call_duration_plan_4 = #{callDurationPlan4},</if>
             <if test="blindAddPlan4 != null  and blindAddPlan4 != ''">blind_add_plan_4 = #{blindAddPlan4},</if>
             <if test="addWechatPlan4 != null  and addWechatPlan4 != ''">add_WeChat_plan_4 = #{addWechatPlan4},</if>
@@ -683,6 +711,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod4 != null  and improvedMethod4 != ''">Improved_method_4 = #{improvedMethod4},</if>
             <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">tomorrow_plan_4 = #{tomorrowPlan4},</if>
             <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">manager_work_suggestion_4 = #{managerWorkSuggestion4},</if>
+            <if test="customer5 != null  and customer5 != ''">customer_5 = #{customer5},</if>
             <if test="callDurationPlan5 != null  and callDurationPlan5 != ''">call_duration_plan_5 = #{callDurationPlan5},</if>
             <if test="blindAddPlan5 != null  and blindAddPlan5 != ''">blind_add_plan_5 = #{blindAddPlan5},</if>
             <if test="addWechatPlan5 != null  and addWechatPlan5 != ''">add_WeChat_plan_5 = #{addWechatPlan5},</if>
@@ -704,6 +733,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="improvedMethod5 != null  and improvedMethod5 != ''">Improved_method_5 = #{improvedMethod5},</if>
             <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">tomorrow_plan_5 = #{tomorrowPlan5},</if>
             <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">manager_work_suggestion_5 = #{managerWorkSuggestion5},</if>
+            <if test="customer6 != null  and customer6 != ''">customer_6 = #{customer6},</if>
             <if test="callDurationPlan6 != null  and callDurationPlan6 != ''">call_duration_plan_6 = #{callDurationPlan6},</if>
             <if test="blindAddPlan6 != null  and blindAddPlan6 != ''">blind_add_plan_6 = #{blindAddPlan6},</if>
             <if test="addWechatPlan6 != null  and addWechatPlan6 != ''">add_WeChat_plan_6 = #{addWechatPlan6},</if>

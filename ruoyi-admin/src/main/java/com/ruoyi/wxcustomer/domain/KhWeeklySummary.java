@@ -10,12 +10,12 @@ import java.util.Date;
  * 发样每周工作对象 kh_weekly_summary
  * 
  * @author ruoyi
- * @date 2019-12-01
+ * @date 2019-12-07
  */
 public class KhWeeklySummary extends BaseEntity{
     private static final long serialVersionUID = 1L;
 
-    /** id */
+    /** $column.columnComment */
     private String id;
 
     /** 盲加 */
@@ -42,13 +42,17 @@ public class KhWeeklySummary extends BaseEntity{
     @Excel(name = "未达标解决方案")
     private String substandardSolutions;
 
-    /** 现已有数据 */
-    @Excel(name = "现已有数据")
+    /** 未达标解决方案 */
+    @Excel(name = "未达标解决方案")
     private String havingData;
 
     /** 通话时长_计划_1 */
     @Excel(name = "通话时长_计划_1")
     private String callDurationPlan1;
+
+    /** 客户_1 */
+    @Excel(name = "客户_1")
+    private String customer1;
 
     /** 盲加_计划_1 */
     @Excel(name = "盲加_计划_1")
@@ -129,6 +133,10 @@ public class KhWeeklySummary extends BaseEntity{
     /** 经理工作建议_1 */
     @Excel(name = "经理工作建议_1")
     private String managerWorkSuggestion1;
+
+    /** 客户_2 */
+    @Excel(name = "客户_2")
+    private String customer2;
 
     /** 通话时长_计划_2 */
     @Excel(name = "通话时长_计划_2")
@@ -214,6 +222,10 @@ public class KhWeeklySummary extends BaseEntity{
     @Excel(name = "经理工作建议_2")
     private String managerWorkSuggestion2;
 
+    /** 客户_3 */
+    @Excel(name = "客户_3")
+    private String customer3;
+
     /** 通话时长_计划_3 */
     @Excel(name = "通话时长_计划_3")
     private String callDurationPlan3;
@@ -297,6 +309,10 @@ public class KhWeeklySummary extends BaseEntity{
     /** 经理工作建议_3 */
     @Excel(name = "经理工作建议_3")
     private String managerWorkSuggestion3;
+
+    /** 客户_4 */
+    @Excel(name = "客户_4")
+    private String customer4;
 
     /** 通话时长_计划_4 */
     @Excel(name = "通话时长_计划_4")
@@ -382,6 +398,10 @@ public class KhWeeklySummary extends BaseEntity{
     @Excel(name = "经理工作建议_4")
     private String managerWorkSuggestion4;
 
+    /** 客户_5 */
+    @Excel(name = "客户_5")
+    private String customer5;
+
     /** 通话时长_计划_5 */
     @Excel(name = "通话时长_计划_5")
     private String callDurationPlan5;
@@ -465,6 +485,10 @@ public class KhWeeklySummary extends BaseEntity{
     /** 经理工作建议_5 */
     @Excel(name = "经理工作建议_5")
     private String managerWorkSuggestion5;
+
+    /** 客户_6 */
+    @Excel(name = "客户_6")
+    private String customer6;
 
     /** 通话时长_计划_6 */
     @Excel(name = "通话时长_计划_6")
@@ -637,6 +661,13 @@ public class KhWeeklySummary extends BaseEntity{
     public String getCallDurationPlan1() {
         return callDurationPlan1;
     }
+    public void setCustomer1(String customer1) {
+        this.customer1 = customer1;
+    }
+
+    public String getCustomer1() {
+        return customer1;
+    }
     public void setBlindAddPlan1(String blindAddPlan1) {
         this.blindAddPlan1 = blindAddPlan1;
     }
@@ -776,6 +807,13 @@ public class KhWeeklySummary extends BaseEntity{
 
     public String getManagerWorkSuggestion1() {
         return managerWorkSuggestion1;
+    }
+    public void setCustomer2(String customer2) {
+        this.customer2 = customer2;
+    }
+
+    public String getCustomer2() {
+        return customer2;
     }
     public void setCallDurationPlan2(String callDurationPlan2) {
         this.callDurationPlan2 = callDurationPlan2;
@@ -924,6 +962,13 @@ public class KhWeeklySummary extends BaseEntity{
     public String getManagerWorkSuggestion2() {
         return managerWorkSuggestion2;
     }
+    public void setCustomer3(String customer3) {
+        this.customer3 = customer3;
+    }
+
+    public String getCustomer3() {
+        return customer3;
+    }
     public void setCallDurationPlan3(String callDurationPlan3) {
         this.callDurationPlan3 = callDurationPlan3;
     }
@@ -1070,6 +1115,13 @@ public class KhWeeklySummary extends BaseEntity{
 
     public String getManagerWorkSuggestion3() {
         return managerWorkSuggestion3;
+    }
+    public void setCustomer4(String customer4) {
+        this.customer4 = customer4;
+    }
+
+    public String getCustomer4() {
+        return customer4;
     }
     public void setCallDurationPlan4(String callDurationPlan4) {
         this.callDurationPlan4 = callDurationPlan4;
@@ -1218,6 +1270,13 @@ public class KhWeeklySummary extends BaseEntity{
     public String getManagerWorkSuggestion4() {
         return managerWorkSuggestion4;
     }
+    public void setCustomer5(String customer5) {
+        this.customer5 = customer5;
+    }
+
+    public String getCustomer5() {
+        return customer5;
+    }
     public void setCallDurationPlan5(String callDurationPlan5) {
         this.callDurationPlan5 = callDurationPlan5;
     }
@@ -1364,6 +1423,13 @@ public class KhWeeklySummary extends BaseEntity{
 
     public String getManagerWorkSuggestion5() {
         return managerWorkSuggestion5;
+    }
+    public void setCustomer6(String customer6) {
+        this.customer6 = customer6;
+    }
+
+    public String getCustomer6() {
+        return customer6;
     }
     public void setCallDurationPlan6(String callDurationPlan6) {
         this.callDurationPlan6 = callDurationPlan6;
@@ -1567,6 +1633,7 @@ public class KhWeeklySummary extends BaseEntity{
             .append("substandardSolutions", getSubstandardSolutions())
             .append("havingData", getHavingData())
             .append("callDurationPlan1", getCallDurationPlan1())
+            .append("customer1", getCustomer1())
             .append("blindAddPlan1", getBlindAddPlan1())
             .append("addWechatPlan1", getAddWechatPlan1())
             .append("deliverGoodsPlan1", getDeliverGoodsPlan1())
@@ -1587,6 +1654,7 @@ public class KhWeeklySummary extends BaseEntity{
             .append("improvedMethod1", getImprovedMethod1())
             .append("tomorrowPlan1", getTomorrowPlan1())
             .append("managerWorkSuggestion1", getManagerWorkSuggestion1())
+            .append("customer2", getCustomer2())
             .append("callDurationPlan2", getCallDurationPlan2())
             .append("blindAddPlan2", getBlindAddPlan2())
             .append("addWechatPlan2", getAddWechatPlan2())
@@ -1608,6 +1676,7 @@ public class KhWeeklySummary extends BaseEntity{
             .append("improvedMethod2", getImprovedMethod2())
             .append("tomorrowPlan2", getTomorrowPlan2())
             .append("managerWorkSuggestion2", getManagerWorkSuggestion2())
+            .append("customer3", getCustomer3())
             .append("callDurationPlan3", getCallDurationPlan3())
             .append("blindAddPlan3", getBlindAddPlan3())
             .append("addWechatPlan3", getAddWechatPlan3())
@@ -1629,6 +1698,7 @@ public class KhWeeklySummary extends BaseEntity{
             .append("improvedMethod3", getImprovedMethod3())
             .append("tomorrowPlan3", getTomorrowPlan3())
             .append("managerWorkSuggestion3", getManagerWorkSuggestion3())
+            .append("customer4", getCustomer4())
             .append("callDurationPlan4", getCallDurationPlan4())
             .append("blindAddPlan4", getBlindAddPlan4())
             .append("addWechatPlan4", getAddWechatPlan4())
@@ -1650,6 +1720,7 @@ public class KhWeeklySummary extends BaseEntity{
             .append("improvedMethod4", getImprovedMethod4())
             .append("tomorrowPlan4", getTomorrowPlan4())
             .append("managerWorkSuggestion4", getManagerWorkSuggestion4())
+            .append("customer5", getCustomer5())
             .append("callDurationPlan5", getCallDurationPlan5())
             .append("blindAddPlan5", getBlindAddPlan5())
             .append("addWechatPlan5", getAddWechatPlan5())
@@ -1671,6 +1742,7 @@ public class KhWeeklySummary extends BaseEntity{
             .append("improvedMethod5", getImprovedMethod5())
             .append("tomorrowPlan5", getTomorrowPlan5())
             .append("managerWorkSuggestion5", getManagerWorkSuggestion5())
+            .append("customer6", getCustomer6())
             .append("callDurationPlan6", getCallDurationPlan6())
             .append("blindAddPlan6", getBlindAddPlan6())
             .append("addWechatPlan6", getAddWechatPlan6())

@@ -12,9 +12,9 @@
                         <ul>
                             <li class="select-time">
                                 <p>创建时间：</p>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreationTime]"/>
+                                <input type="text" class="time-input" id="beginCreationTime" placeholder="开始时间" name="params[beginCreationTime]"/>
                                 <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreationTime]"/>
+                                <input type="text" class="time-input" id="endCreationTime" placeholder="结束时间" name="params[endCreationTime]"/>
                             </li>
                             <li>
                                 <p>创建人：</p>
@@ -22,15 +22,15 @@
                             </li>
                             <li class="select-time">
                                 <p>开始时间：</p>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginStartTime]"/>
+                                <input type="text" class="time-input" id="beginStartTime" placeholder="开始时间" name="params[beginStartTime]"/>
                                 <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endStartTime]"/>
+                                <input type="text" class="time-input" id="endStartTime" placeholder="结束时间" name="params[endStartTime]"/>
                             </li>
                             <li class="select-time">
                                 <p>结束时间：</p>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginEndTime]"/>
+                                <input type="text" class="time-input" id="beginEndTime" placeholder="开始时间" name="params[beginEndTime]"/>
                                 <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endEndTime]"/>
+                                <input type="text" class="time-input" id="endEndTime" placeholder="结束时间" name="params[endEndTime]"/>
                             </li>
                             <li>
                                 <p>周次：</p>
@@ -46,10 +46,10 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="wxcustomer:weeklySummary:add">
+                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="wxcustomer:weeklySummary:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="wxcustomer:weeklySummary:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="wxcustomer:weeklySummary:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="wxcustomer:weeklySummary:remove">
@@ -87,6 +87,10 @@
                     visible: false
                 },
                 {
+                    field : 'weekly', 
+                    title : '周次'
+                },
+                {
                     field : 'blindAdd', 
                     title : '盲加'
                 },
@@ -112,29 +116,27 @@
                 },
                 {
                     field : 'startTime', 
-                    title : '开始时间'
+                    title : '开始时间',
+                    formatter: function(value, row, index) {
+                    	return $.common.dateFormat(value);
+                    }
                 },
                 {
                     field : 'endTime', 
-                    title : '结束时间'
-                },
-                {
-                    field : 'weekly', 
-                    title : '周次'
-                },
-                {
-                    title: '操作',
-                    align: 'center',
+                    title : '结束时间',
                     formatter: function(value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        return actions.join('');
+                     	return $.common.dateFormat(value);
                     }
-                }]
+                }
+                ]
             };
             $.table.init(options);
         });
+        
+        function openDetail(id) {
+        	$.modal.openTab($.table._option.modalName + "详情", $.operate.editUrl(id));
+        }
+        
     </script>
 </body>
 </html>
