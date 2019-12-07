@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhWeeklyShSummaryMapper">
+    
+    <resultMap type="KhWeeklyShSummary" id="KhWeeklyShSummaryResult">
+        <result property="id"    column="id"    />
+        <result property="clinchDeal"    column="clinch_deal"    />
+        <result property="hairSample"    column="hair_sample"    />
+        <result property="training"    column="training"    />
+        <result property="promotionalActivities"    column="promotional_activities"    />
+        <result property="videoProduction"    column="video_production"    />
+        <result property="saturdayManagerAnalysis"    column="saturday_manager_analysis"    />
+        <result property="substandardSolutions"    column="substandard_solutions"    />
+        <result property="havingData"    column="having_data"    />
+        <result property="customer1"    column="customer_1"    />
+        <result property="hairSamplePlan1"    column="hair_sample_plan_1"    />
+        <result property="clinchDealPlan1"    column="clinch_deal_plan_1"    />
+        <result property="trainingPlan1"    column="training_plan_1"    />
+        <result property="promotionalActivitiesPlan1"    column="promotional_activities_plan_1"    />
+        <result property="videoProductionPlan1"    column="video_production_plan_1"    />
+        <result property="hairBandsRes1"    column="hair_bands_res_1"    />
+        <result property="bossMassTextingRes1"    column="boss_mass_texting_res_1"    />
+        <result property="giveLikeRes1"    column="give_like_res_1"    />
+        <result property="hairSampleRes1"    column="hair_sample_res_1"    />
+        <result property="clinchDealRes1"    column="clinch_deal_res_1"    />
+        <result property="trainingRes1"    column="training_res_1"    />
+        <result property="promotionalActivitiesRes1"    column="promotional_activities_res_1"    />
+        <result property="videoProductionRes1"    column="video_production_res_1"    />
+        <result property="problem1"    column="problem_1"    />
+        <result property="improvedMethod1"    column="Improved_method_1"    />
+        <result property="tomorrowPlan1"    column="tomorrow_plan_1"    />
+        <result property="managerWorkSuggestion1"    column="manager_work_suggestion_1"    />
+        <result property="customer2"    column="customer_2"    />
+        <result property="hairSamplePlan2"    column="hair_sample_plan_2"    />
+        <result property="clinchDealPlan2"    column="clinch_deal_plan_2"    />
+        <result property="trainingPlan2"    column="training_plan_2"    />
+        <result property="promotionalActivitiesPlan2"    column="promotional_activities_plan_2"    />
+        <result property="videoProductionPlan2"    column="video_production_plan_2"    />
+        <result property="hairBandsRes2"    column="hair_bands_res_2"    />
+        <result property="bossMassTextingRes2"    column="boss_mass_texting_res_2"    />
+        <result property="giveLikeRes2"    column="give_like_res_2"    />
+        <result property="hairSampleRes2"    column="hair_sample_res_2"    />
+        <result property="clinchDealRes2"    column="clinch_deal_res_2"    />
+        <result property="trainingRes2"    column="training_res_2"    />
+        <result property="promotionalActivitiesRes2"    column="promotional_activities_res_2"    />
+        <result property="videoProductionRes2"    column="video_production_res_2"    />
+        <result property="problem2"    column="problem_2"    />
+        <result property="improvedMethod2"    column="Improved_method_2"    />
+        <result property="tomorrowPlan2"    column="tomorrow_plan_2"    />
+        <result property="managerWorkSuggestion2"    column="manager_work_suggestion_2"    />
+        <result property="customer3"    column="customer_3"    />
+        <result property="hairSamplePlan3"    column="hair_sample_plan_3"    />
+        <result property="clinchDealPlan3"    column="clinch_deal_plan_3"    />
+        <result property="trainingPlan3"    column="training_plan_3"    />
+        <result property="promotionalActivitiesPlan3"    column="promotional_activities_plan_3"    />
+        <result property="videoProductionPlan3"    column="video_production_plan_3"    />
+        <result property="hairBandsRes3"    column="hair_bands_res_3"    />
+        <result property="bossMassTextingRes3"    column="boss_mass_texting_res_3"    />
+        <result property="giveLikeRes3"    column="give_like_res_3"    />
+        <result property="hairSampleRes3"    column="hair_sample_res_3"    />
+        <result property="clinchDealRes3"    column="clinch_deal_res_3"    />
+        <result property="trainingRes3"    column="training_res_3"    />
+        <result property="promotionalActivitiesRes3"    column="promotional_activities_res_3"    />
+        <result property="videoProductionRes3"    column="video_production_res_3"    />
+        <result property="problem3"    column="problem_3"    />
+        <result property="improvedMethod3"    column="Improved_method_3"    />
+        <result property="tomorrowPlan3"    column="tomorrow_plan_3"    />
+        <result property="managerWorkSuggestion3"    column="manager_work_suggestion_3"    />
+        <result property="customer4"    column="customer_4"    />
+        <result property="hairSamplePlan4"    column="hair_sample_plan_4"    />
+        <result property="clinchDealPlan4"    column="clinch_deal_plan_4"    />
+        <result property="trainingPlan4"    column="training_plan_4"    />
+        <result property="promotionalActivitiesPlan4"    column="promotional_activities_plan_4"    />
+        <result property="videoProductionPlan4"    column="video_production_plan_4"    />
+        <result property="hairBandsRes4"    column="hair_bands_res_4"    />
+        <result property="bossMassTextingRes4"    column="boss_mass_texting_res_4"    />
+        <result property="giveLikeRes4"    column="give_like_res_4"    />
+        <result property="hairSampleRes4"    column="hair_sample_res_4"    />
+        <result property="clinchDealRes4"    column="clinch_deal_res_4"    />
+        <result property="trainingRes4"    column="training_res_4"    />
+        <result property="promotionalActivitiesRes4"    column="promotional_activities_res_4"    />
+        <result property="videoProductionRes4"    column="video_production_res_4"    />
+        <result property="problem4"    column="problem_4"    />
+        <result property="improvedMethod4"    column="Improved_method_4"    />
+        <result property="tomorrowPlan4"    column="tomorrow_plan_4"    />
+        <result property="managerWorkSuggestion4"    column="manager_work_suggestion_4"    />
+        <result property="customer5"    column="customer_5"    />
+        <result property="hairSamplePlan5"    column="hair_sample_plan_5"    />
+        <result property="clinchDealPlan5"    column="clinch_deal_plan_5"    />
+        <result property="trainingPlan5"    column="training_plan_5"    />
+        <result property="promotionalActivitiesPlan5"    column="promotional_activities_plan_5"    />
+        <result property="videoProductionPlan5"    column="video_production_plan_5"    />
+        <result property="hairBandsRes5"    column="hair_bands_res_5"    />
+        <result property="bossMassTextingRes5"    column="boss_mass_texting_res_5"    />
+        <result property="giveLikeRes5"    column="give_like_res_5"    />
+        <result property="hairSampleRes5"    column="hair_sample_res_5"    />
+        <result property="clinchDealRes5"    column="clinch_deal_res_5"    />
+        <result property="trainingRes5"    column="training_res_5"    />
+        <result property="promotionalActivitiesRes5"    column="promotional_activities_res_5"    />
+        <result property="videoProductionRes5"    column="video_production_res_5"    />
+        <result property="problem5"    column="problem_5"    />
+        <result property="improvedMethod5"    column="Improved_method_5"    />
+        <result property="tomorrowPlan5"    column="tomorrow_plan_5"    />
+        <result property="managerWorkSuggestion5"    column="manager_work_suggestion_5"    />
+        <result property="customer6"    column="customer_6"    />
+        <result property="hairSamplePlan6"    column="hair_sample_plan_6"    />
+        <result property="clinchDealPlan6"    column="clinch_deal_plan_6"    />
+        <result property="trainingPlan6"    column="training_plan_6"    />
+        <result property="promotionalActivitiesPlan6"    column="promotional_activities_plan_6"    />
+        <result property="videoProductionPlan6"    column="video_production_plan_6"    />
+        <result property="hairBandsRes6"    column="hair_bands_res_6"    />
+        <result property="bossMassTextingRes6"    column="boss_mass_texting_res_6"    />
+        <result property="giveLikeRes6"    column="give_like_res_6"    />
+        <result property="hairSampleRes6"    column="hair_sample_res_6"    />
+        <result property="clinchDealRes6"    column="clinch_deal_res_6"    />
+        <result property="trainingRes6"    column="training_res_6"    />
+        <result property="promotionalActivitiesRes6"    column="promotional_activities_res_6"    />
+        <result property="videoProductionRes6"    column="video_production_res_6"    />
+        <result property="problem6"    column="problem_6"    />
+        <result property="improvedMethod6"    column="Improved_method_6"    />
+        <result property="tomorrowPlan6"    column="tomorrow_plan_6"    />
+        <result property="managerWorkSuggestion6"    column="manager_work_suggestion_6"    />
+        <result property="creationTime"    column="creation_time"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="weekly"    column="weekly"    />
+    </resultMap>
+
+    <sql id="selectKhWeeklyShSummaryVo">
+        select id, clinch_deal, hair_sample, training, promotional_activities, video_production, saturday_manager_analysis, substandard_solutions, having_data, customer_1, hair_sample_plan_1, clinch_deal_plan_1, training_plan_1, promotional_activities_plan_1, video_production_plan_1, hair_bands_res_1, boss_mass_texting_res_1, give_like_res_1, hair_sample_res_1, clinch_deal_res_1, training_res_1, promotional_activities_res_1, video_production_res_1, problem_1, Improved_method_1, tomorrow_plan_1, manager_work_suggestion_1, customer_2, hair_sample_plan_2, clinch_deal_plan_2, training_plan_2, promotional_activities_plan_2, video_production_plan_2, hair_bands_res_2, boss_mass_texting_res_2, give_like_res_2, hair_sample_res_2, clinch_deal_res_2, training_res_2, promotional_activities_res_2, video_production_res_2, problem_2, Improved_method_2, tomorrow_plan_2, manager_work_suggestion_2, customer_3, hair_sample_plan_3, clinch_deal_plan_3, training_plan_3, promotional_activities_plan_3, video_production_plan_3, hair_bands_res_3, boss_mass_texting_res_3, give_like_res_3, hair_sample_res_3, clinch_deal_res_3, training_res_3, promotional_activities_res_3, video_production_res_3, problem_3, Improved_method_3, tomorrow_plan_3, manager_work_suggestion_3, customer_4, hair_sample_plan_4, clinch_deal_plan_4, training_plan_4, promotional_activities_plan_4, video_production_plan_4, hair_bands_res_4, boss_mass_texting_res_4, give_like_res_4, hair_sample_res_4, clinch_deal_res_4, training_res_4, promotional_activities_res_4, video_production_res_4, problem_4, Improved_method_4, tomorrow_plan_4, manager_work_suggestion_4, customer_5, hair_sample_plan_5, clinch_deal_plan_5, training_plan_5, promotional_activities_plan_5, video_production_plan_5, hair_bands_res_5, boss_mass_texting_res_5, give_like_res_5, hair_sample_res_5, clinch_deal_res_5, training_res_5, promotional_activities_res_5, video_production_res_5, problem_5, Improved_method_5, tomorrow_plan_5, manager_work_suggestion_5, customer_6, hair_sample_plan_6, clinch_deal_plan_6, training_plan_6, promotional_activities_plan_6, video_production_plan_6, hair_bands_res_6, boss_mass_texting_res_6, give_like_res_6, hair_sample_res_6, clinch_deal_res_6, training_res_6, promotional_activities_res_6, video_production_res_6, problem_6, Improved_method_6, tomorrow_plan_6, manager_work_suggestion_6, creation_time, creator_id, creator, start_time, end_time, weekly from kh_weekly_sh_summary
+    </sql>
+
+    <select id="selectKhWeeklyShSummaryList" parameterType="KhWeeklyShSummary" resultMap="KhWeeklyShSummaryResult">
+        <include refid="selectKhWeeklyShSummaryVo"/>
+        <where>  
+            <if test="clinchDeal != null  and clinchDeal != ''"> and clinch_deal = #{clinchDeal}</if>
+            <if test="hairSample != null  and hairSample != ''"> and hair_sample = #{hairSample}</if>
+            <if test="training != null  and training != ''"> and training = #{training}</if>
+            <if test="promotionalActivities != null  and promotionalActivities != ''"> and promotional_activities = #{promotionalActivities}</if>
+            <if test="videoProduction != null  and videoProduction != ''"> and video_production = #{videoProduction}</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''"> and saturday_manager_analysis = #{saturdayManagerAnalysis}</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''"> and substandard_solutions = #{substandardSolutions}</if>
+            <if test="havingData != null  and havingData != ''"> and having_data = #{havingData}</if>
+            <if test="customer1 != null  and customer1 != ''"> and customer_1 = #{customer1}</if>
+            <if test="hairSamplePlan1 != null  and hairSamplePlan1 != ''"> and hair_sample_plan_1 = #{hairSamplePlan1}</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''"> and clinch_deal_plan_1 = #{clinchDealPlan1}</if>
+            <if test="trainingPlan1 != null  and trainingPlan1 != ''"> and training_plan_1 = #{trainingPlan1}</if>
+            <if test="promotionalActivitiesPlan1 != null  and promotionalActivitiesPlan1 != ''"> and promotional_activities_plan_1 = #{promotionalActivitiesPlan1}</if>
+            <if test="videoProductionPlan1 != null  and videoProductionPlan1 != ''"> and video_production_plan_1 = #{videoProductionPlan1}</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''"> and hair_bands_res_1 = #{hairBandsRes1}</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''"> and boss_mass_texting_res_1 = #{bossMassTextingRes1}</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''"> and give_like_res_1 = #{giveLikeRes1}</if>
+            <if test="hairSampleRes1 != null  and hairSampleRes1 != ''"> and hair_sample_res_1 = #{hairSampleRes1}</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''"> and clinch_deal_res_1 = #{clinchDealRes1}</if>
+            <if test="trainingRes1 != null  and trainingRes1 != ''"> and training_res_1 = #{trainingRes1}</if>
+            <if test="promotionalActivitiesRes1 != null  and promotionalActivitiesRes1 != ''"> and promotional_activities_res_1 = #{promotionalActivitiesRes1}</if>
+            <if test="videoProductionRes1 != null  and videoProductionRes1 != ''"> and video_production_res_1 = #{videoProductionRes1}</if>
+            <if test="problem1 != null  and problem1 != ''"> and problem_1 = #{problem1}</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''"> and Improved_method_1 = #{improvedMethod1}</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''"> and tomorrow_plan_1 = #{tomorrowPlan1}</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''"> and manager_work_suggestion_1 = #{managerWorkSuggestion1}</if>
+            <if test="customer2 != null  and customer2 != ''"> and customer_2 = #{customer2}</if>
+            <if test="hairSamplePlan2 != null  and hairSamplePlan2 != ''"> and hair_sample_plan_2 = #{hairSamplePlan2}</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''"> and clinch_deal_plan_2 = #{clinchDealPlan2}</if>
+            <if test="trainingPlan2 != null  and trainingPlan2 != ''"> and training_plan_2 = #{trainingPlan2}</if>
+            <if test="promotionalActivitiesPlan2 != null  and promotionalActivitiesPlan2 != ''"> and promotional_activities_plan_2 = #{promotionalActivitiesPlan2}</if>
+            <if test="videoProductionPlan2 != null  and videoProductionPlan2 != ''"> and video_production_plan_2 = #{videoProductionPlan2}</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''"> and hair_bands_res_2 = #{hairBandsRes2}</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''"> and boss_mass_texting_res_2 = #{bossMassTextingRes2}</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''"> and give_like_res_2 = #{giveLikeRes2}</if>
+            <if test="hairSampleRes2 != null  and hairSampleRes2 != ''"> and hair_sample_res_2 = #{hairSampleRes2}</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''"> and clinch_deal_res_2 = #{clinchDealRes2}</if>
+            <if test="trainingRes2 != null  and trainingRes2 != ''"> and training_res_2 = #{trainingRes2}</if>
+            <if test="promotionalActivitiesRes2 != null  and promotionalActivitiesRes2 != ''"> and promotional_activities_res_2 = #{promotionalActivitiesRes2}</if>
+            <if test="videoProductionRes2 != null  and videoProductionRes2 != ''"> and video_production_res_2 = #{videoProductionRes2}</if>
+            <if test="problem2 != null  and problem2 != ''"> and problem_2 = #{problem2}</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''"> and Improved_method_2 = #{improvedMethod2}</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''"> and tomorrow_plan_2 = #{tomorrowPlan2}</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''"> and manager_work_suggestion_2 = #{managerWorkSuggestion2}</if>
+            <if test="customer3 != null  and customer3 != ''"> and customer_3 = #{customer3}</if>
+            <if test="hairSamplePlan3 != null  and hairSamplePlan3 != ''"> and hair_sample_plan_3 = #{hairSamplePlan3}</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''"> and clinch_deal_plan_3 = #{clinchDealPlan3}</if>
+            <if test="trainingPlan3 != null  and trainingPlan3 != ''"> and training_plan_3 = #{trainingPlan3}</if>
+            <if test="promotionalActivitiesPlan3 != null  and promotionalActivitiesPlan3 != ''"> and promotional_activities_plan_3 = #{promotionalActivitiesPlan3}</if>
+            <if test="videoProductionPlan3 != null  and videoProductionPlan3 != ''"> and video_production_plan_3 = #{videoProductionPlan3}</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''"> and hair_bands_res_3 = #{hairBandsRes3}</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''"> and boss_mass_texting_res_3 = #{bossMassTextingRes3}</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''"> and give_like_res_3 = #{giveLikeRes3}</if>
+            <if test="hairSampleRes3 != null  and hairSampleRes3 != ''"> and hair_sample_res_3 = #{hairSampleRes3}</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''"> and clinch_deal_res_3 = #{clinchDealRes3}</if>
+            <if test="trainingRes3 != null  and trainingRes3 != ''"> and training_res_3 = #{trainingRes3}</if>
+            <if test="promotionalActivitiesRes3 != null  and promotionalActivitiesRes3 != ''"> and promotional_activities_res_3 = #{promotionalActivitiesRes3}</if>
+            <if test="videoProductionRes3 != null  and videoProductionRes3 != ''"> and video_production_res_3 = #{videoProductionRes3}</if>
+            <if test="problem3 != null  and problem3 != ''"> and problem_3 = #{problem3}</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''"> and Improved_method_3 = #{improvedMethod3}</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''"> and tomorrow_plan_3 = #{tomorrowPlan3}</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''"> and manager_work_suggestion_3 = #{managerWorkSuggestion3}</if>
+            <if test="customer4 != null  and customer4 != ''"> and customer_4 = #{customer4}</if>
+            <if test="hairSamplePlan4 != null  and hairSamplePlan4 != ''"> and hair_sample_plan_4 = #{hairSamplePlan4}</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''"> and clinch_deal_plan_4 = #{clinchDealPlan4}</if>
+            <if test="trainingPlan4 != null  and trainingPlan4 != ''"> and training_plan_4 = #{trainingPlan4}</if>
+            <if test="promotionalActivitiesPlan4 != null  and promotionalActivitiesPlan4 != ''"> and promotional_activities_plan_4 = #{promotionalActivitiesPlan4}</if>
+            <if test="videoProductionPlan4 != null  and videoProductionPlan4 != ''"> and video_production_plan_4 = #{videoProductionPlan4}</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''"> and hair_bands_res_4 = #{hairBandsRes4}</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''"> and boss_mass_texting_res_4 = #{bossMassTextingRes4}</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''"> and give_like_res_4 = #{giveLikeRes4}</if>
+            <if test="hairSampleRes4 != null  and hairSampleRes4 != ''"> and hair_sample_res_4 = #{hairSampleRes4}</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''"> and clinch_deal_res_4 = #{clinchDealRes4}</if>
+            <if test="trainingRes4 != null  and trainingRes4 != ''"> and training_res_4 = #{trainingRes4}</if>
+            <if test="promotionalActivitiesRes4 != null  and promotionalActivitiesRes4 != ''"> and promotional_activities_res_4 = #{promotionalActivitiesRes4}</if>
+            <if test="videoProductionRes4 != null  and videoProductionRes4 != ''"> and video_production_res_4 = #{videoProductionRes4}</if>
+            <if test="problem4 != null  and problem4 != ''"> and problem_4 = #{problem4}</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''"> and Improved_method_4 = #{improvedMethod4}</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''"> and tomorrow_plan_4 = #{tomorrowPlan4}</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''"> and manager_work_suggestion_4 = #{managerWorkSuggestion4}</if>
+            <if test="customer5 != null  and customer5 != ''"> and customer_5 = #{customer5}</if>
+            <if test="hairSamplePlan5 != null  and hairSamplePlan5 != ''"> and hair_sample_plan_5 = #{hairSamplePlan5}</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''"> and clinch_deal_plan_5 = #{clinchDealPlan5}</if>
+            <if test="trainingPlan5 != null  and trainingPlan5 != ''"> and training_plan_5 = #{trainingPlan5}</if>
+            <if test="promotionalActivitiesPlan5 != null  and promotionalActivitiesPlan5 != ''"> and promotional_activities_plan_5 = #{promotionalActivitiesPlan5}</if>
+            <if test="videoProductionPlan5 != null  and videoProductionPlan5 != ''"> and video_production_plan_5 = #{videoProductionPlan5}</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''"> and hair_bands_res_5 = #{hairBandsRes5}</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''"> and boss_mass_texting_res_5 = #{bossMassTextingRes5}</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''"> and give_like_res_5 = #{giveLikeRes5}</if>
+            <if test="hairSampleRes5 != null  and hairSampleRes5 != ''"> and hair_sample_res_5 = #{hairSampleRes5}</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''"> and clinch_deal_res_5 = #{clinchDealRes5}</if>
+            <if test="trainingRes5 != null  and trainingRes5 != ''"> and training_res_5 = #{trainingRes5}</if>
+            <if test="promotionalActivitiesRes5 != null  and promotionalActivitiesRes5 != ''"> and promotional_activities_res_5 = #{promotionalActivitiesRes5}</if>
+            <if test="videoProductionRes5 != null  and videoProductionRes5 != ''"> and video_production_res_5 = #{videoProductionRes5}</if>
+            <if test="problem5 != null  and problem5 != ''"> and problem_5 = #{problem5}</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''"> and Improved_method_5 = #{improvedMethod5}</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''"> and tomorrow_plan_5 = #{tomorrowPlan5}</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''"> and manager_work_suggestion_5 = #{managerWorkSuggestion5}</if>
+            <if test="customer6 != null  and customer6 != ''"> and customer_6 = #{customer6}</if>
+            <if test="hairSamplePlan6 != null  and hairSamplePlan6 != ''"> and hair_sample_plan_6 = #{hairSamplePlan6}</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''"> and clinch_deal_plan_6 = #{clinchDealPlan6}</if>
+            <if test="trainingPlan6 != null  and trainingPlan6 != ''"> and training_plan_6 = #{trainingPlan6}</if>
+            <if test="promotionalActivitiesPlan6 != null  and promotionalActivitiesPlan6 != ''"> and promotional_activities_plan_6 = #{promotionalActivitiesPlan6}</if>
+            <if test="videoProductionPlan6 != null  and videoProductionPlan6 != ''"> and video_production_plan_6 = #{videoProductionPlan6}</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''"> and hair_bands_res_6 = #{hairBandsRes6}</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''"> and boss_mass_texting_res_6 = #{bossMassTextingRes6}</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''"> and give_like_res_6 = #{giveLikeRes6}</if>
+            <if test="hairSampleRes6 != null  and hairSampleRes6 != ''"> and hair_sample_res_6 = #{hairSampleRes6}</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''"> and clinch_deal_res_6 = #{clinchDealRes6}</if>
+            <if test="trainingRes6 != null  and trainingRes6 != ''"> and training_res_6 = #{trainingRes6}</if>
+            <if test="promotionalActivitiesRes6 != null  and promotionalActivitiesRes6 != ''"> and promotional_activities_res_6 = #{promotionalActivitiesRes6}</if>
+            <if test="videoProductionRes6 != null  and videoProductionRes6 != ''"> and video_production_res_6 = #{videoProductionRes6}</if>
+            <if test="problem6 != null  and problem6 != ''"> and problem_6 = #{problem6}</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''"> and Improved_method_6 = #{improvedMethod6}</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''"> and tomorrow_plan_6 = #{tomorrowPlan6}</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''"> and manager_work_suggestion_6 = #{managerWorkSuggestion6}</if>
+            <if test="creationTime != null "> and creation_time = #{creationTime}</if>
+            <if test="creatorId != null  and creatorId != ''"> and creator_id = #{creatorId}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="weekly != null  and weekly != ''"> and weekly = #{weekly}</if>
+        </where>
+    </select>
+    
+    <select id="selectKhWeeklyShSummaryById" parameterType="String" resultMap="KhWeeklyShSummaryResult">
+        <include refid="selectKhWeeklyShSummaryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKhWeeklyShSummary" parameterType="KhWeeklyShSummary">
+        insert into kh_weekly_sh_summary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="clinchDeal != null  and clinchDeal != ''">clinch_deal,</if>
+            <if test="hairSample != null  and hairSample != ''">hair_sample,</if>
+            <if test="training != null  and training != ''">training,</if>
+            <if test="promotionalActivities != null  and promotionalActivities != ''">promotional_activities,</if>
+            <if test="videoProduction != null  and videoProduction != ''">video_production,</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''">saturday_manager_analysis,</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''">substandard_solutions,</if>
+            <if test="havingData != null  and havingData != ''">having_data,</if>
+            <if test="customer1 != null  and customer1 != ''">customer_1,</if>
+            <if test="hairSamplePlan1 != null  and hairSamplePlan1 != ''">hair_sample_plan_1,</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''">clinch_deal_plan_1,</if>
+            <if test="trainingPlan1 != null  and trainingPlan1 != ''">training_plan_1,</if>
+            <if test="promotionalActivitiesPlan1 != null  and promotionalActivitiesPlan1 != ''">promotional_activities_plan_1,</if>
+            <if test="videoProductionPlan1 != null  and videoProductionPlan1 != ''">video_production_plan_1,</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''">hair_bands_res_1,</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''">boss_mass_texting_res_1,</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''">give_like_res_1,</if>
+            <if test="hairSampleRes1 != null  and hairSampleRes1 != ''">hair_sample_res_1,</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''">clinch_deal_res_1,</if>
+            <if test="trainingRes1 != null  and trainingRes1 != ''">training_res_1,</if>
+            <if test="promotionalActivitiesRes1 != null  and promotionalActivitiesRes1 != ''">promotional_activities_res_1,</if>
+            <if test="videoProductionRes1 != null  and videoProductionRes1 != ''">video_production_res_1,</if>
+            <if test="problem1 != null  and problem1 != ''">problem_1,</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''">Improved_method_1,</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">tomorrow_plan_1,</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">manager_work_suggestion_1,</if>
+            <if test="customer2 != null  and customer2 != ''">customer_2,</if>
+            <if test="hairSamplePlan2 != null  and hairSamplePlan2 != ''">hair_sample_plan_2,</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''">clinch_deal_plan_2,</if>
+            <if test="trainingPlan2 != null  and trainingPlan2 != ''">training_plan_2,</if>
+            <if test="promotionalActivitiesPlan2 != null  and promotionalActivitiesPlan2 != ''">promotional_activities_plan_2,</if>
+            <if test="videoProductionPlan2 != null  and videoProductionPlan2 != ''">video_production_plan_2,</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''">hair_bands_res_2,</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''">boss_mass_texting_res_2,</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''">give_like_res_2,</if>
+            <if test="hairSampleRes2 != null  and hairSampleRes2 != ''">hair_sample_res_2,</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''">clinch_deal_res_2,</if>
+            <if test="trainingRes2 != null  and trainingRes2 != ''">training_res_2,</if>
+            <if test="promotionalActivitiesRes2 != null  and promotionalActivitiesRes2 != ''">promotional_activities_res_2,</if>
+            <if test="videoProductionRes2 != null  and videoProductionRes2 != ''">video_production_res_2,</if>
+            <if test="problem2 != null  and problem2 != ''">problem_2,</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''">Improved_method_2,</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">tomorrow_plan_2,</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">manager_work_suggestion_2,</if>
+            <if test="customer3 != null  and customer3 != ''">customer_3,</if>
+            <if test="hairSamplePlan3 != null  and hairSamplePlan3 != ''">hair_sample_plan_3,</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''">clinch_deal_plan_3,</if>
+            <if test="trainingPlan3 != null  and trainingPlan3 != ''">training_plan_3,</if>
+            <if test="promotionalActivitiesPlan3 != null  and promotionalActivitiesPlan3 != ''">promotional_activities_plan_3,</if>
+            <if test="videoProductionPlan3 != null  and videoProductionPlan3 != ''">video_production_plan_3,</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''">hair_bands_res_3,</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''">boss_mass_texting_res_3,</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''">give_like_res_3,</if>
+            <if test="hairSampleRes3 != null  and hairSampleRes3 != ''">hair_sample_res_3,</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''">clinch_deal_res_3,</if>
+            <if test="trainingRes3 != null  and trainingRes3 != ''">training_res_3,</if>
+            <if test="promotionalActivitiesRes3 != null  and promotionalActivitiesRes3 != ''">promotional_activities_res_3,</if>
+            <if test="videoProductionRes3 != null  and videoProductionRes3 != ''">video_production_res_3,</if>
+            <if test="problem3 != null  and problem3 != ''">problem_3,</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''">Improved_method_3,</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">tomorrow_plan_3,</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">manager_work_suggestion_3,</if>
+            <if test="customer4 != null  and customer4 != ''">customer_4,</if>
+            <if test="hairSamplePlan4 != null  and hairSamplePlan4 != ''">hair_sample_plan_4,</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''">clinch_deal_plan_4,</if>
+            <if test="trainingPlan4 != null  and trainingPlan4 != ''">training_plan_4,</if>
+            <if test="promotionalActivitiesPlan4 != null  and promotionalActivitiesPlan4 != ''">promotional_activities_plan_4,</if>
+            <if test="videoProductionPlan4 != null  and videoProductionPlan4 != ''">video_production_plan_4,</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''">hair_bands_res_4,</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''">boss_mass_texting_res_4,</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''">give_like_res_4,</if>
+            <if test="hairSampleRes4 != null  and hairSampleRes4 != ''">hair_sample_res_4,</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''">clinch_deal_res_4,</if>
+            <if test="trainingRes4 != null  and trainingRes4 != ''">training_res_4,</if>
+            <if test="promotionalActivitiesRes4 != null  and promotionalActivitiesRes4 != ''">promotional_activities_res_4,</if>
+            <if test="videoProductionRes4 != null  and videoProductionRes4 != ''">video_production_res_4,</if>
+            <if test="problem4 != null  and problem4 != ''">problem_4,</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''">Improved_method_4,</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">tomorrow_plan_4,</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">manager_work_suggestion_4,</if>
+            <if test="customer5 != null  and customer5 != ''">customer_5,</if>
+            <if test="hairSamplePlan5 != null  and hairSamplePlan5 != ''">hair_sample_plan_5,</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''">clinch_deal_plan_5,</if>
+            <if test="trainingPlan5 != null  and trainingPlan5 != ''">training_plan_5,</if>
+            <if test="promotionalActivitiesPlan5 != null  and promotionalActivitiesPlan5 != ''">promotional_activities_plan_5,</if>
+            <if test="videoProductionPlan5 != null  and videoProductionPlan5 != ''">video_production_plan_5,</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''">hair_bands_res_5,</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''">boss_mass_texting_res_5,</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''">give_like_res_5,</if>
+            <if test="hairSampleRes5 != null  and hairSampleRes5 != ''">hair_sample_res_5,</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''">clinch_deal_res_5,</if>
+            <if test="trainingRes5 != null  and trainingRes5 != ''">training_res_5,</if>
+            <if test="promotionalActivitiesRes5 != null  and promotionalActivitiesRes5 != ''">promotional_activities_res_5,</if>
+            <if test="videoProductionRes5 != null  and videoProductionRes5 != ''">video_production_res_5,</if>
+            <if test="problem5 != null  and problem5 != ''">problem_5,</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''">Improved_method_5,</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">tomorrow_plan_5,</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">manager_work_suggestion_5,</if>
+            <if test="customer6 != null  and customer6 != ''">customer_6,</if>
+            <if test="hairSamplePlan6 != null  and hairSamplePlan6 != ''">hair_sample_plan_6,</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''">clinch_deal_plan_6,</if>
+            <if test="trainingPlan6 != null  and trainingPlan6 != ''">training_plan_6,</if>
+            <if test="promotionalActivitiesPlan6 != null  and promotionalActivitiesPlan6 != ''">promotional_activities_plan_6,</if>
+            <if test="videoProductionPlan6 != null  and videoProductionPlan6 != ''">video_production_plan_6,</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''">hair_bands_res_6,</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''">boss_mass_texting_res_6,</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''">give_like_res_6,</if>
+            <if test="hairSampleRes6 != null  and hairSampleRes6 != ''">hair_sample_res_6,</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''">clinch_deal_res_6,</if>
+            <if test="trainingRes6 != null  and trainingRes6 != ''">training_res_6,</if>
+            <if test="promotionalActivitiesRes6 != null  and promotionalActivitiesRes6 != ''">promotional_activities_res_6,</if>
+            <if test="videoProductionRes6 != null  and videoProductionRes6 != ''">video_production_res_6,</if>
+            <if test="problem6 != null  and problem6 != ''">problem_6,</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''">Improved_method_6,</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''">tomorrow_plan_6,</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''">manager_work_suggestion_6,</if>
+            <if test="creationTime != null ">creation_time,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+            <if test="creator != null  and creator != ''">creator,</if>
+            <if test="startTime != null ">start_time,</if>
+            <if test="endTime != null ">end_time,</if>
+            <if test="weekly != null  and weekly != ''">weekly,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="clinchDeal != null  and clinchDeal != ''">#{clinchDeal},</if>
+            <if test="hairSample != null  and hairSample != ''">#{hairSample},</if>
+            <if test="training != null  and training != ''">#{training},</if>
+            <if test="promotionalActivities != null  and promotionalActivities != ''">#{promotionalActivities},</if>
+            <if test="videoProduction != null  and videoProduction != ''">#{videoProduction},</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''">#{saturdayManagerAnalysis},</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''">#{substandardSolutions},</if>
+            <if test="havingData != null  and havingData != ''">#{havingData},</if>
+            <if test="customer1 != null  and customer1 != ''">#{customer1},</if>
+            <if test="hairSamplePlan1 != null  and hairSamplePlan1 != ''">#{hairSamplePlan1},</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''">#{clinchDealPlan1},</if>
+            <if test="trainingPlan1 != null  and trainingPlan1 != ''">#{trainingPlan1},</if>
+            <if test="promotionalActivitiesPlan1 != null  and promotionalActivitiesPlan1 != ''">#{promotionalActivitiesPlan1},</if>
+            <if test="videoProductionPlan1 != null  and videoProductionPlan1 != ''">#{videoProductionPlan1},</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''">#{hairBandsRes1},</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''">#{bossMassTextingRes1},</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''">#{giveLikeRes1},</if>
+            <if test="hairSampleRes1 != null  and hairSampleRes1 != ''">#{hairSampleRes1},</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''">#{clinchDealRes1},</if>
+            <if test="trainingRes1 != null  and trainingRes1 != ''">#{trainingRes1},</if>
+            <if test="promotionalActivitiesRes1 != null  and promotionalActivitiesRes1 != ''">#{promotionalActivitiesRes1},</if>
+            <if test="videoProductionRes1 != null  and videoProductionRes1 != ''">#{videoProductionRes1},</if>
+            <if test="problem1 != null  and problem1 != ''">#{problem1},</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''">#{improvedMethod1},</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">#{tomorrowPlan1},</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">#{managerWorkSuggestion1},</if>
+            <if test="customer2 != null  and customer2 != ''">#{customer2},</if>
+            <if test="hairSamplePlan2 != null  and hairSamplePlan2 != ''">#{hairSamplePlan2},</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''">#{clinchDealPlan2},</if>
+            <if test="trainingPlan2 != null  and trainingPlan2 != ''">#{trainingPlan2},</if>
+            <if test="promotionalActivitiesPlan2 != null  and promotionalActivitiesPlan2 != ''">#{promotionalActivitiesPlan2},</if>
+            <if test="videoProductionPlan2 != null  and videoProductionPlan2 != ''">#{videoProductionPlan2},</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''">#{hairBandsRes2},</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''">#{bossMassTextingRes2},</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''">#{giveLikeRes2},</if>
+            <if test="hairSampleRes2 != null  and hairSampleRes2 != ''">#{hairSampleRes2},</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''">#{clinchDealRes2},</if>
+            <if test="trainingRes2 != null  and trainingRes2 != ''">#{trainingRes2},</if>
+            <if test="promotionalActivitiesRes2 != null  and promotionalActivitiesRes2 != ''">#{promotionalActivitiesRes2},</if>
+            <if test="videoProductionRes2 != null  and videoProductionRes2 != ''">#{videoProductionRes2},</if>
+            <if test="problem2 != null  and problem2 != ''">#{problem2},</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''">#{improvedMethod2},</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">#{tomorrowPlan2},</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">#{managerWorkSuggestion2},</if>
+            <if test="customer3 != null  and customer3 != ''">#{customer3},</if>
+            <if test="hairSamplePlan3 != null  and hairSamplePlan3 != ''">#{hairSamplePlan3},</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''">#{clinchDealPlan3},</if>
+            <if test="trainingPlan3 != null  and trainingPlan3 != ''">#{trainingPlan3},</if>
+            <if test="promotionalActivitiesPlan3 != null  and promotionalActivitiesPlan3 != ''">#{promotionalActivitiesPlan3},</if>
+            <if test="videoProductionPlan3 != null  and videoProductionPlan3 != ''">#{videoProductionPlan3},</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''">#{hairBandsRes3},</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''">#{bossMassTextingRes3},</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''">#{giveLikeRes3},</if>
+            <if test="hairSampleRes3 != null  and hairSampleRes3 != ''">#{hairSampleRes3},</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''">#{clinchDealRes3},</if>
+            <if test="trainingRes3 != null  and trainingRes3 != ''">#{trainingRes3},</if>
+            <if test="promotionalActivitiesRes3 != null  and promotionalActivitiesRes3 != ''">#{promotionalActivitiesRes3},</if>
+            <if test="videoProductionRes3 != null  and videoProductionRes3 != ''">#{videoProductionRes3},</if>
+            <if test="problem3 != null  and problem3 != ''">#{problem3},</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''">#{improvedMethod3},</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">#{tomorrowPlan3},</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">#{managerWorkSuggestion3},</if>
+            <if test="customer4 != null  and customer4 != ''">#{customer4},</if>
+            <if test="hairSamplePlan4 != null  and hairSamplePlan4 != ''">#{hairSamplePlan4},</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''">#{clinchDealPlan4},</if>
+            <if test="trainingPlan4 != null  and trainingPlan4 != ''">#{trainingPlan4},</if>
+            <if test="promotionalActivitiesPlan4 != null  and promotionalActivitiesPlan4 != ''">#{promotionalActivitiesPlan4},</if>
+            <if test="videoProductionPlan4 != null  and videoProductionPlan4 != ''">#{videoProductionPlan4},</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''">#{hairBandsRes4},</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''">#{bossMassTextingRes4},</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''">#{giveLikeRes4},</if>
+            <if test="hairSampleRes4 != null  and hairSampleRes4 != ''">#{hairSampleRes4},</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''">#{clinchDealRes4},</if>
+            <if test="trainingRes4 != null  and trainingRes4 != ''">#{trainingRes4},</if>
+            <if test="promotionalActivitiesRes4 != null  and promotionalActivitiesRes4 != ''">#{promotionalActivitiesRes4},</if>
+            <if test="videoProductionRes4 != null  and videoProductionRes4 != ''">#{videoProductionRes4},</if>
+            <if test="problem4 != null  and problem4 != ''">#{problem4},</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''">#{improvedMethod4},</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">#{tomorrowPlan4},</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">#{managerWorkSuggestion4},</if>
+            <if test="customer5 != null  and customer5 != ''">#{customer5},</if>
+            <if test="hairSamplePlan5 != null  and hairSamplePlan5 != ''">#{hairSamplePlan5},</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''">#{clinchDealPlan5},</if>
+            <if test="trainingPlan5 != null  and trainingPlan5 != ''">#{trainingPlan5},</if>
+            <if test="promotionalActivitiesPlan5 != null  and promotionalActivitiesPlan5 != ''">#{promotionalActivitiesPlan5},</if>
+            <if test="videoProductionPlan5 != null  and videoProductionPlan5 != ''">#{videoProductionPlan5},</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''">#{hairBandsRes5},</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''">#{bossMassTextingRes5},</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''">#{giveLikeRes5},</if>
+            <if test="hairSampleRes5 != null  and hairSampleRes5 != ''">#{hairSampleRes5},</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''">#{clinchDealRes5},</if>
+            <if test="trainingRes5 != null  and trainingRes5 != ''">#{trainingRes5},</if>
+            <if test="promotionalActivitiesRes5 != null  and promotionalActivitiesRes5 != ''">#{promotionalActivitiesRes5},</if>
+            <if test="videoProductionRes5 != null  and videoProductionRes5 != ''">#{videoProductionRes5},</if>
+            <if test="problem5 != null  and problem5 != ''">#{problem5},</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''">#{improvedMethod5},</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">#{tomorrowPlan5},</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">#{managerWorkSuggestion5},</if>
+            <if test="customer6 != null  and customer6 != ''">#{customer6},</if>
+            <if test="hairSamplePlan6 != null  and hairSamplePlan6 != ''">#{hairSamplePlan6},</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''">#{clinchDealPlan6},</if>
+            <if test="trainingPlan6 != null  and trainingPlan6 != ''">#{trainingPlan6},</if>
+            <if test="promotionalActivitiesPlan6 != null  and promotionalActivitiesPlan6 != ''">#{promotionalActivitiesPlan6},</if>
+            <if test="videoProductionPlan6 != null  and videoProductionPlan6 != ''">#{videoProductionPlan6},</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''">#{hairBandsRes6},</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''">#{bossMassTextingRes6},</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''">#{giveLikeRes6},</if>
+            <if test="hairSampleRes6 != null  and hairSampleRes6 != ''">#{hairSampleRes6},</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''">#{clinchDealRes6},</if>
+            <if test="trainingRes6 != null  and trainingRes6 != ''">#{trainingRes6},</if>
+            <if test="promotionalActivitiesRes6 != null  and promotionalActivitiesRes6 != ''">#{promotionalActivitiesRes6},</if>
+            <if test="videoProductionRes6 != null  and videoProductionRes6 != ''">#{videoProductionRes6},</if>
+            <if test="problem6 != null  and problem6 != ''">#{problem6},</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''">#{improvedMethod6},</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''">#{tomorrowPlan6},</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''">#{managerWorkSuggestion6},</if>
+            <if test="creationTime != null ">#{creationTime},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+            <if test="creator != null  and creator != ''">#{creator},</if>
+            <if test="startTime != null ">#{startTime},</if>
+            <if test="endTime != null ">#{endTime},</if>
+            <if test="weekly != null  and weekly != ''">#{weekly},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKhWeeklyShSummary" parameterType="KhWeeklyShSummary">
+        update kh_weekly_sh_summary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clinchDeal != null  and clinchDeal != ''">clinch_deal = #{clinchDeal},</if>
+            <if test="hairSample != null  and hairSample != ''">hair_sample = #{hairSample},</if>
+            <if test="training != null  and training != ''">training = #{training},</if>
+            <if test="promotionalActivities != null  and promotionalActivities != ''">promotional_activities = #{promotionalActivities},</if>
+            <if test="videoProduction != null  and videoProduction != ''">video_production = #{videoProduction},</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''">saturday_manager_analysis = #{saturdayManagerAnalysis},</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''">substandard_solutions = #{substandardSolutions},</if>
+            <if test="havingData != null  and havingData != ''">having_data = #{havingData},</if>
+            <if test="customer1 != null  and customer1 != ''">customer_1 = #{customer1},</if>
+            <if test="hairSamplePlan1 != null  and hairSamplePlan1 != ''">hair_sample_plan_1 = #{hairSamplePlan1},</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''">clinch_deal_plan_1 = #{clinchDealPlan1},</if>
+            <if test="trainingPlan1 != null  and trainingPlan1 != ''">training_plan_1 = #{trainingPlan1},</if>
+            <if test="promotionalActivitiesPlan1 != null  and promotionalActivitiesPlan1 != ''">promotional_activities_plan_1 = #{promotionalActivitiesPlan1},</if>
+            <if test="videoProductionPlan1 != null  and videoProductionPlan1 != ''">video_production_plan_1 = #{videoProductionPlan1},</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''">hair_bands_res_1 = #{hairBandsRes1},</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''">boss_mass_texting_res_1 = #{bossMassTextingRes1},</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''">give_like_res_1 = #{giveLikeRes1},</if>
+            <if test="hairSampleRes1 != null  and hairSampleRes1 != ''">hair_sample_res_1 = #{hairSampleRes1},</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''">clinch_deal_res_1 = #{clinchDealRes1},</if>
+            <if test="trainingRes1 != null  and trainingRes1 != ''">training_res_1 = #{trainingRes1},</if>
+            <if test="promotionalActivitiesRes1 != null  and promotionalActivitiesRes1 != ''">promotional_activities_res_1 = #{promotionalActivitiesRes1},</if>
+            <if test="videoProductionRes1 != null  and videoProductionRes1 != ''">video_production_res_1 = #{videoProductionRes1},</if>
+            <if test="problem1 != null  and problem1 != ''">problem_1 = #{problem1},</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''">Improved_method_1 = #{improvedMethod1},</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">tomorrow_plan_1 = #{tomorrowPlan1},</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">manager_work_suggestion_1 = #{managerWorkSuggestion1},</if>
+            <if test="customer2 != null  and customer2 != ''">customer_2 = #{customer2},</if>
+            <if test="hairSamplePlan2 != null  and hairSamplePlan2 != ''">hair_sample_plan_2 = #{hairSamplePlan2},</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''">clinch_deal_plan_2 = #{clinchDealPlan2},</if>
+            <if test="trainingPlan2 != null  and trainingPlan2 != ''">training_plan_2 = #{trainingPlan2},</if>
+            <if test="promotionalActivitiesPlan2 != null  and promotionalActivitiesPlan2 != ''">promotional_activities_plan_2 = #{promotionalActivitiesPlan2},</if>
+            <if test="videoProductionPlan2 != null  and videoProductionPlan2 != ''">video_production_plan_2 = #{videoProductionPlan2},</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''">hair_bands_res_2 = #{hairBandsRes2},</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''">boss_mass_texting_res_2 = #{bossMassTextingRes2},</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''">give_like_res_2 = #{giveLikeRes2},</if>
+            <if test="hairSampleRes2 != null  and hairSampleRes2 != ''">hair_sample_res_2 = #{hairSampleRes2},</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''">clinch_deal_res_2 = #{clinchDealRes2},</if>
+            <if test="trainingRes2 != null  and trainingRes2 != ''">training_res_2 = #{trainingRes2},</if>
+            <if test="promotionalActivitiesRes2 != null  and promotionalActivitiesRes2 != ''">promotional_activities_res_2 = #{promotionalActivitiesRes2},</if>
+            <if test="videoProductionRes2 != null  and videoProductionRes2 != ''">video_production_res_2 = #{videoProductionRes2},</if>
+            <if test="problem2 != null  and problem2 != ''">problem_2 = #{problem2},</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''">Improved_method_2 = #{improvedMethod2},</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">tomorrow_plan_2 = #{tomorrowPlan2},</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">manager_work_suggestion_2 = #{managerWorkSuggestion2},</if>
+            <if test="customer3 != null  and customer3 != ''">customer_3 = #{customer3},</if>
+            <if test="hairSamplePlan3 != null  and hairSamplePlan3 != ''">hair_sample_plan_3 = #{hairSamplePlan3},</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''">clinch_deal_plan_3 = #{clinchDealPlan3},</if>
+            <if test="trainingPlan3 != null  and trainingPlan3 != ''">training_plan_3 = #{trainingPlan3},</if>
+            <if test="promotionalActivitiesPlan3 != null  and promotionalActivitiesPlan3 != ''">promotional_activities_plan_3 = #{promotionalActivitiesPlan3},</if>
+            <if test="videoProductionPlan3 != null  and videoProductionPlan3 != ''">video_production_plan_3 = #{videoProductionPlan3},</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''">hair_bands_res_3 = #{hairBandsRes3},</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''">boss_mass_texting_res_3 = #{bossMassTextingRes3},</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''">give_like_res_3 = #{giveLikeRes3},</if>
+            <if test="hairSampleRes3 != null  and hairSampleRes3 != ''">hair_sample_res_3 = #{hairSampleRes3},</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''">clinch_deal_res_3 = #{clinchDealRes3},</if>
+            <if test="trainingRes3 != null  and trainingRes3 != ''">training_res_3 = #{trainingRes3},</if>
+            <if test="promotionalActivitiesRes3 != null  and promotionalActivitiesRes3 != ''">promotional_activities_res_3 = #{promotionalActivitiesRes3},</if>
+            <if test="videoProductionRes3 != null  and videoProductionRes3 != ''">video_production_res_3 = #{videoProductionRes3},</if>
+            <if test="problem3 != null  and problem3 != ''">problem_3 = #{problem3},</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''">Improved_method_3 = #{improvedMethod3},</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">tomorrow_plan_3 = #{tomorrowPlan3},</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">manager_work_suggestion_3 = #{managerWorkSuggestion3},</if>
+            <if test="customer4 != null  and customer4 != ''">customer_4 = #{customer4},</if>
+            <if test="hairSamplePlan4 != null  and hairSamplePlan4 != ''">hair_sample_plan_4 = #{hairSamplePlan4},</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''">clinch_deal_plan_4 = #{clinchDealPlan4},</if>
+            <if test="trainingPlan4 != null  and trainingPlan4 != ''">training_plan_4 = #{trainingPlan4},</if>
+            <if test="promotionalActivitiesPlan4 != null  and promotionalActivitiesPlan4 != ''">promotional_activities_plan_4 = #{promotionalActivitiesPlan4},</if>
+            <if test="videoProductionPlan4 != null  and videoProductionPlan4 != ''">video_production_plan_4 = #{videoProductionPlan4},</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''">hair_bands_res_4 = #{hairBandsRes4},</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''">boss_mass_texting_res_4 = #{bossMassTextingRes4},</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''">give_like_res_4 = #{giveLikeRes4},</if>
+            <if test="hairSampleRes4 != null  and hairSampleRes4 != ''">hair_sample_res_4 = #{hairSampleRes4},</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''">clinch_deal_res_4 = #{clinchDealRes4},</if>
+            <if test="trainingRes4 != null  and trainingRes4 != ''">training_res_4 = #{trainingRes4},</if>
+            <if test="promotionalActivitiesRes4 != null  and promotionalActivitiesRes4 != ''">promotional_activities_res_4 = #{promotionalActivitiesRes4},</if>
+            <if test="videoProductionRes4 != null  and videoProductionRes4 != ''">video_production_res_4 = #{videoProductionRes4},</if>
+            <if test="problem4 != null  and problem4 != ''">problem_4 = #{problem4},</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''">Improved_method_4 = #{improvedMethod4},</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">tomorrow_plan_4 = #{tomorrowPlan4},</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">manager_work_suggestion_4 = #{managerWorkSuggestion4},</if>
+            <if test="customer5 != null  and customer5 != ''">customer_5 = #{customer5},</if>
+            <if test="hairSamplePlan5 != null  and hairSamplePlan5 != ''">hair_sample_plan_5 = #{hairSamplePlan5},</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''">clinch_deal_plan_5 = #{clinchDealPlan5},</if>
+            <if test="trainingPlan5 != null  and trainingPlan5 != ''">training_plan_5 = #{trainingPlan5},</if>
+            <if test="promotionalActivitiesPlan5 != null  and promotionalActivitiesPlan5 != ''">promotional_activities_plan_5 = #{promotionalActivitiesPlan5},</if>
+            <if test="videoProductionPlan5 != null  and videoProductionPlan5 != ''">video_production_plan_5 = #{videoProductionPlan5},</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''">hair_bands_res_5 = #{hairBandsRes5},</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''">boss_mass_texting_res_5 = #{bossMassTextingRes5},</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''">give_like_res_5 = #{giveLikeRes5},</if>
+            <if test="hairSampleRes5 != null  and hairSampleRes5 != ''">hair_sample_res_5 = #{hairSampleRes5},</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''">clinch_deal_res_5 = #{clinchDealRes5},</if>
+            <if test="trainingRes5 != null  and trainingRes5 != ''">training_res_5 = #{trainingRes5},</if>
+            <if test="promotionalActivitiesRes5 != null  and promotionalActivitiesRes5 != ''">promotional_activities_res_5 = #{promotionalActivitiesRes5},</if>
+            <if test="videoProductionRes5 != null  and videoProductionRes5 != ''">video_production_res_5 = #{videoProductionRes5},</if>
+            <if test="problem5 != null  and problem5 != ''">problem_5 = #{problem5},</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''">Improved_method_5 = #{improvedMethod5},</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">tomorrow_plan_5 = #{tomorrowPlan5},</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">manager_work_suggestion_5 = #{managerWorkSuggestion5},</if>
+            <if test="customer6 != null  and customer6 != ''">customer_6 = #{customer6},</if>
+            <if test="hairSamplePlan6 != null  and hairSamplePlan6 != ''">hair_sample_plan_6 = #{hairSamplePlan6},</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''">clinch_deal_plan_6 = #{clinchDealPlan6},</if>
+            <if test="trainingPlan6 != null  and trainingPlan6 != ''">training_plan_6 = #{trainingPlan6},</if>
+            <if test="promotionalActivitiesPlan6 != null  and promotionalActivitiesPlan6 != ''">promotional_activities_plan_6 = #{promotionalActivitiesPlan6},</if>
+            <if test="videoProductionPlan6 != null  and videoProductionPlan6 != ''">video_production_plan_6 = #{videoProductionPlan6},</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''">hair_bands_res_6 = #{hairBandsRes6},</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''">boss_mass_texting_res_6 = #{bossMassTextingRes6},</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''">give_like_res_6 = #{giveLikeRes6},</if>
+            <if test="hairSampleRes6 != null  and hairSampleRes6 != ''">hair_sample_res_6 = #{hairSampleRes6},</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''">clinch_deal_res_6 = #{clinchDealRes6},</if>
+            <if test="trainingRes6 != null  and trainingRes6 != ''">training_res_6 = #{trainingRes6},</if>
+            <if test="promotionalActivitiesRes6 != null  and promotionalActivitiesRes6 != ''">promotional_activities_res_6 = #{promotionalActivitiesRes6},</if>
+            <if test="videoProductionRes6 != null  and videoProductionRes6 != ''">video_production_res_6 = #{videoProductionRes6},</if>
+            <if test="problem6 != null  and problem6 != ''">problem_6 = #{problem6},</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''">Improved_method_6 = #{improvedMethod6},</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''">tomorrow_plan_6 = #{tomorrowPlan6},</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''">manager_work_suggestion_6 = #{managerWorkSuggestion6},</if>
+            <if test="creationTime != null ">creation_time = #{creationTime},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+            <if test="creator != null  and creator != ''">creator = #{creator},</if>
+            <if test="startTime != null ">start_time = #{startTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+            <if test="weekly != null  and weekly != ''">weekly = #{weekly},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKhWeeklyShSummaryById" parameterType="String">
+        delete from kh_weekly_sh_summary where id = #{id}
+    </delete>
+
+    <delete id="deleteKhWeeklyShSummaryByIds" parameterType="String">
+        delete from kh_weekly_sh_summary where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

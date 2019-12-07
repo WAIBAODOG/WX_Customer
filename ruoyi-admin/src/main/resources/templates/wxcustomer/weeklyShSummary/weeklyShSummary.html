@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('售后每周工作列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li class="select-time">
+                                <p>创建时间：</p>
+                                <input type="text" class="time-input" id="beginCreationTime" placeholder="开始时间" name="params[beginCreationTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endCreationTime" placeholder="结束时间" name="params[endCreationTime]"/>
+                            </li>
+                            <li>
+                                <p>创建人：</p>
+                                <input type="text" name="creator"/>
+                            </li>
+                            <li class="select-time">
+                                <p>开始时间：</p>
+                                <input type="text" class="time-input" id="beginStartTime" placeholder="开始时间" name="params[beginStartTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endStartTime" placeholder="结束时间" name="params[endStartTime]"/>
+                            </li>
+                            <li class="select-time">
+                                <p>结束时间：</p>
+                                <input type="text" class="time-input" id="beginEndTime" placeholder="开始时间" name="params[beginEndTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endEndTime" placeholder="结束时间" name="params[endEndTime]"/>
+                            </li>
+                            <li>
+                                <p>周次：</p>
+                                <input type="text" name="weekly"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="wxcustomer:weeklyShSummary:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="wxcustomer:weeklyShSummary:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="wxcustomer:weeklyShSummary:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+               <!--  <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="wxcustomer:weeklyShSummary:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a> -->
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('wxcustomer:weeklyShSummary:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('wxcustomer:weeklyShSummary:remove')}]];
+        var prefix = ctx + "wxcustomer/weeklyShSummary";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "售后每周工作",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'id', 
+                    title : 'id',
+                    visible: false
+                },
+                {
+                    field : 'weekly', 
+                    title : '周次'
+                },
+                {
+                    field : 'clinchDeal', 
+                    title : '成交'
+                },
+                {
+                    field : 'promotionalActivities', 
+                    title : '活动促销'
+                },
+                {
+                    field : 'hairSample', 
+                    title : '发样'
+                },
+                {
+                    field : 'videoProduction', 
+                    title : '视频制作'
+                },
+                {
+                    field : 'training', 
+                    title : ' 培训'
+                },
+                {
+                    field : 'creationTime', 
+                    title : '创建时间'
+                },
+                {
+                    field : 'creator', 
+                    title : '创建人'
+                },
+                {
+                    field : 'startTime', 
+                    title : '开始时间',
+                    formatter: function(value, row, index) {
+                    	return $.common.dateFormat(value);
+                    }
+                },
+                {
+                    field : 'endTime', 
+                    title : '结束时间',
+                    formatter: function(value, row, index) {
+                     	return $.common.dateFormat(value);
+                    }
+                }
+                ]
+            };
+            $.table.init(options);
+        });
+        
+        function openDetail(id) {
+        	$.modal.openTab($.table._option.modalName + "详情", $.operate.editUrl(id));
+        }
+        
+    </script>
+</body>
+</html>

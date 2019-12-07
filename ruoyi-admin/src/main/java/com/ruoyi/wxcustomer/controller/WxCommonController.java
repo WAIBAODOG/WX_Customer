@@ -10,10 +10,8 @@
 package com.ruoyi.wxcustomer.controller;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,14 +29,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysDeptService;
 import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.wxcustomer.domain.KhFile;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
 import com.ruoyi.wxcustomer.domain.common.FileInfo;
 import com.ruoyi.wxcustomer.service.IFileService;
@@ -86,6 +83,14 @@ public class WxCommonController extends BaseController {
 	@ResponseBody
 	public TableDataInfo customerList(String requestType, Model model, WechatCustomer wechatCustomer) {
 		startPage();
+		if("weeklyShSummary".equals(requestType)) {
+			wechatCustomer.setSaleId(ShiroUtils.getSysUser().getUserId().toString());
+		}
+		
+		if("weeklySummary".equals(requestType)) {
+			wechatCustomer.setIsSales("0");
+		}
+		
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		return getDataTable(list);
 	}
