@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增微信客户')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <style>
+    	.fixed_header{
+    		width: 2000px;
+		    table-layout: fixed;
+		    border-collapse: collapse;
+		}
+		
+		.fixed_header tbody{
+		  display:block;
+		  width: 100%;
+		  overflow: auto;
+		  height: 400px;
+		}
+		
+		.fixed_header thead tr {
+		   display: block;
+		}
+		
+		.fixed_header thead {
+		  color: black;
+		}
+		
+		.fixed_header th, .fixed_header td {
+		  padding: 5px;
+		  text-align: center;
+		  width: 200px;
+		}
+    	thead {
+		    width: calc( 100% - 1em )
+		}
+    	
+    </style>
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+       <form class="form-horizontal" id="form-weeklySummary-add" style="margin-right: 150px;">
+       	  <input name="id" type="hidden" th:value="${week.id}">
+       	  <input type="hidden" value="" name="weekData" id="weekData" />
+ 		  <input type="hidden" th:value="${isAdd}" name="isAdd" id="isAdd" />    
+ 		  <input name="creatorId" type="hidden"  th:value="${week.creatorId}">
+		  <input name="creator" type="hidden" r th:value="${week.creator}">
+           <div class="form-group">
+	         	<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>期间：</label>
+				<div class="col-sm-4 form-inline">
+                   <input name="startTime" class="form-control" type="text" style="width:48%;"  placeholder="请输入开始时间" readonly required th:value="${#dates.format(week.startTime, 'yyyy-MM-dd')}">
+                   <input name="endTime" class="form-control" type="text" style="width:50%;"  placeholder="请输入结束时间" readonly required th:value="${#dates.format(week.endTime, 'yyyy-MM-dd')}">
+               </div>
+				<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>周次：</label>
+				<div class="col-sm-4">
+					<input name="weekly" class="form-control" type="number" placeholder="请输入周次"  required  th:value="${week.weekly}">
+				</div>
+           </div>
+           
+           <div class="form-group">    
+              	<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>盲加：</label>
+				<div class="col-sm-4">
+					 <input name="blindAdd"  class="form-control" type="text" placeholder="请输入盲加" required   th:value="${week.blindAdd}">
+				</div>
+				<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>加V：</label>
+				<div class="col-sm-4">
+					<input  name="addWechat" class="form-control"  placeholder="请输入加V" type="text" required  th:value="${week.addWechat}">
+				</div>
+           </div>
+           
+           <div class="form-group">    
+	             <label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>发样：</label>
+				<div class="col-sm-4">
+					 <input name="deliverGoods" class="form-control" type="text" placeholder="请输入发样" required   th:value="${week.deliverGoods}">
+				</div>
+				<label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>成交：</label>
+				<div class="col-sm-4">
+					<input  name="clinchDeal" class="form-control" type="text"  placeholder="请输入成交" required  th:value="${week.clinchDeal}">
+				</div>
+           </div>
+           
+           <div class="form-group">
+               <label class="col-sm-2 control-label">周六经理分析：</label>
+               <div class="col-sm-10">
+                   <textarea name="saturdayManagerAnalysis" class="form-control"   th:text=="${week.saturdayManagerAnalysis}"></textarea>
+               </div>
+           </div>
+           
+           <div class="form-group">
+               <label class="col-sm-2 control-label">未达标解决方案：</label>
+               <div class="col-sm-10">
+                   <textarea name="substandardSolutions" class="form-control"    th:text=="${week.substandardSolutions}"></textarea>
+               </div>
+           </div>
+           
+           <div class="form-group">
+               <label class="col-sm-2 control-label">现已有数据：</label>
+               <div class="col-sm-10">
+                   <textarea name="havingData" class="form-control"    th:text=="${week.havingData}"></textarea>
+               </div>
+           </div>
+       </form>
+      
+      <div class="container-div" style="overflow: scroll;">
+		   <div class="row">    
+	             <table class="table table-bordered fixed_header">
+	             		<thead>
+					    <tr>
+					      <th>日期</th>
+					      <th></th>
+					      <th>发圈6条</th>
+					      <th>老板群群发</th>
+					      <th>点赞</th>
+					      <th>通话时长</th>
+					      <th>盲加</th>
+					      <th>加V</th>
+					      <th>发样</th>
+					      <th>意向跟进</th>
+					      <th>成交</th>
+					      <th style="width: 209px;">总微信数量</th>
+					    </tr>
+					  </thead>
+					  <tbody id="weekDataTbody">
+					  	<tr >
+					      <td rowspan="2">周一</td>
+					      <td rowspan="2"><div class="customerData"></div><div style="display: block;"><a href="#" onclick="selectCustomer(this);" >选择客户</a></div></td>
+					      <td>必发（产品，新推荐 每日生活）</td>
+					      <td>必发（早中晚3条不同产品，发朋友的或新品推荐）</td>
+					      <td>必做：需要沟通的和日常点赞</td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="跟进目标：" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					    </tr>
+					    <tr>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					    </tr>
+					    <tr>
+					      <td rowspan="4">总结</td>
+					      <td>问题： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>改进方法： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>明日计划建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>经理工作建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    
+					    <tr>
+					      <td rowspan="2">周二</td>
+					      <td rowspan="2"><div class="customerData"></div><div style="display: block;"><a href="#" onclick="selectCustomer(this);" >选择客户</a></div></td>
+					      <td>必发（产品，新推荐 每日生活）</td>
+					      <td>必发（早中晚3条不同产品，发朋友的或新品推荐）</td>
+					      <td>必做：需要沟通的和日常点赞</td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="跟进目标：" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					    </tr>
+					    <tr>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					    </tr>
+					    <tr>
+					      <td rowspan="4">总结</td>
+					      <td>问题： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>改进方法： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>明日计划建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>经理工作建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    
+					    <tr>
+					      <td rowspan="2">周三</td>
+					      <td rowspan="2"><div class="customerData"></div><div style="display: block;"><a href="#" onclick="selectCustomer(this);" >选择客户</a></div></td>
+					      <td>必发（产品，新推荐 每日生活）</td>
+					      <td>必发（早中晚3条不同产品，发朋友的或新品推荐）</td>
+					      <td>必做：需要沟通的和日常点赞</td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="跟进目标：" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					    </tr>
+					    <tr>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					    </tr>
+					    <tr>
+					      <td rowspan="4">总结</td>
+					      <td>问题： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>改进方法： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>明日计划建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>经理工作建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    
+					    <tr>
+					      <td rowspan="2">周四</td>
+					      <td rowspan="2"><div class="customerData"></div><div style="display: block;"><a href="#" onclick="selectCustomer(this);" >选择客户</a></div></td>
+					      <td>必发（产品，新推荐 每日生活）</td>
+					      <td>必发（早中晚3条不同产品，发朋友的或新品推荐）</td>
+					      <td>必做：需要沟通的和日常点赞</td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="跟进目标：" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					    </tr>
+					    <tr>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					    </tr>
+					    <tr>
+					      <td rowspan="4">总结</td>
+					      <td>问题： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>改进方法： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>明日计划建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>经理工作建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    
+					    <tr>
+					      <td rowspan="2">周五</td>
+					      <td rowspan="2"><div class="customerData"></div><div style="display: block;"><a href="#" onclick="selectCustomer(this);" >选择客户</a></div></td>
+					      <td>必发（产品，新推荐 每日生活）</td>
+					      <td>必发（早中晚3条不同产品，发朋友的或新品推荐）</td>
+					      <td>必做：需要沟通的和日常点赞</td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="跟进目标：" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					    </tr>
+					    <tr>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					    </tr>
+					    <tr>
+					      <td rowspan="4">总结</td>
+					      <td>问题： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>改进方法： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>明日计划建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>经理工作建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    
+					    <tr>
+					      <td rowspan="2">周六</td>
+					      <td rowspan="2"><div class="customerData"></div><div style="display: block;"><a href="#" onclick="selectCustomer(this);" >选择客户</a></div></td>
+					      <td>必发（产品，新推荐 每日生活）</td>
+					      <td>必发（早中晚3条不同产品，发朋友的或新品推荐）</td>
+					      <td>必做：需要沟通的和日常点赞</td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="跟进目标：" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					      <td><input class="form-control" type="text" placeholder="计划:" ></td>
+					    </tr>
+					    <tr>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					      <td><input class="form-control" type="text" placeholder="结果:" ></td>
+					    </tr>
+					    <tr>
+					      <td rowspan="4">总结</td>
+					      <td>问题： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>改进方法： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>明日计划建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    <tr>
+					      <td>经理工作建议： </td>
+					      <td colspan="10"><textarea class="form-control" ></textarea></td>
+					    </tr>
+					    </tbody>
+	             </table>
+		    </div>
+       </div>
+       
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+        </div>
+    </div>
+    
+    <div id="weekDataStr" style="display:none;" th:text="${weekDataStr}"></div>
+    <div id="planFieldArrayStr" style="display:none;" th:text="${planFieldArray}"></div>
+    <div id="resFieldArrayStr" style="display:none;" th:text="${resFieldArray}"></div>
+    <div id="sumFieldArrayStr" style="display:none;" th:text="${sumFieldArray}"></div>
+    
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:inline="javascript">
+    	var prefix = ctx + "wxcustomer/weeklySummary";
+    	var planFieldArray = JSON.parse($.trim($('#planFieldArrayStr').text()));
+        var resFieldArray = JSON.parse($.trim($('#resFieldArrayStr').text()));;
+        var sumFieldArray = JSON.parse($.trim($('#sumFieldArrayStr').text()));;
+        
+        $(function() {
+        	var isAdd = $('#isAdd').val();
+        	if(isAdd != 1) {
+        		renderData(JSON.parse($.trim($('#weekDataStr').text())));
+        	}
+        });
+        
+    	$("input[name='startTime']").datetimepicker({
+        	format: "yyyy-mm-dd",
+        	minView: "month",
+   		    autoclose: true
+        });
+        
+        
+        $("input[name='endTime']").datetimepicker({
+        	format: "yyyy-mm-dd",
+        	minView: "month",
+   		    autoclose: true
+        });
+        
+        $("#form-weeklySummary-add").validate({
+            focusCleanup: true
+        });
+        
+        
+    	var _thisOpenCustomer;
+        function selectCustomer(_this){
+        	_thisOpenCustomer = _this;
+        	$.modal.open('选择客户', "/wxcustomer/common/customer?requestType=weeklySummary");
+        }
+        
+        function getSelectCustomer() {
+        	var data = $(_thisOpenCustomer).closest('td').find('.customerData').text();
+        	if(!data) {
+        		return [];
+        	}
+        	return data.split(',');
+        }
+        
+        function handleSelectCustomer(selectCustomerArray) {
+        	if(!selectCustomerArray || selectCustomerArray.length == 0) {
+        		return;
+        	}
+        	var sb = '';
+        	for(var i=0;i<selectCustomerArray.length;i++) {
+        		if(i == 0) {
+        			sb = selectCustomerArray[i];
+        		} else {
+        			sb += ',' + selectCustomerArray[i];
+        		}
+        	}
+        	$(_thisOpenCustomer).closest('td').find('.customerData').html(sb);
+        }
+        
+        function submitHandler() {
+        	if (!$.validate.form()) {
+            	return;
+            }
+            var isAdd = $('#isAdd').val();
+        	var url = prefix + "/add"; 
+        	if(isAdd != 1) {
+        		url = prefix + "/edit"; 
+        	}
+            var result = [];
+            var rowIndex = 0;
+            $('#weekDataTbody').find('tr').each(function(index, dom) {
+            	var $tr = $(this);
+            	var json = null;
+            	if(index % 6 == 0) {
+            		rowIndex++;
+            	}
+            	if(index % 6 == 0) {
+            		json = getJson(planFieldArray, $tr, rowIndex);
+            		json[planFieldArray[planFieldArray.length - 1] + rowIndex] = $.trim($tr.find('.customerData').text());
+            	} 
+            	
+            	if(index % 6 == 1) {
+            		json = getJson(resFieldArray, $tr, rowIndex);
+            	}
+            	
+            	if(index % 6 == 2 || index % 6 == 3 || index % 6 == 4 || index % 6 == 5) {
+            		json = getJson(sumFieldArray, $tr, rowIndex, (index % 6) - 2);
+            	}
+            	if(json != null) {
+	            	result.push(json);
+            	}
+            });
+            $('#weekData').val(JSON.stringify(result));
+            $.operate.saveTab(url, $('#form-weeklySummary-add').serialize());
+        }
+        
+        function renderData(dataList) {
+			var rowIndex = 0;
+            $('#weekDataTbody').find('tr').each(function(index, dom) {
+            	var $tr = $(this);
+            	if(index % 6 == 0) {
+            		rowIndex++;
+            	}
+            	
+            	if(index % 6 == 0) {
+            		var json = dataList[index];
+            		setJson(json, planFieldArray, $tr, rowIndex);
+            		$tr.find('.customerData').text(json[planFieldArray[planFieldArray.length - 1] + rowIndex]);
+            	} 
+            	
+            	if(index % 6 == 1) {
+            		var json = dataList[index];
+            		setJson(json, resFieldArray, $tr, rowIndex);
+            	}
+            	
+            	if(index % 6 == 2 || index % 6 == 3 || index % 6 == 4 || index % 6 == 5) {
+            		var json = dataList[index];
+            		setJson(json, sumFieldArray, $tr, rowIndex, (index % 6) - 2);
+            	}
+            });    
+        }
+        
+        function setJson(json, fieldArr, $tr, rowIndex, filedIndex) {
+        	$tr.find(':input').each(function(index, dom) {
+        		var _index = index;
+        		if(filedIndex != null) {
+        			_index = filedIndex;
+        		}
+        		$(this).val(json[fieldArr[_index] + rowIndex]);
+        	});
+        }
+        
+        function getJson(fieldArr, $tr, rowIndex, filedIndex) {
+        	var json = {};
+        	$tr.find(':input').each(function(index, dom) {
+        		var _index = index;
+        		if(filedIndex != null) {
+        			_index = filedIndex;
+        		}
+        		json[fieldArr[_index] + rowIndex] = $(this).val();
+        	});
+        	return json;
+        }
+        
+    </script>
+</body>
+</html>

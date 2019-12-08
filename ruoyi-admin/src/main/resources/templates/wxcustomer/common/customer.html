@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('客户列表')" />
+	<th:block th:include="include :: layout-latest-css" />
+	
+	<style>
+		.wrapper {
+		  position: relative;
+		  display: inline-block;
+		}
+		.close:before {
+		  content: 'x';
+		}
+		.close {
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  cursor: pointer;
+		}
+	</style>
+</head>
+<body class="gray-bg">
+	<div id="customerTmp" class="wrapper" style="display:none;"><span class="text"></span><span class="close" onclick="removeCustomer(this)"></span></div>
+
+	<div class="ui-layout-west">
+		<div class="box box-main">
+			<div class="box-header">
+				<div class="box-title">
+					<i class="fa icon-grid"></i> 已选择客户
+				</div>
+				<div class="box-tools pull-right">
+				</div>
+			</div>
+			<div class="ui-layout-content" id="selectCustomerContent">
+			</div>
+		</div>
+	</div>
+	
+	<div class="ui-layout-center">
+		<div class="container-div">
+			<div class="row">
+				<div class="col-sm-12 search-collapse">
+					<form id="user-form">
+						<input type="hidden" id="requestType" name="requestType" th:value="${requestType}">
+						<div class="select-list">
+							<ul>
+								 <li>
+	                                <p>电话号：</p>
+	                                <input type="text" name="phoneNumber"/>
+	                            </li>
+	                            <li>
+	                                <p>微信号：</p>
+	                                <input type="text" name="weixinNumber"/>
+	                            </li>
+	                            <li>
+	                                <p>客户姓名：</p>
+	                                <input type="text" name="customerName"/>
+	                            </li>
+								<li>
+									<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+								    <a class="btn btn-warning btn-rounded btn-sm" onclick="selectCustomer()">选择客户</a>
+								</li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+		        <div class="col-sm-12 select-table table-striped">
+				    <table id="bootstrap-table"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: layout-latest-js" />
+	<script th:inline="javascript">
+		var prefix = ctx + "wxcustomer/common";
+		var selectCustomerArray = [];
+		$(function() {
+		    var panehHidden = false;
+		    if ($(this).width() < 769) {
+		        panehHidden = true;
+		    }
+		    $('body').layout({ initClosed: panehHidden, west__size: 185 });
+		    queryList();
+		    
+		    renderCustomer(parent.getSelectCustomer());
+		});
+		
+		function removeCustomer(_this) {
+			var name = $(_this).parent().find('.text').text();
+			var index = selectCustomerArray.indexOf(name);
+			if(index != -1) {
+     			selectCustomerArray.splice(index, 1);
+     		}
+			$(_this).parent().remove();
+		}
+		
+		function queryList() {
+		    var options = {
+                url: prefix + "/customerList",
+                modalName: "微信客户",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'customerId', 
+                    title : 'customerId',
+                    visible: false
+                },
+                {
+                    field : 'phoneNumber', 
+                    title : '电话号',
+                },
+                {
+                    field : 'weixinNumber', 
+                    title : '微信号'
+                },
+                {
+                    field : 'customerName', 
+                    title : '客户姓名'
+                },
+                {
+                    field : 'province', 
+                    title : '省'
+                },
+                {
+                    field : 'city', 
+                    title : '市'
+                },
+                {
+                    field : 'area', 
+                    title : '区'
+                },
+                {
+                    field : 'shopName', 
+                    title : '店名'
+                },
+                ]
+            };
+            $.table.init(options);
+		}
+
+		 function submitHandler() {
+			if(selectCustomerArray.length==0){
+	        	$.modal.alertWarning('至少选择一个客户！')
+	        	return;
+	        }
+			parent.handleSelectCustomer(selectCustomerArray);
+			$.modal.close();
+	     }
+	     
+	     function selectCustomer() {
+	        var customerArray = $.table.selectColumns('customerName');
+	        if(customerArray.length==0){
+	        	$.modal.alertWarning('至少是勾选一项！')
+	        	return;
+	        }
+			renderCustomer(customerArray);
+	     }
+	     
+	     function renderCustomer(customerArray) {
+	      	var $content = $('#selectCustomerContent');
+	     	for(var i=0;i<customerArray.length;i++) {
+	     		if(selectCustomerArray.indexOf(customerArray[i]) != -1) {
+	     			continue;
+	     		}
+	     		var $tmp = $('#customerTmp').clone();
+	     		$tmp.removeAttr('id');
+	     		$tmp.find('.text').text(customerArray[i]);
+	     		$content.append($tmp.show());
+	     		selectCustomerArray.push(customerArray[i]);
+	     	}
+	     }
+	</script>
+</body>
+</html>

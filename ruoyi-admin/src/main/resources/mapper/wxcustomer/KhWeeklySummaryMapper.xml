@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhWeeklySummaryMapper">
+    
+    <resultMap type="KhWeeklySummary" id="KhWeeklySummaryResult">
+        <result property="id"    column="id"    />
+        <result property="blindAdd"    column="blind_add"    />
+        <result property="addWechat"    column="add_WeChat"    />
+        <result property="deliverGoods"    column="deliver_goods"    />
+        <result property="clinchDeal"    column="clinch_deal"    />
+        <result property="saturdayManagerAnalysis"    column="saturday_manager_analysis"    />
+        <result property="substandardSolutions"    column="substandard_solutions"    />
+        <result property="havingData"    column="having_data"    />
+        <result property="callDurationPlan1"    column="call_duration_plan_1"    />
+        <result property="customer1"    column="customer_1"    />
+        <result property="blindAddPlan1"    column="blind_add_plan_1"    />
+        <result property="addWechatPlan1"    column="add_WeChat_plan_1"    />
+        <result property="deliverGoodsPlan1"    column="deliver_goods_plan_1"    />
+        <result property="intentionFollowPlan1"    column="Intention_follow_plan_1"    />
+        <result property="clinchDealPlan1"    column="clinch_deal_plan_1"    />
+        <result property="totalWechatNumberPlan1"    column="total_WeChat_number_plan_1"    />
+        <result property="hairBandsRes1"    column="hair_bands_res_1"    />
+        <result property="bossMassTextingRes1"    column="boss_mass_texting_res_1"    />
+        <result property="giveLikeRes1"    column="give_like_res_1"    />
+        <result property="callDurationRes1"    column="call_duration_res_1"    />
+        <result property="blindAddRes1"    column="blind_add_res_1"    />
+        <result property="addWechatRes1"    column="add_WeChat_res_1"    />
+        <result property="deliverGoodsRes1"    column="deliver_goods_res_1"    />
+        <result property="intentionFollowRes1"    column="Intention_follow_res_1"    />
+        <result property="clinchDealRes1"    column="clinch_deal_res_1"    />
+        <result property="totalWechatNumberRes1"    column="total_WeChat_number_res_1"    />
+        <result property="problem1"    column="problem_1"    />
+        <result property="improvedMethod1"    column="Improved_method_1"    />
+        <result property="tomorrowPlan1"    column="tomorrow_plan_1"    />
+        <result property="managerWorkSuggestion1"    column="manager_work_suggestion_1"    />
+        <result property="customer2"    column="customer_2"    />
+        <result property="callDurationPlan2"    column="call_duration_plan_2"    />
+        <result property="blindAddPlan2"    column="blind_add_plan_2"    />
+        <result property="addWechatPlan2"    column="add_WeChat_plan_2"    />
+        <result property="deliverGoodsPlan2"    column="deliver_goods_plan_2"    />
+        <result property="intentionFollowPlan2"    column="Intention_follow_plan_2"    />
+        <result property="clinchDealPlan2"    column="clinch_deal_plan_2"    />
+        <result property="totalWechatNumberPlan2"    column="total_WeChat_number_plan_2"    />
+        <result property="hairBandsRes2"    column="hair_bands_res_2"    />
+        <result property="bossMassTextingRes2"    column="boss_mass_texting_res_2"    />
+        <result property="giveLikeRes2"    column="give_like_res_2"    />
+        <result property="callDurationRes2"    column="call_duration_res_2"    />
+        <result property="blindAddRes2"    column="blind_add_res_2"    />
+        <result property="addWechatRes2"    column="add_WeChat_res_2"    />
+        <result property="deliverGoodsRes2"    column="deliver_goods_res_2"    />
+        <result property="intentionFollowRes2"    column="Intention_follow_res_2"    />
+        <result property="clinchDealRes2"    column="clinch_deal_res_2"    />
+        <result property="totalWechatNumberRes2"    column="total_WeChat_number_res_2"    />
+        <result property="problem2"    column="problem_2"    />
+        <result property="improvedMethod2"    column="Improved_method_2"    />
+        <result property="tomorrowPlan2"    column="tomorrow_plan_2"    />
+        <result property="managerWorkSuggestion2"    column="manager_work_suggestion_2"    />
+        <result property="customer3"    column="customer_3"    />
+        <result property="callDurationPlan3"    column="call_duration_plan_3"    />
+        <result property="blindAddPlan3"    column="blind_add_plan_3"    />
+        <result property="addWechatPlan3"    column="add_WeChat_plan_3"    />
+        <result property="deliverGoodsPlan3"    column="deliver_goods_plan_3"    />
+        <result property="intentionFollowPlan3"    column="Intention_follow_plan_3"    />
+        <result property="clinchDealPlan3"    column="clinch_deal_plan_3"    />
+        <result property="totalWechatNumberPlan3"    column="total_WeChat_number_plan_3"    />
+        <result property="hairBandsRes3"    column="hair_bands_res_3"    />
+        <result property="bossMassTextingRes3"    column="boss_mass_texting_res_3"    />
+        <result property="giveLikeRes3"    column="give_like_res_3"    />
+        <result property="callDurationRes3"    column="call_duration_res_3"    />
+        <result property="blindAddRes3"    column="blind_add_res_3"    />
+        <result property="addWechatRes3"    column="add_WeChat_res_3"    />
+        <result property="deliverGoodsRes3"    column="deliver_goods_res_3"    />
+        <result property="intentionFollowRes3"    column="Intention_follow_res_3"    />
+        <result property="clinchDealRes3"    column="clinch_deal_res_3"    />
+        <result property="totalWechatNumberRes3"    column="total_WeChat_number_res_3"    />
+        <result property="problem3"    column="problem_3"    />
+        <result property="improvedMethod3"    column="Improved_method_3"    />
+        <result property="tomorrowPlan3"    column="tomorrow_plan_3"    />
+        <result property="managerWorkSuggestion3"    column="manager_work_suggestion_3"    />
+        <result property="customer4"    column="customer_4"    />
+        <result property="callDurationPlan4"    column="call_duration_plan_4"    />
+        <result property="blindAddPlan4"    column="blind_add_plan_4"    />
+        <result property="addWechatPlan4"    column="add_WeChat_plan_4"    />
+        <result property="deliverGoodsPlan4"    column="deliver_goods_plan_4"    />
+        <result property="intentionFollowPlan4"    column="Intention_follow_plan_4"    />
+        <result property="clinchDealPlan4"    column="clinch_deal_plan_4"    />
+        <result property="totalWechatNumberPlan4"    column="total_WeChat_number_plan_4"    />
+        <result property="hairBandsRes4"    column="hair_bands_res_4"    />
+        <result property="bossMassTextingRes4"    column="boss_mass_texting_res_4"    />
+        <result property="giveLikeRes4"    column="give_like_res_4"    />
+        <result property="callDurationRes4"    column="call_duration_res_4"    />
+        <result property="blindAddRes4"    column="blind_add_res_4"    />
+        <result property="addWechatRes4"    column="add_WeChat_res_4"    />
+        <result property="deliverGoodsRes4"    column="deliver_goods_res_4"    />
+        <result property="intentionFollowRes4"    column="Intention_follow_res_4"    />
+        <result property="clinchDealRes4"    column="clinch_deal_res_4"    />
+        <result property="totalWechatNumberRes4"    column="total_WeChat_number_res_4"    />
+        <result property="problem4"    column="problem_4"    />
+        <result property="improvedMethod4"    column="Improved_method_4"    />
+        <result property="tomorrowPlan4"    column="tomorrow_plan_4"    />
+        <result property="managerWorkSuggestion4"    column="manager_work_suggestion_4"    />
+        <result property="customer5"    column="customer_5"    />
+        <result property="callDurationPlan5"    column="call_duration_plan_5"    />
+        <result property="blindAddPlan5"    column="blind_add_plan_5"    />
+        <result property="addWechatPlan5"    column="add_WeChat_plan_5"    />
+        <result property="deliverGoodsPlan5"    column="deliver_goods_plan_5"    />
+        <result property="intentionFollowPlan5"    column="Intention_follow_plan_5"    />
+        <result property="clinchDealPlan5"    column="clinch_deal_plan_5"    />
+        <result property="totalWechatNumberPlan5"    column="total_WeChat_number_plan_5"    />
+        <result property="hairBandsRes5"    column="hair_bands_res_5"    />
+        <result property="bossMassTextingRes5"    column="boss_mass_texting_res_5"    />
+        <result property="giveLikeRes5"    column="give_like_res_5"    />
+        <result property="callDurationRes5"    column="call_duration_res_5"    />
+        <result property="blindAddRes5"    column="blind_add_res_5"    />
+        <result property="addWechatRes5"    column="add_WeChat_res_5"    />
+        <result property="deliverGoodsRes5"    column="deliver_goods_res_5"    />
+        <result property="intentionFollowRes5"    column="Intention_follow_res_5"    />
+        <result property="clinchDealRes5"    column="clinch_deal_res_5"    />
+        <result property="totalWechatNumberRes5"    column="total_WeChat_number_res_5"    />
+        <result property="problem5"    column="problem_5"    />
+        <result property="improvedMethod5"    column="Improved_method_5"    />
+        <result property="tomorrowPlan5"    column="tomorrow_plan_5"    />
+        <result property="managerWorkSuggestion5"    column="manager_work_suggestion_5"    />
+        <result property="customer6"    column="customer_6"    />
+        <result property="callDurationPlan6"    column="call_duration_plan_6"    />
+        <result property="blindAddPlan6"    column="blind_add_plan_6"    />
+        <result property="addWechatPlan6"    column="add_WeChat_plan_6"    />
+        <result property="deliverGoodsPlan6"    column="deliver_goods_plan_6"    />
+        <result property="intentionFollowPlan6"    column="Intention_follow_plan_6"    />
+        <result property="clinchDealPlan6"    column="clinch_deal_plan_6"    />
+        <result property="totalWechatNumberPlan6"    column="total_WeChat_number_plan_6"    />
+        <result property="hairBandsRes6"    column="hair_bands_res_6"    />
+        <result property="bossMassTextingRes6"    column="boss_mass_texting_res_6"    />
+        <result property="giveLikeRes6"    column="give_like_res_6"    />
+        <result property="callDurationRes6"    column="call_duration_res_6"    />
+        <result property="blindAddRes6"    column="blind_add_res_6"    />
+        <result property="addWechatRes6"    column="add_WeChat_res_6"    />
+        <result property="deliverGoodsRes6"    column="deliver_goods_res_6"    />
+        <result property="intentionFollowRes6"    column="Intention_follow_res_6"    />
+        <result property="clinchDealRes6"    column="clinch_deal_res_6"    />
+        <result property="totalWechatNumberRes6"    column="total_WeChat_number_res_6"    />
+        <result property="problem6"    column="problem_6"    />
+        <result property="improvedMethod6"    column="Improved_method_6"    />
+        <result property="tomorrowPlan6"    column="tomorrow_plan_6"    />
+        <result property="managerWorkSuggestion6"    column="manager_work_suggestion_6"    />
+        <result property="creationTime"    column="creation_time"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="weekly"    column="weekly"    />
+    </resultMap>
+
+    <sql id="selectKhWeeklySummaryVo">
+        select id, blind_add, add_WeChat, deliver_goods, clinch_deal, saturday_manager_analysis, substandard_solutions, having_data, call_duration_plan_1, customer_1, blind_add_plan_1, add_WeChat_plan_1, deliver_goods_plan_1, Intention_follow_plan_1, clinch_deal_plan_1, total_WeChat_number_plan_1, hair_bands_res_1, boss_mass_texting_res_1, give_like_res_1, call_duration_res_1, blind_add_res_1, add_WeChat_res_1, deliver_goods_res_1, Intention_follow_res_1, clinch_deal_res_1, total_WeChat_number_res_1, problem_1, Improved_method_1, tomorrow_plan_1, manager_work_suggestion_1, customer_2, call_duration_plan_2, blind_add_plan_2, add_WeChat_plan_2, deliver_goods_plan_2, Intention_follow_plan_2, clinch_deal_plan_2, total_WeChat_number_plan_2, hair_bands_res_2, boss_mass_texting_res_2, give_like_res_2, call_duration_res_2, blind_add_res_2, add_WeChat_res_2, deliver_goods_res_2, Intention_follow_res_2, clinch_deal_res_2, total_WeChat_number_res_2, problem_2, Improved_method_2, tomorrow_plan_2, manager_work_suggestion_2, customer_3, call_duration_plan_3, blind_add_plan_3, add_WeChat_plan_3, deliver_goods_plan_3, Intention_follow_plan_3, clinch_deal_plan_3, total_WeChat_number_plan_3, hair_bands_res_3, boss_mass_texting_res_3, give_like_res_3, call_duration_res_3, blind_add_res_3, add_WeChat_res_3, deliver_goods_res_3, Intention_follow_res_3, clinch_deal_res_3, total_WeChat_number_res_3, problem_3, Improved_method_3, tomorrow_plan_3, manager_work_suggestion_3, customer_4, call_duration_plan_4, blind_add_plan_4, add_WeChat_plan_4, deliver_goods_plan_4, Intention_follow_plan_4, clinch_deal_plan_4, total_WeChat_number_plan_4, hair_bands_res_4, boss_mass_texting_res_4, give_like_res_4, call_duration_res_4, blind_add_res_4, add_WeChat_res_4, deliver_goods_res_4, Intention_follow_res_4, clinch_deal_res_4, total_WeChat_number_res_4, problem_4, Improved_method_4, tomorrow_plan_4, manager_work_suggestion_4, customer_5, call_duration_plan_5, blind_add_plan_5, add_WeChat_plan_5, deliver_goods_plan_5, Intention_follow_plan_5, clinch_deal_plan_5, total_WeChat_number_plan_5, hair_bands_res_5, boss_mass_texting_res_5, give_like_res_5, call_duration_res_5, blind_add_res_5, add_WeChat_res_5, deliver_goods_res_5, Intention_follow_res_5, clinch_deal_res_5, total_WeChat_number_res_5, problem_5, Improved_method_5, tomorrow_plan_5, manager_work_suggestion_5, customer_6, call_duration_plan_6, blind_add_plan_6, add_WeChat_plan_6, deliver_goods_plan_6, Intention_follow_plan_6, clinch_deal_plan_6, total_WeChat_number_plan_6, hair_bands_res_6, boss_mass_texting_res_6, give_like_res_6, call_duration_res_6, blind_add_res_6, add_WeChat_res_6, deliver_goods_res_6, Intention_follow_res_6, clinch_deal_res_6, total_WeChat_number_res_6, problem_6, Improved_method_6, tomorrow_plan_6, manager_work_suggestion_6, creation_time, creator_id, creator, start_time, end_time, weekly from kh_weekly_summary
+    </sql>
+
+    <select id="selectKhWeeklySummaryList" parameterType="KhWeeklySummary" resultMap="KhWeeklySummaryResult">
+        <include refid="selectKhWeeklySummaryVo"/>
+        <where>  
+            <if test="blindAdd != null  and blindAdd != ''"> and blind_add = #{blindAdd}</if>
+            <if test="addWechat != null  and addWechat != ''"> and add_WeChat = #{addWechat}</if>
+            <if test="deliverGoods != null  and deliverGoods != ''"> and deliver_goods = #{deliverGoods}</if>
+            <if test="clinchDeal != null  and clinchDeal != ''"> and clinch_deal = #{clinchDeal}</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''"> and saturday_manager_analysis = #{saturdayManagerAnalysis}</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''"> and substandard_solutions = #{substandardSolutions}</if>
+            <if test="havingData != null  and havingData != ''"> and having_data = #{havingData}</if>
+            <if test="callDurationPlan1 != null  and callDurationPlan1 != ''"> and call_duration_plan_1 = #{callDurationPlan1}</if>
+            <if test="customer1 != null  and customer1 != ''"> and customer_1 = #{customer1}</if>
+            <if test="blindAddPlan1 != null  and blindAddPlan1 != ''"> and blind_add_plan_1 = #{blindAddPlan1}</if>
+            <if test="addWechatPlan1 != null  and addWechatPlan1 != ''"> and add_WeChat_plan_1 = #{addWechatPlan1}</if>
+            <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''"> and deliver_goods_plan_1 = #{deliverGoodsPlan1}</if>
+            <if test="intentionFollowPlan1 != null  and intentionFollowPlan1 != ''"> and Intention_follow_plan_1 = #{intentionFollowPlan1}</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''"> and clinch_deal_plan_1 = #{clinchDealPlan1}</if>
+            <if test="totalWechatNumberPlan1 != null  and totalWechatNumberPlan1 != ''"> and total_WeChat_number_plan_1 = #{totalWechatNumberPlan1}</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''"> and hair_bands_res_1 = #{hairBandsRes1}</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''"> and boss_mass_texting_res_1 = #{bossMassTextingRes1}</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''"> and give_like_res_1 = #{giveLikeRes1}</if>
+            <if test="callDurationRes1 != null  and callDurationRes1 != ''"> and call_duration_res_1 = #{callDurationRes1}</if>
+            <if test="blindAddRes1 != null  and blindAddRes1 != ''"> and blind_add_res_1 = #{blindAddRes1}</if>
+            <if test="addWechatRes1 != null  and addWechatRes1 != ''"> and add_WeChat_res_1 = #{addWechatRes1}</if>
+            <if test="deliverGoodsRes1 != null  and deliverGoodsRes1 != ''"> and deliver_goods_res_1 = #{deliverGoodsRes1}</if>
+            <if test="intentionFollowRes1 != null  and intentionFollowRes1 != ''"> and Intention_follow_res_1 = #{intentionFollowRes1}</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''"> and clinch_deal_res_1 = #{clinchDealRes1}</if>
+            <if test="totalWechatNumberRes1 != null  and totalWechatNumberRes1 != ''"> and total_WeChat_number_res_1 = #{totalWechatNumberRes1}</if>
+            <if test="problem1 != null  and problem1 != ''"> and problem_1 = #{problem1}</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''"> and Improved_method_1 = #{improvedMethod1}</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''"> and tomorrow_plan_1 = #{tomorrowPlan1}</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''"> and manager_work_suggestion_1 = #{managerWorkSuggestion1}</if>
+            <if test="customer2 != null  and customer2 != ''"> and customer_2 = #{customer2}</if>
+            <if test="callDurationPlan2 != null  and callDurationPlan2 != ''"> and call_duration_plan_2 = #{callDurationPlan2}</if>
+            <if test="blindAddPlan2 != null  and blindAddPlan2 != ''"> and blind_add_plan_2 = #{blindAddPlan2}</if>
+            <if test="addWechatPlan2 != null  and addWechatPlan2 != ''"> and add_WeChat_plan_2 = #{addWechatPlan2}</if>
+            <if test="deliverGoodsPlan2 != null  and deliverGoodsPlan2 != ''"> and deliver_goods_plan_2 = #{deliverGoodsPlan2}</if>
+            <if test="intentionFollowPlan2 != null  and intentionFollowPlan2 != ''"> and Intention_follow_plan_2 = #{intentionFollowPlan2}</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''"> and clinch_deal_plan_2 = #{clinchDealPlan2}</if>
+            <if test="totalWechatNumberPlan2 != null  and totalWechatNumberPlan2 != ''"> and total_WeChat_number_plan_2 = #{totalWechatNumberPlan2}</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''"> and hair_bands_res_2 = #{hairBandsRes2}</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''"> and boss_mass_texting_res_2 = #{bossMassTextingRes2}</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''"> and give_like_res_2 = #{giveLikeRes2}</if>
+            <if test="callDurationRes2 != null  and callDurationRes2 != ''"> and call_duration_res_2 = #{callDurationRes2}</if>
+            <if test="blindAddRes2 != null  and blindAddRes2 != ''"> and blind_add_res_2 = #{blindAddRes2}</if>
+            <if test="addWechatRes2 != null  and addWechatRes2 != ''"> and add_WeChat_res_2 = #{addWechatRes2}</if>
+            <if test="deliverGoodsRes2 != null  and deliverGoodsRes2 != ''"> and deliver_goods_res_2 = #{deliverGoodsRes2}</if>
+            <if test="intentionFollowRes2 != null  and intentionFollowRes2 != ''"> and Intention_follow_res_2 = #{intentionFollowRes2}</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''"> and clinch_deal_res_2 = #{clinchDealRes2}</if>
+            <if test="totalWechatNumberRes2 != null  and totalWechatNumberRes2 != ''"> and total_WeChat_number_res_2 = #{totalWechatNumberRes2}</if>
+            <if test="problem2 != null  and problem2 != ''"> and problem_2 = #{problem2}</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''"> and Improved_method_2 = #{improvedMethod2}</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''"> and tomorrow_plan_2 = #{tomorrowPlan2}</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''"> and manager_work_suggestion_2 = #{managerWorkSuggestion2}</if>
+            <if test="customer3 != null  and customer3 != ''"> and customer_3 = #{customer3}</if>
+            <if test="callDurationPlan3 != null  and callDurationPlan3 != ''"> and call_duration_plan_3 = #{callDurationPlan3}</if>
+            <if test="blindAddPlan3 != null  and blindAddPlan3 != ''"> and blind_add_plan_3 = #{blindAddPlan3}</if>
+            <if test="addWechatPlan3 != null  and addWechatPlan3 != ''"> and add_WeChat_plan_3 = #{addWechatPlan3}</if>
+            <if test="deliverGoodsPlan3 != null  and deliverGoodsPlan3 != ''"> and deliver_goods_plan_3 = #{deliverGoodsPlan3}</if>
+            <if test="intentionFollowPlan3 != null  and intentionFollowPlan3 != ''"> and Intention_follow_plan_3 = #{intentionFollowPlan3}</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''"> and clinch_deal_plan_3 = #{clinchDealPlan3}</if>
+            <if test="totalWechatNumberPlan3 != null  and totalWechatNumberPlan3 != ''"> and total_WeChat_number_plan_3 = #{totalWechatNumberPlan3}</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''"> and hair_bands_res_3 = #{hairBandsRes3}</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''"> and boss_mass_texting_res_3 = #{bossMassTextingRes3}</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''"> and give_like_res_3 = #{giveLikeRes3}</if>
+            <if test="callDurationRes3 != null  and callDurationRes3 != ''"> and call_duration_res_3 = #{callDurationRes3}</if>
+            <if test="blindAddRes3 != null  and blindAddRes3 != ''"> and blind_add_res_3 = #{blindAddRes3}</if>
+            <if test="addWechatRes3 != null  and addWechatRes3 != ''"> and add_WeChat_res_3 = #{addWechatRes3}</if>
+            <if test="deliverGoodsRes3 != null  and deliverGoodsRes3 != ''"> and deliver_goods_res_3 = #{deliverGoodsRes3}</if>
+            <if test="intentionFollowRes3 != null  and intentionFollowRes3 != ''"> and Intention_follow_res_3 = #{intentionFollowRes3}</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''"> and clinch_deal_res_3 = #{clinchDealRes3}</if>
+            <if test="totalWechatNumberRes3 != null  and totalWechatNumberRes3 != ''"> and total_WeChat_number_res_3 = #{totalWechatNumberRes3}</if>
+            <if test="problem3 != null  and problem3 != ''"> and problem_3 = #{problem3}</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''"> and Improved_method_3 = #{improvedMethod3}</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''"> and tomorrow_plan_3 = #{tomorrowPlan3}</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''"> and manager_work_suggestion_3 = #{managerWorkSuggestion3}</if>
+            <if test="customer4 != null  and customer4 != ''"> and customer_4 = #{customer4}</if>
+            <if test="callDurationPlan4 != null  and callDurationPlan4 != ''"> and call_duration_plan_4 = #{callDurationPlan4}</if>
+            <if test="blindAddPlan4 != null  and blindAddPlan4 != ''"> and blind_add_plan_4 = #{blindAddPlan4}</if>
+            <if test="addWechatPlan4 != null  and addWechatPlan4 != ''"> and add_WeChat_plan_4 = #{addWechatPlan4}</if>
+            <if test="deliverGoodsPlan4 != null  and deliverGoodsPlan4 != ''"> and deliver_goods_plan_4 = #{deliverGoodsPlan4}</if>
+            <if test="intentionFollowPlan4 != null  and intentionFollowPlan4 != ''"> and Intention_follow_plan_4 = #{intentionFollowPlan4}</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''"> and clinch_deal_plan_4 = #{clinchDealPlan4}</if>
+            <if test="totalWechatNumberPlan4 != null  and totalWechatNumberPlan4 != ''"> and total_WeChat_number_plan_4 = #{totalWechatNumberPlan4}</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''"> and hair_bands_res_4 = #{hairBandsRes4}</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''"> and boss_mass_texting_res_4 = #{bossMassTextingRes4}</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''"> and give_like_res_4 = #{giveLikeRes4}</if>
+            <if test="callDurationRes4 != null  and callDurationRes4 != ''"> and call_duration_res_4 = #{callDurationRes4}</if>
+            <if test="blindAddRes4 != null  and blindAddRes4 != ''"> and blind_add_res_4 = #{blindAddRes4}</if>
+            <if test="addWechatRes4 != null  and addWechatRes4 != ''"> and add_WeChat_res_4 = #{addWechatRes4}</if>
+            <if test="deliverGoodsRes4 != null  and deliverGoodsRes4 != ''"> and deliver_goods_res_4 = #{deliverGoodsRes4}</if>
+            <if test="intentionFollowRes4 != null  and intentionFollowRes4 != ''"> and Intention_follow_res_4 = #{intentionFollowRes4}</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''"> and clinch_deal_res_4 = #{clinchDealRes4}</if>
+            <if test="totalWechatNumberRes4 != null  and totalWechatNumberRes4 != ''"> and total_WeChat_number_res_4 = #{totalWechatNumberRes4}</if>
+            <if test="problem4 != null  and problem4 != ''"> and problem_4 = #{problem4}</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''"> and Improved_method_4 = #{improvedMethod4}</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''"> and tomorrow_plan_4 = #{tomorrowPlan4}</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''"> and manager_work_suggestion_4 = #{managerWorkSuggestion4}</if>
+            <if test="customer5 != null  and customer5 != ''"> and customer_5 = #{customer5}</if>
+            <if test="callDurationPlan5 != null  and callDurationPlan5 != ''"> and call_duration_plan_5 = #{callDurationPlan5}</if>
+            <if test="blindAddPlan5 != null  and blindAddPlan5 != ''"> and blind_add_plan_5 = #{blindAddPlan5}</if>
+            <if test="addWechatPlan5 != null  and addWechatPlan5 != ''"> and add_WeChat_plan_5 = #{addWechatPlan5}</if>
+            <if test="deliverGoodsPlan5 != null  and deliverGoodsPlan5 != ''"> and deliver_goods_plan_5 = #{deliverGoodsPlan5}</if>
+            <if test="intentionFollowPlan5 != null  and intentionFollowPlan5 != ''"> and Intention_follow_plan_5 = #{intentionFollowPlan5}</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''"> and clinch_deal_plan_5 = #{clinchDealPlan5}</if>
+            <if test="totalWechatNumberPlan5 != null  and totalWechatNumberPlan5 != ''"> and total_WeChat_number_plan_5 = #{totalWechatNumberPlan5}</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''"> and hair_bands_res_5 = #{hairBandsRes5}</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''"> and boss_mass_texting_res_5 = #{bossMassTextingRes5}</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''"> and give_like_res_5 = #{giveLikeRes5}</if>
+            <if test="callDurationRes5 != null  and callDurationRes5 != ''"> and call_duration_res_5 = #{callDurationRes5}</if>
+            <if test="blindAddRes5 != null  and blindAddRes5 != ''"> and blind_add_res_5 = #{blindAddRes5}</if>
+            <if test="addWechatRes5 != null  and addWechatRes5 != ''"> and add_WeChat_res_5 = #{addWechatRes5}</if>
+            <if test="deliverGoodsRes5 != null  and deliverGoodsRes5 != ''"> and deliver_goods_res_5 = #{deliverGoodsRes5}</if>
+            <if test="intentionFollowRes5 != null  and intentionFollowRes5 != ''"> and Intention_follow_res_5 = #{intentionFollowRes5}</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''"> and clinch_deal_res_5 = #{clinchDealRes5}</if>
+            <if test="totalWechatNumberRes5 != null  and totalWechatNumberRes5 != ''"> and total_WeChat_number_res_5 = #{totalWechatNumberRes5}</if>
+            <if test="problem5 != null  and problem5 != ''"> and problem_5 = #{problem5}</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''"> and Improved_method_5 = #{improvedMethod5}</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''"> and tomorrow_plan_5 = #{tomorrowPlan5}</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''"> and manager_work_suggestion_5 = #{managerWorkSuggestion5}</if>
+            <if test="customer6 != null  and customer6 != ''"> and customer_6 = #{customer6}</if>
+            <if test="callDurationPlan6 != null  and callDurationPlan6 != ''"> and call_duration_plan_6 = #{callDurationPlan6}</if>
+            <if test="blindAddPlan6 != null  and blindAddPlan6 != ''"> and blind_add_plan_6 = #{blindAddPlan6}</if>
+            <if test="addWechatPlan6 != null  and addWechatPlan6 != ''"> and add_WeChat_plan_6 = #{addWechatPlan6}</if>
+            <if test="deliverGoodsPlan6 != null  and deliverGoodsPlan6 != ''"> and deliver_goods_plan_6 = #{deliverGoodsPlan6}</if>
+            <if test="intentionFollowPlan6 != null  and intentionFollowPlan6 != ''"> and Intention_follow_plan_6 = #{intentionFollowPlan6}</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''"> and clinch_deal_plan_6 = #{clinchDealPlan6}</if>
+            <if test="totalWechatNumberPlan6 != null  and totalWechatNumberPlan6 != ''"> and total_WeChat_number_plan_6 = #{totalWechatNumberPlan6}</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''"> and hair_bands_res_6 = #{hairBandsRes6}</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''"> and boss_mass_texting_res_6 = #{bossMassTextingRes6}</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''"> and give_like_res_6 = #{giveLikeRes6}</if>
+            <if test="callDurationRes6 != null  and callDurationRes6 != ''"> and call_duration_res_6 = #{callDurationRes6}</if>
+            <if test="blindAddRes6 != null  and blindAddRes6 != ''"> and blind_add_res_6 = #{blindAddRes6}</if>
+            <if test="addWechatRes6 != null  and addWechatRes6 != ''"> and add_WeChat_res_6 = #{addWechatRes6}</if>
+            <if test="deliverGoodsRes6 != null  and deliverGoodsRes6 != ''"> and deliver_goods_res_6 = #{deliverGoodsRes6}</if>
+            <if test="intentionFollowRes6 != null  and intentionFollowRes6 != ''"> and Intention_follow_res_6 = #{intentionFollowRes6}</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''"> and clinch_deal_res_6 = #{clinchDealRes6}</if>
+            <if test="totalWechatNumberRes6 != null  and totalWechatNumberRes6 != ''"> and total_WeChat_number_res_6 = #{totalWechatNumberRes6}</if>
+            <if test="problem6 != null  and problem6 != ''"> and problem_6 = #{problem6}</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''"> and Improved_method_6 = #{improvedMethod6}</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''"> and tomorrow_plan_6 = #{tomorrowPlan6}</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''"> and manager_work_suggestion_6 = #{managerWorkSuggestion6}</if>
+            <if test="creationTime != null "> and creation_time = #{creationTime}</if>
+            <if test="creatorId != null  and creatorId != ''"> and creator_id = #{creatorId}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="weekly != null  and weekly != ''"> and weekly = #{weekly}</if>
+        </where>
+    </select>
+    
+    <select id="selectKhWeeklySummaryById" parameterType="String" resultMap="KhWeeklySummaryResult">
+        <include refid="selectKhWeeklySummaryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKhWeeklySummary" parameterType="KhWeeklySummary">
+        insert into kh_weekly_summary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="blindAdd != null  and blindAdd != ''">blind_add,</if>
+            <if test="addWechat != null  and addWechat != ''">add_WeChat,</if>
+            <if test="deliverGoods != null  and deliverGoods != ''">deliver_goods,</if>
+            <if test="clinchDeal != null  and clinchDeal != ''">clinch_deal,</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''">saturday_manager_analysis,</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''">substandard_solutions,</if>
+            <if test="havingData != null  and havingData != ''">having_data,</if>
+            <if test="callDurationPlan1 != null  and callDurationPlan1 != ''">call_duration_plan_1,</if>
+            <if test="customer1 != null  and customer1 != ''">customer_1,</if>
+            <if test="blindAddPlan1 != null  and blindAddPlan1 != ''">blind_add_plan_1,</if>
+            <if test="addWechatPlan1 != null  and addWechatPlan1 != ''">add_WeChat_plan_1,</if>
+            <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''">deliver_goods_plan_1,</if>
+            <if test="intentionFollowPlan1 != null  and intentionFollowPlan1 != ''">Intention_follow_plan_1,</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''">clinch_deal_plan_1,</if>
+            <if test="totalWechatNumberPlan1 != null  and totalWechatNumberPlan1 != ''">total_WeChat_number_plan_1,</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''">hair_bands_res_1,</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''">boss_mass_texting_res_1,</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''">give_like_res_1,</if>
+            <if test="callDurationRes1 != null  and callDurationRes1 != ''">call_duration_res_1,</if>
+            <if test="blindAddRes1 != null  and blindAddRes1 != ''">blind_add_res_1,</if>
+            <if test="addWechatRes1 != null  and addWechatRes1 != ''">add_WeChat_res_1,</if>
+            <if test="deliverGoodsRes1 != null  and deliverGoodsRes1 != ''">deliver_goods_res_1,</if>
+            <if test="intentionFollowRes1 != null  and intentionFollowRes1 != ''">Intention_follow_res_1,</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''">clinch_deal_res_1,</if>
+            <if test="totalWechatNumberRes1 != null  and totalWechatNumberRes1 != ''">total_WeChat_number_res_1,</if>
+            <if test="problem1 != null  and problem1 != ''">problem_1,</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''">Improved_method_1,</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">tomorrow_plan_1,</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">manager_work_suggestion_1,</if>
+            <if test="customer2 != null  and customer2 != ''">customer_2,</if>
+            <if test="callDurationPlan2 != null  and callDurationPlan2 != ''">call_duration_plan_2,</if>
+            <if test="blindAddPlan2 != null  and blindAddPlan2 != ''">blind_add_plan_2,</if>
+            <if test="addWechatPlan2 != null  and addWechatPlan2 != ''">add_WeChat_plan_2,</if>
+            <if test="deliverGoodsPlan2 != null  and deliverGoodsPlan2 != ''">deliver_goods_plan_2,</if>
+            <if test="intentionFollowPlan2 != null  and intentionFollowPlan2 != ''">Intention_follow_plan_2,</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''">clinch_deal_plan_2,</if>
+            <if test="totalWechatNumberPlan2 != null  and totalWechatNumberPlan2 != ''">total_WeChat_number_plan_2,</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''">hair_bands_res_2,</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''">boss_mass_texting_res_2,</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''">give_like_res_2,</if>
+            <if test="callDurationRes2 != null  and callDurationRes2 != ''">call_duration_res_2,</if>
+            <if test="blindAddRes2 != null  and blindAddRes2 != ''">blind_add_res_2,</if>
+            <if test="addWechatRes2 != null  and addWechatRes2 != ''">add_WeChat_res_2,</if>
+            <if test="deliverGoodsRes2 != null  and deliverGoodsRes2 != ''">deliver_goods_res_2,</if>
+            <if test="intentionFollowRes2 != null  and intentionFollowRes2 != ''">Intention_follow_res_2,</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''">clinch_deal_res_2,</if>
+            <if test="totalWechatNumberRes2 != null  and totalWechatNumberRes2 != ''">total_WeChat_number_res_2,</if>
+            <if test="problem2 != null  and problem2 != ''">problem_2,</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''">Improved_method_2,</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">tomorrow_plan_2,</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">manager_work_suggestion_2,</if>
+            <if test="customer3 != null  and customer3 != ''">customer_3,</if>
+            <if test="callDurationPlan3 != null  and callDurationPlan3 != ''">call_duration_plan_3,</if>
+            <if test="blindAddPlan3 != null  and blindAddPlan3 != ''">blind_add_plan_3,</if>
+            <if test="addWechatPlan3 != null  and addWechatPlan3 != ''">add_WeChat_plan_3,</if>
+            <if test="deliverGoodsPlan3 != null  and deliverGoodsPlan3 != ''">deliver_goods_plan_3,</if>
+            <if test="intentionFollowPlan3 != null  and intentionFollowPlan3 != ''">Intention_follow_plan_3,</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''">clinch_deal_plan_3,</if>
+            <if test="totalWechatNumberPlan3 != null  and totalWechatNumberPlan3 != ''">total_WeChat_number_plan_3,</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''">hair_bands_res_3,</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''">boss_mass_texting_res_3,</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''">give_like_res_3,</if>
+            <if test="callDurationRes3 != null  and callDurationRes3 != ''">call_duration_res_3,</if>
+            <if test="blindAddRes3 != null  and blindAddRes3 != ''">blind_add_res_3,</if>
+            <if test="addWechatRes3 != null  and addWechatRes3 != ''">add_WeChat_res_3,</if>
+            <if test="deliverGoodsRes3 != null  and deliverGoodsRes3 != ''">deliver_goods_res_3,</if>
+            <if test="intentionFollowRes3 != null  and intentionFollowRes3 != ''">Intention_follow_res_3,</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''">clinch_deal_res_3,</if>
+            <if test="totalWechatNumberRes3 != null  and totalWechatNumberRes3 != ''">total_WeChat_number_res_3,</if>
+            <if test="problem3 != null  and problem3 != ''">problem_3,</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''">Improved_method_3,</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">tomorrow_plan_3,</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">manager_work_suggestion_3,</if>
+            <if test="customer4 != null  and customer4 != ''">customer_4,</if>
+            <if test="callDurationPlan4 != null  and callDurationPlan4 != ''">call_duration_plan_4,</if>
+            <if test="blindAddPlan4 != null  and blindAddPlan4 != ''">blind_add_plan_4,</if>
+            <if test="addWechatPlan4 != null  and addWechatPlan4 != ''">add_WeChat_plan_4,</if>
+            <if test="deliverGoodsPlan4 != null  and deliverGoodsPlan4 != ''">deliver_goods_plan_4,</if>
+            <if test="intentionFollowPlan4 != null  and intentionFollowPlan4 != ''">Intention_follow_plan_4,</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''">clinch_deal_plan_4,</if>
+            <if test="totalWechatNumberPlan4 != null  and totalWechatNumberPlan4 != ''">total_WeChat_number_plan_4,</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''">hair_bands_res_4,</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''">boss_mass_texting_res_4,</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''">give_like_res_4,</if>
+            <if test="callDurationRes4 != null  and callDurationRes4 != ''">call_duration_res_4,</if>
+            <if test="blindAddRes4 != null  and blindAddRes4 != ''">blind_add_res_4,</if>
+            <if test="addWechatRes4 != null  and addWechatRes4 != ''">add_WeChat_res_4,</if>
+            <if test="deliverGoodsRes4 != null  and deliverGoodsRes4 != ''">deliver_goods_res_4,</if>
+            <if test="intentionFollowRes4 != null  and intentionFollowRes4 != ''">Intention_follow_res_4,</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''">clinch_deal_res_4,</if>
+            <if test="totalWechatNumberRes4 != null  and totalWechatNumberRes4 != ''">total_WeChat_number_res_4,</if>
+            <if test="problem4 != null  and problem4 != ''">problem_4,</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''">Improved_method_4,</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">tomorrow_plan_4,</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">manager_work_suggestion_4,</if>
+            <if test="customer5 != null  and customer5 != ''">customer_5,</if>
+            <if test="callDurationPlan5 != null  and callDurationPlan5 != ''">call_duration_plan_5,</if>
+            <if test="blindAddPlan5 != null  and blindAddPlan5 != ''">blind_add_plan_5,</if>
+            <if test="addWechatPlan5 != null  and addWechatPlan5 != ''">add_WeChat_plan_5,</if>
+            <if test="deliverGoodsPlan5 != null  and deliverGoodsPlan5 != ''">deliver_goods_plan_5,</if>
+            <if test="intentionFollowPlan5 != null  and intentionFollowPlan5 != ''">Intention_follow_plan_5,</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''">clinch_deal_plan_5,</if>
+            <if test="totalWechatNumberPlan5 != null  and totalWechatNumberPlan5 != ''">total_WeChat_number_plan_5,</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''">hair_bands_res_5,</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''">boss_mass_texting_res_5,</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''">give_like_res_5,</if>
+            <if test="callDurationRes5 != null  and callDurationRes5 != ''">call_duration_res_5,</if>
+            <if test="blindAddRes5 != null  and blindAddRes5 != ''">blind_add_res_5,</if>
+            <if test="addWechatRes5 != null  and addWechatRes5 != ''">add_WeChat_res_5,</if>
+            <if test="deliverGoodsRes5 != null  and deliverGoodsRes5 != ''">deliver_goods_res_5,</if>
+            <if test="intentionFollowRes5 != null  and intentionFollowRes5 != ''">Intention_follow_res_5,</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''">clinch_deal_res_5,</if>
+            <if test="totalWechatNumberRes5 != null  and totalWechatNumberRes5 != ''">total_WeChat_number_res_5,</if>
+            <if test="problem5 != null  and problem5 != ''">problem_5,</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''">Improved_method_5,</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">tomorrow_plan_5,</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">manager_work_suggestion_5,</if>
+            <if test="customer6 != null  and customer6 != ''">customer_6,</if>
+            <if test="callDurationPlan6 != null  and callDurationPlan6 != ''">call_duration_plan_6,</if>
+            <if test="blindAddPlan6 != null  and blindAddPlan6 != ''">blind_add_plan_6,</if>
+            <if test="addWechatPlan6 != null  and addWechatPlan6 != ''">add_WeChat_plan_6,</if>
+            <if test="deliverGoodsPlan6 != null  and deliverGoodsPlan6 != ''">deliver_goods_plan_6,</if>
+            <if test="intentionFollowPlan6 != null  and intentionFollowPlan6 != ''">Intention_follow_plan_6,</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''">clinch_deal_plan_6,</if>
+            <if test="totalWechatNumberPlan6 != null  and totalWechatNumberPlan6 != ''">total_WeChat_number_plan_6,</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''">hair_bands_res_6,</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''">boss_mass_texting_res_6,</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''">give_like_res_6,</if>
+            <if test="callDurationRes6 != null  and callDurationRes6 != ''">call_duration_res_6,</if>
+            <if test="blindAddRes6 != null  and blindAddRes6 != ''">blind_add_res_6,</if>
+            <if test="addWechatRes6 != null  and addWechatRes6 != ''">add_WeChat_res_6,</if>
+            <if test="deliverGoodsRes6 != null  and deliverGoodsRes6 != ''">deliver_goods_res_6,</if>
+            <if test="intentionFollowRes6 != null  and intentionFollowRes6 != ''">Intention_follow_res_6,</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''">clinch_deal_res_6,</if>
+            <if test="totalWechatNumberRes6 != null  and totalWechatNumberRes6 != ''">total_WeChat_number_res_6,</if>
+            <if test="problem6 != null  and problem6 != ''">problem_6,</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''">Improved_method_6,</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''">tomorrow_plan_6,</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''">manager_work_suggestion_6,</if>
+            <if test="creationTime != null ">creation_time,</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id,</if>
+            <if test="creator != null  and creator != ''">creator,</if>
+            <if test="startTime != null ">start_time,</if>
+            <if test="endTime != null ">end_time,</if>
+            <if test="weekly != null  and weekly != ''">weekly,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="blindAdd != null  and blindAdd != ''">#{blindAdd},</if>
+            <if test="addWechat != null  and addWechat != ''">#{addWechat},</if>
+            <if test="deliverGoods != null  and deliverGoods != ''">#{deliverGoods},</if>
+            <if test="clinchDeal != null  and clinchDeal != ''">#{clinchDeal},</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''">#{saturdayManagerAnalysis},</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''">#{substandardSolutions},</if>
+            <if test="havingData != null  and havingData != ''">#{havingData},</if>
+            <if test="callDurationPlan1 != null  and callDurationPlan1 != ''">#{callDurationPlan1},</if>
+            <if test="customer1 != null  and customer1 != ''">#{customer1},</if>
+            <if test="blindAddPlan1 != null  and blindAddPlan1 != ''">#{blindAddPlan1},</if>
+            <if test="addWechatPlan1 != null  and addWechatPlan1 != ''">#{addWechatPlan1},</if>
+            <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''">#{deliverGoodsPlan1},</if>
+            <if test="intentionFollowPlan1 != null  and intentionFollowPlan1 != ''">#{intentionFollowPlan1},</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''">#{clinchDealPlan1},</if>
+            <if test="totalWechatNumberPlan1 != null  and totalWechatNumberPlan1 != ''">#{totalWechatNumberPlan1},</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''">#{hairBandsRes1},</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''">#{bossMassTextingRes1},</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''">#{giveLikeRes1},</if>
+            <if test="callDurationRes1 != null  and callDurationRes1 != ''">#{callDurationRes1},</if>
+            <if test="blindAddRes1 != null  and blindAddRes1 != ''">#{blindAddRes1},</if>
+            <if test="addWechatRes1 != null  and addWechatRes1 != ''">#{addWechatRes1},</if>
+            <if test="deliverGoodsRes1 != null  and deliverGoodsRes1 != ''">#{deliverGoodsRes1},</if>
+            <if test="intentionFollowRes1 != null  and intentionFollowRes1 != ''">#{intentionFollowRes1},</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''">#{clinchDealRes1},</if>
+            <if test="totalWechatNumberRes1 != null  and totalWechatNumberRes1 != ''">#{totalWechatNumberRes1},</if>
+            <if test="problem1 != null  and problem1 != ''">#{problem1},</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''">#{improvedMethod1},</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">#{tomorrowPlan1},</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">#{managerWorkSuggestion1},</if>
+            <if test="customer2 != null  and customer2 != ''">#{customer2},</if>
+            <if test="callDurationPlan2 != null  and callDurationPlan2 != ''">#{callDurationPlan2},</if>
+            <if test="blindAddPlan2 != null  and blindAddPlan2 != ''">#{blindAddPlan2},</if>
+            <if test="addWechatPlan2 != null  and addWechatPlan2 != ''">#{addWechatPlan2},</if>
+            <if test="deliverGoodsPlan2 != null  and deliverGoodsPlan2 != ''">#{deliverGoodsPlan2},</if>
+            <if test="intentionFollowPlan2 != null  and intentionFollowPlan2 != ''">#{intentionFollowPlan2},</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''">#{clinchDealPlan2},</if>
+            <if test="totalWechatNumberPlan2 != null  and totalWechatNumberPlan2 != ''">#{totalWechatNumberPlan2},</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''">#{hairBandsRes2},</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''">#{bossMassTextingRes2},</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''">#{giveLikeRes2},</if>
+            <if test="callDurationRes2 != null  and callDurationRes2 != ''">#{callDurationRes2},</if>
+            <if test="blindAddRes2 != null  and blindAddRes2 != ''">#{blindAddRes2},</if>
+            <if test="addWechatRes2 != null  and addWechatRes2 != ''">#{addWechatRes2},</if>
+            <if test="deliverGoodsRes2 != null  and deliverGoodsRes2 != ''">#{deliverGoodsRes2},</if>
+            <if test="intentionFollowRes2 != null  and intentionFollowRes2 != ''">#{intentionFollowRes2},</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''">#{clinchDealRes2},</if>
+            <if test="totalWechatNumberRes2 != null  and totalWechatNumberRes2 != ''">#{totalWechatNumberRes2},</if>
+            <if test="problem2 != null  and problem2 != ''">#{problem2},</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''">#{improvedMethod2},</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">#{tomorrowPlan2},</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">#{managerWorkSuggestion2},</if>
+            <if test="customer3 != null  and customer3 != ''">#{customer3},</if>
+            <if test="callDurationPlan3 != null  and callDurationPlan3 != ''">#{callDurationPlan3},</if>
+            <if test="blindAddPlan3 != null  and blindAddPlan3 != ''">#{blindAddPlan3},</if>
+            <if test="addWechatPlan3 != null  and addWechatPlan3 != ''">#{addWechatPlan3},</if>
+            <if test="deliverGoodsPlan3 != null  and deliverGoodsPlan3 != ''">#{deliverGoodsPlan3},</if>
+            <if test="intentionFollowPlan3 != null  and intentionFollowPlan3 != ''">#{intentionFollowPlan3},</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''">#{clinchDealPlan3},</if>
+            <if test="totalWechatNumberPlan3 != null  and totalWechatNumberPlan3 != ''">#{totalWechatNumberPlan3},</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''">#{hairBandsRes3},</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''">#{bossMassTextingRes3},</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''">#{giveLikeRes3},</if>
+            <if test="callDurationRes3 != null  and callDurationRes3 != ''">#{callDurationRes3},</if>
+            <if test="blindAddRes3 != null  and blindAddRes3 != ''">#{blindAddRes3},</if>
+            <if test="addWechatRes3 != null  and addWechatRes3 != ''">#{addWechatRes3},</if>
+            <if test="deliverGoodsRes3 != null  and deliverGoodsRes3 != ''">#{deliverGoodsRes3},</if>
+            <if test="intentionFollowRes3 != null  and intentionFollowRes3 != ''">#{intentionFollowRes3},</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''">#{clinchDealRes3},</if>
+            <if test="totalWechatNumberRes3 != null  and totalWechatNumberRes3 != ''">#{totalWechatNumberRes3},</if>
+            <if test="problem3 != null  and problem3 != ''">#{problem3},</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''">#{improvedMethod3},</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">#{tomorrowPlan3},</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">#{managerWorkSuggestion3},</if>
+            <if test="customer4 != null  and customer4 != ''">#{customer4},</if>
+            <if test="callDurationPlan4 != null  and callDurationPlan4 != ''">#{callDurationPlan4},</if>
+            <if test="blindAddPlan4 != null  and blindAddPlan4 != ''">#{blindAddPlan4},</if>
+            <if test="addWechatPlan4 != null  and addWechatPlan4 != ''">#{addWechatPlan4},</if>
+            <if test="deliverGoodsPlan4 != null  and deliverGoodsPlan4 != ''">#{deliverGoodsPlan4},</if>
+            <if test="intentionFollowPlan4 != null  and intentionFollowPlan4 != ''">#{intentionFollowPlan4},</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''">#{clinchDealPlan4},</if>
+            <if test="totalWechatNumberPlan4 != null  and totalWechatNumberPlan4 != ''">#{totalWechatNumberPlan4},</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''">#{hairBandsRes4},</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''">#{bossMassTextingRes4},</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''">#{giveLikeRes4},</if>
+            <if test="callDurationRes4 != null  and callDurationRes4 != ''">#{callDurationRes4},</if>
+            <if test="blindAddRes4 != null  and blindAddRes4 != ''">#{blindAddRes4},</if>
+            <if test="addWechatRes4 != null  and addWechatRes4 != ''">#{addWechatRes4},</if>
+            <if test="deliverGoodsRes4 != null  and deliverGoodsRes4 != ''">#{deliverGoodsRes4},</if>
+            <if test="intentionFollowRes4 != null  and intentionFollowRes4 != ''">#{intentionFollowRes4},</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''">#{clinchDealRes4},</if>
+            <if test="totalWechatNumberRes4 != null  and totalWechatNumberRes4 != ''">#{totalWechatNumberRes4},</if>
+            <if test="problem4 != null  and problem4 != ''">#{problem4},</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''">#{improvedMethod4},</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">#{tomorrowPlan4},</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">#{managerWorkSuggestion4},</if>
+            <if test="customer5 != null  and customer5 != ''">#{customer5},</if>
+            <if test="callDurationPlan5 != null  and callDurationPlan5 != ''">#{callDurationPlan5},</if>
+            <if test="blindAddPlan5 != null  and blindAddPlan5 != ''">#{blindAddPlan5},</if>
+            <if test="addWechatPlan5 != null  and addWechatPlan5 != ''">#{addWechatPlan5},</if>
+            <if test="deliverGoodsPlan5 != null  and deliverGoodsPlan5 != ''">#{deliverGoodsPlan5},</if>
+            <if test="intentionFollowPlan5 != null  and intentionFollowPlan5 != ''">#{intentionFollowPlan5},</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''">#{clinchDealPlan5},</if>
+            <if test="totalWechatNumberPlan5 != null  and totalWechatNumberPlan5 != ''">#{totalWechatNumberPlan5},</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''">#{hairBandsRes5},</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''">#{bossMassTextingRes5},</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''">#{giveLikeRes5},</if>
+            <if test="callDurationRes5 != null  and callDurationRes5 != ''">#{callDurationRes5},</if>
+            <if test="blindAddRes5 != null  and blindAddRes5 != ''">#{blindAddRes5},</if>
+            <if test="addWechatRes5 != null  and addWechatRes5 != ''">#{addWechatRes5},</if>
+            <if test="deliverGoodsRes5 != null  and deliverGoodsRes5 != ''">#{deliverGoodsRes5},</if>
+            <if test="intentionFollowRes5 != null  and intentionFollowRes5 != ''">#{intentionFollowRes5},</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''">#{clinchDealRes5},</if>
+            <if test="totalWechatNumberRes5 != null  and totalWechatNumberRes5 != ''">#{totalWechatNumberRes5},</if>
+            <if test="problem5 != null  and problem5 != ''">#{problem5},</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''">#{improvedMethod5},</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">#{tomorrowPlan5},</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">#{managerWorkSuggestion5},</if>
+            <if test="customer6 != null  and customer6 != ''">#{customer6},</if>
+            <if test="callDurationPlan6 != null  and callDurationPlan6 != ''">#{callDurationPlan6},</if>
+            <if test="blindAddPlan6 != null  and blindAddPlan6 != ''">#{blindAddPlan6},</if>
+            <if test="addWechatPlan6 != null  and addWechatPlan6 != ''">#{addWechatPlan6},</if>
+            <if test="deliverGoodsPlan6 != null  and deliverGoodsPlan6 != ''">#{deliverGoodsPlan6},</if>
+            <if test="intentionFollowPlan6 != null  and intentionFollowPlan6 != ''">#{intentionFollowPlan6},</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''">#{clinchDealPlan6},</if>
+            <if test="totalWechatNumberPlan6 != null  and totalWechatNumberPlan6 != ''">#{totalWechatNumberPlan6},</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''">#{hairBandsRes6},</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''">#{bossMassTextingRes6},</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''">#{giveLikeRes6},</if>
+            <if test="callDurationRes6 != null  and callDurationRes6 != ''">#{callDurationRes6},</if>
+            <if test="blindAddRes6 != null  and blindAddRes6 != ''">#{blindAddRes6},</if>
+            <if test="addWechatRes6 != null  and addWechatRes6 != ''">#{addWechatRes6},</if>
+            <if test="deliverGoodsRes6 != null  and deliverGoodsRes6 != ''">#{deliverGoodsRes6},</if>
+            <if test="intentionFollowRes6 != null  and intentionFollowRes6 != ''">#{intentionFollowRes6},</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''">#{clinchDealRes6},</if>
+            <if test="totalWechatNumberRes6 != null  and totalWechatNumberRes6 != ''">#{totalWechatNumberRes6},</if>
+            <if test="problem6 != null  and problem6 != ''">#{problem6},</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''">#{improvedMethod6},</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''">#{tomorrowPlan6},</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''">#{managerWorkSuggestion6},</if>
+            <if test="creationTime != null ">#{creationTime},</if>
+            <if test="creatorId != null  and creatorId != ''">#{creatorId},</if>
+            <if test="creator != null  and creator != ''">#{creator},</if>
+            <if test="startTime != null ">#{startTime},</if>
+            <if test="endTime != null ">#{endTime},</if>
+            <if test="weekly != null  and weekly != ''">#{weekly},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKhWeeklySummary" parameterType="KhWeeklySummary">
+        update kh_weekly_summary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="blindAdd != null  and blindAdd != ''">blind_add = #{blindAdd},</if>
+            <if test="addWechat != null  and addWechat != ''">add_WeChat = #{addWechat},</if>
+            <if test="deliverGoods != null  and deliverGoods != ''">deliver_goods = #{deliverGoods},</if>
+            <if test="clinchDeal != null  and clinchDeal != ''">clinch_deal = #{clinchDeal},</if>
+            <if test="saturdayManagerAnalysis != null  and saturdayManagerAnalysis != ''">saturday_manager_analysis = #{saturdayManagerAnalysis},</if>
+            <if test="substandardSolutions != null  and substandardSolutions != ''">substandard_solutions = #{substandardSolutions},</if>
+            <if test="havingData != null  and havingData != ''">having_data = #{havingData},</if>
+            <if test="callDurationPlan1 != null  and callDurationPlan1 != ''">call_duration_plan_1 = #{callDurationPlan1},</if>
+            <if test="customer1 != null  and customer1 != ''">customer_1 = #{customer1},</if>
+            <if test="blindAddPlan1 != null  and blindAddPlan1 != ''">blind_add_plan_1 = #{blindAddPlan1},</if>
+            <if test="addWechatPlan1 != null  and addWechatPlan1 != ''">add_WeChat_plan_1 = #{addWechatPlan1},</if>
+            <if test="deliverGoodsPlan1 != null  and deliverGoodsPlan1 != ''">deliver_goods_plan_1 = #{deliverGoodsPlan1},</if>
+            <if test="intentionFollowPlan1 != null  and intentionFollowPlan1 != ''">Intention_follow_plan_1 = #{intentionFollowPlan1},</if>
+            <if test="clinchDealPlan1 != null  and clinchDealPlan1 != ''">clinch_deal_plan_1 = #{clinchDealPlan1},</if>
+            <if test="totalWechatNumberPlan1 != null  and totalWechatNumberPlan1 != ''">total_WeChat_number_plan_1 = #{totalWechatNumberPlan1},</if>
+            <if test="hairBandsRes1 != null  and hairBandsRes1 != ''">hair_bands_res_1 = #{hairBandsRes1},</if>
+            <if test="bossMassTextingRes1 != null  and bossMassTextingRes1 != ''">boss_mass_texting_res_1 = #{bossMassTextingRes1},</if>
+            <if test="giveLikeRes1 != null  and giveLikeRes1 != ''">give_like_res_1 = #{giveLikeRes1},</if>
+            <if test="callDurationRes1 != null  and callDurationRes1 != ''">call_duration_res_1 = #{callDurationRes1},</if>
+            <if test="blindAddRes1 != null  and blindAddRes1 != ''">blind_add_res_1 = #{blindAddRes1},</if>
+            <if test="addWechatRes1 != null  and addWechatRes1 != ''">add_WeChat_res_1 = #{addWechatRes1},</if>
+            <if test="deliverGoodsRes1 != null  and deliverGoodsRes1 != ''">deliver_goods_res_1 = #{deliverGoodsRes1},</if>
+            <if test="intentionFollowRes1 != null  and intentionFollowRes1 != ''">Intention_follow_res_1 = #{intentionFollowRes1},</if>
+            <if test="clinchDealRes1 != null  and clinchDealRes1 != ''">clinch_deal_res_1 = #{clinchDealRes1},</if>
+            <if test="totalWechatNumberRes1 != null  and totalWechatNumberRes1 != ''">total_WeChat_number_res_1 = #{totalWechatNumberRes1},</if>
+            <if test="problem1 != null  and problem1 != ''">problem_1 = #{problem1},</if>
+            <if test="improvedMethod1 != null  and improvedMethod1 != ''">Improved_method_1 = #{improvedMethod1},</if>
+            <if test="tomorrowPlan1 != null  and tomorrowPlan1 != ''">tomorrow_plan_1 = #{tomorrowPlan1},</if>
+            <if test="managerWorkSuggestion1 != null  and managerWorkSuggestion1 != ''">manager_work_suggestion_1 = #{managerWorkSuggestion1},</if>
+            <if test="customer2 != null  and customer2 != ''">customer_2 = #{customer2},</if>
+            <if test="callDurationPlan2 != null  and callDurationPlan2 != ''">call_duration_plan_2 = #{callDurationPlan2},</if>
+            <if test="blindAddPlan2 != null  and blindAddPlan2 != ''">blind_add_plan_2 = #{blindAddPlan2},</if>
+            <if test="addWechatPlan2 != null  and addWechatPlan2 != ''">add_WeChat_plan_2 = #{addWechatPlan2},</if>
+            <if test="deliverGoodsPlan2 != null  and deliverGoodsPlan2 != ''">deliver_goods_plan_2 = #{deliverGoodsPlan2},</if>
+            <if test="intentionFollowPlan2 != null  and intentionFollowPlan2 != ''">Intention_follow_plan_2 = #{intentionFollowPlan2},</if>
+            <if test="clinchDealPlan2 != null  and clinchDealPlan2 != ''">clinch_deal_plan_2 = #{clinchDealPlan2},</if>
+            <if test="totalWechatNumberPlan2 != null  and totalWechatNumberPlan2 != ''">total_WeChat_number_plan_2 = #{totalWechatNumberPlan2},</if>
+            <if test="hairBandsRes2 != null  and hairBandsRes2 != ''">hair_bands_res_2 = #{hairBandsRes2},</if>
+            <if test="bossMassTextingRes2 != null  and bossMassTextingRes2 != ''">boss_mass_texting_res_2 = #{bossMassTextingRes2},</if>
+            <if test="giveLikeRes2 != null  and giveLikeRes2 != ''">give_like_res_2 = #{giveLikeRes2},</if>
+            <if test="callDurationRes2 != null  and callDurationRes2 != ''">call_duration_res_2 = #{callDurationRes2},</if>
+            <if test="blindAddRes2 != null  and blindAddRes2 != ''">blind_add_res_2 = #{blindAddRes2},</if>
+            <if test="addWechatRes2 != null  and addWechatRes2 != ''">add_WeChat_res_2 = #{addWechatRes2},</if>
+            <if test="deliverGoodsRes2 != null  and deliverGoodsRes2 != ''">deliver_goods_res_2 = #{deliverGoodsRes2},</if>
+            <if test="intentionFollowRes2 != null  and intentionFollowRes2 != ''">Intention_follow_res_2 = #{intentionFollowRes2},</if>
+            <if test="clinchDealRes2 != null  and clinchDealRes2 != ''">clinch_deal_res_2 = #{clinchDealRes2},</if>
+            <if test="totalWechatNumberRes2 != null  and totalWechatNumberRes2 != ''">total_WeChat_number_res_2 = #{totalWechatNumberRes2},</if>
+            <if test="problem2 != null  and problem2 != ''">problem_2 = #{problem2},</if>
+            <if test="improvedMethod2 != null  and improvedMethod2 != ''">Improved_method_2 = #{improvedMethod2},</if>
+            <if test="tomorrowPlan2 != null  and tomorrowPlan2 != ''">tomorrow_plan_2 = #{tomorrowPlan2},</if>
+            <if test="managerWorkSuggestion2 != null  and managerWorkSuggestion2 != ''">manager_work_suggestion_2 = #{managerWorkSuggestion2},</if>
+            <if test="customer3 != null  and customer3 != ''">customer_3 = #{customer3},</if>
+            <if test="callDurationPlan3 != null  and callDurationPlan3 != ''">call_duration_plan_3 = #{callDurationPlan3},</if>
+            <if test="blindAddPlan3 != null  and blindAddPlan3 != ''">blind_add_plan_3 = #{blindAddPlan3},</if>
+            <if test="addWechatPlan3 != null  and addWechatPlan3 != ''">add_WeChat_plan_3 = #{addWechatPlan3},</if>
+            <if test="deliverGoodsPlan3 != null  and deliverGoodsPlan3 != ''">deliver_goods_plan_3 = #{deliverGoodsPlan3},</if>
+            <if test="intentionFollowPlan3 != null  and intentionFollowPlan3 != ''">Intention_follow_plan_3 = #{intentionFollowPlan3},</if>
+            <if test="clinchDealPlan3 != null  and clinchDealPlan3 != ''">clinch_deal_plan_3 = #{clinchDealPlan3},</if>
+            <if test="totalWechatNumberPlan3 != null  and totalWechatNumberPlan3 != ''">total_WeChat_number_plan_3 = #{totalWechatNumberPlan3},</if>
+            <if test="hairBandsRes3 != null  and hairBandsRes3 != ''">hair_bands_res_3 = #{hairBandsRes3},</if>
+            <if test="bossMassTextingRes3 != null  and bossMassTextingRes3 != ''">boss_mass_texting_res_3 = #{bossMassTextingRes3},</if>
+            <if test="giveLikeRes3 != null  and giveLikeRes3 != ''">give_like_res_3 = #{giveLikeRes3},</if>
+            <if test="callDurationRes3 != null  and callDurationRes3 != ''">call_duration_res_3 = #{callDurationRes3},</if>
+            <if test="blindAddRes3 != null  and blindAddRes3 != ''">blind_add_res_3 = #{blindAddRes3},</if>
+            <if test="addWechatRes3 != null  and addWechatRes3 != ''">add_WeChat_res_3 = #{addWechatRes3},</if>
+            <if test="deliverGoodsRes3 != null  and deliverGoodsRes3 != ''">deliver_goods_res_3 = #{deliverGoodsRes3},</if>
+            <if test="intentionFollowRes3 != null  and intentionFollowRes3 != ''">Intention_follow_res_3 = #{intentionFollowRes3},</if>
+            <if test="clinchDealRes3 != null  and clinchDealRes3 != ''">clinch_deal_res_3 = #{clinchDealRes3},</if>
+            <if test="totalWechatNumberRes3 != null  and totalWechatNumberRes3 != ''">total_WeChat_number_res_3 = #{totalWechatNumberRes3},</if>
+            <if test="problem3 != null  and problem3 != ''">problem_3 = #{problem3},</if>
+            <if test="improvedMethod3 != null  and improvedMethod3 != ''">Improved_method_3 = #{improvedMethod3},</if>
+            <if test="tomorrowPlan3 != null  and tomorrowPlan3 != ''">tomorrow_plan_3 = #{tomorrowPlan3},</if>
+            <if test="managerWorkSuggestion3 != null  and managerWorkSuggestion3 != ''">manager_work_suggestion_3 = #{managerWorkSuggestion3},</if>
+            <if test="customer4 != null  and customer4 != ''">customer_4 = #{customer4},</if>
+            <if test="callDurationPlan4 != null  and callDurationPlan4 != ''">call_duration_plan_4 = #{callDurationPlan4},</if>
+            <if test="blindAddPlan4 != null  and blindAddPlan4 != ''">blind_add_plan_4 = #{blindAddPlan4},</if>
+            <if test="addWechatPlan4 != null  and addWechatPlan4 != ''">add_WeChat_plan_4 = #{addWechatPlan4},</if>
+            <if test="deliverGoodsPlan4 != null  and deliverGoodsPlan4 != ''">deliver_goods_plan_4 = #{deliverGoodsPlan4},</if>
+            <if test="intentionFollowPlan4 != null  and intentionFollowPlan4 != ''">Intention_follow_plan_4 = #{intentionFollowPlan4},</if>
+            <if test="clinchDealPlan4 != null  and clinchDealPlan4 != ''">clinch_deal_plan_4 = #{clinchDealPlan4},</if>
+            <if test="totalWechatNumberPlan4 != null  and totalWechatNumberPlan4 != ''">total_WeChat_number_plan_4 = #{totalWechatNumberPlan4},</if>
+            <if test="hairBandsRes4 != null  and hairBandsRes4 != ''">hair_bands_res_4 = #{hairBandsRes4},</if>
+            <if test="bossMassTextingRes4 != null  and bossMassTextingRes4 != ''">boss_mass_texting_res_4 = #{bossMassTextingRes4},</if>
+            <if test="giveLikeRes4 != null  and giveLikeRes4 != ''">give_like_res_4 = #{giveLikeRes4},</if>
+            <if test="callDurationRes4 != null  and callDurationRes4 != ''">call_duration_res_4 = #{callDurationRes4},</if>
+            <if test="blindAddRes4 != null  and blindAddRes4 != ''">blind_add_res_4 = #{blindAddRes4},</if>
+            <if test="addWechatRes4 != null  and addWechatRes4 != ''">add_WeChat_res_4 = #{addWechatRes4},</if>
+            <if test="deliverGoodsRes4 != null  and deliverGoodsRes4 != ''">deliver_goods_res_4 = #{deliverGoodsRes4},</if>
+            <if test="intentionFollowRes4 != null  and intentionFollowRes4 != ''">Intention_follow_res_4 = #{intentionFollowRes4},</if>
+            <if test="clinchDealRes4 != null  and clinchDealRes4 != ''">clinch_deal_res_4 = #{clinchDealRes4},</if>
+            <if test="totalWechatNumberRes4 != null  and totalWechatNumberRes4 != ''">total_WeChat_number_res_4 = #{totalWechatNumberRes4},</if>
+            <if test="problem4 != null  and problem4 != ''">problem_4 = #{problem4},</if>
+            <if test="improvedMethod4 != null  and improvedMethod4 != ''">Improved_method_4 = #{improvedMethod4},</if>
+            <if test="tomorrowPlan4 != null  and tomorrowPlan4 != ''">tomorrow_plan_4 = #{tomorrowPlan4},</if>
+            <if test="managerWorkSuggestion4 != null  and managerWorkSuggestion4 != ''">manager_work_suggestion_4 = #{managerWorkSuggestion4},</if>
+            <if test="customer5 != null  and customer5 != ''">customer_5 = #{customer5},</if>
+            <if test="callDurationPlan5 != null  and callDurationPlan5 != ''">call_duration_plan_5 = #{callDurationPlan5},</if>
+            <if test="blindAddPlan5 != null  and blindAddPlan5 != ''">blind_add_plan_5 = #{blindAddPlan5},</if>
+            <if test="addWechatPlan5 != null  and addWechatPlan5 != ''">add_WeChat_plan_5 = #{addWechatPlan5},</if>
+            <if test="deliverGoodsPlan5 != null  and deliverGoodsPlan5 != ''">deliver_goods_plan_5 = #{deliverGoodsPlan5},</if>
+            <if test="intentionFollowPlan5 != null  and intentionFollowPlan5 != ''">Intention_follow_plan_5 = #{intentionFollowPlan5},</if>
+            <if test="clinchDealPlan5 != null  and clinchDealPlan5 != ''">clinch_deal_plan_5 = #{clinchDealPlan5},</if>
+            <if test="totalWechatNumberPlan5 != null  and totalWechatNumberPlan5 != ''">total_WeChat_number_plan_5 = #{totalWechatNumberPlan5},</if>
+            <if test="hairBandsRes5 != null  and hairBandsRes5 != ''">hair_bands_res_5 = #{hairBandsRes5},</if>
+            <if test="bossMassTextingRes5 != null  and bossMassTextingRes5 != ''">boss_mass_texting_res_5 = #{bossMassTextingRes5},</if>
+            <if test="giveLikeRes5 != null  and giveLikeRes5 != ''">give_like_res_5 = #{giveLikeRes5},</if>
+            <if test="callDurationRes5 != null  and callDurationRes5 != ''">call_duration_res_5 = #{callDurationRes5},</if>
+            <if test="blindAddRes5 != null  and blindAddRes5 != ''">blind_add_res_5 = #{blindAddRes5},</if>
+            <if test="addWechatRes5 != null  and addWechatRes5 != ''">add_WeChat_res_5 = #{addWechatRes5},</if>
+            <if test="deliverGoodsRes5 != null  and deliverGoodsRes5 != ''">deliver_goods_res_5 = #{deliverGoodsRes5},</if>
+            <if test="intentionFollowRes5 != null  and intentionFollowRes5 != ''">Intention_follow_res_5 = #{intentionFollowRes5},</if>
+            <if test="clinchDealRes5 != null  and clinchDealRes5 != ''">clinch_deal_res_5 = #{clinchDealRes5},</if>
+            <if test="totalWechatNumberRes5 != null  and totalWechatNumberRes5 != ''">total_WeChat_number_res_5 = #{totalWechatNumberRes5},</if>
+            <if test="problem5 != null  and problem5 != ''">problem_5 = #{problem5},</if>
+            <if test="improvedMethod5 != null  and improvedMethod5 != ''">Improved_method_5 = #{improvedMethod5},</if>
+            <if test="tomorrowPlan5 != null  and tomorrowPlan5 != ''">tomorrow_plan_5 = #{tomorrowPlan5},</if>
+            <if test="managerWorkSuggestion5 != null  and managerWorkSuggestion5 != ''">manager_work_suggestion_5 = #{managerWorkSuggestion5},</if>
+            <if test="customer6 != null  and customer6 != ''">customer_6 = #{customer6},</if>
+            <if test="callDurationPlan6 != null  and callDurationPlan6 != ''">call_duration_plan_6 = #{callDurationPlan6},</if>
+            <if test="blindAddPlan6 != null  and blindAddPlan6 != ''">blind_add_plan_6 = #{blindAddPlan6},</if>
+            <if test="addWechatPlan6 != null  and addWechatPlan6 != ''">add_WeChat_plan_6 = #{addWechatPlan6},</if>
+            <if test="deliverGoodsPlan6 != null  and deliverGoodsPlan6 != ''">deliver_goods_plan_6 = #{deliverGoodsPlan6},</if>
+            <if test="intentionFollowPlan6 != null  and intentionFollowPlan6 != ''">Intention_follow_plan_6 = #{intentionFollowPlan6},</if>
+            <if test="clinchDealPlan6 != null  and clinchDealPlan6 != ''">clinch_deal_plan_6 = #{clinchDealPlan6},</if>
+            <if test="totalWechatNumberPlan6 != null  and totalWechatNumberPlan6 != ''">total_WeChat_number_plan_6 = #{totalWechatNumberPlan6},</if>
+            <if test="hairBandsRes6 != null  and hairBandsRes6 != ''">hair_bands_res_6 = #{hairBandsRes6},</if>
+            <if test="bossMassTextingRes6 != null  and bossMassTextingRes6 != ''">boss_mass_texting_res_6 = #{bossMassTextingRes6},</if>
+            <if test="giveLikeRes6 != null  and giveLikeRes6 != ''">give_like_res_6 = #{giveLikeRes6},</if>
+            <if test="callDurationRes6 != null  and callDurationRes6 != ''">call_duration_res_6 = #{callDurationRes6},</if>
+            <if test="blindAddRes6 != null  and blindAddRes6 != ''">blind_add_res_6 = #{blindAddRes6},</if>
+            <if test="addWechatRes6 != null  and addWechatRes6 != ''">add_WeChat_res_6 = #{addWechatRes6},</if>
+            <if test="deliverGoodsRes6 != null  and deliverGoodsRes6 != ''">deliver_goods_res_6 = #{deliverGoodsRes6},</if>
+            <if test="intentionFollowRes6 != null  and intentionFollowRes6 != ''">Intention_follow_res_6 = #{intentionFollowRes6},</if>
+            <if test="clinchDealRes6 != null  and clinchDealRes6 != ''">clinch_deal_res_6 = #{clinchDealRes6},</if>
+            <if test="totalWechatNumberRes6 != null  and totalWechatNumberRes6 != ''">total_WeChat_number_res_6 = #{totalWechatNumberRes6},</if>
+            <if test="problem6 != null  and problem6 != ''">problem_6 = #{problem6},</if>
+            <if test="improvedMethod6 != null  and improvedMethod6 != ''">Improved_method_6 = #{improvedMethod6},</if>
+            <if test="tomorrowPlan6 != null  and tomorrowPlan6 != ''">tomorrow_plan_6 = #{tomorrowPlan6},</if>
+            <if test="managerWorkSuggestion6 != null  and managerWorkSuggestion6 != ''">manager_work_suggestion_6 = #{managerWorkSuggestion6},</if>
+            <if test="creationTime != null ">creation_time = #{creationTime},</if>
+            <if test="creatorId != null  and creatorId != ''">creator_id = #{creatorId},</if>
+            <if test="creator != null  and creator != ''">creator = #{creator},</if>
+            <if test="startTime != null ">start_time = #{startTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+            <if test="weekly != null  and weekly != ''">weekly = #{weekly},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKhWeeklySummaryById" parameterType="String">
+        delete from kh_weekly_summary where id = #{id}
+    </delete>
+
+    <delete id="deleteKhWeeklySummaryByIds" parameterType="String">
+        delete from kh_weekly_summary where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
