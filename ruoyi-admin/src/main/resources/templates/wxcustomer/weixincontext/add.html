@@ -110,8 +110,8 @@ img {
 									<span style="color: red;"  onclick="javaScript:delFile(this);"  th:data="${item.id}">删除</span>
 									<span style="color: blue;"  onclick="javaScript:openFile(this);" th:data="${item.filePath}">查看</span>
 								</div>
-								<div class="result">
-									<img class="subPic" status="success" th:src="${item.filePath}" th:alt="${item.fileName}"   />
+								<div class="result"  >
+									<img class="subPic" status="success" th:src="${item.filePath}" th:alt="${item.fileName}"  width="200" height="200"/>
 								</div>
 							</div>
                     </div>
@@ -282,7 +282,7 @@ img {
         		var fileId=$(obj).attr("data");
             	if(fileId){
             		$.post("/wxcustomer/common/delFile", {fileIds:fileId},function(res){
-            			if(res.status=="true"){
+            			if(res.status){
             				$(obj).parent().parent().remove();
             				$.modal.alert(res.msg);
             			}else{
