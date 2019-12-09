@@ -97,7 +97,7 @@ img {
                     <textarea name="remark" id="remark" class="form-control" th:text="${weixinContext.remark}" readonly="readonly" disabled="disabled"></textarea>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group" style="padding-left: 200px;">    
                  <div class="col-sm-8">
                  	<input type="file" id="file_input" accept=".jpg,.png,.jpeg,.gif" multiple style="display: none;" /> 
                     <div class="input-group " id="pritrueDiv">
@@ -107,7 +107,7 @@ img {
 									<span style="color: blue;"  onclick="javaScript:openFile(this);" th:data="${item.filePath}">查看</span>
 								</div>
 								<div class="result">
-									<img class="subPic" status="success" th:src="${item.filePath}" th:alt="${item.fileName}"   />
+									<img class="subPic" status="success" th:src="${item.filePath}" th:alt="${item.fileName}" width="200" height="200" />
 								</div>
 							</div>
                     </div>
