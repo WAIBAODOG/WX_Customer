@@ -70,6 +70,7 @@ public class WechatCustomerController extends BaseController {
 			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZY");
 			if(StringUtils.isBlank(isFyUserRoleStr)) {
 				wechatCustomer.setIsFyUser("1");
+				wechatCustomer.setCreatorId(ShiroUtils.getUserId() + "");
 			}
 			
 			String isShUserRoleStr = permissionService.hasAnyRoles("SHZZY");

@@ -113,6 +113,18 @@ public class WechatCustomer extends BaseEntity{
     
     private String isFyUser;   //是否发样成交人员, 不持久化
     private String shUserId;   //售后人员Id, 不持久化
+    
+    /** 客户生日 */
+    @Excel(name = "客户生日", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date customerbirthday;
+
+    /** 预计下次跟进时间 */
+    @Excel(name = "预计下次跟进时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date nexttime;
+
+    /** 预计库存 */
+    @Excel(name = "预计库存")
+    private String expectedinventory;
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
@@ -332,7 +344,30 @@ public class WechatCustomer extends BaseEntity{
 		this.shUserId = shUserId;
 	}
 
-	@Override
+    public void setCustomerbirthday(Date customerbirthday) {
+        this.customerbirthday = customerbirthday;
+    }
+
+    public Date getCustomerbirthday() {
+        return customerbirthday;
+    }
+    public void setNexttime(Date nexttime) {
+        this.nexttime = nexttime;
+    }
+
+    public Date getNexttime() {
+        return nexttime;
+    }
+    public void setExpectedinventory(String expectedinventory) {
+        this.expectedinventory = expectedinventory;
+    }
+
+    public String getExpectedinventory() {
+        return expectedinventory;
+    }
+
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("customerId", getCustomerId())
@@ -361,7 +396,12 @@ public class WechatCustomer extends BaseEntity{
             .append("isDelivery", getIsDelivery())
             .append("isSales", getIsSales())
             .append("customerNum", getCustomerNum())
+            .append("saleName", getSaleName())
+            .append("saleId", getSaleId())
+            .append("isDelete", getIsDelete())
+            .append("customerbirthday", getCustomerbirthday())
+            .append("nexttime", getNexttime())
+            .append("expectedinventory", getExpectedinventory())
             .toString();
     }
-	
 }

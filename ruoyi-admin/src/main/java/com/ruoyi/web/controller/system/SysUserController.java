@@ -123,14 +123,13 @@ public class SysUserController extends BaseController
         {
             return error("新增用户'" + user.getLoginName() + "'失败，登录账号已存在");
         }
-        else if (UserConstants.USER_PHONE_NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
-        {
-            return error("新增用户'" + user.getLoginName() + "'失败，手机号码已存在");
-        }
-        else if (UserConstants.USER_EMAIL_NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
-        {
-            return error("新增用户'" + user.getLoginName() + "'失败，邮箱账号已存在");
-        }
+		/*
+		 * else if
+		 * (UserConstants.USER_PHONE_NOT_UNIQUE.equals(userService.checkPhoneUnique(user
+		 * ))) { return error("新增用户'" + user.getLoginName() + "'失败，手机号码已存在"); } else if
+		 * (UserConstants.USER_EMAIL_NOT_UNIQUE.equals(userService.checkEmailUnique(user
+		 * ))) { return error("新增用户'" + user.getLoginName() + "'失败，邮箱账号已存在"); }
+		 */
         user.setSalt(ShiroUtils.randomSalt());
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         user.setCreateBy(ShiroUtils.getLoginName());
