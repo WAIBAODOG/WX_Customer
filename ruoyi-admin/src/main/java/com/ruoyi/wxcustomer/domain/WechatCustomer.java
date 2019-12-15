@@ -113,6 +113,9 @@ public class WechatCustomer extends BaseEntity{
     
     private String isFyUser;   //是否发样成交人员, 不持久化
     private String shUserId;   //售后人员Id, 不持久化
+    private String customerStartbirthday;
+    private String customerEndbirthday;
+    private String operateFlag;
     
     /** 客户生日 */
     @Excel(name = "客户生日", width = 30, dateFormat = "yyyy-MM-dd")
@@ -367,7 +370,31 @@ public class WechatCustomer extends BaseEntity{
     }
 
 
-    @Override
+    public String getCustomerStartbirthday() {
+		return customerStartbirthday;
+	}
+
+	public void setCustomerStartbirthday(String customerStartbirthday) {
+		this.customerStartbirthday = customerStartbirthday;
+	}
+
+	public String getCustomerEndbirthday() {
+		return customerEndbirthday;
+	}
+
+	public void setCustomerEndbirthday(String customerEndbirthday) {
+		this.customerEndbirthday = customerEndbirthday;
+	}
+	
+	public String getOperateFlag() {
+		return operateFlag;
+	}
+
+	public void setOperateFlag(String operateFlag) {
+		this.operateFlag = operateFlag;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("customerId", getCustomerId())

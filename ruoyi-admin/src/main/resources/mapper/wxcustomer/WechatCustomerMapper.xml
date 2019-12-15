@@ -67,8 +67,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isFyUser != null"> and is_sales!='1'</if>
             <if test="shUserId != null"> and sale_id=#{shUserId}</if>
             <if test="customerbirthday != null "> and customerBirthday = #{customerbirthday}</if>
-            <if test="nexttime != null "> and nextTime = #{nexttime}</if>
+            <if test="nexttime != null "> and date_format(nextTime, '%y%m%d') =date_format(#{nexttime},'%y%m%d') </if>
             <if test="expectedinventory != null  and expectedinventory != ''"> and expectedInventory = #{expectedinventory}</if>
+            
+            <if test="customerStartbirthday!=null and customerStartbirthday!=''">
+			   and  date_format(customerBirthday, '%y%m%d') &gt;= date_format(#{customerStartbirthday},'%y%m%d')  
+			</if> 
+			<if test="customerEndbirthday !=null and customerEndbirthday!=''">
+			     and  date_format(customerBirthday, '%y%m%d') &lt;=  date_format(#{customerEndbirthday}, '%y%m%d') 
+			</if>
         </where>
     </select>
     

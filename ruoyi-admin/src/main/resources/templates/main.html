@@ -1,24 +1,220 @@
 <!DOCTYPE html>
-<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--360浏览器优先以webkit内核解析-->
-    <title>系统介绍</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
-    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--360浏览器优先以webkit内核解析-->
+<title>系统介绍</title>
+<th:block th:include="include :: header('初始多表格')" />
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link href="../static/css/font-awesome.min.css"
+	th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+<link href="../static/css/main/animate.min.css"
+	th:href="@{/css/main/animate.min.css}" rel="stylesheet" />
+<link href="../static/css/main/style.min862f.css"
+	th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
 </head>
 
 <body class="gray-bg">
-    
-    </div>
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-    <script type="text/javascript">
+	<div class="col-sm-12">
+		<div class="tabs-container">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#tab-1"
+					aria-expanded="true">消息提醒</a></li>
+				<!--                         <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">计划提醒</a> -->
+				<!--                         </li> -->
+			</ul>
+			<div class="tab-content">
+				<div id="tab-1" class="tab-pane active">
+					<div class="panel-body">
+						<div>
+							今天是：
+							<lable id="date-label"></lable>
+						</div>
+						<div class="col-sm-12 select-table table-striped">
+							<table id="birthday-table"></table>
+						</div>
+					</div>
+				</div>
+				<!--                         <div id="tab-2" class="tab-pane"> -->
+				<!--                             <div class="panel-body"> -->
+				<!--                             	<div class="col-sm-12 select-table table-striped"> -->
+				<!-- 									<table id="plan-table"></table> -->
+				<!-- 								</div> -->
+				<!--                             </div> -->
+				<!--                         </div> -->
+			</div>
+
+
+		</div>
+	</div>
+	<small class="font-bold">
+                    <div class="modal inmodal fade" id="openModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title">消息</h4>
+                                </div>
+                                <div class="modal-body">
+                                	<div id="msg-div">
+                                	
+                                	</div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+	</small>
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript">
+    var prefix = ctx + "wxcustomer/notice";
+    $(function() {
+    $("#date-label").html(getDate());
+    var options = {
+        	id: "birthday-table",
+        	toolbar: "toolbar1",
+            url: prefix + "/notice",
+	        showSearch: false,
+	        showRefresh: false,
+	        showToggle: false,
+	        showColumns: false,
+            columns: [{
+	            checkbox: false
+	        },
+			{
+				field : 'operateFlag', 
+				title : '消息类型',
+				formatter: function(value, row, index) {
+                	if(value=="B"){
+                		return  "生日消息"
+                	}else if(value=="G"){
+                		return  "跟进消息"
+                	}
+                	return  "";
+                	
+                }
+			},
+			{
+				field : 'operateFlag', 
+				title : '消息',
+				  formatter: function(value, row, index) {
+	                	 if(value=="B"){
+	                		 return birthdayInfo(row);
+	                	 }else if(value=="G"){
+	                		 return flowNextInfo(row);
+	                	 }
+	                	
+	                }
+			},{
+				field : 'customerId', 
+				title : '操作',
+                formatter: function(value, row, index) {
+                	 if(row.operateFlag=="G"){
+                		 return '<a  href="javascript:void(0)" onclick="openDetail(\''+row.customerId+'\');">查看</a>';
+                	 }if(row.operateFlag=="B"){
+                		 return '<a  href="#"  data-weixinNumber='+row.weixinNumber+' data-name='+row.customerName+'   data-birthday='+row.customerbirthday+'    data-customerAddress='+row.customerAddress+' data-phoneNumber='+row.phoneNumber+'   data-gender='+row.gender+'  onclick="openModal(this);">查看</a>';
+                	 }
+                	return  "";
+                	
+                }
+			}]
+        };
+        $.table.init(options);
+       
+    });
+    function openModal(obj) {
+    	var name=$(obj).attr("data-name");
+    	var gender=$(obj).attr("data-gender");
+    	var genders=gender=="1"?"男":gender=="0"?"女":""
+    	var birthday=$(obj).attr("data-birthday");
+    	var weixinNumber=$(obj).attr("data-weixinNumber");
+    	var phoneNumber=$(obj).attr("data-phoneNumber");
+    	var customerAddress=$(obj).attr("data-customerAddress");
+    	 $("#msg-div").html('');
+    	 var msg="客户姓名："+name+"<br>"+
+    		 "性别："+genders+"<br>"+
+    		 "生日："+timeFormat(new Date(birthday),'yyyy-mm-dd')+"<br>"+
+    		 "微信："+weixinNumber+"<br>"+
+    		 "电话："+phoneNumber+"<br>"+
+    		 "地址："+customerAddress+"<br>";
+      	 $("#msg-div").html(msg);
+    	$('#openModal').modal('show')
+      }
+    function openDetail(id) {
+      	 var wcEditurl = ctx + "wxcustomer/WechatCustomer/edit/"+id;
+      	 $.modal.openTab("客户详情",  wcEditurl);
+      }
+    function flowNextInfo(row){
+    	var value="<span style='color:red'>今天</span>别忘了要跟进客户<span style='color:blue'> ["+row.customerName+"] </span>"
+    	return value;
+    }
+    function birthdayInfo(row){
+    	var birthday=timeFormat(new Date(row.customerbirthday),'yyyy-mm-dd');
+    	var thisday=timeFormat(new Date(),'yyyy-mm-dd');
+    	var diff=dateDiff(birthday,thisday)
+    	var customerName="<span style='color:blue'> ["+row.customerName+"] </span> ";
+    	switch(diff){
+    		case 0:return "<span style='color:red'>今天</span>是客户"+customerName+"的生日"; break;
+    		case 1:return "一天后是客户"+customerName+"的生日"; break;
+    		case 2:return "两天后是客户"+customerName+"的生日";break;
+    		case 3:return "三天后是客户"+customerName+"的生日";break;
+    		case 4:return "四天后是客户"+customerName+"的生日";break;
+    		case 5:return "五天后是客户"+customerName+"的生日";break;
+    		case 6:return "六天后是客户"+customerName+"的生日";break;
+    		case 7:return "七天后是客户"+customerName+"的生日";break;
+    	}
+    }
+    function dateDiff(firstDate,secondDate){
+    	var firstDate = new Date(firstDate);
+    	var secondDate = new Date(secondDate);
+    	var diff = Math.abs(firstDate.getTime() - secondDate.getTime())
+    	var result = parseInt(diff / (1000 * 60 * 60 * 24));
+    	return result
+    } 
+    function timeFormat(time, fmStr) {
+    	const weekCN = '一二三四五六日';
+    	const weekEN = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    	let year = time.getFullYear();
+    	let month = time.getMonth() + 1;
+    	let day = time.getDate();
+    	let hours = time.getHours();
+    	let minutes = time.getMinutes();
+    	let seconds = time.getSeconds();
+    	let milliSeconds = time.getMilliseconds();
+    	let week = time.getDay();
+
+    	month = month >= 10 ? month : ('0' + month);
+    	day = day >= 10 ? day : ('0' + day);
+    	hours = hours >= 10 ? hours : ('0' + hours);
+    	minutes = minutes >= 10 ? minutes : ('0' + minutes);
+    	seconds = seconds >= 10 ? seconds : ('0' + seconds);
+
+    	if (fmStr.indexOf('yyyy') !== -1) {
+    		fmStr = fmStr.replace('yyyy', year);
+    	} else {
+    		fmStr = fmStr.replace('yy', (year + '').slice(2));
+    	}
+    	fmStr = fmStr.replace('mm', month);
+    	fmStr = fmStr.replace('dd', day);
+    	fmStr = fmStr.replace('hh', hours);
+    	fmStr = fmStr.replace('MM', minutes);
+    	fmStr = fmStr.replace('ss', seconds);
+    	fmStr = fmStr.replace('SSS', milliSeconds);
+    	fmStr = fmStr.replace('W', weekCN[week - 1]);
+    	fmStr = fmStr.replace('ww', weekEN[week - 1]);
+    	fmStr = fmStr.replace('w', week);
+
+    	return fmStr;
+    } 
 	    $('#pay-qrcode').click(function(){
 	        var html=$(this).html();
 	        parent.layer.open({
@@ -30,6 +226,42 @@
 	            content: html
 	        });
 	    });
+	    function getDate(){
+	    	var mydate = new Date();
+	    	var thisDate=mydate.getFullYear(); //获取完整的年份(4位,1970-????)
+	    	thisDate=thisDate+"-"+mydate.getMonth(); //获取当前月份(0-11,0代表1月)
+	    	thisDate=thisDate+"-"+mydate.getDate(); //获取当前日(1-31)
+	    	var day=mydate.getDay(); //获取当前星期X(0-6,0代表星期天)
+	    	thisDate=thisDate+" "+getDay(day);
+	    	return thisDate;
+	    }
+	   function getDay(type){
+		   var day='';
+		   switch(type){
+			case 0:
+				day='星期天';
+				break;
+			case 1:
+				day='星期一';
+				break;
+			case 2:
+				day='星期二';
+				break;
+			case 3:
+				day='星期三';
+				break;
+			case 4:
+				day='星期四';
+				break;
+			case 5:
+				day='星期五';
+				break;
+			case 6:
+				day='星期六';
+				break;
+		}
+		   return day;
+	   }
     </script>
 </body>
 </html>
