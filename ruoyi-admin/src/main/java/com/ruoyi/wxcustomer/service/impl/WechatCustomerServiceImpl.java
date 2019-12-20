@@ -142,11 +142,16 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 	public int addWechatCustomer(WechatCustomer wechatCustomer, List<KhDeliverGoods> saleInfoList,
 			List<KhAfterSaleMember> postSaleList) {
 		wechatCustomer.setCreationTime(new Date());
-		wechatCustomerMapper.insertWechatCustomer(wechatCustomer);
 		if(saleInfoList != null && saleInfoList.size() > 0) {
 			for (KhDeliverGoods khDeliverGoods : saleInfoList) {
 				khDeliverGoods.setOrderNumber(genOrderNumber(khDeliverGoods.getFollowResultType()));
 				khDeliverGoods.setCustomerId(wechatCustomer.getCustomerId());
+				if("2".equals(khDeliverGoods.getFollowResultType())) {
+					wechatCustomer.setIsDelivery("1");
+				}
+				if("3".equals(khDeliverGoods.getFollowResultType())) {
+					wechatCustomer.setIsSales("1");
+				}
 				khDeliverGoodsMapper.insertKhDeliverGoods(khDeliverGoods);
 			}
 		}
@@ -158,6 +163,7 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 				khAfterSaleMemberMapper.insertKhAfterSaleMember(khAfterSaleMember);
 			}
 		}
+		wechatCustomerMapper.insertWechatCustomer(wechatCustomer);
 		return 1;
 	}
 	
@@ -169,7 +175,6 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 	@Override
 	public int updateWechatCustomer(WechatCustomer wechatCustomer, List<KhDeliverGoods> saleInfoList,
 			List<KhAfterSaleMember> postSaleList) {
-		wechatCustomerMapper.updateWechatCustomer(wechatCustomer);
 		if(saleInfoList != null && saleInfoList.size() > 0) {
 			for (KhDeliverGoods khDeliverGoods : saleInfoList) {
 				khDeliverGoods.setCustomerId(wechatCustomer.getCustomerId());
@@ -180,7 +185,12 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 				}else {
 					khDeliverGoodsMapper.updateKhDeliverGoods(khDeliverGoods);
 				}
-				
+				if("2".equals(khDeliverGoods.getFollowResultType())) {
+					wechatCustomer.setIsDelivery("1");
+				}
+				if("3".equals(khDeliverGoods.getFollowResultType())) {
+					wechatCustomer.setIsSales("1");
+				}
 			}
 		}
 		
@@ -197,6 +207,7 @@ public class WechatCustomerServiceImpl implements IWechatCustomerService {
 				
 			}
 		}
+		wechatCustomerMapper.updateWechatCustomer(wechatCustomer);
 		return 1;
 	}
 

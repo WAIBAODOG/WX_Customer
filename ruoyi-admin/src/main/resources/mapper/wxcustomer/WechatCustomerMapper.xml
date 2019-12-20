@@ -37,12 +37,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="customerbirthday"    column="customerBirthday"    />
         <result property="nexttime"    column="nextTime"    />
         <result property="expectedinventory"    column="expectedInventory"    />
-        
-        
+        <result property="customerLevel"    column="customer_level"    />
+        <result property="coopProduct"    column="coop_product"    />
     </resultMap>
 
     <sql id="selectWechatCustomerVo">
-        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales,customer_num ,sale_id,sale_name ,is_delete, customerBirthday, nextTime, expectedInventory from kh_wechat_customer
+        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales,customer_num ,sale_id,sale_name ,is_delete, customerBirthday, nextTime, expectedInventory, customer_level, coop_product from kh_wechat_customer
     </sql>
 
     <select id="selectWechatCustomerList" parameterType="WechatCustomer" resultMap="WechatCustomerResult">
@@ -76,6 +76,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="customerEndbirthday !=null and customerEndbirthday!=''">
 			     and  date_format(customerBirthday, '%y%m%d') &lt;=  date_format(#{customerEndbirthday}, '%y%m%d') 
 			</if>
+			
+			<if test="customerLevel != null  and customerLevel != ''"> and customer_level = #{customerLevel}</if>
+            <if test="coopProduct != null  and coopProduct != ''"> and coop_product like concat('%', #{coopProduct}, '%')</if>
+			
+		    <choose>
+	   			<when test='status != null and status == "1"'>
+	   				and  weixin_number is not null
+	   			</when>	
+	   			<when test='status != null and status == "2"'>
+	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='2' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0
+	   			</when>	
+	   			<when test='status != null and status == "3"'>
+	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0
+	   			</when>	
+	   		</choose>
         </where>
     </select>
     
@@ -119,6 +134,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerbirthday != null ">customerBirthday,</if>
             <if test="nexttime != null ">nextTime,</if>
             <if test="expectedinventory != null  and expectedinventory != ''">expectedInventory,</if>
+            <if test="customerLevel != null  and customerLevel != ''">customer_level,</if>
+            <if test="coopProduct != null  and coopProduct != ''">coop_product,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="customerId != null  and customerId != ''">#{customerId},</if>
@@ -153,6 +170,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerbirthday != null ">#{customerbirthday},</if>
             <if test="nexttime != null ">#{nexttime},</if>
             <if test="expectedinventory != null  and expectedinventory != ''">#{expectedinventory},</if>
+             <if test="customerLevel != null  and customerLevel != ''">#{customerLevel},</if>
+            <if test="coopProduct != null  and coopProduct != ''">#{coopProduct},</if>
          </trim>
     </insert>
 
@@ -191,6 +210,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerbirthday != null ">customerBirthday = #{customerbirthday},</if>
             <if test="nexttime != null ">nextTime = #{nexttime},</if>
             <if test="expectedinventory != null  and expectedinventory != ''">expectedInventory = #{expectedinventory},</if>
+             <if test="customerLevel != null  and customerLevel != ''">customer_level = #{customerLevel},</if>
+            <if test="coopProduct != null  and coopProduct != ''">coop_product = #{coopProduct},</if>
         </trim>
         where customer_id = #{customerId}
     </update>

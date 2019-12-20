@@ -124,6 +124,22 @@
                 </div>
             </div>
            </div>
+           
+           <div class="form-group">
+           	<label class="col-sm-2 control-label">客户等级：</label>
+			<div class="col-sm-4">
+				<select name="customerLevel" class="form-control m-b" th:with="type=${@dict.getType('customer_level')}">
+                    <option value="">请选择</option>
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{wechatCustomer.customerLevel}"></option>
+                </select>
+			</div>
+           
+               <label class="col-sm-2 control-label">已合作产品：</label>
+               <div class="col-sm-4">
+                   <textarea name="coopProduct" class="form-control" th:text="${wechatCustomer.coopProduct}"></textarea>
+               </div>
+           </div>
+           
             <div class="form-group">    
                 <label class="col-sm-2 control-label">预计库存：</label>
                 <div class="col-sm-4">
@@ -239,7 +255,9 @@
 	        		jsonArray[i].intentionDegreeName = $.common.getDictName(intentionDegreeDatas, jsonArray[i].intentionDegreeName);
 	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
 	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
-	        		jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
+	        		if(jsonArray[i].durationHour != null) {
+	        			jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
+	        		}
 	        	}
         		$('#saleInfoTpl').tmpl(jsonArray).appendTo('#saleInfoTable');
         		if(saleRoleFlag == 'hidden') {
@@ -255,7 +273,9 @@
 	        		jsonArray[i].intentionDegreeName = $.common.getDictName(intentionDegreeDatas, jsonArray[i].intentionDegreeName);
 	        		jsonArray[i].dealTime = $.common.dateFormat(jsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
 	        		jsonArray[i].nextFollowTime = $.common.dateFormat(jsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
-	        		jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
+	        		if(jsonArray[i].durationHour != null) {
+	        			jsonArray[i].duration = jsonArray[i].durationHour + ":" + jsonArray[i].durationMinute + ":" + jsonArray[i].durationSecond;
+	        		}
 	        	}
         		$('#postSaleTpl').tmpl(jsonArray).appendTo('#postSaleTable');
         		if(shRoleFlag == 'hidden') {

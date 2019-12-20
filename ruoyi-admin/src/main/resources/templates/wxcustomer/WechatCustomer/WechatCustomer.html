@@ -28,18 +28,24 @@
                             </li>
                             
                             <li>
-                                <p>是否发样：</p>
-                                <select name="isDelivery" th:with="type=${@dict.getType('is_delivery')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                <p>客户状态：</p>
+                                <select name="status">
+                                	<option value="">所有</option>
+                                    <option value="1">加V</option>
+                                    <option value="2">发样</option>
+                                    <option value="3">成交</option>
                                 </select>
                             </li>
                             <li>
-                                <p>是否发货：</p>
-                                <select name="isSales" th:with="type=${@dict.getType('is_delivery')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                <p>客户等级：</p>
+                                <select name="customerLevel" th:with="type=${@dict.getType('customer_level')}">
+                                	<option value="">所有</option>
+				                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
+                            </li>
+                            <li>
+                                <p>已合作产品：</p>
+                                <input type="text" name="coopProduct"/>
                             </li>
                         </ul>
                         <ul>
@@ -180,7 +186,7 @@
                 },
                 {
                     field : 'isSales', 
-                    title : '是否销售',
+                    title : '是否成交',
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel(isSalesDatas, value);
                     }

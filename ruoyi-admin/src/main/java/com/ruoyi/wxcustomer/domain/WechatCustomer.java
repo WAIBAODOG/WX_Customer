@@ -116,6 +116,7 @@ public class WechatCustomer extends BaseEntity{
     private String customerStartbirthday;
     private String customerEndbirthday;
     private String operateFlag;
+    private String status;   //客户状态
     
     /** 客户生日 */
     @Excel(name = "客户生日", width = 30, dateFormat = "yyyy-MM-dd")
@@ -128,6 +129,12 @@ public class WechatCustomer extends BaseEntity{
     /** 预计库存 */
     @Excel(name = "预计库存")
     private String expectedinventory;
+    
+    @Excel(name = "客户等级")
+    private String customerLevel;
+
+    @Excel(name = "已合作产品")
+    private String coopProduct;
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
@@ -393,6 +400,30 @@ public class WechatCustomer extends BaseEntity{
 	public void setOperateFlag(String operateFlag) {
 		this.operateFlag = operateFlag;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCustomerLevel() {
+		return customerLevel;
+	}
+
+	public void setCustomerLevel(String customerLevel) {
+		this.customerLevel = customerLevel;
+	}
+
+	public String getCoopProduct() {
+		return coopProduct;
+	}
+
+	public void setCoopProduct(String coopProduct) {
+		this.coopProduct = coopProduct;
+	}
 
 	@Override
     public String toString() {
@@ -429,6 +460,8 @@ public class WechatCustomer extends BaseEntity{
             .append("customerbirthday", getCustomerbirthday())
             .append("nexttime", getNexttime())
             .append("expectedinventory", getExpectedinventory())
+            .append("customerLevel", getCustomerLevel())
+            .append("coopProduct", getCoopProduct())
             .toString();
     }
 }
