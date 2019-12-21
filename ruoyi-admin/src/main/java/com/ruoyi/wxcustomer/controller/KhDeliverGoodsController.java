@@ -94,6 +94,15 @@ public class KhDeliverGoodsController extends BaseController {
 	@GetMapping("/detail")
 	public String detail(String orderNumber, Model model) {
 		DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+		if(vo.getDurationHour()==null) {
+			vo.setDurationHour(0L);
+		}
+		if(vo.getDurationMinute()==null) {
+			vo.setDurationMinute(0L);
+		}
+		if(vo.getDurationSecond()==null) {
+			vo.setDurationSecond(0L);
+		}
 		model.addAttribute("vo", vo);
 		return prefix + "/hairDetail";
 

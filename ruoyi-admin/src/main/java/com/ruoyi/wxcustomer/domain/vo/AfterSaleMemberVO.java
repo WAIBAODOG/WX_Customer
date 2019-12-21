@@ -226,6 +226,21 @@ public class AfterSaleMemberVO extends BaseEntity{
     private String isFYRY;  
     private String isSHRY;  
     
+    //新增
+    /**售后类型**/
+    private String saleType;
+    /**客情摸底档案完善**/
+    private String archivePerfect;
+    /**一对多群运营**/
+    private String oneToManyOperate;
+    /**专业培训**/
+    private String training;
+    /**销售培训回访确保知识到位**/
+    private String saleTraining;
+    /**动销匹配落实店员奖励**/
+    private String salespersonAward;
+    /**C端活动执行**/
+    private String cEndActivityExe;
   
     public void setId(String id) {
         this.id = id;
@@ -738,6 +753,62 @@ public class AfterSaleMemberVO extends BaseEntity{
 
 	public void setIsSHRY(String isSHRY) {
 		this.isSHRY = isSHRY;
+	}
+
+	public String getSaleType() {
+		return saleType;
+	}
+
+	public void setSaleType(String saleType) {
+		this.saleType = saleType;
+	}
+
+	public String getArchivePerfect() {
+		return archivePerfect;
+	}
+
+	public void setArchivePerfect(String archivePerfect) {
+		this.archivePerfect = archivePerfect;
+	}
+
+	public String getOneToManyOperate() {
+		return oneToManyOperate;
+	}
+
+	public void setOneToManyOperate(String oneToManyOperate) {
+		this.oneToManyOperate = oneToManyOperate;
+	}
+
+	public String getTraining() {
+		return training;
+	}
+
+	public void setTraining(String training) {
+		this.training = training;
+	}
+
+	public String getSaleTraining() {
+		return saleTraining;
+	}
+
+	public void setSaleTraining(String saleTraining) {
+		this.saleTraining = saleTraining;
+	}
+
+	public String getSalespersonAward() {
+		return salespersonAward;
+	}
+
+	public void setSalespersonAward(String salespersonAward) {
+		this.salespersonAward = salespersonAward;
+	}
+
+	public String getcEndActivityExe() {
+		return cEndActivityExe;
+	}
+
+	public void setcEndActivityExe(String cEndActivityExe) {
+		this.cEndActivityExe = cEndActivityExe;
 	}
 
 	 

@@ -117,9 +117,27 @@ public class DealController extends BaseController {
 	public String detail(String orderNumber, Model model, String dealType) {
 		if ("1".equals(dealType)) {
 			DeliverGoodsVO vo = khDeliverGoodsService.selectVOByOrderNumber(orderNumber);
+			if(vo.getDurationHour()==null) {
+				vo.setDurationHour(0L);
+			}
+			if(vo.getDurationMinute()==null) {
+				vo.setDurationMinute(0L);
+			}
+			if(vo.getDurationSecond()==null) {
+				vo.setDurationSecond(0L);
+			}
 			model.addAttribute("vo", vo);
 		} else {
 			AfterSaleMemberVO vo = khAfterSaleMemberService.selectVOByOrderNumber(orderNumber);
+			if(vo.getDurationHour()==null) {
+				vo.setDurationHour(0L);
+			}
+			if(vo.getDurationMinute()==null) {
+				vo.setDurationMinute(0L);
+			}
+			if(vo.getDurationSecond()==null) {
+				vo.setDurationSecond(0L);
+			}
 			model.addAttribute("vo", vo);
 		}
 

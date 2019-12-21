@@ -36,10 +36,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderNumber"    column="order_number"    />
          <result property="isDelete"    column="is_delete"    />
         <result property="intentionDegree"    column="intention_degree"    />
+        <!-- 新增 -->
+        <result property="saleType"    column="sale_type"    />
+        <result property="archivePerfect"    column="archive_perfect"    />
+        <result property="oneToManyOperate"    column="one_tomany_operate"    />
+        <result property="training"    column="training"    />
+        <result property="saleTraining"    column="sale_training"    />
+        <result property="salespersonAward"    column="salesperson_award"    />
+        <result property="cEndActivityExe"    column="cend_activity_exe"    />
     </resultMap>
 
     <sql id="selectKhAfterSaleMemberVo">
-        select id, customer_id, follow_result_type, deal_amount, send_sample_list, gifts_list, deal_time, trouble_spots, intention_point, follow_times, follow_result, duration_hour, duration_minute, duration_second, next_follow_time, next_follow_mentality, creator_id, creator, sender, sender_phone, sender_address, send_time, courier_number, logistics_company, collecting_amount, insurance_amount, postage, is_deal,order_number,is_delete,intention_degree  from kh_after_sale_member
+        select id, customer_id, follow_result_type, deal_amount, send_sample_list, gifts_list, deal_time, trouble_spots, intention_point, follow_times, follow_result, duration_hour, duration_minute, duration_second, next_follow_time, next_follow_mentality, creator_id, creator, sender, sender_phone, sender_address, send_time, courier_number, logistics_company, collecting_amount, insurance_amount, postage, is_deal,order_number,is_delete,intention_degree 
+        ,sale_type, archive_perfect, one_tomany_operate, training, sale_training , salesperson_award, cend_activity_exe
+         from kh_after_sale_member
     </sql>
 
     <select id="selectKhAfterSaleMemberList" parameterType="KhAfterSaleMember" resultMap="KhAfterSaleMemberResult">
@@ -92,6 +102,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="orderNumber != null  and orderNumber != ''">order_number,</if>
             <if test="isDelete != null  and isDelete != ''">is_delete,</if>
             <if test="intentionDegree != null  and intentionDegree != '' ">intention_degree,</if>
+            <if test="saleType != null  and saleType != '' ">sale_type,</if>
+            <if test="archivePerfect != null  and archivePerfect != '' ">archive_perfect,</if>
+            <if test="oneToManyOperate != null  and oneToManyOperate != '' ">one_tomany_operate,</if>
+            <if test="training != null  and training != '' ">training,</if>
+            <if test="saleTraining != null  and saleTraining != '' ">sale_training,</if>
+            <if test="salespersonAward != null  and salespersonAward != '' ">salesperson_award,</if>
+            <if test="cEndActivityExe != null  and cEndActivityExe != '' ">cend_activity_exe,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null  and id != ''">#{id},</if>
@@ -125,6 +142,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderNumber != null  and orderNumber != ''">#{orderNumber},</if>
              <if test="isDelete != null and isDelete != '' ">#{isDelete},</if>
             <if test="intentionDegree != null and intentionDegree != ''">#{intentionDegree},</if>
+        	<if test="saleType != null  and saleType != '' ">#{saleType},</if>
+            <if test="archivePerfect != null  and archivePerfect != '' ">#{archivePerfect},</if>
+            <if test="oneToManyOperate != null  and oneToManyOperate != '' ">#{oneToManyOperate},</if>
+            <if test="training != null  and training != '' ">#{training},</if>
+            <if test="saleTraining != null  and saleTraining != '' ">#{saleTraining},</if>
+            <if test="salespersonAward != null  and salespersonAward != '' ">#{salespersonAward},</if>
+            <if test="cEndActivityExe != null  and cEndActivityExe != '' ">#{cEndActivityExe},</if>
          </trim>
     </insert>
 
@@ -161,6 +185,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderNumber != null  and orderNumber != ''">order_number = #{orderNumber},</if>
              <if test="isDelete != null  and isDelete != ''">is_delete = #{isDelete},</if>
             <if test="intentionDegree != null  and intentionDegree != ''">intention_degree = #{intentionDegree},</if>
+            	
+            <if test="saleType != null  and saleType != '' ">sale_type=#{saleType},</if>
+            <if test="archivePerfect != null  and archivePerfect != '' ">archive_perfect=#{archivePerfect},</if>
+            <if test="oneToManyOperate != null  and oneToManyOperate != '' ">one_tomany_operate=#{oneToManyOperate},</if>
+            <if test="training != null  and training != '' ">training=#{training},</if>
+            <if test="saleTraining != null  and saleTraining != '' ">sale_training=#{saleTraining},</if>
+            <if test="salespersonAward != null  and salespersonAward != '' ">salesperson_award=#{salespersonAward},</if>
+            <if test="cEndActivityExe != null  and cEndActivityExe != '' ">cend_activity_exe=#{cEndActivityExe},</if>
+        
         </trim>
         where id = #{id}
     </update>
@@ -212,6 +245,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="postage"    column="postage"    />
           <result property="isDelete"    column="is_delete"    />
         <result property="intentionDegree"    column="intention_degree"    />
+         <!-- 新增 -->
+        <result property="saleType"    column="sale_type"    />
+        <result property="archivePerfect"    column="archive_perfect"    />
+        <result property="oneToManyOperate"    column="one_tomany_operate"    />
+        <result property="training"    column="training"    />
+        <result property="saleTraining"    column="sale_training"    />
+        <result property="salespersonAward"    column="salesperson_award"    />
+        <result property="cEndActivityExe"    column="cend_activity_exe"    />
         <!-- 客户表 -->
          <result property="customerId"    column="customer_id"    />
         <result property="phoneNumber"    column="phone_number"    />
@@ -252,6 +293,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           d.next_follow_time, d.next_follow_mentality, d.creator_id, d.creator, d.sender,
            d.sender_phone, d.sender_address, d.send_time, d.courier_number, d.logistics_company,
             d.collecting_amount, d.insurance_amount, d.postage ,d.is_delete,d.intention_degree,
+             d.sale_type, d.archive_perfect, d.one_tomany_operate, d.training, d.sale_training , d.salesperson_award, d.cend_activity_exe,
+       
             (select count(*) from kh_after_sale_member ss where ss.customer_id=d.customer_id )  "countAfterOrder",
              (select count(*) from kh_deliver_goods kk where kk.customer_id=d.customer_id ) "countDealOrder",
             <!--客户表  -->

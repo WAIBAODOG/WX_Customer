@@ -18,6 +18,15 @@
                  	</select>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>售后类型：</label>
+				<div class="col-sm-8">
+					<select id="saleType" name="saleType" class="form-control m-b" th:with="type=${@dict.getType('saleType')}" required>
+                       <option value="">请选择</option>
+                       <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                 	</select>
+				</div>
+			</div>
 			<div class="form-group">    
                 <label class="col-sm-3 control-label">意向度：</label>
                 <div class="col-sm-8">
@@ -102,6 +111,42 @@
 					<input class="form-control" type="text" name="creator" th:value="${user.userName}" readonly="readonly">
 				</div>
 			</div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">客情摸底档案完善：</label>
+                <div class="col-sm-8">
+                    <textarea name="archivePerfect" class="form-control"></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">一对多群运营：</label>
+                <div class="col-sm-8">
+                    <textarea name="oneToManyOperate" class="form-control"></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">专业培训：</label>
+                <div class="col-sm-8">
+                    <textarea name="training" class="form-control"></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">销售培训回访确保知识到位：</label>
+                <div class="col-sm-8">
+                    <textarea name="saleTraining" class="form-control"></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">动销匹配落实店员奖励：</label>
+                <div class="col-sm-8">
+                    <textarea name="salespersonAward" class="form-control"></textarea>
+                </div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">C端活动执行：</label>
+                <div class="col-sm-8">
+                    <textarea name="cEndActivityExe" class="form-control"></textarea>
+                </div>
+            </div>
 		</form>
 	</div>
 	
