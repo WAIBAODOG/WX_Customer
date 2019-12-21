@@ -101,4 +101,16 @@ public class KhDeliverGoodsServiceImpl implements IKhDeliverGoodsService {
 	public int deleteByIds(String ids) {
 		return khDeliverGoodsMapper.deleteByIds(Convert.toStrArray(ids));
 	}
+
+	@Override
+	public int updateKhDeliverGoodList(List<KhDeliverGoods> khDeliverGoods) {
+		try {
+			for(int i=0;i<khDeliverGoods.size();i++) {
+				 this.updateKhDeliverGoods(khDeliverGoods.get(i));
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
+	}
 }

@@ -67,6 +67,12 @@
                 	  <a class="btn btn-success   " onclick="$.table.exportExcel()" shiro:hasPermission="deliverGoods:deliverGoods:export" >
                   	  <i class="fa fa-download"></i> 导出
                 	 </a>
+                	 <a class="btn btn-success   " onclick="importExcel()" shiro:hasPermission="deliverGoods:deliverGoods:import" >
+                  	  <i class="fa fa-upload"></i> 导入快速发货
+                	 </a>
+                	 <a class="btn btn-success   " onclick="downloadTemplate('发样订单快速发货模板.xlsx')" shiro:hasPermission="deliverGoods:deliverGoods:downloadTemplate" >
+                  	  <i class="fa fa-cloud-download"></i> 下载快速发货模板
+                	 </a>
             </div>  
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -169,6 +175,53 @@
         	var orderNumber=$(ck[0]).parent().parent().find(".orderNumber").html();
         	$.modal.open('快递单', prefix + '/expressBill?orderNumber='+orderNumber);
         	//$('#deliverGoodsModal').modal('show');
+        }
+        function importExcel(){
+        	var elm="<input  type='file' id='fileUpload' name='file' accept='.xlsx' style='display:none;' hidden/>";
+        	$("body").append(elm);
+        	$("#fileUpload").click();
+        	$("#fileUpload").bind("input propertychange", function () {
+        	    	var size = this.files[0].size;
+        	        if (size > 10485760) {
+        	            return;
+        	        }
+        	       var arr=this.files['0']['name'].split(".");//切割 获取文件名
+        	       var i=(arr.length-1);
+        	        var filetype=arr[i];//文件类型
+        	        var typearr=['xlsx'];  //设置只能有的类型
+        	        if($.inArray(filetype, typearr)!=-1){
+        		        $.ajaxFileUpload({
+        		            url: prefix+'/importExcel',
+        		            secureuri: false,
+        		            fileElementId: "fileUpload",
+        		            type: "post",
+        		            dataType: "JSON",
+        		            contentType : "application/json;charset=utf-8", 
+        		            success: function (data, status) {
+        		            	var result=eval('(' + data + ')')
+        		            	 if(status=='success'&&result.state=='true'){
+        		            		 $.modal.confirm(result.msg+"\n是否刷新页面?", function() {
+        		            			 $.table.search();
+        		            		 });
+        		            	  } else{
+        		            		  $.modal.alertError(result.msg);
+        		            	  }
+        		            	 $("#fileUpload").remove();
+        		            },
+        		            error: function (e) {
+        		            	$.modal.alertError("操作失败!");
+        		            	$("#fileUpload").remove();
+        		            }
+        		        });
+        	        }else{
+        	        	$.modal.alertError("只能导入指定的excel模板！");
+        	        }
+        	    });
+        }
+        function downloadTemplate(fileName){
+        	window.location.href="/wxcustomer/common/downloadTemplate?fileName="+fileName;
+       		 window.event.returnValue=false;//不跳转页面
+       		return ;
         }
     </script>
 	<div class="modal inmodal fade" id="deliverGoodsModal" tabindex="-1"

@@ -9,6 +9,10 @@
  */
 package com.ruoyi.wxcustomer.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -195,5 +199,21 @@ public class WxCommonController extends BaseController {
 		String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
 		return prefix;
 	}
-	 
+	//模板下载
+    @RequestMapping("/downloadTemplate")
+    public void downloadTemplate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String fileName=request.getParameter("fileName");
+    	String path="/template/"+fileName;
+        response.setHeader("content-disposition", "attachment;filename=" + 	 URLEncoder.encode(fileName, "UTF-8"));
+        response.setContentType("content-type:octet-stream");
+        InputStream inputStream = WxCommonController.class.getResourceAsStream(path);
+        OutputStream outputStream = response.getOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, len);
+        }
+        inputStream.close();
+        outputStream.close(); 
+    }
 }

@@ -67,4 +67,6 @@ public interface IKhDeliverGoodsService {
 
 	/** 改状态，不是物理删除 **/
 	public int deleteByIds(String ids);
+	
+	public int updateKhDeliverGoodList(List<KhDeliverGoods> khDeliverGoods);
 }

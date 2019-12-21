@@ -154,7 +154,7 @@
 					required:true,
 				},
 				email:{
-					required:true,
+					required:false,
 		            email:true,
 		            remote: {
 		                url: ctx + "system/user/checkEmailUnique",
@@ -174,7 +174,7 @@
 		            }
 				},
 				phonenumber:{
-					required:true,
+					required:false,
 					isPhone:true,
 		            remote: {
 		                url: ctx + "system/user/checkPhoneUnique",
