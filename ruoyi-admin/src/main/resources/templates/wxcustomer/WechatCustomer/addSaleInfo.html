@@ -9,6 +9,7 @@
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-sale-add">
 			<input class="form-control" type="hidden" name="id" th:value="${id}" id="id">
+			<input class="form-control" type="hidden" name="isView" th:value="${isView}" id="isView">
 			<div class="form-group">
 				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>跟进结果类型：</label>
 				<div class="col-sm-8">
@@ -112,6 +113,9 @@
 			var id = $('#id').val();
 			if(id) {
 				$.common.setForm($('#form-sale-add'), parent.getJson('saleInfo', id));
+			}
+			if($('#isView').val() == 1) {
+				$("#form-sale-add").find(':input').attr('disabled', 'true');
 			}
 		});
 		

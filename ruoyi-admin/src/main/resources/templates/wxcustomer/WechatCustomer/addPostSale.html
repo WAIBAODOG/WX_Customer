@@ -9,6 +9,7 @@
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-post-sale-add">
 			<input class="form-control" type="hidden" name="id" th:value="${id}" id="id">
+			<input class="form-control" type="hidden" name="isView" th:value="${isView}" id="isView">
 			<div class="form-group">
 				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>是否成交：</label>
 				<div class="col-sm-8">
@@ -158,9 +159,12 @@
 			if(id) {
 				$.common.setForm($('#form-post-sale-add'), parent.getJson('postSale', id));
 			}
+			if($('#isView').val() == 1) {
+				$("#form-post-sale-add").find(':input').attr('disabled', 'true');
+			}
 		});
 		
-        $("#form-sale-add").validate({
+        $("#form-post-sale-add").validate({
             focusCleanup: true
         });
         

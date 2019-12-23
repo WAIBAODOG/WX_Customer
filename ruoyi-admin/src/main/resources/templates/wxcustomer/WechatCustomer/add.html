@@ -341,6 +341,13 @@
         	$.modal.open('修改销售情况',prefix + '/addSaleInfo?id=' + id);
         }
         
+        function viewSaleInfo(_this) {
+        	var id = $(_this).closest('tr').find('[data-name="id"]').text();
+        	$.modal.openOptions({title:'销售情况', url: prefix + '/addSaleInfo?id=' + id + '&isView=1', width : '800', btn : ['<i class="fa fa-close"></i> 关闭'], callBack: function(index, layero) {
+        		layer.close(index);
+        	}});
+        }
+        
         function getJson(type, id) {
             var json = {};
             var $id = getTdById(type, id);
@@ -410,6 +417,13 @@
         	$.modal.open('修改售后情况',prefix + '/addPostSale?id=' + id);
         }
         
+        function viewPostSale(_this) {
+        	var id = $(_this).closest('tr').find('[data-name="id"]').text();
+        	$.modal.openOptions({title:'售后情况', url: prefix + '/addPostSale?id=' + id + '&isView=1', width : '800', btn : ['<i class="fa fa-close"></i> 关闭'], callBack: function(index, layero) {
+        		layer.close(index);
+        	}});
+        }
+        
         function handlePostSale(json, isAdd) {
         	handleInfo('postSale', json, isAdd);
         }
@@ -451,7 +465,7 @@
 	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
 	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
 	      <td data-name="creator">${creator}</td>
-	      <td><a href="javascript:;" onclick="editSaleInfo(this);" class="op">修改</a></td>
+	      <td><a href="javascript:;" onclick="editSaleInfo(this);" class="op">修改</a> <a href="javascript:;" onclick="viewSaleInfo(this);">查看</a></td>
 	    </tr>
 	</script>
 	
@@ -479,7 +493,6 @@
 	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
 	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
 	      <td data-name="creator">${creator}</td>
-		  
 		  <td data-name="saleType" style="display:none;" >${saleType}</td>
 	      <td data-name="archivePerfect" style="display:none;" >${archivePerfect}</td>
 	      <td data-name="oneToManyOperate" style="display:none;" >${oneToManyOperate}</td>
@@ -487,11 +500,8 @@
 	      <td data-name="saleTraining" style="display:none;" >${saleTraining}</td>
 	      <td data-name="salespersonAward" style="display:none;" >${salespersonAward}</td>
 	      <td data-name="cEndActivityExe" style="display:none;" >${cEndActivityExe}</td>
-
-	      <td><a href="javascript:;" onclick="editPostSale(this);" class="op">修改</a></td>
+		  <td><a href="javascript:;" onclick="editPostSale(this);" class="op">修改</a> <a href="javascript:;" onclick="viewPostSale(this);">查看</a></td>
 	    </tr>
-
-
 	</script>
  
 </body>

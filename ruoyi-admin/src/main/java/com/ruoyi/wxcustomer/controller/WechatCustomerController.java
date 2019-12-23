@@ -116,9 +116,10 @@ public class WechatCustomerController extends BaseController {
 	 */
 	@RequiresPermissions("wxcustomer:WechatCustomer:addSaleInfo")
 	@GetMapping("/addSaleInfo")
-	public String addSaleInfo(Model model, String id) {
+	public String addSaleInfo(Model model, String id, String isView) {
 		model.addAttribute("user", ShiroUtils.getSysUser());
 		model.addAttribute("id", id);
+		model.addAttribute("isView", isView);
 		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		return prefix + "/addSaleInfo";
 	}
@@ -128,9 +129,10 @@ public class WechatCustomerController extends BaseController {
 	 */
 	@RequiresPermissions("wxcustomer:WechatCustomer:addPostSale")
 	@GetMapping("/addPostSale")
-	public String addPostSale(Model model, String id) {
+	public String addPostSale(Model model, String id, String isView) {
 		model.addAttribute("user", ShiroUtils.getSysUser());
 		model.addAttribute("id", id);
+		model.addAttribute("isView", isView);
 		model.addAttribute("createTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		return prefix + "/addPostSale";
 	}
