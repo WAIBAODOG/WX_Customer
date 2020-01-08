@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhShopInFoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruoyi.wxcustomer.domain.KhShopInFo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="poi" property="poi" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="adress" property="adress" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="classic" property="classic" jdbcType="VARCHAR" />
+    <result column="os" property="os" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, poi, link, shop_name, phone, province, city, adress, keyword, classic, os, create_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from kh_shop_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from kh_shop_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
+    
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into kh_shop_info (poi, link, shop_name, 
+      phone, province, city, 
+      adress, keyword, classic, 
+      os, create_date)
+    values (#{poi,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{adress,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{classic,jdbcType=VARCHAR}, 
+      #{os,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into kh_shop_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="poi != null" >
+        poi,
+      </if>
+      <if test="link != null" >
+        link,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="adress != null" >
+        adress,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="classic != null" >
+        classic,
+      </if>
+      <if test="os != null" >
+        os,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="poi != null" >
+        #{poi,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="classic != null" >
+        #{classic,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
+    update kh_shop_info
+    <set >
+      <if test="poi != null" >
+        poi = #{poi,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null" >
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="classic != null" >
+        classic = #{classic,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        os = #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
+    update kh_shop_info
+    set poi = #{poi,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      classic = #{classic,jdbcType=VARCHAR},
+      os = #{os,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectList" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" resultMap="BaseResultMap">
+        select 
+	    <include refid="Base_Column_List" />
+	    from kh_shop_info
+        <where>    1=1 
+        	<if test="poi != null  and poi != ''"> and poi = #{poi}</if>
+        	<if test="link != null  and link != ''"> and link like concat('%', #{link}, '%')</if>
+        	<if test="shopName != null  and shopName != ''"> and shop_name like concat('%', #{shopName}, '%')</if>
+        	<if test="phone != null  and phone != ''"> and phone =#{phone}</if>
+        	<if test="province != null  and province != ''"> and province =#{province}</if>
+        	<if test="city != null  and city != ''"> and city=#{city}</if>
+        	<if test="adress != null  and adress != ''"> and adress like concat('%', #{adress}, '%')</if>
+        	<if test="keyword != null  and keyword != ''"> and keyword like concat('%', #{keyword}, '%')</if>
+        	<if test="classic != null  and classic != ''"> and classic like concat('%', #{classic}, '%')</if>
+        	<if test="os != null  and os != ''"> and os =#{os}</if>
+        	 order by  create_time desc
+        </where>
+    </select>
+</mapper>
