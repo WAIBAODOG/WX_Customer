@@ -87,10 +87,10 @@ public class SearchInFoServiceImpl implements ISearchInFoService {
 		bufUrl.append("&limit=");
 		bufUrl.append(condition.getLimit());
 		String listUrl = bufUrl.toString();
-		//System.setProperty("https.proxySet", "true");
-		//System.getProperties().put("https.proxyHost", "60.167.21.106");
-		//System.getProperties().put("https.proxyPort", "808");
-		//String agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36" ;
+//		System.setProperty("https.proxySet", "true");
+//		System.getProperties().put("https.proxyHost", "183.154.54.242");
+//		System.getProperties().put("https.proxyPort", "9999");
+//		String agent="Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Mobile Safari/537.36";
 		Connection conn = Jsoup.connect(listUrl).headers(GetHeadMap(listUrl))
 				//.ignoreContentType(true)
 				//.userAgent(agent)
