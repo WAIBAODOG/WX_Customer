@@ -16,9 +16,16 @@ ruoyi:
 fileHost: http://120.24.166.205:8888/
 
 searchUrl:
+  proxy:
+    free: https://www.freeip.top/?page=1
+    xici: https://www.xicidaili.com
+    kuai: https://www.kuaidaili.com/free
+    yun: http://www.ip3366.net
+    bjip: http://www.89ip.cn
+    iphai: http://www.iphai.com/free/ng
   meituan:
-    list: https://i.meituan.com/s/
-    info: https://i.meituan.com/poi/
+    list: http://i.meituan.com/s/
+    info: http://i.meituan.com/poi/
 
 # 开发环境配置
 server:

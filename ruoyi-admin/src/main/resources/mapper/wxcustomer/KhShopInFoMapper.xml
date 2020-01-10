@@ -29,25 +29,22 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
-    
-    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into kh_shop_info (poi, link, shop_name, 
+    insert into kh_shop_info (id,poi, link, shop_name, 
       phone, province, city, 
       adress, keyword, classic, 
       os, create_date)
-    values (#{poi,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR},#{poi,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{adress,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{classic,jdbcType=VARCHAR}, 
       #{os,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
-    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+     
     insert into kh_shop_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="poi != null" >
         poi,
       </if>
@@ -83,6 +80,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="poi != null" >
         #{poi,jdbcType=VARCHAR},
       </if>

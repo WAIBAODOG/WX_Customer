@@ -24,7 +24,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.wxcustomer.domain.KhShopInFo;
 import com.ruoyi.wxcustomer.domain.common.SearchCondition;
 import com.ruoyi.wxcustomer.service.IKhShopInFoService;
-import com.ruoyi.wxcustomer.service.ISearchInFoService;
+import com.ruoyi.wxcustomer.service.IMeituanService;
 
 /**
 * @ClassName: ShopInfoController
@@ -38,7 +38,7 @@ import com.ruoyi.wxcustomer.service.ISearchInFoService;
 public class ShopInfoController extends BaseController{
 	private String prefix = "wxcustomer/shopInfo";
 	@Autowired
-	private ISearchInFoService searchInFoService;
+	private IMeituanService meituanService;
 	@Autowired
 	private IKhShopInFoService khShopInFoService;
 	@RequiresPermissions("shopInfo:shopInfo:view")
@@ -55,6 +55,18 @@ public class ShopInfoController extends BaseController{
 	@PostMapping("/search")
 	@ResponseBody
 	public List<KhShopInFo> search(SearchCondition condition) {
-		return  searchInFoService.search(condition);
+		if (condition == null) {
+			return null;
+		}
+		try {
+			switch (condition.getOs()) {
+			case "MT": return meituanService.search(condition);
+			case "BD": return null;
+			case "DZDP": return null;
+			default: return meituanService.search(condition);
+			}
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }
