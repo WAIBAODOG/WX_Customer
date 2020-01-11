@@ -102,6 +102,6 @@ public class ShopInfoController extends BaseController{
 		ExcelUtil<KhShopInFo> util = new ExcelUtil<KhShopInFo>(KhShopInFo.class);
 		SimpleDateFormat format=new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String version=format.format(new Date());
-		return util.exportExcel(list, "商家数据-v-"+version);
+		return util.exportExcel(list, "店家数据-v-"+version);
 	}
 }

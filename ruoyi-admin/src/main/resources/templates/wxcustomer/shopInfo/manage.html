@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('商家信息')" />
+    <th:block th:include="include :: header('店家信息')" />
     <script th:src="@{/js/china-city.js}"></script>
     <style type="text/css">
     	.mark{
@@ -22,7 +22,7 @@
 		<div class="tabs-container">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a data-toggle="tab" href="#tab-1" aria-expanded="true">商家数据</a>
+					<a data-toggle="tab" href="#tab-1" aria-expanded="true">店家数据</a>
 				</li>
 				<li class="">
 					<a data-toggle="tab" href="#tab-2" aria-expanded="false">获取数据</a>
@@ -193,7 +193,7 @@
 	        showRefresh: false,
 	        showToggle: false,
 	        showColumns: false,
-	        modalName: "商家数据",
+	        modalName: "店家数据",
             columns: [{
 	            checkbox: true
 	        },
