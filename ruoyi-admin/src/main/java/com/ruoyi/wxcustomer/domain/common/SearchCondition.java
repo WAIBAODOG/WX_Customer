@@ -57,6 +57,12 @@ public class SearchCondition {
 	 */
 	public Integer page;
 
+	private String operatorId;
+	
+	private String operatorName;
+	
+	private String batchCode;
+	
 	public String getKeyword() {
 		if(StringUtils.isEmpty(keyword)) {
 			keyword="%E7%BE%8E%E5%AE%B9%E9%99%A2";
@@ -148,6 +154,30 @@ public class SearchCondition {
 
 	public void setProvince(String province) {
 		this.province = province;
+	}
+
+	public String getOperatorId() {
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
+	}
+
+	public String getOperatorName() {
+		return operatorName;
+	}
+
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+
+	public String getBatchCode() {
+		return batchCode;
+	}
+
+	public void setBatchCode(String batchCode) {
+		this.batchCode = batchCode;
 	}
 	
 	

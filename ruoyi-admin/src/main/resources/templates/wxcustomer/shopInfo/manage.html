@@ -22,10 +22,10 @@
 		<div class="tabs-container">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a data-toggle="tab" href="#tab-1" aria-expanded="true">已存系统</a>
+					<a data-toggle="tab" href="#tab-1" aria-expanded="true">商家数据</a>
 				</li>
 				<li class="">
-					<a data-toggle="tab" href="#tab-2" aria-expanded="false">新查找</a>
+					<a data-toggle="tab" href="#tab-2" aria-expanded="false">获取数据</a>
 				 </li>
 			</ul>
 			<div class="tab-content">
@@ -54,14 +54,16 @@
 					                                <select name="os">
 					                                	<option value="">所有</option>
 					                                    <option value="MT">美团</option>
-<!-- 					                                    <option value="BD">百度</option> -->
-					                                    <option value="DZDP">大众点评</option>
+ 				                                 		<option value="AMAP">高德地图</option>
 					                                </select>
 					                            </li>
 					                            <li>
 					                            	 <a class="btn btn-success" onclick="$.table.search()"  >
 									                    <i class="fa fa-search"></i> 查询
 									                </a>
+									                 <a class="btn btn-success   " onclick="$.table.exportExcel()"  >
+								                  	  <i class="fa fa-download"></i> 导出
+								                	 </a>
 					                            </li>
 					                        </ul>
 					                     </div>
@@ -98,23 +100,29 @@
 						                                	<option value="">所有</option>
 						                                    <option value="MT" selected>美团</option>
 <!-- 						                                    <option value="BD">百度</option> -->
-						                                    <option value="DZDP">大众点评</option>
+						                                    <option value="AMAP">高德地图</option>
 						                                </select>
 						                            </li>
 						                            <li style="width: 350px;">
 						                                <p>城市：</p>
-						                                <div data-toggle="distpicker">
-						                                	  <input type="hidden" name="cityKey" />
-									                          <select name="province" style="display: inline-block;width: 100px;"></select>
-									                          <select name="city"  style="display: inline-block;width: 100px;"></select>
-<!-- 									                          <select name="area"></select> -->
-								                         </div>
+						                                <input name="selectCity"  type="text" readonly="readonly" />
+						                                <input type="hidden" name="cityKey" />
+						                                <a href="javascript:void(0);" onclick="javascript:addCity();" class='btn btn-outline btn-sm btn-success'>添加</a>
+<!-- 						                                <div data-toggle="distpicker"> -->
+<!-- 						                                	  <input type="hidden" name="cityKey" /> -->
+<!-- 									                          <select name="province" style="display: inline-block;width: 100px;"></select> -->
+<!-- 									                          <select name="city"  style="display: inline-block;width: 100px;"></select> -->
+<!-- <!-- 									                          <select name="area"></select> -->  
+<!-- 								                         </div> -->
 <!-- 						                                <input type="hidden" name="city" value="guangzhou"/> -->
 						                            </li>
 						                            <li>
 						                            	 <a class="btn btn-success" id="btn-search"  >
 										                    <i class="fa fa-search"></i> 获取
 										                </a>
+										                 <a class="btn btn-success "  id="btn-export" batch-code="" onclick="exportExcelByBatchCode()"  >
+									                  	   <i class="fa fa-download"></i> 导出
+									                	 </a>
 						                            </li>
 						                        </ul>
 						                     </div>
@@ -133,7 +141,7 @@
 												  </tbody>
 									              <thead>
 												    <tr>
-												      <th>商家</th>
+												      <th>店名</th>
 												      <th>联系方式</th>
 												      <th>地址</th>
 												      <th>关键词</th>
@@ -146,12 +154,11 @@
 										<div style="background: #eff3f8;width: 100%;height: 35px;">
 											<div style="float: left;position: relative;top:5px;">
 												<span>第<input type="number" name="page" onchange="javascript:pageChange();" value="1" min="1" style="text-align:center; width: 35px;height: 30px;border: 1px solid #ddd;border-radius: 4px;" form="searchForm" />页</span>&nbsp;
-												<span>约显示<select name="limit" onchange="javascript:pageChange();" style="border: 1px solid #ddd;border-radius: 4px;  background: width;  outline: none;width: 50px;height: 32px;" form="searchForm" >
+												<span>获取每个城市约<select name="limit" onchange="javascript:pageChange();" style="border: 1px solid #ddd;border-radius: 4px;  background: width;  outline: none;width: 50px;height: 32px;" form="searchForm" >
 															<option value="10" selected="selected">10</option>
-															<option value="50" >50</option>
-															<option value="100" >100</option>
+															<option value="30" >30</option>
 															<option value="1000">全部</option>
-														 </select>条目</span> &nbsp;
+														 </select>条数据</span> &nbsp;
 												<span >总共
 													<label id="count-span"></label>条
 												</span>    
@@ -181,16 +188,18 @@
         	id: "list-table",
         	toolbar: "toolbar1",
             url: prefix + "/list",
+            exportUrl: prefix + "/export",
 	        showSearch: false,
 	        showRefresh: false,
 	        showToggle: false,
 	        showColumns: false,
+	        modalName: "商家数据",
             columns: [{
 	            checkbox: true
 	        },
 			{
 				field : 'shopName', 
-				title : '商家',
+				title : '店名',
 			},
 			{
 				field : 'phone', 
@@ -218,7 +227,7 @@
 				field : 'link', 
 				title : '访问链接',
 				formatter: function(value, row, index) { 
-                	return "<a class='link' target='_bank' href='"+value+"'>"+value+"</a>"
+                	return "<a class='link' target='_bank' href='"+value+"'>查看</a>"
                 }
 			},
 			]
@@ -233,38 +242,54 @@
         $("#btn-search").click(function(){
         	document.getElementById('scrollTable').scrollTop=0;
         	$("#count-span").html(0);
-        	var city=$('[name="city"]').val();
-        	if(!city){
+        	var city=$('[name="selectCity"]').val();
+        	var span=$("#selectd-citys").find("span");
+        	if(!city||span.length<1){
         		$.modal.alertWarning('请选择城市！')
         		return;
         	}
-        	var citys=iGetCityKey(city);
-        	$("[name='cityKey']").val(citys[1]);
+        	var citys="";
+        	for(var i=0;i<span.length;i++){
+        		var dataCity=$(span[i]).attr("data-city");
+        		var dc=dataCity.split("-");
+        		var key=iGetCityKey(dc[1]);
+        		citys=dataCity+"-"+key[1]+","+citys;
+        	}
+        	//var citys=iGetCityKey(city);
+        	$("[name='cityKey']").val(citys.slice(0,-1));
         	$("#search-tbody").empty();
         	$("#search-tbody").addClass("mark").append(GetTips('正在获取中'));
         	var url=prefix + "/search";
         	var param=$("#searchForm").serialize();
         	$.modal.loading('正在获取中,请稍等...');
-        	jQuery.post(url,param,function(res){
+        	jQuery.post(url,param,function(data){
+        		var res=data.data;
+        		var batchCode=data.batchCode;
+        		$("#btn-export").attr("batch-code",batchCode);
         		$("#count-span").html(res.length);
         		$("#search-tbody").empty().removeClass("mark");
         		if(res.length<1){
         			$("#search-tbody").append(GetTips('无记录'));
-        		}
-        		 
+        		} 
+        		
         		for(var i=0;i<res.length;i++){
-        			var result=res[i];
-        			var adress=result.province+"-"+result.city+"-"+result.adress;
-        			var link="<a class='link' target='_bank' href='"+result.link+"'>"+result.link+"</a>"
-        			var elem="<tr>"+
-        						"<td>"+result.shopName+"</td>"+
-        						"<td>"+result.phone+"</td>"+
-        						"<td>"+adress+"</td>"+
-        						"<td>"+result.keyword+"</td>"+
-        						"<td>"+GetOs(result.os)+"</td>"+
-        						"<td>"+link+"</td>"+
-        					"</tr>";
-        			$("#search-tbody").append(elem);
+        			try{
+        				var result=res[i];
+            			var adress=result.province+"-"+result.city+"-"+result.adress;
+            			var link="<a class='link' target='_bank' href='"+result.link+"'>查看</a>"
+            			var elem="<tr>"+
+            						"<td>"+result.shopName+"</td>"+
+            						"<td>"+result.phone+"</td>"+
+            						"<td>"+adress+"</td>"+
+            						"<td>"+result.keyword+"</td>"+
+            						"<td>"+GetOs(result.os)+"</td>"+
+            						"<td>"+link+"</td>"+
+            					"</tr>";
+            			$("#search-tbody").append(elem);
+        			}catch(e){
+        				
+        			}
+        			
         		}
         		$.modal.closeLoading();
         	},"JSON").error(function() { 
@@ -277,8 +302,8 @@
     function GetOs(type){
     	if(type=="MT"){
     		return "美团";
-    	}else if(type=="BD"){
-    		return "百度地图";
+    	}else if(type=="AMAP"){
+    		return "高德地图";
     	}else if(type=="DZ"){
     		return "大众点评";
     	}else{
@@ -337,7 +362,122 @@
 			});
 		}
 	}
+	function addCity(){
+		$('#cityModal').modal('show');
+	}
+	function getcity(){
+		 $("#div-citys").empty();
+		 var options=$('[name="city"]').find("option");
+		 for(var i=0;i<options.length;i++){
+			 var text=$(options[i]).val();
+			 var code=$(options[i]).attr("data-code");
+			 var tag="<p><a href='javascript:void(0);' onclick='selectCity(this);' data-code='"+code+"' data-text='"+text+"' >"+text+"</a></p>";
+		 	 $("#div-citys").append(tag);
+		 }
+	}
+	function selectCity(obj){
+		var	province =$('[name="province"]').val();
+		var	city =$(obj).attr("data-text");
+		var	code =$(obj).attr("data-code");
+		var pc=province+"-"+city;
+		var spans=$("#selectd-citys").find("span");
+		var isSelected=false;
+		for(var i=0;i<spans.length;i++){
+			var dataCode = $(spans[i]).attr('data-code');
+			if(dataCode==code){
+				isSelected=true;
+			}
+		}
+		if(!isSelected){
+			var tag="<span onclick='delTag(this)' style='margin: 1px;' class='btn btn-default btn-sm' data-code='"+code+"' data-city='"+pc+"'>"+city+"</span>";
+			$("#selectd-citys").append(tag);
+		}
+		
+	}
+	function delTag(obj){
+		$(obj).remove();
+	}
+	function selectAllCity(){
+		var tag= $("#div-citys").find("p a");
+		 for(var i=0;i<tag.length;i++){
+			 if($(tag[i]).attr("data-code"))
+			 selectCity(tag[i]);
+		 }
+	}
+	function delAllCity(){
+		 $("#selectd-citys").empty();
+// 		var spans=$("#selectd-citys").find("span");
+// 		for(var i=0;i<spans.length;i++){
+// 			delTag(spans[i]);
+// 		}
+	}
+	function saveCity(){
+		var span=$("#selectd-citys").find("span");
+		var text="";
+		for(var i=0;i<span.length;i++){
+			text=$(span[i]).text()+","+text;
+		}
+		text=text.slice(0,-1);
+		$("[name='selectCity']").val(text);
+		$('#cityModal').modal('hide');
+	}
+	function exportExcelByBatchCode(){
+		var batchCode=$("#btn-export").attr("batch-code");
+		if(!batchCode){
+			return;
+		}
+		$.modal.loading("正在导出数据，请稍后...");
+		$.post(prefix + "/export", {batchCode:batchCode}, function(result) {
+			if (result.code == web_status.SUCCESS) {
+		        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+			} else if (result.code == web_status.WARNING) {
+                $.modal.alertWarning(result.msg)
+            } else {
+				$.modal.alertError(result.msg);
+			}
+			$.modal.closeLoading();
+		});
+	}
     </script>
-    
+    <div class="modal inmodal fade" id="cityModal" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 70%;">
+				<div class="modal-header" style="padding: 0px;">
+					<h3 class=" " style="float: left;position: relative; left: 5px;">添加城市</h3>
+				</div>
+					<div class="modal-body" style="margin-bottom: 20px;padding: 5px;">
+						<div class="select-list" style="width: 100%;display: block;">
+							<ul style="width: 100%;display: block;padding: 0px;" >
+								<li style="width: 100%;display: block;padding: 0px;">
+									<div data-toggle="distpicker" style="width: 100%;">
+										<select name="province" onclick="getcity();"
+											style="display: inline-block; width: 100px;" ></select> <select
+											name="city" style="display: none; width: 100px;" ></select>
+											 <a href="javascript:void(0);" onclick="javascript:selectAllCity();" class='btn btn-outline btn-xs btn-success'>添加全部</a>
+											 <a href="javascript:void(0);" onclick="javascript:delAllCity();" class='btn btn-outline btn-xs btn-danger'>清除全部</a>
+									</div>
+								</li>
+							</ul>
+						</div><br>
+						<div style="width: 100%;height: 200px;">
+							<div id="div-citys" style="width: 25%;height: 100%;display: inline-block;background-color: white;overflow-y:auto; border: graytext;">
+							
+							</div>
+							<div id="selectd-citys" style="width: 73%;height: 100%;display: inline-block;background-color: white; border: graytext; overflow: auto;">
+							
+							</div>
+						</div>
+				</div>
+
+					<div class="modal-footer" style="padding: 5px">
+						<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary" onclick="saveCity();">确认</button>
+					</div>
+			</div>
+			<small class="font-bold"> </small>
+		</div>
+		<small class="font-bold"> </small>
+	</div>
 </body>
 </html>

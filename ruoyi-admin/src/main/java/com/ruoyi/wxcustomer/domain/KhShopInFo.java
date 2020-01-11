@@ -11,6 +11,7 @@ package com.ruoyi.wxcustomer.domain;
 
 import java.util.Date;
 
+import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
@@ -23,16 +24,30 @@ public class KhShopInFo extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String poi;
-	private String link;
+	@Excel(name = "店名")
 	private String shopName;
+	@Excel(name = "联系方式")
 	private String phone;
+	@Excel(name = "省")
 	private String province;
+	@Excel(name = "城市")
 	private String city;
+	@Excel(name = "地址")
 	private String adress;
+	@Excel(name = "关键字")
 	private String keyword;
 	private String classic;
+	@Excel(name = "来源", readConverterExp = "MT=美团,AMAP=高德地图")
 	private String os;
+	@Excel(name = "创建时间",dateFormat = "yyyy-MM-dd")
 	private Date createDate;
+	private String operatorId;
+	@Excel(name = "操作人")
+	private String operatorName;
+	@Excel(name = "访问地址")
+	private String link;
+	@Excel(name = "批次号")
+	private String batchCode;
 
 	public String getId() {
 		return id;
@@ -128,6 +143,30 @@ public class KhShopInFo extends BaseEntity {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getOperatorId() {
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
+	}
+
+	public String getOperatorName() {
+		return operatorName;
+	}
+
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+
+	public String getBatchCode() {
+		return batchCode;
+	}
+
+	public void setBatchCode(String batchCode) {
+		this.batchCode = batchCode;
 	}
 	
 

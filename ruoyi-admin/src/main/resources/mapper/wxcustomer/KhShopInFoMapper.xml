@@ -14,9 +14,13 @@
     <result column="classic" property="classic" jdbcType="VARCHAR" />
     <result column="os" property="os" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+     <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+      <result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+       <result column="batch_code" property="batchCode" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, poi, link, shop_name, phone, province, city, adress, keyword, classic, os, create_date
+    id, poi, link, shop_name, phone, province, city, adress, keyword, classic, os, create_date,
+    operator_id,operator_name,batch_code
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -32,11 +36,12 @@
     insert into kh_shop_info (id,poi, link, shop_name, 
       phone, province, city, 
       adress, keyword, classic, 
-      os, create_date)
+      os, create_date,operator_id,operator_name,batch_code)
     values (#{id,jdbcType=VARCHAR},#{poi,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{adress,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{classic,jdbcType=VARCHAR}, 
-      #{os,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+      #{os,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},#{operatorId,jdbcType=VARCHAR},
+      #{operatorName,jdbcType=VARCHAR},#{batchCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" >
      
@@ -78,6 +83,15 @@
       <if test="createDate != null" >
         create_date,
       </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="operatorName != null" >
+        operator_name,
+      </if>
+      <if test="batchCode != null" >
+        batch_code,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -115,6 +129,15 @@
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchCode != null" >
+        #{batchCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,6 +177,15 @@
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
+       <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+       <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
+       <if test="batchCode != null" >
+        batch_code = #{batchCode,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -169,7 +201,10 @@
       keyword = #{keyword,jdbcType=VARCHAR},
       classic = #{classic,jdbcType=VARCHAR},
       os = #{os,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+       operator_id = #{operatorId,jdbcType=VARCHAR},
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+         batch_code = #{batchCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectList" parameterType="com.ruoyi.wxcustomer.domain.KhShopInFo" resultMap="BaseResultMap">
@@ -187,7 +222,11 @@
         	<if test="keyword != null  and keyword != ''"> and keyword like concat('%', #{keyword}, '%')</if>
         	<if test="classic != null  and classic != ''"> and classic like concat('%', #{classic}, '%')</if>
         	<if test="os != null  and os != ''"> and os =#{os}</if>
+        	<if test="operatorId != null  and operatorId != ''"> and operator_id =#{operatorId}</if>
+        	<if test="operatorName != null  and operatorName != ''"> and operator_name =#{operatorName}</if>
+        	<if test="batchCode != null  and batchCode != ''"> and batch_code =#{batchCode}</if>
         	 order by  create_date desc
         </where>
     </select>
+ 	   
 </mapper>

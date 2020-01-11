@@ -26,6 +26,10 @@ searchUrl:
   meituan:
     list: http://i.meituan.com/s/
     info: http://i.meituan.com/poi/
+    pcinfo: https://www.meituan.com/poi/
+  amap:
+    list: https://ditu.amap.com/service/poiInfo?
+    detail: https://m.amap.com/search/mapview/poiid=
 
 # 开发环境配置
 server:
