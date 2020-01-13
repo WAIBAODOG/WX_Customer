@@ -58,21 +58,28 @@
 					                                </select>
 					                            </li>
 					                            <li>
-					                            	 <a class="btn btn-success" onclick="$.table.search()"  >
-									                    <i class="fa fa-search"></i> 查询
-									                </a>
-									                 <a class="btn btn-success   " onclick="$.table.exportExcel()"  >
-								                  	  <i class="fa fa-download"></i> 导出
-								                	 </a>
+					                            	
 					                            </li>
 					                        </ul>
 					                     </div>
 					                  </form>
 					               </div>
-<!-- 					               <div  class="btn-group-sm" id="toolbar" role="group"> -->
-						               
-<!-- 						            </div>   -->
+					               
 									<div class="col-sm-12 select-table table-striped">
+									<div  class="btn-group-sm" id="toolbar" role="group">
+										 <a class="btn btn-success" onclick="$.table.search()"  >
+									        <i class="fa fa-search"></i> 查询
+									      </a>
+									     <a class="btn btn-primary  " onclick="$.form.reset()"  >
+										     <i class="fa fa-refresh"></i> 清空
+										 </a> 
+						                <a class="btn btn-success   " onclick="$.table.exportExcel()"  >
+								              <i class="fa fa-download"></i> 导出
+								          </a>
+								          <a class="btn btn-danger " onclick="$.operate.removeAll()" >
+								              <i class="fa fa-remove"></i> 删除
+								           </a>
+						            </div>
 										<table id="list-table"></table>
 									</div>
 					         </div>
@@ -117,21 +124,21 @@
 <!-- 						                                <input type="hidden" name="city" value="guangzhou"/> -->
 						                            </li>
 						                            <li>
-						                            	 <a class="btn btn-success" id="btn-search"  >
-										                    <i class="fa fa-search"></i> 获取
-										                </a>
-										                 <a class="btn btn-success "  id="btn-export" batch-code="" onclick="exportExcelByBatchCode()"  >
-									                  	   <i class="fa fa-download"></i> 导出
-									                	 </a>
+						                            	 
 						                            </li>
 						                        </ul>
 						                     </div>
 						                  </form>
 						               </div>
-<!-- 						               <div  class="btn-group-sm" id="toolbar" role="group"> -->
-							               
-<!-- 							            </div> -->
 						               <div class="col-sm-12 select-table table-striped">
+						               	<div  class="btn-group-sm"  style="margin: 5px;"  role="group">
+							               <a class="btn btn-success" id="btn-search"  >
+										       <i class="fa fa-search"></i> 获取
+										   </a>
+										   <a class="btn btn-success "  id="btn-export" batch-code="" onclick="exportExcelByBatchCode()"  >
+									             <i class="fa fa-download"></i> 导出
+									          </a>
+							            </div> 
 						               	<div id="scrollTable" style="max-height: 350px; width:100%; margin: auto;min-height:10px;overflow: auto;position: relative;">
 											<table id="search-table" class="table table-bordered table-striped" style="margin-bottom: 0px;">
 									              <tbody id="search-tbody">
@@ -188,6 +195,7 @@
         	id: "list-table",
         	toolbar: "toolbar1",
             url: prefix + "/list",
+            removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
 	        showSearch: false,
 	        showRefresh: false,
@@ -196,7 +204,11 @@
 	        modalName: "店家数据",
             columns: [{
 	            checkbox: true
-	        },
+	        },{
+                field : 'id', 
+                title : 'ID',
+                visible: false
+            }, 
 			{
 				field : 'shopName', 
 				title : '店名',
@@ -307,7 +319,7 @@
     	}else if(type=="DZ"){
     		return "大众点评";
     	}else{
-    		return "";
+    		return type;
     	}
     }
     function pageChange(){

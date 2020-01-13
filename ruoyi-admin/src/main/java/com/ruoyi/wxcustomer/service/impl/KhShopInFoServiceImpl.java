@@ -14,6 +14,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.wxcustomer.domain.KhShopInFo;
 import com.ruoyi.wxcustomer.mapper.KhShopInFoMapper;
 import com.ruoyi.wxcustomer.service.IKhShopInFoService;
@@ -58,6 +59,17 @@ public class KhShopInFoServiceImpl implements IKhShopInFoService{
 	@Override
 	public List<KhShopInFo> selectList(KhShopInFo record) {
 		return khShopInFoMapper.selectList(record);
+	}
+	public int deleteByIds(String ids) {
+		try {
+			String[] idArray = Convert.toStrArray(ids);
+			for (int i = 0; i < idArray.length; i++) {
+				deleteByPrimaryKey(idArray[i]);
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
 
 }

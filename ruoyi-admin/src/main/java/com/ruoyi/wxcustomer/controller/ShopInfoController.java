@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
@@ -38,7 +41,7 @@ import com.ruoyi.wxcustomer.service.IMeituanService;
 
 /**
 * @ClassName: ShopInfoController
-* @Description: 通知
+* @Description: 商家信息获取
 * @author HuaSheng
 * @date 2019年12月11日 上午10:27:34
 *
@@ -103,5 +106,14 @@ public class ShopInfoController extends BaseController{
 		SimpleDateFormat format=new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String version=format.format(new Date());
 		return util.exportExcel(list, "店家数据-v-"+version);
+	}
+	@Log(title = "商家信息删除", businessType = BusinessType.DELETE)
+	@PostMapping("/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids) {
+		if(StringUtils.isEmpty(ids)) {
+			return toAjax(0);
+		}
+		return toAjax (khShopInFoService.deleteByPrimaryKey(ids));
 	}
 }
