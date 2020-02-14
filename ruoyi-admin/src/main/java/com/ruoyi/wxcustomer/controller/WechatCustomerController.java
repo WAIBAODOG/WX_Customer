@@ -25,12 +25,12 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
 import com.ruoyi.wxcustomer.service.IWechatCustomerService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * 微信客户Controller
@@ -47,7 +47,7 @@ public class WechatCustomerController extends BaseController {
 	private IWechatCustomerService wechatCustomerService;
 	
 	@Autowired
-	private PermissionService permissionService;
+	private RoleDataService roleDataService;
 
 	@RequiresPermissions("wxcustomer:WechatCustomer:view")
 	@GetMapping()
@@ -64,20 +64,7 @@ public class WechatCustomerController extends BaseController {
 	public TableDataInfo list(WechatCustomer wechatCustomer) {
 		startPage();
 		wechatCustomer.setIsDelete("0");//未删除的
-		
-		boolean isAdmin = permissionService.isRole("admin");
-		if(!isAdmin) {
-			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZY");
-			if(StringUtils.isBlank(isFyUserRoleStr)) {
-				wechatCustomer.setIsFyUser("1");
-				wechatCustomer.setCreatorId(ShiroUtils.getUserId() + "");
-			}
-			
-			String isShUserRoleStr = permissionService.hasAnyRoles("SHZZY");
-			if(StringUtils.isBlank(isShUserRoleStr)) {
-				wechatCustomer.setShUserId(ShiroUtils.getUserId() + "");
-			}
-		}
+		wechatCustomer.setDataRightUserIds(roleDataService.getRoleData());
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		return getDataTable(list);
 	}
@@ -90,6 +77,7 @@ public class WechatCustomerController extends BaseController {
 	@ResponseBody
 	public AjaxResult export(WechatCustomer wechatCustomer) {
 		wechatCustomer.setIsDelete("0");//未删除的
+		wechatCustomer.setDataRightUserIds(roleDataService.getRoleData());
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		ExcelUtil<WechatCustomer> util = new ExcelUtil<WechatCustomer>(WechatCustomer.class);
 		return util.exportExcel(list, "WechatCustomer");

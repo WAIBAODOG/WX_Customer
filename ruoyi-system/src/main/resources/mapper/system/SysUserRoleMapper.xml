@@ -8,6 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userId"     column="user_id"      />
 		<result property="roleId"     column="role_id"      />
 	</resultMap>
+	    
+	<select id="selectLikeRoleKey" parameterType="string" resultType="java.lang.Long">
+		SELECT DISTINCT user_id FROM sys_user_role WHERE role_id IN (
+			SELECT role_id FROM sys_role WHERE role_key LIKE CONCAT(#{roleKey}, '%') 
+			and status = '0' and del_flag = '0'
+		)
+	</select>
 
 	<delete id="deleteUserRoleByUserId" parameterType="Long">
 		delete from sys_user_role where user_id=#{userId}

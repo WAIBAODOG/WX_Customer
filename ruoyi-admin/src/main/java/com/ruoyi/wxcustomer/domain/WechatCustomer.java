@@ -135,6 +135,11 @@ public class WechatCustomer extends BaseEntity{
 
     @Excel(name = "已合作产品")
     private String coopProduct;
+    
+    /**
+     	* 权限用户ids
+     */
+    private String dataRightUserIds;
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
@@ -423,6 +428,14 @@ public class WechatCustomer extends BaseEntity{
 
 	public void setCoopProduct(String coopProduct) {
 		this.coopProduct = coopProduct;
+	}
+
+	public String getDataRightUserIds() {
+		return dataRightUserIds;
+	}
+
+	public void setDataRightUserIds(String dataRightUserIds) {
+		this.dataRightUserIds = dataRightUserIds;
 	}
 
 	@Override

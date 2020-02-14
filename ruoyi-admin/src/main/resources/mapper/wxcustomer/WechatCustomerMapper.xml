@@ -79,7 +79,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 			<if test="customerLevel != null  and customerLevel != ''"> and customer_level = #{customerLevel}</if>
             <if test="coopProduct != null  and coopProduct != ''"> and coop_product like concat('%', #{coopProduct}, '%')</if>
-			
+            
+            <if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+            	and ( creator_id in (${dataRightUserIds}) or sale_id in (${dataRightUserIds}))
+            </if>
+            
 		    <choose>
 	   			<when test='status != null and status == "1"'>
 	   				and  weixin_number is not null

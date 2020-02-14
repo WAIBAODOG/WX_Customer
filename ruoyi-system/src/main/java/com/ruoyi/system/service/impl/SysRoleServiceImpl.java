@@ -44,6 +44,12 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Autowired
     private SysRoleDeptMapper roleDeptMapper;
 
+
+	@Override
+	public Set<Long> selectLikeRoleKey(String roleKey) {
+		return userRoleMapper.selectLikeRoleKey(roleKey);
+	}
+    
     /**
      * 根据条件分页查询角色数据
      * 
@@ -101,6 +107,12 @@ public class SysRoleServiceImpl implements ISysRoleService
             }
         }
         return roles;
+    }
+    
+    @Override
+    public List<SysRole> selectRolesByUid(Long userId) {
+        List<SysRole> userRoles = roleMapper.selectRolesByUserId(userId);
+        return userRoles;
     }
 
     /**
