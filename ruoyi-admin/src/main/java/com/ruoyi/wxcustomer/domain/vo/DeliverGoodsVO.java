@@ -748,10 +748,5 @@ public class DeliverGoodsVO {
 	public void setIsSHRY(String isSHRY) {
 		this.isSHRY = isSHRY;
 	}
-	
-	 
-	
-    
-    
 }
 

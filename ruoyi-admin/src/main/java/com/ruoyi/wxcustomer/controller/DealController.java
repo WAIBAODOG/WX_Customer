@@ -36,7 +36,6 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
@@ -46,6 +45,7 @@ import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
 import com.ruoyi.wxcustomer.service.IWechatCustomerService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * 成交客户管理Controller
@@ -66,6 +66,9 @@ public class DealController extends BaseController {
 	private IKhAfterSaleMemberService khAfterSaleMemberService;
 	@Autowired
 	private PermissionService permissionService;
+	
+	@Autowired
+	private RoleDataService roleDataService;
 
 	@RequiresPermissions("deal:deal:view")
 	@GetMapping()
@@ -83,14 +86,9 @@ public class DealController extends BaseController {
 	@ResponseBody
 	public TableDataInfo list(DeliverGoodsVO vo) {
 		startPage();
-		boolean isFYRY = permissionService.isRole("FYCJZZY");
-		if (isFYRY) {
-			vo.setIsFYRY(ShiroUtils.getUserId().toString());
-		}
-		boolean isFYSH = permissionService.isRole("SHZZY");
-		if (isFYSH) {
-			vo.setIsSHRY(ShiroUtils.getUserId().toString());
-		}
+		
+		vo.setIsSHRY(roleDataService.getRoleData());
+		
 		vo.setIsDelete("0");// 未删除
 		if ("2".equals(vo.getDealType())) {// 售后成交
 			AfterSaleMemberVO saleVo = new AfterSaleMemberVO();
@@ -229,14 +227,7 @@ public class DealController extends BaseController {
 	public AjaxResult export(DeliverGoodsVO vo) {
 		String title = "发样";
 		List<SendVO> listData = new ArrayList<SendVO>();
-		boolean isFYRY = permissionService.isRole("FYCJZZY");
-		if (isFYRY) {
-			vo.setIsFYRY(ShiroUtils.getUserId().toString());
-		}
-		boolean isFYSH = permissionService.isRole("SHZZY");
-		if (isFYSH) {
-			vo.setIsSHRY(ShiroUtils.getUserId().toString());
-		}
+		vo.setIsSHRY(roleDataService.getRoleData());
 		vo.setIsDelete("0");// 未删除
 		if ("2".equals(vo.getDealType())) {// 售后成交
 			title = "售后";

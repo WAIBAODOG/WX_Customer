@@ -1,6 +1,8 @@
 package com.ruoyi.system.mapper;
 
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.system.domain.SysUserRole;
 
@@ -11,6 +13,8 @@ import com.ruoyi.system.domain.SysUserRole;
  */
 public interface SysUserRoleMapper
 {
+	public Set<Long> selectLikeRoleKey(String roleKey);
+	
     /**
      * 通过用户ID删除用户和角色关联
      * 

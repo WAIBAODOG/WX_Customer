@@ -13,6 +13,13 @@ import com.ruoyi.system.domain.SysUserRole;
 public interface ISysRoleService
 {
     /**
+       * 若依权限
+     * @param 角色key， like查询
+     * @return 用户id集合
+     */
+    public Set<Long> selectLikeRoleKey(String roleKey);
+	
+    /**
      * 根据条件分页查询角色数据
      * 
      * @param role 角色信息
@@ -35,6 +42,8 @@ public interface ISysRoleService
      * @return 角色列表
      */
     public List<SysRole> selectRolesByUserId(Long userId);
+    
+    public List<SysRole> selectRolesByUid(Long userId);
 
     /**
      * 查询所有角色

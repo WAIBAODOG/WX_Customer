@@ -36,12 +36,11 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.exportvo.SendVO;
 import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhDeliverGoodsService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * 发样情况Controller
@@ -57,7 +56,7 @@ public class KhDeliverGoodsController extends BaseController {
 	@Autowired
 	private IKhDeliverGoodsService khDeliverGoodsService;
 	@Autowired
-	private PermissionService permissionService;
+	private RoleDataService roleDataService;
 
 	@RequiresPermissions("deliverGoods:deliverGoods:view")
 	@GetMapping()
@@ -73,14 +72,7 @@ public class KhDeliverGoodsController extends BaseController {
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(DeliverGoodsVO vo) {
-		boolean isFYRY = permissionService.isRole("FYCJZZY");
-		if (isFYRY) {
-			vo.setIsFYRY(ShiroUtils.getUserId().toString());
-		}
-		boolean isFYSH = permissionService.isRole("SHZZY");
-		if (isFYSH) {
-			vo.setIsSHRY(ShiroUtils.getUserId().toString());
-		}
+		vo.setIsFYRY(roleDataService.getRoleData());
 		vo.setIsDelete("0");// 未删除
 		vo.setFollowResultType("2");// 发样
 		startPage();
@@ -148,14 +140,7 @@ public class KhDeliverGoodsController extends BaseController {
 	@ResponseBody
 	public AjaxResult export(DeliverGoodsVO vo) {
 		List<SendVO> listData = new ArrayList<SendVO>();
-		boolean isFYRY = permissionService.isRole("FYCJZZY");
-		if (isFYRY) {
-			vo.setIsFYRY(ShiroUtils.getUserId().toString());
-		}
-		boolean isFYSH = permissionService.isRole("SHZZY");
-		if (isFYSH) {
-			vo.setIsSHRY(ShiroUtils.getUserId().toString());
-		}
+		vo.setIsFYRY(roleDataService.getRoleData());
 		vo.setIsDelete("0");// 未删除
 		vo.setFollowResultType("2");// 发样
 		List<DeliverGoodsVO> list = khDeliverGoodsService.selectList(vo);
