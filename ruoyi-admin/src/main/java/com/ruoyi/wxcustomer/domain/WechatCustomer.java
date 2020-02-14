@@ -135,6 +135,11 @@ public class WechatCustomer extends BaseEntity{
 
     @Excel(name = "已合作产品")
     private String coopProduct;
+    @Excel(name = "手机编码")
+    private String phoneCode;
+    
+    @Excel(name = "店里竞品")
+    private String storeCompetition;
     
     /**
      	* 权限用户ids
@@ -438,6 +443,22 @@ public class WechatCustomer extends BaseEntity{
 		this.dataRightUserIds = dataRightUserIds;
 	}
 
+	public String getPhoneCode() {
+		return phoneCode;
+	}
+
+	public void setPhoneCode(String phoneCode) {
+		this.phoneCode = phoneCode;
+	}
+
+	public String getStoreCompetition() {
+		return storeCompetition;
+	}
+
+	public void setStoreCompetition(String storeCompetition) {
+		this.storeCompetition = storeCompetition;
+	}
+
 	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -475,6 +496,8 @@ public class WechatCustomer extends BaseEntity{
             .append("expectedinventory", getExpectedinventory())
             .append("customerLevel", getCustomerLevel())
             .append("coopProduct", getCoopProduct())
+            .append("phoneCode", getPhoneCode())
+            .append("storeCompetition", getStoreCompetition())
             .toString();
     }
 }
