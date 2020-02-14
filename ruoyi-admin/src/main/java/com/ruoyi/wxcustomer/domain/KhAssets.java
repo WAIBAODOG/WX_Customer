@@ -1,5 +1,8 @@
 package com.ruoyi.wxcustomer.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
@@ -13,7 +16,7 @@ public class KhAssets extends BaseEntity{
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @Excel(name = "主键")
+    
     private String id;
 
     /** 使用人id */
@@ -37,7 +40,10 @@ public class KhAssets extends BaseEntity{
     /** 群发素材数量 */
     @Excel(name = "群发素材数量")
     private Integer countMaterial;
+    
+    private String detailInfo;
 
+    private List<KhAssetsDetail> detailList;
     public void setId(String id) {
         this.id = id;
     }
@@ -87,6 +93,22 @@ public class KhAssets extends BaseEntity{
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public List<KhAssetsDetail> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<KhAssetsDetail> detailList) {
+		this.detailList = detailList;
+	}
+
+	public String getDetailInfo() {
+		return detailInfo;
+	}
+
+	public void setDetailInfo(String detailInfo) {
+		this.detailInfo = detailInfo;
 	}
 
     

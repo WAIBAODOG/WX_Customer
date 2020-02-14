@@ -29,6 +29,8 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.wxcustomer.domain.KhAfterSaleMember;
 import com.ruoyi.wxcustomer.domain.KhDeliverGoods;
 import com.ruoyi.wxcustomer.domain.WechatCustomer;
+import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
+import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IWechatCustomerService;
 import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
@@ -181,5 +183,24 @@ public class WechatCustomerController extends BaseController {
 			return success();
 		}
 		return error(msg);
+	}
+	
+	/**
+	 * 分配业务对接人
+	 */
+	@PostMapping("/distributionBusinessMan")
+	@ResponseBody
+	public AjaxResult distributionSale( String businessManId, String businessManName,
+			String customerid) {
+		WechatCustomer wechatCustomer = new WechatCustomer();
+		if (StringUtils.isNotEmpty(customerid)) {
+			wechatCustomer.setCustomerId(customerid);
+			wechatCustomer.setCreatorId(businessManId);
+			wechatCustomer.setCreator(businessManName);
+			return toAjax(wechatCustomerService.updateWechatCustomer(wechatCustomer));
+		}else {
+			return toAjax(false);
+		}
+		 
 	}
 }

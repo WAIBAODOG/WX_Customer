@@ -26,10 +26,10 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="wxcustomer:asset:add">
+                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="wxcustomer:asset:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="wxcustomer:asset:edit">
+                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="wxcustomer:asset:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="wxcustomer:asset:remove">
@@ -61,9 +61,19 @@
                 columns: [{
                     checkbox: true
                 },
+                 {
+                    field : 'id', 
+                    title : 'ID',
+                    visible: false
+                },
                 {
                     field : 'userName', 
-                    title : '使用人'
+                    title : '使用人',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a  href="javascript:void(0)" onclick="openDetail(\'' + row.id + '\')">'+ value +'</a> ');
+                        return actions.join('');	
+                      }
                 },
                 {
                     field : 'countWechat', 
@@ -81,19 +91,23 @@
                     field : 'countMaterial', 
                     title : '群发素材数量'
                 },
-                {
-                    title: '操作',
-                    align: 'center',
-                    formatter: function(value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        return actions.join('');
-                    }
-                }]
+//                 {
+//                     title: '操作',
+//                     align: 'center',
+//                     formatter: function(value, row, index) {
+//                         var actions = [];
+//                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+//                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+//                         return actions.join('');
+//                     }
+//                 }
+                ]
             };
             $.table.init(options);
         });
+        function openDetail(id) {
+        	$.modal.openTab($.table._option.modalName + "详情", prefix + "/show/"+id);
+        }
     </script>
 </body>
 </html>

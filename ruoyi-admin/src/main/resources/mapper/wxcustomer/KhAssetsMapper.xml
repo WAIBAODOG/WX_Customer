@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectKhAssetsVo">
-        select id, user_id, count_wechat, resp_group, group_people, count_material from kh_assets
+        select id, user_name, user_id, count_wechat, resp_group, group_people, count_material from kh_assets
     </sql>
 
     <select id="selectKhAssetsList" parameterType="KhAssets" resultMap="KhAssetsResult">
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="id != null  and id != ''"> and id = #{id}</if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="userName != null  and userName != ''"> and user_name = #{userName}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
             <if test="countWechat != null "> and count_wechat = #{countWechat}</if>
             <if test="respGroup != null  and respGroup != ''"> and resp_group like concat('%', #{respGroup}, '%')</if>
             <if test="groupPeople != null "> and group_people = #{groupPeople}</if>

@@ -1,12 +1,19 @@
 package com.ruoyi.wxcustomer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.wxcustomer.mapper.KhAssetsMapper;
-import com.ruoyi.wxcustomer.domain.KhAssets;
-import com.ruoyi.wxcustomer.service.IKhAssetsService;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.wxcustomer.domain.KhAssets;
+import com.ruoyi.wxcustomer.domain.KhAssetsDetail;
+import com.ruoyi.wxcustomer.mapper.KhAssetsDetailMapper;
+import com.ruoyi.wxcustomer.mapper.KhAssetsMapper;
+import com.ruoyi.wxcustomer.service.IKhAssetsService;
 
 /**
  * 资产管理Service业务层处理
@@ -18,6 +25,8 @@ import com.ruoyi.common.core.text.Convert;
 public class KhAssetsServiceImpl implements IKhAssetsService {
     @Autowired
     private KhAssetsMapper khAssetsMapper;
+    @Autowired
+    private KhAssetsDetailMapper khAssetsDetailMapper;
 
     /**
      * 查询资产管理
@@ -27,7 +36,10 @@ public class KhAssetsServiceImpl implements IKhAssetsService {
      */
     @Override
     public KhAssets selectKhAssetsById(String id){
-        return khAssetsMapper.selectKhAssetsById(id);
+    	KhAssets assets=khAssetsMapper.selectKhAssetsById(id);
+    	List<KhAssetsDetail> detailList=khAssetsDetailMapper.selectByAssetId(id);
+    	assets.setDetailList(detailList);
+    	return assets;
     }
 
     /**
@@ -48,8 +60,23 @@ public class KhAssetsServiceImpl implements IKhAssetsService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertKhAssets(KhAssets khAssets){
-        return khAssetsMapper.insertKhAssets(khAssets);
+    	String assetId=UUID.randomUUID().toString().replace("-", "");
+    	try {
+    		khAssets.setId(assetId);
+        	khAssetsMapper.insertKhAssets(khAssets);
+        	List<KhAssetsDetail> recordList=khAssets.getDetailList();
+        	for(int i=0;i<recordList.size();i++) {
+        		String dId=UUID.randomUUID().toString().replace("-", "");
+        		recordList.get(i).setId(dId);
+        		recordList.get(i).setAssetsId(assetId);
+        		khAssetsDetailMapper.insert(recordList.get(i));
+        	}
+		} catch (Exception e) {
+			return 0;
+		}
+        return 1;
     }
 
     /**
@@ -59,7 +86,12 @@ public class KhAssetsServiceImpl implements IKhAssetsService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateKhAssets(KhAssets khAssets){
+    	List<KhAssetsDetail> recordList=khAssets.getDetailList();
+    	for(int i=0;i<recordList.size();i++) {
+    		khAssetsDetailMapper.updateByPrimaryKey(recordList.get(i));
+    	}
         return khAssetsMapper.updateKhAssets(khAssets);
     }
 
@@ -70,7 +102,10 @@ public class KhAssetsServiceImpl implements IKhAssetsService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteKhAssetsByIds(String ids){
+    	 
+    	khAssetsDetailMapper.deleteByKhAssetIds(Convert.toStrArray(ids));
         return khAssetsMapper.deleteKhAssetsByIds(Convert.toStrArray(ids));
     }
 
@@ -81,7 +116,9 @@ public class KhAssetsServiceImpl implements IKhAssetsService {
      * @return 结果
      */
     @Override
+    @Transactional
     public int deleteKhAssetsById(String id){
+    	khAssetsDetailMapper.deleteByKhAssetId(id);
         return khAssetsMapper.deleteKhAssetsById(id);
     }
 }

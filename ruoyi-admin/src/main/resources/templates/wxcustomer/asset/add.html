@@ -5,43 +5,53 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <h4 class="form-header h4">基本信息</h4>	
         <form class="form-horizontal m" id="form-asset-add">
-             
+             <input  name="id" th:value="${vo.id}" type="hidden" />
+             <input  name="flag" th:value="${flag}" type="hidden" />
+             <input  name="detailInfo"  id="detailInfo" th:value="${detailList}" type="hidden">
+            	<input name="isAdd" class="form-control" type="hidden" th:value="${isAdd}" id="isAdd">
             <div class="form-group">    
-                <label class="col-sm-3 control-label">使用人：</label>
-                <div class="col-sm-8">
-                    <input name="userId" class="form-control" type="hidden" required>
-                    <input name="userName" class="form-control" type="text" required readonly="readonly">
+                <label class="col-sm-2 control-label">使用人：</label>
+                <div class="col-sm-4">
+                    <input name="userId" class="form-control"  th:value="${vo.userId}" type="hidden" required>
+                    <input name="userName" class="form-control"  th:value="${vo.userName}" type="text" required readonly="readonly">
+                </div>
+               
+                <label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>微信数量：</label>
+                <div class="col-sm-4">
+                    <input name="countWechat"  th:value="${vo.countWechat}" min="0" class="form-control" type="number" required>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">微信数量：</label>
-                <div class="col-sm-8">
-                    <input name="countWechat" class="form-control" type="text">
+                <label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>负责的群：</label>
+                <div class="col-sm-4">
+                    <input name="respGroup"  th:value="${vo.respGroup}" class="form-control" type="text" required>
+                </div>
+                
+                <label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>群总人数：</label>
+                <div class="col-sm-4">
+                    <input name="groupPeople"  th:value="${vo.groupPeople}" min="0" class="form-control" type="number" required>
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">负责的群：</label>
-                <div class="col-sm-8">
-                    <input name="respGroup" class="form-control" type="text">
+                <label class="col-sm-2 control-label"><span style="color:#ff0000;">*</span>群发素材数量：</label>
+                <div class="col-sm-4">
+                    <input name="countMaterial"  th:value="${vo.countMaterial}" min="0" class="form-control" type="number" required>
                 </div>
             </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">群总人数：</label>
-                <div class="col-sm-8">
-                    <input name="groupPeople" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">群发素材数量：</label>
-                <div class="col-sm-8">
-                    <input name="countMaterial" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-            <label class="col-sm-3 control-label"></label>
-                  <div class="col-sm-8">    
-		             <table class="table table-bordered table-striped">
+           </form>
+            <div class="container-div" style="margin-top: 50px;">
+		       <div class="row">
+		       		<h4 class="form-header h4">明细列表</h4>
+		       </div>
+		   <div  class="row flagDiv" style="padding-bottom: 5px;position: relative;top:-15px;"> 	
+	             <a class="btn btn-success" onclick="addDetail();"  shiro:hasPermission="assets:assets:addDetail">
+	                 	 添加
+	             </a>
+		   </div>
+		   <div class="row">    
+	             <table class="table table-bordered table-striped">
 			              <thead>
 			              	<tr>
 			              		<th colspan="8" style="text-align: center;">
@@ -58,25 +68,149 @@
 						    </tr>
 						  </thead>
 						  <tbody id="detailTbody" >
-						  	 
+													  	 
 						  </tbody>
 		             </table>
-			    </div>
-            </div>
-        </form>
+		    </div>
+       </div>
+       </div>
+       <div class="row flagDiv">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+        </div>
     </div>
     <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: distpicker-js" />
+    <th:block th:include="include :: jquery-tmpl-js" />
     <script type="text/javascript">
-        var prefix = ctx + "wxcustomer/asset"
-        $("#form-asset-add").validate({
-            focusCleanup: true
+    var prefix = ctx + "wxcustomer/asset";
+        $(function(){
+        	var detailInfo = $('#detailInfo').val();
+        	var flag = $('[name="flag"]').val();
+        	if(flag=="0"){
+        		$(".flagDiv").remove();
+        	}
+        	if(detailInfo){
+        		var jsonArray = JSON.parse(detailInfo);
+        		for(var i=0;i<jsonArray.length;i++) {
+	        		if(jsonArray[i].isAbnormal=="0") {
+	        			jsonArray[i].isAbnormalText ="否"
+	        		}else{
+	        			jsonArray[i].isAbnormalText ="是"
+	        		}
+	        	}
+        		
+	        	
+        		$('#detailTpl').tmpl(jsonArray).appendTo('#detailTbody');
+        	}
+        	
+        	$("#form-asset-add").validate({
+                focusCleanup: true
+            });
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-asset-add').serialize());
+            	var detailInfo = getArrayJson('detailTbody');
+            	if(detailInfo.length < 1) {
+            		$.modal.alertWarning('必须是填写一项明细！');
+            		return;
+            	} 
+            	var isAdd = $('#isAdd').val();
+            	var url = prefix + "/add"; 
+            	if(isAdd != 1) {
+            		url = prefix + "/edit"; 
+            	}
+            	$('#detailInfo').val(JSON.stringify(detailInfo));
+                $.operate.saveTab(url, $('#form-asset-add').serialize());
             }
         }
+        
+        function handleInfo( json, isAdd) {
+        	if(isAdd) {
+        		$('#detailTpl').tmpl(json).appendTo('#detailTbody');
+        		return;
+        	}
+        	var $id = getTdById("detailTbody", json.id);
+        	if($id) {
+        		$id.closest('tr').find('td[data-name]').each(function() {
+        			var $this = $(this);
+        			$this.text(json[$this.data('name')]);
+        		});
+        	}
+        }
+        function getArrayJson(tableName) {
+        	var data = [];
+        	$('#' + tableName).find('tr').each(function() {
+    			var $tdThis = $(this);
+    			var json = {};
+    			$tdThis.find('[data-name]').each(function() {
+    				var $this = $(this);
+	    			json[$this.data('name')] = $this.text();
+    			});
+    			
+    			data.push(json);
+    		});
+    		return data;
+        }
+        function addDetail() {
+        	var detailInfo = getArrayJson('detailTbody');
+        	if(detailInfo.length >= 4) {
+        		$.modal.alertWarning('最多只能填写4条记录！');
+        		return;
+        	}
+        	$.modal.open('添加', prefix + '/addDetail');
+        }
+        
+        function modifyDetail(_this) {
+        	var id = $(_this).closest('tr').find('[data-name="id"]').text();
+        	$.modal.open('修改',prefix + '/addDetail?id=' + id);
+        }
+        function openDetail(_this) {
+        	var id = $(_this).closest('tr').find('[data-name="id"]').text();
+        	$.modal.openOptions({title:'查看', url: prefix + '/addDetail?id=' + id + '&isView=1', width : '800', btn : ['<i class="fa fa-close"></i> 关闭'], callBack: function(index, layero) {
+        		layer.close(index);
+        	}});
+        }
+        function getJson(type, id) {
+            var json = {};
+            var $id = getTdById(type, id);
+        	if($id) {
+        		$id.closest('tr').find('td[data-name]').each(function() {
+        			var $this = $(this);
+        			json[$this.data('name')] = $this.text();
+        		});
+        	}
+        	return json;
+        }
+        function getTdById(tableName, id) {
+        	$('#' + tableName).find('[data-name="id"]').each(function() {
+        		var $this = $(this);
+        		if($this.text() == id) {
+        			$id = $this;
+        			return false;
+        		}
+        	});
+        	return $id;
+        }
+        
     </script>
+     <script  id="detailTpl" type="text/x-jquery-tmpl">
+ 		<tr>
+ 		  <td data-name="id" style="display:none;">${id}</td>
+	      <td data-name="assetsId" style="display:none;">${assetsId}</td>
+	      <td data-name="wechatName" >${wechatName}</td>
+	      <td data-name="mealDetail">${mealDetail}</td>
+	      <td data-name="isAbnormalText">${isAbnormalText}</td>
+	      <td data-name="isAbnormal" style="display:none;">${isAbnormal}</td>
+	      <td data-name="checkDate">${checkDate}</td>
+	      <td data-name="ringsCount">${ringsCount}</td>
+	      <td data-name="firendCount">${firendCount}</td>
+	      <td data-name="jitterFans" style="display:none;">${jitterFans}</td>
+	      <td><a href="javascript:;" onclick="modifyDetail(this);" class="op">修改</a> <a href="javascript:;" onclick="modifyDetail(this);">查看</a></td>
+	    </tr>
+	</script>
 </body>
 </html>
