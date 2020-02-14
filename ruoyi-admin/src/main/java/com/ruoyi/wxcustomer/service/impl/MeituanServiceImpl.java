@@ -9,17 +9,24 @@
  */
 package com.ruoyi.wxcustomer.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.Vector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -30,6 +37,7 @@ import com.ruoyi.wxcustomer.domain.common.SearchCondition;
 import com.ruoyi.wxcustomer.service.IKhShopInFoService;
 import com.ruoyi.wxcustomer.service.IMeituanService;
 import com.ruoyi.wxcustomer.service.IProxyInfoService;
+import com.ruoyi.wxcustomer.util.ConnUtil;
 
 /**
  * @ClassName: MeituanServiceImpl
@@ -105,7 +113,7 @@ public class MeituanServiceImpl implements IMeituanService {
 	}
 	// 美团
 	public void selectMeiTuan(SearchCondition condition) throws Exception {
-		/*int limit = condition.getLimit();
+		int limit = condition.getLimit();
 		int page = condition.getPage();
 		boolean isGetAll = false;
 		if (limit > 100) {
@@ -174,12 +182,12 @@ public class MeituanServiceImpl implements IMeituanService {
 					log.info(e.getMessage());
 				}
 			}
-		}*/
+		}
 	}
 
 	public KhShopInFo selectMtInFo(String poi, SearchCondition condition, Map<String, String> map) {
 		KhShopInFo info = new KhShopInFo();
-		/*try {
+		try {
 			String detailUrl = this.inFoUrl + poi;
 			Connection conn = Jsoup.connect(detailUrl).ignoreHttpErrors(true);
 			if (StringUtils.isNotEmpty(map.get("host")) && StringUtils.isNotEmpty(map.get("port"))) {
@@ -219,13 +227,13 @@ public class MeituanServiceImpl implements IMeituanService {
 			log.info("name:" + name + " address:" + address + " phone:" + phone);
 		} catch (IOException e) {
 			info=selectMtPcInFo(poi, condition, map);
-		}*/
+		}
 		return info;
 	}
 
 	public KhShopInFo selectMtPcInFo(String poi, SearchCondition condition, Map<String, String> map){
 		KhShopInFo info = new KhShopInFo();
-		/*try {
+		try {
 			String detailUrl = this.pcInFoUrl + poi;
 			Connection conn = Jsoup.connect(detailUrl).ignoreHttpErrors(true);
 			if (StringUtils.isNotEmpty(map.get("host")) && StringUtils.isNotEmpty(map.get("port"))
@@ -261,7 +269,7 @@ public class MeituanServiceImpl implements IMeituanService {
 			log.info("name:" + name + " address:" + address + " phone:" + phone);
 		} catch (Exception e) {
 			return null;
-		}*/
+		}
 		return info;
 	}
 

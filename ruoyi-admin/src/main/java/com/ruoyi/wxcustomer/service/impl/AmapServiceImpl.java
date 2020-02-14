@@ -9,23 +9,35 @@
  */
 package com.ruoyi.wxcustomer.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Vector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.wxcustomer.domain.KhShopInFo;
 import com.ruoyi.wxcustomer.domain.common.SearchCondition;
 import com.ruoyi.wxcustomer.service.IAmapService;
 import com.ruoyi.wxcustomer.service.IKhShopInFoService;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * @ClassName: AmapServiceImpl
@@ -95,7 +107,7 @@ public class AmapServiceImpl implements IAmapService {
 		
 	}
 	public void selectAmap(SearchCondition condition) {
-		/*try {
+		try {
 
 			int limit = condition.getLimit();
 			int page = condition.getPage();
@@ -210,12 +222,12 @@ public class AmapServiceImpl implements IAmapService {
 			 
 		} catch (Exception e) {
 
-		}*/
+		}
 	}
 
 	public KhShopInFo selectAmapInFo(String poi, SearchCondition condition, Map<String, String> map) {
 		KhShopInFo info = new KhShopInFo();
-		/*try {
+		try {
 			String detailUrl = this.detailUrl + poi;
 			Connection conn = Jsoup.connect(detailUrl).ignoreHttpErrors(true);
 			if (StringUtils.isNotEmpty(map.get("host")) && StringUtils.isNotEmpty(map.get("port"))
@@ -249,7 +261,7 @@ public class AmapServiceImpl implements IAmapService {
 			log.info("name:" + name + " address:" + address + " phone:" + phone);
 		} catch (IOException e) {
 			return null;
-		}*/
+		}
 		return info;
 	}
 
