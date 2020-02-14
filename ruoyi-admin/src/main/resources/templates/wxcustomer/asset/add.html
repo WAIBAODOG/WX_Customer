@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增资产')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-asset-add">
+             
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">使用人：</label>
+                <div class="col-sm-8">
+                    <input name="userId" class="form-control" type="hidden" required>
+                    <input name="userName" class="form-control" type="text" required readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">微信数量：</label>
+                <div class="col-sm-8">
+                    <input name="countWechat" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">负责的群：</label>
+                <div class="col-sm-8">
+                    <input name="respGroup" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">群总人数：</label>
+                <div class="col-sm-8">
+                    <input name="groupPeople" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">群发素材数量：</label>
+                <div class="col-sm-8">
+                    <input name="countMaterial" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+            <label class="col-sm-3 control-label"></label>
+                  <div class="col-sm-8">    
+		             <table class="table table-bordered table-striped">
+			              <thead>
+			              	<tr>
+			              		<th colspan="8" style="text-align: center;">
+								每周一次统计/日期/数量</th>
+			              	</tr>
+						    <tr> 
+						      <th>微信名</th>
+						      <th>套餐详情</th>
+						      <th>是否异常</th>
+						      <th>检查发圈日期</th>
+						      <th>发圈数量</th>
+						      <th>微信好友数量</th>
+						      <th>抖音粉丝</th>
+						    </tr>
+						  </thead>
+						  <tbody id="detailTbody" >
+						  	 
+						  </tbody>
+		             </table>
+			    </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "wxcustomer/asset"
+        $("#form-asset-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-asset-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

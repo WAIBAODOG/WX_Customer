@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.wxcustomer.mapper.KhAssetsMapper">
+    
+    <resultMap type="KhAssets" id="KhAssetsResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="countWechat"    column="count_wechat"    />
+        <result property="respGroup"    column="resp_group"    />
+        <result property="groupPeople"    column="group_people"    />
+        <result property="countMaterial"    column="count_material"    />
+    </resultMap>
+
+    <sql id="selectKhAssetsVo">
+        select id, user_id, count_wechat, resp_group, group_people, count_material from kh_assets
+    </sql>
+
+    <select id="selectKhAssetsList" parameterType="KhAssets" resultMap="KhAssetsResult">
+        <include refid="selectKhAssetsVo"/>
+        <where>  
+            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name = #{userName}</if>
+            <if test="countWechat != null "> and count_wechat = #{countWechat}</if>
+            <if test="respGroup != null  and respGroup != ''"> and resp_group like concat('%', #{respGroup}, '%')</if>
+            <if test="groupPeople != null "> and group_people = #{groupPeople}</if>
+            <if test="countMaterial != null "> and count_material = #{countMaterial}</if>
+        </where>
+    </select>
+    
+    <select id="selectKhAssetsById" parameterType="String" resultMap="KhAssetsResult">
+        <include refid="selectKhAssetsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKhAssets" parameterType="KhAssets">
+        insert into kh_assets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="countWechat != null ">count_wechat,</if>
+            <if test="respGroup != null  and respGroup != ''">resp_group,</if>
+            <if test="groupPeople != null ">group_people,</if>
+            <if test="countMaterial != null ">count_material,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="countWechat != null ">#{countWechat},</if>
+            <if test="respGroup != null  and respGroup != ''">#{respGroup},</if>
+            <if test="groupPeople != null ">#{groupPeople},</if>
+            <if test="countMaterial != null ">#{countMaterial},</if>
+         </trim>
+    </insert>
+
+    <update id="updateKhAssets" parameterType="KhAssets">
+        update kh_assets
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="countWechat != null ">count_wechat = #{countWechat},</if>
+            <if test="respGroup != null  and respGroup != ''">resp_group = #{respGroup},</if>
+            <if test="groupPeople != null ">group_people = #{groupPeople},</if>
+            <if test="countMaterial != null ">count_material = #{countMaterial},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteKhAssetsById" parameterType="String">
+        delete from kh_assets where id = #{id}
+    </delete>
+
+    <delete id="deleteKhAssetsByIds" parameterType="String">
+        delete from kh_assets where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

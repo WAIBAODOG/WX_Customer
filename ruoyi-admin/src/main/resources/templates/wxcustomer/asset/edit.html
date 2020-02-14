@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改资产')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-asset-edit" th:object="${khAssets}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">使用人：</label>
+                <div class="col-sm-8">
+                    <input name="userId"  type="hidden" th:field="*{userId}" class="form-control" type="text" required>
+                    <input name="userId" th:field="*{userName}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">微信数量：</label>
+                <div class="col-sm-8">
+                    <input name="countWechat" th:field="*{countWechat}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">负责的群：</label>
+                <div class="col-sm-8">
+                    <input name="respGroup" th:field="*{respGroup}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">群总人数：</label>
+                <div class="col-sm-8">
+                    <input name="groupPeople" th:field="*{groupPeople}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">群发素材数量：</label>
+                <div class="col-sm-8">
+                    <input name="countMaterial" th:field="*{countMaterial}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "wxcustomer/asset";
+        $("#form-asset-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-asset-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>
