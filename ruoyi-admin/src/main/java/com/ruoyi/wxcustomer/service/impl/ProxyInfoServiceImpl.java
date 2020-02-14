@@ -1,19 +1,13 @@
 package com.ruoyi.wxcustomer.service.impl;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.ruoyi.wxcustomer.service.IProxyInfoService;
-import com.ruoyi.wxcustomer.util.ConnUtil;
 
 @Service
 public class ProxyInfoServiceImpl implements IProxyInfoService {
@@ -56,7 +50,7 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 	 * https://www.freeip.top/?page=1
 	 */
 	public  Map<String, String> freeIp() {
-		try {
+		/*try {
 			Connection conn = Jsoup.connect(freeUrl);
 			Document document=conn.get();
 			Elements trElem=document.getElementsByAttributeValue("class", "layui-table").select("tbody").select("tr");
@@ -84,13 +78,14 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 			return null;
 		} catch (IOException e) {
 			return null;
-		}
+		}*/
+		return null;
 	}
 	/**
 	 * https://www.xicidaili.com
 	 */
 	public  Map<String, String> xicidaili() {
-		try {
+		/*try {
 			Connection conn = Jsoup.connect(xiciUrl);
 			Document document=conn.get();
 			Elements trElem=document.getElementsByAttributeValue("id", "ip_list").select("tbody").select("tr");
@@ -118,13 +113,14 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 			return null;
 		} catch (IOException e) {
 			return null;
-		}
+		}*/
+		return null;
 	}
 	/**
 	 * https://www.kuaidaili.com/free/
 	 */
 	public  Map<String, String> kuaidaili() {
-		try {
+		/*try {
 			Connection conn = Jsoup.connect(kuaiUrl);
 			Document document=conn.get();
 			Elements trElem=document.getElementsByAttributeValue("class","table table-bordered table-striped").select("tbody").select("tr");
@@ -152,13 +148,14 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 			return null;
 		} catch (IOException e) {
 			return null;
-		}
+		}*/
+		return null;
 	}
 	/**
 	 * http://www.ip3366.net/
 	 */
 	public   Map<String, String> yun() {
-		try {
+		/*try {
 			Connection conn = Jsoup.connect(yunUrl);
 			Document document=conn.get();
 			Elements trElem=document.getElementsByAttributeValue("class","table table-bordered table-striped").select("tbody").select("tr");
@@ -186,14 +183,15 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 			return null;
 		} catch (IOException e) {
 			return null;
-		}
+		}*/
+		return null;
 	}
 	
 	/**
 	 * http://www.89ip.cn/
 	 */
 	public   Map<String, String> bjip() {
-		try {
+		/*try {
 			Connection conn = Jsoup.connect(bjipUrl);
 			Document document=conn.get();
 			Elements trElem=document.getElementsByAttributeValue("class","layui-table").select("tbody").select("tr");
@@ -220,13 +218,14 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 			return null;
 		} catch (IOException e) {
 			return null;
-		}
+		}*/
+		return null;
 	}
 	/**
 	 * http://www.iphai.com/free/ng
 	 */
 	public static  Map<String, String> iphai() {
-		try {
+		/*try {
 			Connection conn = Jsoup.connect("http://www.iphai.com/free/ng");
 			Document document=conn.get();
 			Elements trElem=document.getElementsByAttributeValue("class","table table-bordered table-striped table-hover").select("tbody").select("tr");
@@ -254,6 +253,7 @@ public class ProxyInfoServiceImpl implements IProxyInfoService {
 			return null;
 		} catch (IOException e) {
 			return null;
-		}
+		}*/
+		return null;
 	}
 }
