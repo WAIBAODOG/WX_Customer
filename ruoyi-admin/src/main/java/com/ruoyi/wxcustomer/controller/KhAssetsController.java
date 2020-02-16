@@ -82,6 +82,7 @@ public class KhAssetsController extends BaseController{
 		asset.setUserName(sysUser.getUserName());
 		model.addAttribute("vo", asset);
 		model.addAttribute("flag", "1");
+		model.addAttribute("isAdd", "1");
         return prefix + "/add";
     }
     /**
