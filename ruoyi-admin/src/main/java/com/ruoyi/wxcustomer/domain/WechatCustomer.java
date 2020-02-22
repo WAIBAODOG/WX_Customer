@@ -140,6 +140,9 @@ public class WechatCustomer extends BaseEntity{
      	* 权限用户ids
      */
     private String dataRightUserIds;
+    
+    private String beginCreationTime;
+    private String endCreationTime;
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
@@ -436,6 +439,22 @@ public class WechatCustomer extends BaseEntity{
 
 	public void setDataRightUserIds(String dataRightUserIds) {
 		this.dataRightUserIds = dataRightUserIds;
+	}
+
+	public String getBeginCreationTime() {
+		return beginCreationTime;
+	}
+
+	public void setBeginCreationTime(String beginCreationTime) {
+		this.beginCreationTime = beginCreationTime;
+	}
+
+	public String getEndCreationTime() {
+		return endCreationTime;
+	}
+
+	public void setEndCreationTime(String endCreationTime) {
+		this.endCreationTime = endCreationTime;
 	}
 
 	@Override

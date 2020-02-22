@@ -77,6 +77,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			     and  date_format(customerBirthday, '%y%m%d') &lt;=  date_format(#{customerEndbirthday}, '%y%m%d') 
 			</if>
 			
+			<if test="beginCreationTime!=null and beginCreationTime!=''">
+			   and  date_format(creation_time, '%y%m%d') &gt;= date_format(#{beginCreationTime},'%y%m%d')  
+			</if> 
+			<if test="endCreationTime !=null and endCreationTime!=''">
+			     and  date_format(creation_time, '%y%m%d') &lt;=  date_format(#{endCreationTime}, '%y%m%d') 
+			</if>
+			
 			<if test="customerLevel != null  and customerLevel != ''"> and customer_level = #{customerLevel}</if>
             <if test="coopProduct != null  and coopProduct != ''"> and coop_product like concat('%', #{coopProduct}, '%')</if>
             
@@ -87,6 +94,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    <choose>
 	   			<when test='status != null and status == "1"'>
 	   				and  weixin_number is not null
+	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='2' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[=]]> 0
+	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[=]]> 0
 	   			</when>	
 	   			<when test='status != null and status == "2"'>
 	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='2' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0
