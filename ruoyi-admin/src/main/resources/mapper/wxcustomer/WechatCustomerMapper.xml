@@ -99,6 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   			</when>	
 	   			<when test='status != null and status == "2"'>
 	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='2' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0
+	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[=]]> 0
 	   			</when>	
 	   			<when test='status != null and status == "3"'>
 	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0
