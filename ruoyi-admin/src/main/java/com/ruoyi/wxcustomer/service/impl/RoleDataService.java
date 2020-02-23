@@ -37,6 +37,7 @@ public class RoleDataService {
 			if(LAST_STR.equals(lastStr)) {
 				returnUserIds.add(userId);
 			} else {
+				returnUserIds.add(userId);
 				Set<Long> roleUserIds = sysRoleService.selectLikeRoleKey(roleKey);
 				if(roleUserIds != null && roleUserIds.size() != 0) {
 					returnUserIds.addAll(roleUserIds);

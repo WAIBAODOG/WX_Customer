@@ -353,6 +353,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="allData != null  and allData != ''"> </if>
             <if test="isFYRY != null  and isFYRY != ''">and d.creator_id in (${isFYRY}) </if>
             <if test="isSHRY != null  and isSHRY != ''">and w.sale_id in (${isSHRY}) </if>
+            <if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+            	and ( d.creator_id in (${dataRightUserIds}) or w.sale_id in (${dataRightUserIds}))
+            </if>
              order by d.deal_time desc
         </where>
     </select>

@@ -30,10 +30,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.wxcustomer.domain.KhWeeklySummary;
 import com.ruoyi.wxcustomer.service.IKhWeeklySummaryService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * 发样每周工作Controller
@@ -53,8 +53,8 @@ public class KhWeeklySummaryController extends BaseController{
     @Autowired
     private IKhWeeklySummaryService khWeeklySummaryService;
     
-	@Autowired
-	private PermissionService permissionService;
+    @Autowired
+   	private RoleDataService roleDataService;
 
     @RequiresPermissions("wxcustomer:weeklySummary:view")
     @GetMapping()
@@ -71,13 +71,7 @@ public class KhWeeklySummaryController extends BaseController{
     public TableDataInfo list(KhWeeklySummary khWeeklySummary){
         startPage();
         
-        boolean isAdmin = permissionService.isRole("admin");
-		if(!isAdmin) {
-			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZY");
-			if(StringUtils.isBlank(isFyUserRoleStr)) {
-				khWeeklySummary.setCreatorId(ShiroUtils.getUserId() + "");
-			}
-		}
+        khWeeklySummary.setDataRightUserIds(roleDataService.getRoleData());
         
         List<KhWeeklySummary> list = khWeeklySummaryService.selectKhWeeklySummaryList(khWeeklySummary);
         return getDataTable(list);
@@ -90,6 +84,7 @@ public class KhWeeklySummaryController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(KhWeeklySummary khWeeklySummary){
+    	khWeeklySummary.setDataRightUserIds(roleDataService.getRoleData());
         List<KhWeeklySummary> list = khWeeklySummaryService.selectKhWeeklySummaryList(khWeeklySummary);
         ExcelUtil<KhWeeklySummary> util = new ExcelUtil<KhWeeklySummary>(KhWeeklySummary.class);
         return util.exportExcel(list, "weeklySummary");

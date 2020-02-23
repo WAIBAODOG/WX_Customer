@@ -228,6 +228,7 @@ public class DeliverGoodsVO {
     private String allData;  
     private String isFYRY;  
     private String isSHRY;  
+    private String dataRightUserIds;
 
 	public String getId() {
 		return id;
@@ -747,6 +748,14 @@ public class DeliverGoodsVO {
 
 	public void setIsSHRY(String isSHRY) {
 		this.isSHRY = isSHRY;
+	}
+
+	public String getDataRightUserIds() {
+		return dataRightUserIds;
+	}
+
+	public void setDataRightUserIds(String dataRightUserIds) {
+		this.dataRightUserIds = dataRightUserIds;
 	}
 }
 

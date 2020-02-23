@@ -33,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="conclusionTime != null "> and conclusion_time = #{conclusionTime}</if>
             <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
             <if test="creationTime != null "> and creation_time = #{creationTime}</if>
+            <if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+            	and creator_id in (${dataRightUserIds})
+            </if>
         </where>
     </select>
     

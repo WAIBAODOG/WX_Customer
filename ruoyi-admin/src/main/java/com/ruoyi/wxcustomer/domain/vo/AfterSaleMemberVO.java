@@ -241,6 +241,8 @@ public class AfterSaleMemberVO extends BaseEntity{
     private String salespersonAward;
     /**C端活动执行**/
     private String cEndActivityExe;
+    
+    private String dataRightUserIds;
   
     public void setId(String id) {
         this.id = id;
@@ -811,6 +813,11 @@ public class AfterSaleMemberVO extends BaseEntity{
 		this.cEndActivityExe = cEndActivityExe;
 	}
 
-	 
-	 
+	public String getDataRightUserIds() {
+		return dataRightUserIds;
+	}
+
+	public void setDataRightUserIds(String dataRightUserIds) {
+		this.dataRightUserIds = dataRightUserIds;
+	}
 }

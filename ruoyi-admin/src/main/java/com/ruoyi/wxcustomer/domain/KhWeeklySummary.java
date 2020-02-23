@@ -597,6 +597,8 @@ public class KhWeeklySummary extends BaseEntity{
     /** 周次 */
     @Excel(name = "周次")
     private String weekly;
+    
+    private String dataRightUserIds;
 
     public void setId(String id) {
         this.id = id;
@@ -1621,7 +1623,15 @@ public class KhWeeklySummary extends BaseEntity{
         return weekly;
     }
 
-    @Override
+    public String getDataRightUserIds() {
+		return dataRightUserIds;
+	}
+
+	public void setDataRightUserIds(String dataRightUserIds) {
+		this.dataRightUserIds = dataRightUserIds;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())

@@ -25,11 +25,9 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.wxcustomer.domain.vo.AfterSaleMemberVO;
-import com.ruoyi.wxcustomer.domain.vo.DeliverGoodsVO;
 import com.ruoyi.wxcustomer.service.IKhAfterSaleMemberService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * @ClassName: CustomerDataStatisticsController
@@ -45,8 +43,8 @@ public class CustomerDataStatisticsController extends BaseController {
 
 	@Autowired
 	private IKhAfterSaleMemberService khAfterSaleMemberService;
-	@Autowired
-	private PermissionService permissionService;
+    @Autowired
+   	private RoleDataService roleDataService;
 
 	// 用户资料
 	@RequiresPermissions("customerDataStatistics:customerData:view")
@@ -63,19 +61,8 @@ public class CustomerDataStatisticsController extends BaseController {
 	@ResponseBody
 	public TableDataInfo list(AfterSaleMemberVO vo) {
 		startPage();
-		boolean isAdmin = permissionService.isRole("admin");
-		if (!isAdmin) {
-			String selfData = permissionService.hasAnyRoles("SHZZY");
-			if (StringUtils.isBlank(selfData)) {
-				vo.setSelfData(ShiroUtils.getUserId().toString());
-			}
-
-			String allData = permissionService.hasAnyRoles("SHZZZ,GSLD");
-			if (StringUtils.isBlank(allData)) {
-				vo.setAllData("1");
-			}
-		}
 		vo.setIsDelete("0");
+		vo.setDataRightUserIds(roleDataService.getRoleData());
 		if (StringUtils.isEmpty(vo.getDealTimeStart()) && StringUtils.isEmpty(vo.getDealTimeEnd())) {
 			vo.setDealTime(new Date());
 		}
@@ -89,19 +76,8 @@ public class CustomerDataStatisticsController extends BaseController {
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(AfterSaleMemberVO vo) {
-		boolean isAdmin = permissionService.isRole("admin");
-		if (!isAdmin) {
-			String selfData = permissionService.hasAnyRoles("SHZZY");
-			if (StringUtils.isBlank(selfData)) {
-				vo.setSelfData(ShiroUtils.getUserId().toString());
-			}
-
-			String allData = permissionService.hasAnyRoles("SHZZZ,GSLD");
-			if (StringUtils.isBlank(allData)) {
-				vo.setAllData("1");
-			}
-		}
 		vo.setIsDelete("0");
+		vo.setDataRightUserIds(roleDataService.getRoleData());
 		if (StringUtils.isEmpty(vo.getDealTimeStart()) && StringUtils.isEmpty(vo.getDealTimeEnd())) {
 			vo.setDealTime(new Date());
 		}

@@ -137,6 +137,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectKhWeeklyShSummaryList" parameterType="KhWeeklyShSummary" resultMap="KhWeeklyShSummaryResult">
         <include refid="selectKhWeeklyShSummaryVo"/>
         <where>  
+        	<if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+            	and creator_id in (${dataRightUserIds})
+            </if>
+        
             <if test="clinchDeal != null  and clinchDeal != ''"> and clinch_deal = #{clinchDeal}</if>
             <if test="hairSample != null  and hairSample != ''"> and hair_sample = #{hairSample}</if>
             <if test="training != null  and training != ''"> and training = #{training}</if>

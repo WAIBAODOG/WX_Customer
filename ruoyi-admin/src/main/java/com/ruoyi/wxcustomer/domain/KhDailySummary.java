@@ -63,6 +63,8 @@ public class KhDailySummary extends BaseEntity{
 
     /** 备用字段5 */
     private String alternateField5;
+    
+    private String dataRightUserIds;
 
     public void setId(String id) {
         this.id = id;
@@ -170,7 +172,15 @@ public class KhDailySummary extends BaseEntity{
         return alternateField5;
     }
 
-    @Override
+    public String getDataRightUserIds() {
+		return dataRightUserIds;
+	}
+
+	public void setDataRightUserIds(String dataRightUserIds) {
+		this.dataRightUserIds = dataRightUserIds;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())

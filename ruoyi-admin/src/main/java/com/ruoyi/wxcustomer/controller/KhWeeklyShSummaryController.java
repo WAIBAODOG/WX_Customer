@@ -30,10 +30,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.framework.web.service.PermissionService;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.wxcustomer.domain.KhWeeklyShSummary;
 import com.ruoyi.wxcustomer.service.IKhWeeklyShSummaryService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * 售后每周工作Controller
@@ -53,8 +53,8 @@ public class KhWeeklyShSummaryController extends BaseController{
     @Autowired
     private IKhWeeklyShSummaryService khWeeklyShSummaryService;
     
-	@Autowired
-	private PermissionService permissionService;
+    @Autowired
+   	private RoleDataService roleDataService;
 
     @RequiresPermissions("wxcustomer:weeklyShSummary:view")
     @GetMapping()
@@ -70,15 +70,7 @@ public class KhWeeklyShSummaryController extends BaseController{
     @ResponseBody
     public TableDataInfo list(KhWeeklyShSummary khWeeklyShSummary){
         startPage();
-        
-        boolean isAdmin = permissionService.isRole("admin");
-		if(!isAdmin) {
-			String isFyUserRoleStr = permissionService.hasAnyRoles("FYCJZZY");
-			if(StringUtils.isBlank(isFyUserRoleStr)) {
-				khWeeklyShSummary.setCreatorId(ShiroUtils.getUserId() + "");
-			}
-		}
-        
+        khWeeklyShSummary.setDataRightUserIds(roleDataService.getRoleData());
         List<KhWeeklyShSummary> list = khWeeklyShSummaryService.selectKhWeeklyShSummaryList(khWeeklyShSummary);
         return getDataTable(list);
     }
@@ -90,6 +82,7 @@ public class KhWeeklyShSummaryController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(KhWeeklyShSummary khWeeklyShSummary){
+    	khWeeklyShSummary.setDataRightUserIds(roleDataService.getRoleData());
         List<KhWeeklyShSummary> list = khWeeklyShSummaryService.selectKhWeeklyShSummaryList(khWeeklyShSummary);
         ExcelUtil<KhWeeklyShSummary> util = new ExcelUtil<KhWeeklyShSummary>(KhWeeklyShSummary.class);
         return util.exportExcel(list, "weeklyShSummary");

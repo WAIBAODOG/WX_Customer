@@ -160,6 +160,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectKhWeeklySummaryList" parameterType="KhWeeklySummary" resultMap="KhWeeklySummaryResult">
         <include refid="selectKhWeeklySummaryVo"/>
         <where>  
+        	<if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+            	and creator_id in (${dataRightUserIds})
+            </if>
+        
             <if test="blindAdd != null  and blindAdd != ''"> and blind_add = #{blindAdd}</if>
             <if test="addWechat != null  and addWechat != ''"> and add_WeChat = #{addWechat}</if>
             <if test="deliverGoods != null  and deliverGoods != ''"> and deliver_goods = #{deliverGoods}</if>
