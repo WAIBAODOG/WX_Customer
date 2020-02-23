@@ -145,6 +145,8 @@
 			var requestType= $("#requestType").val()
 			 if(requestType=="afterSale"){
 				selectAfterSale();
+			 }else if(requestType=="businessMan"){
+				selectBusinessMan();
 			 }
 			
 	       }
@@ -162,6 +164,19 @@
 		        var dealType=$("#dealType").val();
 		        var customerId=$("#customerId").val();
 		        $.operate.save("/wxcustomer/deal/distributionSale", {orderNumber:orderNumber,saleId:saleId,saleName:saleName,dealType:dealType,customerid:customerId});
+		}
+		 //选择业务对接人
+		function selectBusinessMan(){
+			 var ck=$("#bootstrap-table").find('tbody').find(".bs-checkbox ").find("input[type='checkbox']:checked");
+		        if(ck.length<1||ck.length>1){
+		        	$.modal.alertWarning('必须是勾选一项！')
+		        	return;
+		        }
+		        var user=$(ck[0]).parent().parent().find("td");
+		        var businessManId=$(user[1]).html();
+		        var businessManName=$(user[2]).html();
+		        var customerId=$("#customerId").val();
+		        $.operate.save("/wxcustomer/WechatCustomer/distributionBusinessMan", {businessManId:businessManId,businessManName:businessManName,customerid:customerId});
 		}
 		 
 	</script>

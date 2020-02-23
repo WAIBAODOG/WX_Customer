@@ -39,10 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="expectedinventory"    column="expectedInventory"    />
         <result property="customerLevel"    column="customer_level"    />
         <result property="coopProduct"    column="coop_product"    />
+        <result property="phoneCode"    column="phone_code"    />
+        <result property="storeCompetition"    column="store_competition"    />
     </resultMap>
 
     <sql id="selectWechatCustomerVo">
-        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales,customer_num ,sale_id,sale_name ,is_delete, customerBirthday, nextTime, expectedInventory, customer_level, coop_product from kh_wechat_customer
+        select customer_id, phone_number, weixin_number, customer_name, gender, kh_character, creator_id, creator, province_id, province, city_id, city, area_id, area, customer_address, shop_name, appointment_time, customer_type, shop_assistant_number, store_scale, creation_time, demand_product, remark, is_delivery, is_sales,customer_num ,sale_id,sale_name ,is_delete, customerBirthday, nextTime, expectedInventory, customer_level, coop_product ,phone_code, store_competition from kh_wechat_customer
     </sql>
 
     <select id="selectWechatCustomerList" parameterType="WechatCustomer" resultMap="WechatCustomerResult">
@@ -86,11 +88,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 			<if test="customerLevel != null  and customerLevel != ''"> and customer_level = #{customerLevel}</if>
             <if test="coopProduct != null  and coopProduct != ''"> and coop_product like concat('%', #{coopProduct}, '%')</if>
-            
-            <if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+			<if test="phoneCode != null  and phoneCode != ''"> and phone_code = #{phoneCode}</if>
+            <if test="storeCompetition != null  and storeCompetition != ''"> and store_competition like concat('%', #{storeCompetition}, '%')</if>
+			  <if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
             	and ( creator_id in (${dataRightUserIds}) or sale_id in (${dataRightUserIds}))
             </if>
-            
 		    <choose>
 	   			<when test='status != null and status == "1"'>
 	   				and  weixin_number is not null
@@ -150,6 +152,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="expectedinventory != null  and expectedinventory != ''">expectedInventory,</if>
             <if test="customerLevel != null  and customerLevel != ''">customer_level,</if>
             <if test="coopProduct != null  and coopProduct != ''">coop_product,</if>
+            <if test="phoneCode != null  and phoneCode != ''">phone_code,</if>
+            <if test="storeCompetition != null  and storeCompetition != ''">store_competition,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="customerId != null  and customerId != ''">#{customerId},</if>
@@ -186,6 +190,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="expectedinventory != null  and expectedinventory != ''">#{expectedinventory},</if>
              <if test="customerLevel != null  and customerLevel != ''">#{customerLevel},</if>
             <if test="coopProduct != null  and coopProduct != ''">#{coopProduct},</if>
+            <if test="phoneCode != null  and phoneCode != ''">#{phoneCode},</if>
+            <if test="storeCompetition != null  and storeCompetition != ''">#{storeCompetition},</if>
          </trim>
     </insert>
 
@@ -226,6 +232,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="expectedinventory != null  and expectedinventory != ''">expectedInventory = #{expectedinventory},</if>
              <if test="customerLevel != null  and customerLevel != ''">customer_level = #{customerLevel},</if>
             <if test="coopProduct != null  and coopProduct != ''">coop_product = #{coopProduct},</if>
+            <if test="phoneCode != null  and phoneCode != ''">phone_code = #{phoneCode},</if>
+            <if test="storeCompetition != null  and storeCompetition != ''">store_competition = #{storeCompetition},</if>
         </trim>
         where customer_id = #{customerId}
     </update>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('销售信息')" />
+	<th:block th:include="include :: datetimepicker-css" />
+</head>
+<!-- 售后情况 -->
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-detail-add">
+			<input class="form-control" type="hidden" name="id" th:value="${id}" id="id">
+			<input class="form-control" type="hidden" name="assetsId" th:value="${assetsId}" id="assetsId">
+			<div class="form-group">    
+                <label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>微信名称：</label>
+                <div class="col-sm-8">
+                    <input name="wechatName" class="form-control" type="text" required>
+                </div>
+            </div>
+           <div class="form-group">    
+                <label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>套餐详情：</label>
+                <div class="col-sm-8">
+                    <input name="mealDetail" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+				<label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>是否异常：</label>
+				<div class="col-sm-8">
+					<select id="isAbnormal" name="isAbnormal" class="form-control m-b" th:with="type=${@dict.getType('is_delivery')}" required>
+                       <option value="">请选择</option>
+                       <option th:each="dict : ${type}"  th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                 	</select>
+				</div>
+			</div>
+			<div class="form-group">    
+                <label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>检查发圈日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="checkDate" class="form-control" type="text" th:value="${checkDate}" readonly="readonly" required>
+                    </div>
+                </div>
+            </div>
+           <div class="form-group">    
+                <label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>发圈数量：</label>
+                <div class="col-sm-8">
+                    <input name="ringsCount" class="form-control" min="0" type="number" required>
+                </div>
+            </div>
+           <div class="form-group">    
+                <label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>微信好友数量：</label>
+                <div class="col-sm-8">
+                    <input name="firendCount" class="form-control" min="0" type="number" required>
+                </div>
+            </div>
+           <div class="form-group">    
+                <label class="col-sm-3 control-label"><span style="color:#ff0000;">*</span>抖音粉丝：</label>
+                <div class="col-sm-8">
+                    <input name="jitterFans" class="form-control" type="text" required>
+                </div>
+            </div>
+           
+			
+			
+			 
+		</form>
+	</div>
+	
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: datetimepicker-js" />
+	<script type="text/javascript">
+		$(function() {
+			var id = $('#id').val();
+			if(id) {
+				$.common.setForm($('#form-detail-add'), parent.getJson('detailTbody', id));
+			}
+			
+		});
+		
+        $("#form-detail-add").validate({
+            focusCleanup: true
+        });
+        
+        $("input[name='checkDate']").datetimepicker({
+        	format: "yyyy-mm-dd",
+   		    autoclose: true
+        });
+        
+        
+        
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	        	var json = $.common.formToJSON('form-detail-add');
+	        	json.isAbnormalText = $('#isAbnormal').find('option:selected').text();
+	        	var isAdd = false;
+	        	if(!$('#id').val()) {
+		        	json.id = $.common.genUUID();
+		        	isAdd = true;
+	        	}
+	        	parent.handleInfo(json, isAdd);
+	        	$.modal.close();
+	        }
+	    }
+	</script>
+</body>
+</html>
