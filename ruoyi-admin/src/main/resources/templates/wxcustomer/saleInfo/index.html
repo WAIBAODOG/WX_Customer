@@ -46,6 +46,13 @@
 						      <th>下次跟进时间</th>
 						      <th>通话时长</th>
 						      <th>对接业务员</th>
+						      
+						      <th>创建时间</th>
+						      <th>微信号</th>
+						      <th>是否发样</th>
+						      <th>是否成交</th>
+						      <th>客户姓名</th>
+						      <th>店名</th>
 						    </tr>
 						  </thead>
 						  <tbody  id="saleInfoTable">
@@ -178,6 +185,10 @@
         		fyJsonArray[i].dealTime = $.common.dateFormat(fyJsonArray[i].dealTime, 'yyyy-MM-dd hh:mm:ss');
         		fyJsonArray[i].nextFollowTime = $.common.dateFormat(fyJsonArray[i].nextFollowTime, 'yyyy-mm-dd hh:mm:ss');
         		fyJsonArray[i].duration = fyJsonArray[i].durationHour + ":" + fyJsonArray[i].durationMinute + ":" + fyJsonArray[i].durationSecond;
+        	
+        		fyJsonArray[i].creationTime = $.common.dateFormat(fyJsonArray[i].creationTime, 'yyyy-MM-dd hh:mm:ss');
+        		fyJsonArray[i].isDelivery = fyJsonArray[i].isDelivery=='1'?'是'：'否'；
+        		fyJsonArray[i].isDeal = fyJsonArray[i].isDeal=='1'?'是'：'否';
         	}
        		$('#saleInfoTpl').tmpl(fyJsonArray).appendTo('#saleInfoTable');
         	
@@ -218,6 +229,13 @@
 	      <td data-name="durationSecond" style="display:none;">${durationSecond}</td>
 	      <td data-name="creatorId" style="display:none;">${creatorId}</td>
 	      <td data-name="creator">${creator}</td>
+ 
+	      <td data-name="creationTime">${creationTime}</td>
+	      <td data-name="weixinNumber">${weixinNumber}</td>
+	      <td data-name="isDelivery">${isDelivery}</td>
+	      <td data-name="isDeal">${isDeal}</td>
+	      <td data-name="customerName">${customerName}</td>
+	      <td data-name="shopName">${shopName}</td>
 	    </tr>
 	</script>
 	
