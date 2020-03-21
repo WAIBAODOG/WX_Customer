@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectWechatCustomerList" parameterType="WechatCustomer" resultMap="WechatCustomerResult">
         <include refid="selectWechatCustomerVo"/>
         <where>  
-            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number  like concat('%', #{phoneNumber}, '%')</if>
             <if test="weixinNumber != null  and weixinNumber != ''"> and weixin_number = #{weixinNumber}</if>
             <if test="customerName != null  and customerName != ''"> and customer_name like concat('%', #{customerName}, '%')</if>
             <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
