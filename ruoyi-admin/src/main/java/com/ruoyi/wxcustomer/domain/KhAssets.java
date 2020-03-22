@@ -42,6 +42,8 @@ public class KhAssets extends BaseEntity{
     private Integer countMaterial;
     
     private String detailInfo;
+    
+    private String dataRightUserIds;
 
     private List<KhAssetsDetail> detailList;
     public void setId(String id) {
@@ -109,6 +111,14 @@ public class KhAssets extends BaseEntity{
 
 	public void setDetailInfo(String detailInfo) {
 		this.detailInfo = detailInfo;
+	}
+
+	public String getDataRightUserIds() {
+		return dataRightUserIds;
+	}
+
+	public void setDataRightUserIds(String dataRightUserIds) {
+		this.dataRightUserIds = dataRightUserIds;
 	}
 
     

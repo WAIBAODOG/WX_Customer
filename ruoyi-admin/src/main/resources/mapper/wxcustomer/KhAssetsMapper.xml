@@ -28,6 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="respGroup != null  and respGroup != ''"> and resp_group like concat('%', #{respGroup}, '%')</if>
             <if test="groupPeople != null "> and group_people = #{groupPeople}</if>
             <if test="countMaterial != null "> and count_material = #{countMaterial}</if>
+              <if test="dataRightUserIds != null  and dataRightUserIds != ''"> 
+            	and ( user_id in (${dataRightUserIds}) )
+            </if>
         </where>
     </select>
     

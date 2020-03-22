@@ -16,16 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.wxcustomer.domain.KhAssets;
-import com.ruoyi.wxcustomer.domain.KhAssetsDetail;
-import com.ruoyi.wxcustomer.service.IKhAssetsService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.wxcustomer.domain.KhAssets;
+import com.ruoyi.wxcustomer.domain.KhAssetsDetail;
+import com.ruoyi.wxcustomer.service.IKhAssetsService;
+import com.ruoyi.wxcustomer.service.impl.RoleDataService;
 
 /**
  * 资产管理Controller
@@ -40,6 +41,8 @@ public class KhAssetsController extends BaseController{
 
     @Autowired
     private IKhAssetsService khAssetsService;
+    @Autowired
+    private RoleDataService roleDataService;
 
     @RequiresPermissions("wxcustomer:asset:view")
     @GetMapping()
@@ -55,6 +58,8 @@ public class KhAssetsController extends BaseController{
     @ResponseBody
     public TableDataInfo list(KhAssets khAssets){
         startPage();
+        SysUser sysUser = ShiroUtils.getSysUser();
+        khAssets.setUserId(sysUser.getUserId()+"");
         List<KhAssets> list = khAssetsService.selectKhAssetsList(khAssets);
         return getDataTable(list);
     }
@@ -66,6 +71,9 @@ public class KhAssetsController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(KhAssets khAssets){
+    	 SysUser sysUser = ShiroUtils.getSysUser();
+    	 khAssets.setDataRightUserIds(roleDataService.getRoleData());
+         khAssets.setUserId(sysUser.getUserId()+"");
         List<KhAssets> list = khAssetsService.selectKhAssetsList(khAssets);
         ExcelUtil<KhAssets> util = new ExcelUtil<KhAssets>(KhAssets.class);
         return util.exportExcel(list, "asset");
