@@ -85,11 +85,9 @@ public class DealController extends BaseController {
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(DeliverGoodsVO vo) {
-		startPage();
-		
 		vo.setIsSHRY(roleDataService.getRoleData());
-		
 		vo.setIsDelete("0");// 未删除
+		startPage();
 		if ("2".equals(vo.getDealType())) {// 售后成交
 			AfterSaleMemberVO saleVo = new AfterSaleMemberVO();
 			BeanUtils.copyProperties(vo, saleVo);

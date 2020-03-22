@@ -64,9 +64,9 @@ public class WechatCustomerController extends BaseController {
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(WechatCustomer wechatCustomer) {
-		startPage();
 		wechatCustomer.setIsDelete("0");//未删除的
 		wechatCustomer.setDataRightUserIds(roleDataService.getRoleData());
+		startPage();
 		List<WechatCustomer> list = wechatCustomerService.selectWechatCustomerList(wechatCustomer);
 		return getDataTable(list);
 	}

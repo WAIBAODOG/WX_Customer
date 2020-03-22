@@ -56,8 +56,8 @@ public class KhDailySummaryController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(KhDailySummary khDailySummary){
-        startPage();
         khDailySummary.setDataRightUserIds(roleDataService.getRoleData());
+        startPage();
         List<KhDailySummary> list = khDailySummaryService.selectKhDailySummaryList(khDailySummary);
         return getDataTable(list);
     }

@@ -59,9 +59,9 @@ public class WXRegisterStatisticsController extends BaseController {
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(DeliverGoodsVO vo) {
-		startPage();
 		vo.setIsDelete("0");
 		vo.setDataRightUserIds(roleDataService.getRoleData());
+		startPage();
 		if (StringUtils.isEmpty(vo.getDealTimeStart()) && StringUtils.isEmpty(vo.getDealTimeEnd())) {
 			vo.setDealTime(new Date());
 		}

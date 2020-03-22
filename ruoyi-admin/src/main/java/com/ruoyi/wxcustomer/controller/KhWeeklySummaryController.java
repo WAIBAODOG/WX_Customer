@@ -69,10 +69,8 @@ public class KhWeeklySummaryController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(KhWeeklySummary khWeeklySummary){
-        startPage();
-        
         khWeeklySummary.setDataRightUserIds(roleDataService.getRoleData());
-        
+        startPage();
         List<KhWeeklySummary> list = khWeeklySummaryService.selectKhWeeklySummaryList(khWeeklySummary);
         return getDataTable(list);
     }
