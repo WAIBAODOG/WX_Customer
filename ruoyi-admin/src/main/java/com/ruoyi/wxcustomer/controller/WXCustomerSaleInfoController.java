@@ -47,10 +47,12 @@ public class WXCustomerSaleInfoController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> getSaleInfoById(String customerId) {
 		Map<String, Object> result = new HashMap<>();
+		WechatCustomer  wechatCustomer =wechatCustomerService.selectWechatCustomerById(customerId);
 		List<KhAfterSaleMember> khAfterSaleMemberList = wechatCustomerService.findKhAfterSaleMemberByCustomerId(customerId);
 		List<KhDeliverGoods> khDeliverGoodsList = wechatCustomerService.findKhDeliverGoodsByCustomerId(customerId);
 		result.put("sh", khAfterSaleMemberList);
 		result.put("fy", khDeliverGoodsList);
+		result.put("info", wechatCustomer);
 		return result;
 	}
 }
