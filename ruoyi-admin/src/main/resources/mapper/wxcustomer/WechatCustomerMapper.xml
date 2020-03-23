@@ -104,7 +104,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[=]]> 0
 	   			</when>	
 	   			<when test='status != null and status == "3"'>
-	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0
+<!-- 	   				and   (select count(1) from kh_deliver_goods a where follow_result_type='3' and a.customer_id=kh_wechat_customer.customer_id) <![CDATA[>]]> 0 -->
+	   				and is_delivery='1'
 	   			</when>	
 	   		</choose>
 	   		ORDER BY CASE   WHEN customer_level='A' THEN 3  WHEN customer_level='B' THEN 2  WHEN customer_level='C' THEN 1   END  DESC 
